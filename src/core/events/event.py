@@ -1,6 +1,6 @@
 from typing import List
 
-from src.shared.subscriber import Subscriber
+from src.core.events.subscriber import Subscriber
 
 
 class Event:

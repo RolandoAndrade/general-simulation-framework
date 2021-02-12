@@ -1,4 +1,4 @@
-from src.shared.base_module import BaseModule
+from src.core.modules.base_module import BaseModule
 
 
 class SimulationModule(BaseModule):

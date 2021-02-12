@@ -1,4 +1,4 @@
-from src.shared.event import Event
+from src.core.events.event import Event
 
 
 class Subscriber:
