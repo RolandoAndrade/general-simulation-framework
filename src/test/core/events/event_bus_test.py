@@ -1,3 +1,4 @@
+from __future__ import annotations
 import unittest
 from src.core.events.event_bus import EventBus
 from src.core.events.subscriber import Subscriber

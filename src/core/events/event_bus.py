@@ -1,7 +1,7 @@
+from __future__ import annotations
 from typing import List, TYPE_CHECKING
-
+from src.core.events.event import Event
 if TYPE_CHECKING:
-    from src.core.events.event import Event
     from src.core.events.subscriber import Subscriber
 
 
