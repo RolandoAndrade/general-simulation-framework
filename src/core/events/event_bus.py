@@ -1,5 +1,6 @@
 from __future__ import annotations
-from typing import List, TYPE_CHECKING, Dict
+from typing import List, TYPE_CHECKING, Dict, Any
+
 if TYPE_CHECKING:
     from src.core.events.subscriber import Subscriber
 
@@ -19,3 +20,8 @@ class EventBus:
     def unsubscribe(self, event: str, subscriber: Subscriber):
         if event in self._events:
             self._events[event].remove(subscriber)
+
+    def emit(self, event: str, message: Any):
+        if event in self._events:
+            for e in self._events[event]:
+                e.on_message_received(message)
