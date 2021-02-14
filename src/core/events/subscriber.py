@@ -13,3 +13,6 @@ class Subscriber:
 
     def subscribe(self, event: str):
         self._event_bus.subscribe(event, self)
+
+    def unsubscribe(self, event: str):
+        self._event_bus.unsubscribe(event, self)
