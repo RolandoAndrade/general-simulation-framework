@@ -1,33 +1,26 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List, Dict
+from typing import TYPE_CHECKING, List
+
 
 from core.modules.module_metadata import ModuleMetadata
 
 if TYPE_CHECKING:
     from core.modules.provider import Provider
+    from core.modules.component import Component
 
 
 class Module:
-    module_metadata: ModuleMetadata
-    providers: List[type]
-    exports: List[type]
-    imports: List[Module]
-    dependencies: List[Provider]
-    instances: List[Provider]
+    _module_metadata: ModuleMetadata
+    _instances: List[Component]
 
-    def _find_dependency(self, dependency: type) -> Provider:
-        for dep in self.dependencies:
-            if type(dep) == dependency:
-                return dep
-        raise Exception("Missing dependency " + str(dependency))
-
-    def get_exported_dependencies(self) -> List[Provider]:
-        dependencies: List[Provider] = []
-        for provider in self.instances:
-            if type(provider) in self.exports:
-                dependencies.append(provider)
-        return dependencies
-
-    def _inject_dependencies(self):
+    def __init__(self, module_metadata: ModuleMetadata):
         pass
+
+
+    def get_exported_dependencies(self) -> List[Component]:
+        dependencies: List[Component] = []
+        for instance in self._instances:
+            if type(instance) in self._module_metadata.get_exports():
+                dependencies.append(instance)
+        return dependencies

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Dict, Any, List
-
+from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:
     from core.modules.module import Module
@@ -11,7 +10,7 @@ if TYPE_CHECKING:
 
 class ModuleMetadata:
     _imports: List[Module]
-    _exports: List[Component]
+    _exports: List[type]
     _dependencies: List[Provider]
     _components: List[Provider]
 
@@ -19,7 +18,7 @@ class ModuleMetadata:
         self._imports = modules
         return self
 
-    def exports(self, components: List[Component]) -> ModuleMetadata:
+    def exports(self, components: List[type]) -> ModuleMetadata:
         self._exports = components
         return self
 
@@ -30,3 +29,6 @@ class ModuleMetadata:
     def dependencies(self, components: List[Provider]) -> ModuleMetadata:
         self._dependencies = components
         return self
+
+    def get_exports(self) -> List[type]:
+        return self._exports
