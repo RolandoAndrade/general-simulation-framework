@@ -1,36 +1,37 @@
 from __future__ import annotations
 from abc import abstractmethod
-from typing import Set, TYPE_CHECKING
+from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from dynamic_system.atomic_model.value import Value
+    from dynamic_system.atomic_model.bag_of_values import BagOfValues
 
 from dynamic_system.base_model import BaseModel
 
 
 class AtomicModel(BaseModel):
-    _variables: Set[Value]
-
-    """Implements the state transition function
-    :param bag_xb: set of bags with elements in X (inputs set)
+    """A dynamic system that changes in response to its environment and affects
+    its environment as it changes
     """
 
-    @abstractmethod
-    def delta(self, bag_xb: Set[Value]):
-        pass
-
-    """Implements the output function
-    :param bag_yb: set of bags with elements in Y (outputs set)
-    """
+    _output_bag: BagOfValues
 
     @abstractmethod
-    def output_function(self, bag_yb: Set[Value]):
-        pass
+    def state_transition_function(self, bag_xb: BagOfValues):
+        """Implements the state transition function
 
-    """Clear the allocated objects used for """
+        :param bag_xb: set of bags with elements in X (inputs set)
+        """
+        pass
 
     @abstractmethod
-    def garbage_collector_output(self):
-        """"This is necessary because the model that created the object cannot know
-        when the simulator is finished with it."""
+    def output_function(self, output_bag: BagOfValues):
+        """Implements the output function
+
+        :param output_bag: set of bags with elements in Y (outputs set)
+        """
         pass
+
+    def compute_output(self):
+        """Computes the output given by the output function
+        """
+        self.output_function(self._output_bag)
