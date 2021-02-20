@@ -1,0 +1,3 @@
+class Events:
+    STATE_CHANGED = "STATE_CHANGED"
+    OUTPUT_EVENT = "OUTPUT_EVENT"
