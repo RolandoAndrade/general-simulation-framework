@@ -9,8 +9,9 @@ if TYPE_CHECKING:
 
 class SimulationEngine:
     _model: AtomicModel
-    _time: int  # TODO unsigned
     _is_output_up_to_date: bool
+    _time_of_last_event: float
+    _time_of_next_event: float
 
     def __init__(self, atomic_model: AtomicModel):
         self._model = atomic_model
@@ -19,17 +20,39 @@ class SimulationEngine:
         """Returns the simulation time at which the state was last computed"""
         return self._time
 
-    def compute_next_state(self, inputs: BagOfValues):
-        """First computes model's output function if this has not already been done, then
-        computes the model's next state and notifies listeners of these actions
+    def next_event_time(self) -> float:
+        """Returns the time of the next autonomous action
 
+        :returns time of the next autonomous action"""
+        return self._time_of_next_event
+
+    def compute_next_state(self, inputs: BagOfValues, time: float):
+        """Computes the next state with external, internal or confluent state transition function
+
+        :param time:
         :param inputs: Inputs for next state
         """
-        self.compute_output()  # Compute the output at time t
-        self._time = self._time + 1  # Advance simulation clock
-        self._model.state_transition_function(inputs)  # Compute the new state of the model
+        if time < self._time_of_next_event and not inputs.is_empty():  # If this is an external event
+            self._model.external_state_transition_function(inputs, time - self._time_of_last_event)
+        elif time == self._time_of_next_event:
+            # Confluent with autonomous action
+            self.compute_output()  # Compute the output at the time
+            if not inputs.is_empty():
+                # If input is not empty is external event
+                self._model.confluent_state_transition_function(inputs)
+            else:
+                # Internal event
+                self._model.internal_state_transition_function()
+
+        self._time_of_next_event = self._time_of_next_event + self._model.time_advance_function()
+        self._time_of_last_event = time
+
         # event_bus.emit("STATE_CHANGED") # TODO Notify listeners that the state has changed
         self._is_output_up_to_date = False
+
+    def execute_next_event(self):
+        """Computes the output and next state of the model at the next event time"""
+        self.compute_next_state(BagOfValues(), self.next_event_time())
 
     def compute_output(self):
         """Invokes the model's output function and inform to listeners of the consequent

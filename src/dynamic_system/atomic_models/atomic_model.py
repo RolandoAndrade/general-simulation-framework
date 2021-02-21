@@ -16,13 +16,36 @@ class AtomicModel(BaseModel):
     _output_bag: BagOfValues
 
     @abstractmethod
-    def state_transition_function(self, bag_xb: BagOfValues):
-        """Implements the state transition function. The state transition function computes the next
-         state of the model from its current state s and a bag xb of inputs in X
+    def internal_state_transition_function(self):
+        """Implements the internal state transition function. The internal state transition function computes the next state
+        of the model from the state of an autonomous action
+
+         .. math:: \delta_int \; : \; S \longrightarrow S
+        """
+        pass
+
+    @abstractmethod
+    def external_state_transition_function(self, bag_xb: BagOfValues, event_time: float):
+        """Implements the external state transition function. The external state transition function computes the
+        next state of the model from its current total state Q and a bag xb of inputs in X
+
+         .. math:: \delta_ext \; : \; Q \; x \; X \longrightarrow S
+
+        :param bag_xb: set of bags with elements in X (inputs set)
+        :param event_time: time of event
+        """
+        pass
+
+
+    def confluent_state_transition_function(self, bag_xb: BagOfValues):
+        """Implements the confluent state transition function. The confluent state transition function computes the
+        next state of the model from its current state S and a bag xb of inputs in X
+
+         .. math:: \delta_con \; : \; S \; x \; X \longrightarrow S
 
         :param bag_xb: set of bags with elements in X (inputs set)
         """
-        pass
+        return self.external_state_transition_function(bag_xb, self.time_advance_function())
 
     @abstractmethod
     def output_function(self, output_bag: BagOfValues) -> BagOfValues:
@@ -31,6 +54,15 @@ class AtomicModel(BaseModel):
 
         :param output_bag: set of bags with elements in Y (outputs set) where state will be mapped
         :returns bag yb of outputs in Y
+        """
+        pass
+
+
+    @abstractmethod
+    def time_advance_function(self) -> float:
+        """Implement the model’s time advance function.
+
+        :returns time of the autonomous event
         """
         pass
 

@@ -1,2 +1,3 @@
 class BagOfValues:
-    pass
+    def is_empty(self):
+        return False
