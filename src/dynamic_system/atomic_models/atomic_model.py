@@ -17,21 +17,26 @@ class AtomicModel(BaseModel):
 
     @abstractmethod
     def state_transition_function(self, bag_xb: BagOfValues):
-        """Implements the state transition function
+        """Implements the state transition function. The state transition function computes the next
+         state of the model from its current state s and a bag xb of inputs in X
 
         :param bag_xb: set of bags with elements in X (inputs set)
         """
         pass
 
     @abstractmethod
-    def output_function(self, output_bag: BagOfValues):
-        """Implements the output function
+    def output_function(self, output_bag: BagOfValues) -> BagOfValues:
+        """Implements the output function. The output function maps the current state s
+        to a bag yb of outputs in Y
 
-        :param output_bag: set of bags with elements in Y (outputs set)
+        :param output_bag: set of bags with elements in Y (outputs set) where state will be mapped
+        :returns bag yb of outputs in Y
         """
         pass
 
-    def compute_output(self):
+    def compute_output(self) -> BagOfValues:
         """Computes the output given by the output function
+
+        :returns bag yb of outputs in Y
         """
-        self.output_function(self._output_bag)
+        return self.output_function(self._output_bag)

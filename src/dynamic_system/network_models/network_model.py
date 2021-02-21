@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Set, Dict, TYPE_CHECKING
 
+
 from dynamic_system.base_model import BaseModel
 
 if TYPE_CHECKING:
@@ -17,6 +18,9 @@ class NetworkModel(BaseModel):
         for model in self._inputs:
             model.state_transition_function(bag_xb)
 
-    def output_function(self, output_bag: BagOfValues):
-        pass
+    def output_function(self, output_bag: BagOfValues) -> BagOfValues:
+        for model in self._inputs:
+            model.compute_output()
 
+    def compute_output(self) -> BagOfValues:
+        return self.output_function(self._output_bag)
