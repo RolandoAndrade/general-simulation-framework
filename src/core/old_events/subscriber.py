@@ -2,7 +2,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any, Callable, Dict
 
 if TYPE_CHECKING:
-    from src.core.events.event_bus import EventBus
+    from src.core.old_events.event_bus import EventBus
 
 
 class Subscriber:

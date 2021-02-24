@@ -1,34 +1,45 @@
 from __future__ import annotations
-from typing import List, TYPE_CHECKING, Dict, Any
+from typing import Type, Callable
 
-if TYPE_CHECKING:
-    from src.core.events.subscriber import Subscriber
+from pyeventbus3.pyeventbus3 import Mode, PyBus
+
+from core.events.event import Event
+
+
+class ThreadMode(Mode):
+    pass
+
+
+def subscriber(sub: object):
+    def wrapped():
+        PyBus.Instance().register(sub, sub.__class__.__name__)
+
+    return wrapped
+
+
+def subscribe(on_event: Type[Event], thread_mode: ThreadMode = ThreadMode.BACKGROUND):
+    bus = PyBus.Instance()
+
+    def real_decorator(function):
+        bus.addEventsWithMethods(on_event, function, thread_mode)
+
+        def wrapper(*args, **kwargs):
+            return function(*args, **kwargs)
+
+        return wrapper
+
+    return real_decorator
 
 
 class EventBus:
-    _events: Dict[str, List[Subscriber]]
+    def register(self, sub: object):
+        PyBus.Instance().register(sub, sub.__class__.__name__)
 
-    def __init__(self):
-        self._events = {}
+    def emit(self, event: Event):
+        PyBus.Instance().post(event)
 
-    "Subscribe an object to event."
-    def subscribe(self, event: str, subscriber: Subscriber):
-        if event in self._events:
-            self._events[event].append(subscriber)
-        else:
-            self._events[event] = [subscriber]
+    def on(self, on_event: Type[Event], function: Callable, thread_mode: ThreadMode = ThreadMode.BACKGROUND):
+        PyBus.Instance().addEventsWithMethods(on_event, function, thread_mode)
 
-    "Unsubscribe an object to event."
-    def unsubscribe(self, event: str, subscriber: Subscriber):
-        if event in self._events:
-            self._events[event].remove(subscriber)
-        else:
-            raise Exception("Event is not defined")
 
-    "Send a message to all subscribers for an event"
-    def emit(self, event: str, message: Any):
-        if event in self._events:
-            for e in self._events[event]:
-                e.on_message_received(event, message)
-        else:
-            raise Exception("Event is not defined")
+event_bus = EventBus()

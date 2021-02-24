@@ -1,7 +1,7 @@
 from __future__ import annotations
 import unittest
-from src.core.events.event_bus import EventBus
-from src.core.events.subscriber import Subscriber
+from src.core.old_events.event_bus import EventBus
+from src.core.old_events.subscriber import Subscriber
 
 
 class EventBusTest(unittest.TestCase):

@@ -5,9 +5,9 @@ from typing import TYPE_CHECKING, List, Dict
 
 
 if TYPE_CHECKING:
-    from core.events.subscriber import Subscriber
+    from core.old_events.subscriber import Subscriber
 
-from core.events.event_bus import EventBus
+from core.old_events.event_bus import EventBus
 
 
 class MyTestCase(unittest.TestCase):
