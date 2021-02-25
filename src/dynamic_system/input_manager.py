@@ -27,3 +27,6 @@ class InputManager:
     def clear(self):
         for inp in self._inputs:
             self._inputs[inp] = None
+
+    def get_inputs(self) -> BagOfValues:
+        return BagOfValues()

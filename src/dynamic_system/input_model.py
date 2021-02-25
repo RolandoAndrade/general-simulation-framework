@@ -18,5 +18,4 @@ class InputModel(BaseModel):
     @subscribe(ComputeOutputEvent)
     def receive_input(self):
         out = self.output_function(self._inputs)
-        for model in self._listeners:
-            model.receive_input(self.get_id(), out)
+        self.notify_output(out)

@@ -4,6 +4,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from dynamic_system.atomic_models.bag_of_values import BagOfValues
+    from dynamic_system.input_manager import InputManager
 
 from dynamic_system.base_model import BaseModel
 
@@ -13,7 +14,14 @@ class AtomicModel(BaseModel):
     its environment as it changes
     """
 
-    _output_bag: BagOfValues
+    _input_manager: InputManager
+
+    def receive_input(self, model_id: int, inputs: BagOfValues):
+        self._input_manager.save_input(model_id, inputs)
+        if self._input_manager.is_ready():
+            all_inputs = self._input_manager.get_inputs()
+            out = self.output_function(all_inputs)
+            self.notify_output(out)
 
     @abstractmethod
     def internal_state_transition_function(self):
@@ -36,7 +44,6 @@ class AtomicModel(BaseModel):
         """
         pass
 
-
     def confluent_state_transition_function(self, bag_xb: BagOfValues):
         """Implements the confluent state transition function. The confluent state transition function computes the
         next state of the model from its current state S and a bag xb of inputs in X
@@ -57,7 +64,6 @@ class AtomicModel(BaseModel):
         """
         pass
 
-
     @abstractmethod
     def time_advance_function(self) -> float:
         """Implement the model’s time advance function.
@@ -65,10 +71,3 @@ class AtomicModel(BaseModel):
         :returns time of the autonomous event
         """
         pass
-
-    def compute_output(self) -> BagOfValues:
-        """Computes the output given by the output function
-
-        :returns bag yb of outputs in Y
-        """
-        return self.output_function(self._output_bag)

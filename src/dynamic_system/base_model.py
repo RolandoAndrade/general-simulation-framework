@@ -28,6 +28,10 @@ class BaseModel:
     def get_id(self):
         return self._id
 
+    def notify_output(self, out: BagOfValues):
+        for model in self._listeners:
+            model.receive_input(self.get_id(), out)
+
     @abstractmethod
     def receive_input(self, model_id: int, inputs: BagOfValues):
         pass
