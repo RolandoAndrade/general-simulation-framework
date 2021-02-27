@@ -7,8 +7,6 @@ if TYPE_CHECKING:
 
 from abc import abstractmethod
 
-
-
 class BaseModel:
     _id: int
     _serial_id = 0
@@ -35,3 +33,7 @@ class BaseModel:
     @abstractmethod
     def receive_input(self, model_id: int, inputs: BagOfValues):
         pass
+
+    def summary(self):
+        row_format = "{:>15}" * 5
+        print(row_format.format("", *["ID", "TYPE", "NAME", "INPUTS", "OUTPUTS"]))

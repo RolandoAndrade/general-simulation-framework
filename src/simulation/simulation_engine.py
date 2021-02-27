@@ -3,17 +3,17 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from dynamic_system.atomic_models.atomic_model import AtomicModel
+    from dynamic_system.model import Model
     from dynamic_system.atomic_models.bag_of_values import BagOfValues
 
 
 class SimulationEngine:
-    _model: AtomicModel
+    _model: Model
     _is_output_up_to_date: bool
     _time_of_last_event: float
     _time_of_next_event: float
 
-    def __init__(self, atomic_model: AtomicModel):
+    def __init__(self, atomic_model: Model):
         self._model = atomic_model
 
     def get_time(self) -> int:

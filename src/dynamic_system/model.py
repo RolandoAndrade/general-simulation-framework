@@ -2,14 +2,17 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import TYPE_CHECKING
 
+from core.events.event_bus import subscriber, subscribe
+from dynamic_system.events.internal_state_transition_event import InternalStateTransitionEvent
+
 if TYPE_CHECKING:
     from dynamic_system.atomic_models.bag_of_values import BagOfValues
     from dynamic_system.input_manager import InputManager
 
 from dynamic_system.base_model import BaseModel
 
-
-class AtomicModel(BaseModel):
+@subscriber
+class Model(BaseModel):
     """A dynamic system that changes in response to its environment and affects
     its environment as it changes
     """
@@ -24,6 +27,7 @@ class AtomicModel(BaseModel):
             self.notify_output(out)
 
     @abstractmethod
+    @subscribe(InternalStateTransitionEvent)
     def internal_state_transition_function(self):
         """Implements the internal state transition function. The internal state transition function computes the next state
         of the model from the state of an autonomous action
