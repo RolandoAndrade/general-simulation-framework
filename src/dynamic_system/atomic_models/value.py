@@ -1,2 +1,10 @@
+from typing import Type, Any
+
+
 class Value:
-    pass
+    name: str
+    value: Any
+
+    def __init__(self, name: str, value: Any):
+        self.name = name
+        self.value = value

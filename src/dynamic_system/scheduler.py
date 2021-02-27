@@ -37,3 +37,6 @@ class Scheduler:
         """Get the next model that will execute an autonomous event"""
         if len(self._schedule) > 0:
             return heapq.heappop(self._schedule).get_model()
+
+
+static_scheduler = Scheduler()

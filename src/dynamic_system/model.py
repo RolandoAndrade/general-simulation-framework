@@ -3,13 +3,13 @@ from abc import abstractmethod
 from typing import TYPE_CHECKING
 
 from core.events.event_bus import subscriber, subscribe
-from dynamic_system.events.confluent_state_transition_event import ConfluentStateTransitionEvent
 from dynamic_system.events.external_state_transition_event import ExternalStateTransitionEvent
-from dynamic_system.events.internal_state_transition_event import InternalStateTransitionEvent
+
 
 if TYPE_CHECKING:
     from dynamic_system.atomic_models.bag_of_values import BagOfValues
     from dynamic_system.input_manager import InputManager
+    from dynamic_system.scheduler import Scheduler, static_scheduler
 
 from dynamic_system.base_model import BaseModel
 
@@ -22,6 +22,11 @@ class Model(BaseModel):
 
     _input_manager: InputManager
     _last_inputs: BagOfValues
+    _scheduler: Scheduler
+
+    def __init__(self, scheduler: Scheduler = static_scheduler):
+        self._scheduler = scheduler
+        self._scheduler.schedule(self, self.time_advance_function())
 
     def receive_input(self, model_id: int, inputs: BagOfValues):
         self._input_manager.save_input(model_id, inputs)

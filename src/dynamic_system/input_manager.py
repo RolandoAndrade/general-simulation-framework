@@ -2,6 +2,8 @@ from typing import Dict, Union
 
 from typing import TYPE_CHECKING
 
+from dynamic_system.atomic_models.value import Value
+
 if TYPE_CHECKING:
     from dynamic_system.atomic_models.bag_of_values import BagOfValues
 
@@ -29,4 +31,9 @@ class InputManager:
             self._inputs[inp] = None
 
     def get_inputs(self) -> BagOfValues:
-        return BagOfValues()
+        values = list(self._inputs.values())
+        names = self._inputs.keys()
+        vs = []
+        for name in names:
+            vs.append(Value("m" + str(name), values))
+        return BagOfValues(vs)
