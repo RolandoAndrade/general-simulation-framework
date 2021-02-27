@@ -8,7 +8,7 @@ from dynamic_system.events.external_state_transition_event import ExternalStateT
 
 
 if TYPE_CHECKING:
-    from dynamic_system.scheduler import Scheduler
+    from dynamic_system.control.scheduler import Scheduler
 
 
 class SimulationEngine:

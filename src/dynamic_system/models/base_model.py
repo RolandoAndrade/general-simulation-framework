@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, List
 
 if TYPE_CHECKING:
-    from dynamic_system.atomic_models.bag_of_values import BagOfValues
+    from dynamic_system.utils.bag_of_values import BagOfValues
 
 from abc import abstractmethod
 

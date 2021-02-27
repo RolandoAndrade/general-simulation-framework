@@ -1,10 +1,10 @@
 import heapq
 
 from typing import TYPE_CHECKING, List
-from dynamic_system.scheduled_model import ScheduledModel
+from dynamic_system.models.scheduled_model import ScheduledModel
 
 if TYPE_CHECKING:
-    from dynamic_system.model import Model
+    from dynamic_system.models.model import Model
 
 
 class Scheduler:

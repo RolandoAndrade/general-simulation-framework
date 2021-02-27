@@ -1,8 +1,8 @@
 from plistlib import Dict
-from typing import Any, List, TYPE_CHECKING, Union
+from typing import List, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from dynamic_system.atomic_models.value import Value
+    from dynamic_system.utils.value import Value
 
 
 class BagOfValues(Dict[str, Value]):

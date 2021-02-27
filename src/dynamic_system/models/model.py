@@ -7,11 +7,11 @@ from dynamic_system.events.external_state_transition_event import ExternalStateT
 
 
 if TYPE_CHECKING:
-    from dynamic_system.atomic_models.bag_of_values import BagOfValues
-    from dynamic_system.input_manager import InputManager
-    from dynamic_system.scheduler import Scheduler, static_scheduler
+    from dynamic_system.utils.bag_of_values import BagOfValues
+    from dynamic_system.control.input_manager import InputManager
+    from dynamic_system.control.scheduler import Scheduler, static_scheduler
 
-from dynamic_system.base_model import BaseModel
+from dynamic_system.models.base_model import BaseModel
 
 
 @subscriber
@@ -25,6 +25,7 @@ class Model(BaseModel):
     _scheduler: Scheduler
 
     def __init__(self, scheduler: Scheduler = static_scheduler):
+        super().__init__()
         self._scheduler = scheduler
         self._scheduler.schedule(self, self.time_advance_function())
 
