@@ -23,7 +23,7 @@ class Scheduler:
             sm = ScheduledModel(model, time)
             heapq.heappush(self._schedule, sm)
 
-    def next_time(self) -> float:
+    def next_event_time(self) -> float:
         """Get time of the next event"""
         return self._schedule[0].get_time()
 

@@ -3,6 +3,7 @@ from abc import abstractmethod
 from typing import TYPE_CHECKING
 
 from core.events.event_bus import subscriber, subscribe
+from dynamic_system.events.confluent_state_transition_event import ConfluentStateTransitionEvent
 from dynamic_system.events.external_state_transition_event import ExternalStateTransitionEvent
 from dynamic_system.events.internal_state_transition_event import InternalStateTransitionEvent
 
@@ -11,6 +12,7 @@ if TYPE_CHECKING:
     from dynamic_system.input_manager import InputManager
 
 from dynamic_system.base_model import BaseModel
+
 
 @subscriber
 class Model(BaseModel):
@@ -28,9 +30,11 @@ class Model(BaseModel):
             self.notify_output(self._last_output)
             self._input_manager.clear()
 
-    @subscribe(InternalStateTransitionEvent)
-    def _internal_transition(self):
+    def internal_transition(self):
         return self.internal_state_transition_function()
+
+    def confluent_transition(self):
+        return self.confluent_state_transition_function(self._last_inputs)
 
     @subscribe(ExternalStateTransitionEvent)
     def _external_transition(self, event: ExternalStateTransitionEvent):
