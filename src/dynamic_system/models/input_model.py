@@ -12,7 +12,11 @@ if TYPE_CHECKING:
 
 @subscriber
 class InputModel(BaseModel):
-    _inputs: BagOfValues
+    inputs: BagOfValues
+
+    def __init__(self, inputs: BagOfValues):
+        super().__init__()
+        self._inputs = inputs
 
     @subscribe(ComputeOutputEvent)
     def receive_input(self):

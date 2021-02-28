@@ -1,11 +1,13 @@
-from plistlib import Dict
-from typing import List, TYPE_CHECKING, Union
+from __future__ import annotations
+from typing import List, TYPE_CHECKING, Union, Dict, TypeVar
 
 if TYPE_CHECKING:
     from dynamic_system.utils.value import Value
 
+V = TypeVar("V")
 
-class BagOfValues(Dict[str, Value]):
+
+class BagOfValues(Dict[str, V]):
     def __init__(self, values: Union[Value, List[Value], None]):
         super().__init__()
         if not (values is None):

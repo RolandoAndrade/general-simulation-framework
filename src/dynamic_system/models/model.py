@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING
 from core.events.event_bus import subscriber, subscribe
 from dynamic_system.events.external_state_transition_event import ExternalStateTransitionEvent
 
+from dynamic_system.control.scheduler import static_scheduler
 
 if TYPE_CHECKING:
     from dynamic_system.utils.bag_of_values import BagOfValues
@@ -45,6 +46,12 @@ class Model(BaseModel):
     @subscribe(ExternalStateTransitionEvent)
     def _external_transition(self, event: ExternalStateTransitionEvent):
         return self.external_state_transition_function(self._last_inputs, event.get_time())
+
+    def add(self, model: BaseModel):
+        self._input_manager.add_input(model.get_id())
+
+    def get_output(self):
+        return self.output_function(self._last_inputs)
 
     @abstractmethod
     def internal_state_transition_function(self):
