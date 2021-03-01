@@ -6,10 +6,11 @@ from core.events.event_bus import subscriber, subscribe
 from dynamic_system.events.external_state_transition_event import ExternalStateTransitionEvent
 
 from dynamic_system.control.scheduler import static_scheduler
+from dynamic_system.control.input_manager import InputManager
+
 
 if TYPE_CHECKING:
     from dynamic_system.utils.bag_of_values import BagOfValues
-    from dynamic_system.control.input_manager import InputManager
     from dynamic_system.control.scheduler import Scheduler, static_scheduler
 
 from dynamic_system.models.base_model import BaseModel
@@ -29,12 +30,15 @@ class Model(BaseModel):
         super().__init__()
         self._scheduler = scheduler
         self._scheduler.schedule(self, self.time_advance_function())
+        self._input_manager = InputManager()
+        self._last_inputs = None
 
     def receive_input(self, model_id: int, inputs: BagOfValues):
         self._input_manager.save_input(model_id, inputs)
         if self._input_manager.is_ready():
             self._last_inputs = self._input_manager.get_inputs()
-            self.notify_output(self._last_output)
+            out = self.output_function(self._last_inputs)
+            self.notify_output(out)
             self._input_manager.clear()
 
     def internal_transition(self):
@@ -49,6 +53,7 @@ class Model(BaseModel):
 
     def add(self, model: BaseModel):
         self._input_manager.add_input(model.get_id())
+        model.add_listener(self)
 
     def get_output(self):
         return self.output_function(self._last_inputs)

@@ -20,5 +20,5 @@ class InputModel(BaseModel):
 
     @subscribe(ComputeOutputEvent)
     def receive_input(self):
-        out = self.output_function(self._inputs)
+        out = self._inputs
         self.notify_output(out)

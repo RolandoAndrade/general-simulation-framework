@@ -1,16 +1,20 @@
+from __future__ import annotations
 from typing import Dict, Union
 
 from typing import TYPE_CHECKING
 
 from dynamic_system.utils.value import Value
 
-if TYPE_CHECKING:
-    from dynamic_system.utils.bag_of_values import BagOfValues
+from dynamic_system.utils.bag_of_values import BagOfValues
+
 
 
 class InputManager:
     """Manage the inputs received in a model"""
     _inputs: Dict[int, Union[BagOfValues, None]]
+
+    def __init__(self):
+        self._inputs = dict()
 
     def save_input(self, model_id: int, inputs: Union[BagOfValues, None]):
         """Save an input for a model output

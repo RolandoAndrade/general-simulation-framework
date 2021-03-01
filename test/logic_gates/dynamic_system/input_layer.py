@@ -1,3 +1,4 @@
+from __future__ import annotations
 from dynamic_system.models.input_model import InputModel
 from dynamic_system.utils.bag_of_values import BagOfValues
 

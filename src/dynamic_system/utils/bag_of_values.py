@@ -17,7 +17,7 @@ class BagOfValues(Dict[str, V]):
         return len(self.keys()) == 0
 
     def add(self, values: Union[Value, List[Value]]):
-        if values is List:
+        if type(values) is list:
             for val in values:
                 self[val.name] = val
         else:

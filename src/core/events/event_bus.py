@@ -11,10 +11,8 @@ class ThreadMode(Mode):
 
 
 def subscriber(sub: object):
-    def wrapped():
-        PyBus.Instance().register(sub, sub.__class__.__name__)
-
-    return wrapped
+    PyBus.Instance().register(sub, sub.__class__.__name__)
+    return sub
 
 
 def subscribe(on_event: Type[Event], thread_mode: ThreadMode = ThreadMode.POSTING):

@@ -13,20 +13,20 @@ class BaseModel:
     """
     _id: int
     _serial_id = 0
-
-    def __init__(self):
-        _id = BaseModel._serial_id
-        BaseModel._serial_id = BaseModel._serial_id + 1
-
     _listeners: List[BaseModel]
 
-    def _add_listener(self, model: BaseModel):
+    def __init__(self):
+        self._id = BaseModel._serial_id
+        BaseModel._serial_id = BaseModel._serial_id + 1
+        self._listeners = []
+
+    def add_listener(self, model: BaseModel):
         """Add a model to listeners
         :param model Model that will be listen
         """
         self._listeners.append(model)
 
-    def _remove_listener(self, model: BaseModel):
+    def remove_listener(self, model: BaseModel):
         """Remove a model from listeners
         :param model Model to be removed
         """
