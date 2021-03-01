@@ -26,14 +26,14 @@ class Model(BaseModel):
     _last_inputs: BagOfValues
     _scheduler: Scheduler
 
-    def __init__(self, scheduler: Scheduler = static_scheduler):
-        super().__init__()
+    def __init__(self, name: str = None, scheduler: Scheduler = static_scheduler):
+        super().__init__(name)
         self._scheduler = scheduler
         self._scheduler.schedule(self, self.time_advance_function())
         self._input_manager = InputManager()
         self._last_inputs = None
 
-    def receive_input(self, model_id: int, inputs: BagOfValues):
+    def receive_input(self, model_id: str, inputs: BagOfValues):
         self._input_manager.save_input(model_id, inputs)
         if self._input_manager.is_ready():
             self._last_inputs = self._input_manager.get_inputs()

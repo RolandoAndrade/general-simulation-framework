@@ -11,12 +11,12 @@ from dynamic_system.utils.bag_of_values import BagOfValues
 
 class InputManager:
     """Manage the inputs received in a model"""
-    _inputs: Dict[int, Union[BagOfValues, None]]
+    _inputs: Dict[str, Union[BagOfValues, None]]
 
     def __init__(self):
         self._inputs = dict()
 
-    def save_input(self, model_id: int, inputs: Union[BagOfValues, None]):
+    def save_input(self, model_id: str, inputs: Union[BagOfValues, None]):
         """Save an input for a model output
         :param model_id: Model that throw the output
         :param inputs: Inputs given by the output model
@@ -30,7 +30,7 @@ class InputManager:
                 return False
         return True
 
-    def add_input(self, model_id: int):
+    def add_input(self, model_id: str):
         """Define the initial input models"""
         self.save_input(model_id, None)
 
@@ -45,11 +45,10 @@ class InputManager:
 
     def get_inputs(self) -> BagOfValues:
         """Get the inputs thrown by the outputs of the defined models. Return a
-        BagOfValues with the template m-<id>: BagOfValues returned by all the models
+        BagOfValues with the template <id>: BagOfValues returned by all the models
         """
-        values = list(self._inputs.values())
-        names = self._inputs.keys()
         vs = []
-        for name in names:
-            vs.append(Value("m-" + str(name), values))
+        for name in self._inputs:
+            # create a model - bag of values array
+            vs.append(Value(name, self._inputs[name]))
         return BagOfValues(vs)

@@ -3,6 +3,7 @@ from __future__ import annotations
 from dynamic_system.models.model import Model
 
 from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
     from dynamic_system.utils.bag_of_values import BagOfValues
 
@@ -15,8 +16,8 @@ class AndGate(Model):
         pass
 
     def output_function(self, output_bag: BagOfValues) -> BagOfValues:
-        bag = output_bag['m-0'].value[0]
-        return bag['x'].value and bag['y'].value
+        bag = output_bag['Input']
+        return bag['x'] and bag['y']
 
     def time_advance_function(self) -> float:
         return 0

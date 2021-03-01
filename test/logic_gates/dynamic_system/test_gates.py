@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import unittest
 
-
 from dynamic_system.utils.bag_of_values import BagOfValues
 from dynamic_system.utils.value import Value
 from test.logic_gates.dynamic_system.input_layer import InputLayer
@@ -12,21 +11,30 @@ from test.logic_gates.dynamic_system.and_gate import AndGate
 
 class MyTestCase(unittest.TestCase):
     def setUp(self) -> None:
-        self.input_layer = InputLayer()
-        self.andModel = AndGate()
+        self.input_layer = InputLayer("Input")
+        self.andModel = AndGate("Output")
         self.andModel.add(self.input_layer)
 
     def test_and_gate_output(self):
-        self.input_layer.set_inputs(BagOfValues([Value("x", True), Value("y", True)]))
+        bg = BagOfValues()
+        bg['x'] = True
+        bg['y'] = True
+        self.input_layer.set_inputs(bg)
         self.input_layer.receive_input()
         self.assertEqual(self.andModel.get_output(), True, "Should be true")
-        self.input_layer.set_inputs(BagOfValues([Value("x", True), Value("y", False)]))
+        print(bg)
+        bg['y'] = False
+        self.input_layer.set_inputs(bg)
         self.input_layer.receive_input()
         self.assertEqual(self.andModel.get_output(), False, "Should be false")
-        self.input_layer.set_inputs(BagOfValues([Value("x", False), Value("y", True)]))
+        bg['x'] = False
+        bg['y'] = True
+        self.input_layer.set_inputs(bg)
         self.input_layer.receive_input()
         self.assertEqual(self.andModel.get_output(), False, "Should be false")
-        self.input_layer.set_inputs(BagOfValues([Value("x", False), Value("y", False)]))
+        bg['x'] = False
+        bg['y'] = False
+        self.input_layer.set_inputs(bg)
         self.input_layer.receive_input()
         self.assertEqual(self.andModel.get_output(), False, "Should be false")
 

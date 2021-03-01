@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, List, Set
 
 if TYPE_CHECKING:
     from dynamic_system.utils.bag_of_values import BagOfValues
@@ -9,15 +9,21 @@ from abc import abstractmethod
 
 
 class BaseModel:
-    """"Model in a dynamic system
-    """
-    _id: int
+    """"Model in a dynamic system"""
+    _id: str
     _serial_id = 0
+    _savedNames: Set[str] = []
     _listeners: List[BaseModel]
 
-    def __init__(self):
-        self._id = BaseModel._serial_id
-        BaseModel._serial_id = BaseModel._serial_id + 1
+    def __init__(self, name: str = None):
+        if name is None:
+            self._id = 'model' + str(BaseModel._serial_id)
+            BaseModel._serial_id = BaseModel._serial_id + 1
+        else:
+            if name in BaseModel._savedNames:
+                raise Exception('Name already taken')
+            else:
+                self._id = name
         self._listeners = []
 
     def add_listener(self, model: BaseModel):
@@ -32,7 +38,7 @@ class BaseModel:
         """
         self._listeners.remove(model)
 
-    def get_id(self) -> int:
+    def get_id(self) -> str:
         """Returns the identifier of the model"""
         return self._id
 
@@ -43,7 +49,7 @@ class BaseModel:
             model.receive_input(self.get_id(), out)
 
     @abstractmethod
-    def receive_input(self, model_id: int, inputs: BagOfValues):
+    def receive_input(self, model_id: str, inputs: BagOfValues):
         """Receive the output from a model that is an input for the current model
         :param model_id ID of the model that emits the input
         :param inputs Output of the model that serves of input for the current model
