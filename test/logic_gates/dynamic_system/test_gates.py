@@ -22,7 +22,6 @@ class MyTestCase(unittest.TestCase):
         self.input_layer.set_inputs(bg)
         self.input_layer.receive_input()
         self.assertEqual(self.andModel.get_output(), True, "Should be true")
-        print(bg)
         bg['y'] = False
         self.input_layer.set_inputs(bg)
         self.input_layer.receive_input()

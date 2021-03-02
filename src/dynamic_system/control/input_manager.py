@@ -1,9 +1,5 @@
 from __future__ import annotations
-from typing import Dict, Union
-
-from typing import TYPE_CHECKING
-
-from dynamic_system.utils.value import Value
+from typing import Union
 
 from dynamic_system.utils.bag_of_values import BagOfValues
 
@@ -11,10 +7,10 @@ from dynamic_system.utils.bag_of_values import BagOfValues
 
 class InputManager:
     """Manage the inputs received in a model"""
-    _inputs: Dict[str, Union[BagOfValues, None]]
+    _inputs: BagOfValues
 
     def __init__(self):
-        self._inputs = dict()
+        self._inputs = BagOfValues()
 
     def save_input(self, model_id: str, inputs: Union[BagOfValues, None]):
         """Save an input for a model output
@@ -47,8 +43,4 @@ class InputManager:
         """Get the inputs thrown by the outputs of the defined models. Return a
         BagOfValues with the template <id>: BagOfValues returned by all the models
         """
-        vs = []
-        for name in self._inputs:
-            # create a model - bag of values array
-            vs.append(Value(name, self._inputs[name]))
-        return BagOfValues(vs)
+        return self._inputs.copy()
