@@ -24,20 +24,20 @@ class Scheduler:
             sm = ScheduledModel(model, time)
             heapq.heappush(self._schedule, sm)
 
-    def next_event_time(self) -> float:
+    def getTimeOfNextEvent(self) -> float:
         """Get time of the next event"""
-        return self._schedule[0].get_time()
+        return self._schedule[0].getTime()
 
-    def update_time(self, delta_time: float):
+    def updateTime(self, delta_time: float):
         """Update the time of the events
         :param delta_time Time that has passed since the last update"""
         for i in range(len(self._schedule)):
-            self._schedule[i].decrease_time(delta_time)
+            self._schedule[i].decreaseTime(delta_time)
 
-    def get_minimum(self) -> Model:
+    def getNextModel(self) -> Model:
         """Get the next model that will execute an autonomous event"""
         if len(self._schedule) > 0:
-            return heapq.heappop(self._schedule).get_model()
+            return heapq.heappop(self._schedule).getModel()
 
 
 static_scheduler = Scheduler()

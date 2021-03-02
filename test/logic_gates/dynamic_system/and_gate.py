@@ -9,15 +9,15 @@ if TYPE_CHECKING:
 
 
 class AndGate(Model):
-    def internal_state_transition_function(self):
+    def internalStateTransitionFunction(self):
         pass
 
-    def external_state_transition_function(self, xb: BagOfValues, event_time: float):
+    def externalStateTransitionFunction(self, xb: BagOfValues, event_time: float):
         pass
 
-    def output_function(self, output_bag: BagOfValues) -> BagOfValues:
+    def outputFunction(self, output_bag: BagOfValues) -> BagOfValues:
         bag = output_bag['Input']
         return bag['x'] and bag['y']
 
-    def time_advance_function(self) -> float:
+    def timeAdvanceFunction(self) -> float:
         return 0

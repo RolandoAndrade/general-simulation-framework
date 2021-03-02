@@ -19,30 +19,30 @@ class SimulationEngine:
     def __init__(self, scheduler: Scheduler):
         self._scheduler = scheduler
 
-    def compute_next_state(self, time: float, is_external=True):
+    def computeNextState(self, time: float, is_external=True):
         """Computes the next state with external, internal or confluent state transition function
 
         :param time: Time of the event
         :param is_external: Is an external event
         """
-        if time < self._scheduler.next_event_time() and is_external:  # If this is an external event
+        if time < self._scheduler.getTimeOfNextEvent() and is_external:  # If this is an external event
             event_bus.emit(ExternalStateTransitionEvent(time - self._time_of_last_event))
-        elif time == self._scheduler.next_event_time():  # Confluent with autonomous action
-            self.compute_output()  # Compute the output at the time
-            model = self._scheduler.get_minimum()
+        elif time == self._scheduler.getTimeOfNextEvent():  # Confluent with autonomous action
+            self.computeOutput()  # Compute the output at the time
+            model = self._scheduler.getNextModel()
             if is_external:
-                model.confluent_transition()
+                model.confluentTransition()
             else:
-                model.internal_transition()
+                model.internalTransition()
 
         self._time_of_last_event = time
         self._is_output_up_to_date = False
 
-    def execute_next_event(self):
+    def executeNextEvent(self):
         """Computes the output and next state of the model at the next event time"""
-        self.compute_next_state(self._scheduler.next_event_time(), False)
+        self.computeNextState(self._scheduler.getTimeOfNextEvent(), False)
 
-    def compute_output(self):
+    def computeOutput(self):
         """Invokes the model's output function and inform to listeners of the consequent
         output values; it does not change the state of the model"""
         if not self._is_output_up_to_date:

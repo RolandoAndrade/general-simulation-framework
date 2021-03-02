@@ -1,12 +1,9 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 from core.events.event_bus import subscriber, subscribe
 from dynamic_system.models.base_model import BaseModel
 from dynamic_system.events.compute_output_event import ComputeOutputEvent
 from dynamic_system.utils.bag_of_values import BagOfValues
-
 
 
 @subscriber
@@ -18,6 +15,6 @@ class InputModel(BaseModel):
         self._inputs = inputs
 
     @subscribe(ComputeOutputEvent)
-    def receive_input(self):
+    def receiveInput(self):
         out = self._inputs
-        self.notify_output(out)
+        self.notifyOutput(out)

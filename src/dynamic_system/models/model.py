@@ -29,37 +29,37 @@ class Model(BaseModel):
     def __init__(self, name: str = None, scheduler: Scheduler = static_scheduler):
         super().__init__(name)
         self._scheduler = scheduler
-        self._scheduler.schedule(self, self.time_advance_function())
+        self._scheduler.schedule(self, self.timeAdvanceFunction())
         self._input_manager = InputManager()
         self._last_inputs = None
 
-    def receive_input(self, model_id: str, inputs: BagOfValues):
-        self._input_manager.save_input(model_id, inputs)
-        if self._input_manager.is_ready():
-            self._last_inputs = self._input_manager.get_inputs()
-            out = self.output_function(self._last_inputs)
-            self.notify_output(out)
+    def receiveInput(self, model_id: str, inputs: BagOfValues):
+        self._input_manager.saveInput(model_id, inputs)
+        if self._input_manager.isReady():
+            self._last_inputs = self._input_manager.getInputs()
+            out = self.outputFunction(self._last_inputs)
+            self.notifyOutput(out)
             self._input_manager.clear()
 
-    def internal_transition(self):
-        return self.internal_state_transition_function()
+    def internalTransition(self):
+        return self.internalStateTransitionFunction()
 
-    def confluent_transition(self):
-        return self.confluent_state_transition_function(self._last_inputs)
+    def confluentTransition(self):
+        return self.confluentStateTransitionFunction(self._last_inputs)
 
     @subscribe(ExternalStateTransitionEvent)
-    def _external_transition(self, event: ExternalStateTransitionEvent):
-        return self.external_state_transition_function(self._last_inputs, event.get_time())
+    def _externalTransition(self, event: ExternalStateTransitionEvent):
+        return self.externalStateTransitionFunction(self._last_inputs, event.getTime())
 
     def add(self, model: BaseModel):
-        self._input_manager.add_input(model.get_id())
-        model.add_listener(self)
+        self._input_manager.addInput(model.getID())
+        model.addListener(self)
 
-    def get_output(self):
-        return self.output_function(self._last_inputs)
+    def getOutput(self):
+        return self.outputFunction(self._last_inputs)
 
     @abstractmethod
-    def internal_state_transition_function(self):
+    def internalStateTransitionFunction(self):
         """Implements the internal state transition function. The internal state transition function computes the next state
         of the model from the state of an autonomous action
 
@@ -68,7 +68,7 @@ class Model(BaseModel):
         pass
 
     @abstractmethod
-    def external_state_transition_function(self, xb: BagOfValues, event_time: float):
+    def externalStateTransitionFunction(self, xb: BagOfValues, event_time: float):
         """Implements the external state transition function. The external state transition function computes the
         next state of the model from its current total state Q and a bag xb of inputs in X
 
@@ -79,18 +79,18 @@ class Model(BaseModel):
         """
         pass
 
-    def confluent_state_transition_function(self, xb: BagOfValues):
+    def confluentStateTransitionFunction(self, xb: BagOfValues):
         """Implements the confluent state transition function. The confluent state transition function computes the
         next state of the model from its current state S and a bag xb of inputs in X
 
          .. math:: \delta_con \; : \; S \; x \; X^b \longrightarrow S
 
         """
-        self.internal_state_transition_function()
-        return self.external_state_transition_function(xb, self.time_advance_function())
+        self.internalStateTransitionFunction()
+        return self.externalStateTransitionFunction(xb, self.timeAdvanceFunction())
 
     @abstractmethod
-    def output_function(self, output_bag: BagOfValues) -> BagOfValues:
+    def outputFunction(self, output_bag: BagOfValues) -> BagOfValues:
         """Implements the output function. The output function maps the current state S
         to a bag yb of outputs in Y
 
@@ -102,7 +102,7 @@ class Model(BaseModel):
         pass
 
     @abstractmethod
-    def time_advance_function(self) -> float:
+    def timeAdvanceFunction(self) -> float:
         """Implement the model’s time advance function.
 
         :returns time of the autonomous event

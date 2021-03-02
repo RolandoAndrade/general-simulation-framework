@@ -8,5 +8,5 @@ class ExternalStateTransitionEvent(Event):
             time: time
         }
 
-    def get_time(self) -> float:
+    def getTime(self) -> float:
         return self._message.time

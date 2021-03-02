@@ -12,13 +12,13 @@ class ScheduledModel:
     _model: Model
     _time: float
 
-    def get_model(self) -> Model:
+    def getModel(self) -> Model:
         return self._model
 
-    def get_time(self) -> float:
+    def getTime(self) -> float:
         return self._time
 
-    def decrease_time(self, time: float):
+    def decreaseTime(self, time: float):
         return self._time - time
 
     def __lt__(self, other: ScheduledModel):
