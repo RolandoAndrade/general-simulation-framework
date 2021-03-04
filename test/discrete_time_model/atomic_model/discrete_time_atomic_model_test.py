@@ -5,20 +5,10 @@ from dynamic_system.utils.bag_of_values import BagOfValues
 class DiscreteTimeAtomicModelTest(DiscreteTimeModel):
     def __init__(self):
         super().__init__()
-        state = BagOfValues({
-            'Color': 'White',
-            'x': 100,
-            'y': 100
-        })
-        self.setUpState(state)
+        self.setUpState(1)
 
-    def internalStateTransitionFunction(self, s: BagOfValues, x: BagOfValues) -> BagOfValues:
-        s['x'] = s['x'] + x['x']
-        s['y'] = s['y'] + x['y']
-        return s
+    def stateTransitionFunction(self, s: float, x: float) -> float:
+        return s / 2 + x
 
-    def outputFunction(self, s: BagOfValues) -> BagOfValues:
-        return BagOfValues({
-            'x': s['x'] - 100,
-            'y': s['y'] - 100
-        })
+    def outputFunction(self, s: float) -> float:
+        return 10 * s

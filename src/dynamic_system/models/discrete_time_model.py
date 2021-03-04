@@ -1,22 +1,49 @@
 from __future__ import annotations
 from abc import abstractmethod
+from typing import Any
 
 from dynamic_system.models.base_model import BaseModel
 
 from dynamic_system.utils.bag_of_values import BagOfValues
 
+
 class DiscreteTimeModel(BaseModel):
-    _currentState: BagOfValues
+    _currentState: Any
 
     def __init__(self, name: str = None):
         super().__init__(name)
-        self._currentState = BagOfValues()
+        self._currentState = None
 
     def receiveInput(self, model_id: str, inputs: BagOfValues):
         pass
 
+    def setUpState(self, state: Any):
+        """s
+
+        Sets up the state of the model.
+
+        :param state: New state of the model.
+        """
+        self._currentState = state
+
+    def stateTransition(self, inputs: Any):
+        """Executes the state transition using the state given by
+        the state transition function.
+
+        :param inputs: Input trajectory x.
+        """
+        new_state = self.stateTransitionFunction(self._currentState, inputs)
+        self.setUpState(new_state)
+
+    def getOutput(self) -> Any:
+        """Get the output of the model.
+
+        :returns y: output trajectory y.
+        """
+        return self.outputFunction(self._currentState)
+
     @abstractmethod
-    def internalStateTransitionFunction(self, s: BagOfValues, x: BagOfValues) -> BagOfValues:
+    def stateTransitionFunction(self, state: BagOfValues, inputs: Any) -> Any:
         """.. math:: \delta \; (s,x)
 
         Implements the internal state transition function delta.
@@ -25,15 +52,15 @@ class DiscreteTimeModel(BaseModel):
 
          .. math:: \delta \; : \; S \; x \; X \longrightarrow S
 
-         :param s: Current state of the model.
-         :param x: Input trajectory.
+         :param state: Current state s of the model.
+         :param inputs: Input trajectory x.
 
          :return s: New state s'
         """
         pass
 
     @abstractmethod
-    def outputFunction(self, s: BagOfValues) -> BagOfValues:
+    def outputFunction(self, state: Any) -> Any:
         """.. math:: \lambda \; (s)
 
         Implements the output function lambda. The output function describes
@@ -41,11 +68,8 @@ class DiscreteTimeModel(BaseModel):
 
         .. math:: \lambda \; : \; S \; \longrightarrow Y
 
-        :param s: current state of the model.
+        :param state: current state s of the model.
 
         :returns y: output trajectory y.
         """
-        pass
-
-    def setUpState(self, s: BagOfValues):
         pass
