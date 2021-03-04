@@ -20,21 +20,21 @@ class MyTestCase(unittest.TestCase):
         bg['x'] = True
         bg['y'] = True
         self.input_layer.set_inputs(bg)
-        self.input_layer.receiveInput()
+        self.input_layer.computeOutput()
         self.assertEqual(self.andModel.getOutput(), True, "Should be true")
         bg['y'] = False
         self.input_layer.set_inputs(bg)
-        self.input_layer.receiveInput()
+        self.input_layer.computeOutput()
         self.assertEqual(self.andModel.getOutput(), False, "Should be false")
         bg['x'] = False
         bg['y'] = True
         self.input_layer.set_inputs(bg)
-        self.input_layer.receiveInput()
+        self.input_layer.computeOutput()
         self.assertEqual(self.andModel.getOutput(), False, "Should be false")
         bg['x'] = False
         bg['y'] = False
         self.input_layer.set_inputs(bg)
-        self.input_layer.receiveInput()
+        self.input_layer.computeOutput()
         self.assertEqual(self.andModel.getOutput(), False, "Should be false")
 
 

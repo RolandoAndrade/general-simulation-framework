@@ -1,16 +1,15 @@
 from __future__ import annotations
 from abc import abstractmethod
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from core.events.event_bus import subscriber, subscribe
 from dynamic_system.events.external_state_transition_event import ExternalStateTransitionEvent
 
 from dynamic_system.control.scheduler import static_scheduler
 from dynamic_system.control.input_manager import InputManager
-
+from dynamic_system.utils.bag_of_values import BagOfValues
 
 if TYPE_CHECKING:
-    from dynamic_system.utils.bag_of_values import BagOfValues
     from dynamic_system.control.scheduler import Scheduler, static_scheduler
 
 from dynamic_system.models.base_model import BaseModel
@@ -37,7 +36,8 @@ class Model(BaseModel):
         self._input_manager.saveInput(model_id, inputs)
         if self._input_manager.isReady():
             self._last_inputs = self._input_manager.getInputs()
-            out = self.outputFunction(self._last_inputs)
+            out = BagOfValues()
+            out[self.getID()] = self.outputFunction(self._last_inputs)
             self.notifyOutput(out)
             self._input_manager.clear()
 
@@ -90,7 +90,7 @@ class Model(BaseModel):
         return self.externalStateTransitionFunction(xb, self.timeAdvanceFunction())
 
     @abstractmethod
-    def outputFunction(self, output_bag: BagOfValues) -> BagOfValues:
+    def outputFunction(self, output_bag: BagOfValues) -> Any:
         """Implements the output function. The output function maps the current state S
         to a bag yb of outputs in Y
 

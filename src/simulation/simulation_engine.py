@@ -13,8 +13,8 @@ if TYPE_CHECKING:
 
 class SimulationEngine:
     _scheduler: Scheduler
-    _is_output_up_to_date: bool
-    _time_of_last_event: float
+    _isOutputUpToDate: bool
+    _timeOfLastEvent: float
 
     def __init__(self, scheduler: Scheduler):
         self._scheduler = scheduler
@@ -26,7 +26,7 @@ class SimulationEngine:
         :param is_external: Is an external event
         """
         if time < self._scheduler.getTimeOfNextEvent() and is_external:  # If this is an external event
-            event_bus.emit(ExternalStateTransitionEvent(time - self._time_of_last_event))
+            event_bus.emit(ExternalStateTransitionEvent(time - self._timeOfLastEvent))
         elif time == self._scheduler.getTimeOfNextEvent():  # Confluent with autonomous action
             self.computeOutput()  # Compute the output at the time
             model = self._scheduler.getNextModel()
@@ -35,8 +35,8 @@ class SimulationEngine:
             else:
                 model.internalTransition()
 
-        self._time_of_last_event = time
-        self._is_output_up_to_date = False
+        self._timeOfLastEvent = time
+        self._isOutputUpToDate = False
 
     def executeNextEvent(self):
         """Computes the output and next state of the model at the next event time"""
@@ -45,6 +45,6 @@ class SimulationEngine:
     def computeOutput(self):
         """Invokes the model's output function and inform to listeners of the consequent
         output values; it does not change the state of the model"""
-        if not self._is_output_up_to_date:
-            self._is_output_up_to_date = True
+        if not self._isOutputUpToDate:
+            self._isOutputUpToDate = True
             event_bus.emit(ComputeOutputEvent)

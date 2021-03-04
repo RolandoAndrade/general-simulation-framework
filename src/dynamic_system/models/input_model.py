@@ -8,13 +8,13 @@ from dynamic_system.utils.bag_of_values import BagOfValues
 
 @subscriber
 class InputModel(BaseModel):
-    inputs: BagOfValues
+    _inputs: BagOfValues
 
     def __init__(self, name: str = None, inputs: BagOfValues = None):
         super().__init__(name)
         self._inputs = inputs
 
     @subscribe(ComputeOutputEvent)
-    def receiveInput(self):
+    def computeOutput(self):
         out = self._inputs
         self.notifyOutput(out)
