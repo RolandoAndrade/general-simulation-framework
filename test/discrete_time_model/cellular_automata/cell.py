@@ -16,3 +16,9 @@ class Cell(DiscreteTimeModel):
 
     def outputFunction(self, state: bool) -> bool:
         return state
+
+    def __str__(self):
+        if self._currentState:
+            return "*"
+        else:
+            return "0"

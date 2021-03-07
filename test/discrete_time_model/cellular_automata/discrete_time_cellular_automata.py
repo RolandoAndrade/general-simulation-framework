@@ -27,11 +27,17 @@ class CellularAutomata(unittest.TestCase):
 
     def test_dynamic_system(self):
         o = self.ds.getOutput()
-        self.ds.stateTransition(o)
+        self.ds.stateTransition()
         self.assertEqual(self.cellA.getOutput(), Cell.DEAD)
         self.assertEqual(self.cellB.getOutput(), Cell.ALIVE)
         self.assertEqual(self.cellC.getOutput(), Cell.DEAD)
 
+    def test_print(self):
+        for i in range(10):
+            print(str(self.cellA) + str(self.cellB) + str(self.cellC))
+            self.ds.getOutput()
+            self.ds.stateTransition()
+        print(str(self.cellA) + str(self.cellB) + str(self.cellC))
 
 
 if __name__ == '__main__':
