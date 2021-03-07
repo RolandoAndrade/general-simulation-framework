@@ -25,6 +25,10 @@ class DiscreteTimeModel(BaseModel):
         :param model: Model to be an input"""
         self._currentDynamicSystem.addInput(self, model)
 
+    def getDynamicSystem(self):
+        """Returns the dynamic system where the current model belongs with"""
+        return self._currentDynamicSystem
+
     def receiveInput(self, model_id: str, inputs: BagOfValues):
         pass
 
