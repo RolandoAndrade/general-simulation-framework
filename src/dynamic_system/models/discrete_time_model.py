@@ -1,18 +1,29 @@
 from __future__ import annotations
 from abc import abstractmethod
-from typing import Any
+from typing import Any, Set
 
 from dynamic_system.models.base_model import BaseModel
+from dynamic_system.models.dynamic_system import DynamicSystem
 
 from dynamic_system.utils.bag_of_values import BagOfValues
 
 
 class DiscreteTimeModel(BaseModel):
     _currentState: Any
+    _currentDynamicSystem: DynamicSystem
 
-    def __init__(self, name: str = None):
+    def __init__(self, dynamic_system: DynamicSystem, name: str = None, state=None):
         super().__init__(name)
-        self._currentState = None
+        # Init the model
+        self.setUpState(state)
+        # Add the model to the dynamic system
+        self._currentDynamicSystem = dynamic_system
+        self._currentDynamicSystem.add(self)
+
+    def add(self, model: DiscreteTimeModel):
+        """Add a model as an input for the current model in the dynamic system
+        :param model: Model to be an input"""
+        self._currentDynamicSystem.addInput(self, model)
 
     def receiveInput(self, model_id: str, inputs: BagOfValues):
         pass
@@ -43,7 +54,7 @@ class DiscreteTimeModel(BaseModel):
         return self.outputFunction(self._currentState)
 
     @abstractmethod
-    def stateTransitionFunction(self, state: BagOfValues, inputs: Any) -> Any:
+    def stateTransitionFunction(self, state: Any, inputs: Any) -> Any:
         """.. math:: \delta \; (s,x)
 
         Implements the internal state transition function delta.
