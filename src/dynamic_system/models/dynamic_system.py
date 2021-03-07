@@ -25,7 +25,7 @@ class DynamicSystem:
         if model.getDynamicSystem() != self or input_model.getDynamicSystem() != self:
             raise Exception("Invalid dynamic system")
 
-        if self._inputs[model.getID()] is not None:
+        if model.getID() in self._inputs:
             self._inputs[model.getID()].append(input_model.getID())
         else:
             self._inputs[model.getID()] = [input_model.getID()]
@@ -35,7 +35,16 @@ class DynamicSystem:
             self._outputs[model] = self._models[model].getOutput()
         return self._outputs
 
-    def stateTransition(self, inputs: Dict[str, Any]):
-        for model in inputs:
-            if model in self._models:
-                self._models[model].stateTransition(inputs[model])
+    def _getValuesToInject(self, models: List[str], input_models_values: Dict[str, Any]):
+        if len(models) > 1:
+            l = []
+            for inp in models:
+                l.append({inp: input_models_values[inp]})
+            return l
+        else:
+            return input_models_values[models[0]]
+
+    def stateTransition(self, input_models_values: Dict[str, Any]):
+        for model in self._inputs:
+            input_of_model = self._getValuesToInject(self._inputs[model], input_models_values)
+            self._models[model].stateTransition(input_of_model)
