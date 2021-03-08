@@ -41,15 +41,15 @@ class DynamicSystem:
             self._outputs[model] = self._models[model].getOutput()
         return self._outputs
 
-    def _getValuesToInject(self, input_models: List[str]) -> Union[List[Dict[str, Any]], Any]:
+    def _getValuesToInject(self, input_models: List[str]) -> Union[Dict[str, Any], Any]:
         """Get the output of the input models that will be injected.
         :param input_models: Input models of the model.
         """
         if len(input_models) > 1:
-            l = []
+            values = dict()
             for inp in input_models:
-                l.append({inp: self._outputs[inp]})
-            return l
+                values[inp] = self._outputs[inp]
+            return values
         else:
             return self._outputs[input_models[0]]
 
