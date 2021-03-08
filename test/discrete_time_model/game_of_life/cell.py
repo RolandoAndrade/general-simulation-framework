@@ -20,9 +20,7 @@ class Cell(DiscreteTimeModel):
         for v in values:
             if v:
                 count = count + 1
-        if (not state and count == 3) or (state and 2 <= count <= 3):
-            return True
-        return False
+        return (not state and count == 3) or (state and 2 <= count <= 3)
 
     def outputFunction(self, state: bool) -> bool:
         return state
