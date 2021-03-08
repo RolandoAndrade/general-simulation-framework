@@ -2,24 +2,26 @@ from random import random
 from typing import List
 
 from dynamic_system.models.dynamic_system import DynamicSystem
+from simulation.discrete_time_simulator import DiscreteTimeSimulator
 from test.discrete_time_model.game_of_life.cell import Cell
 
 
 class Board:
-    _ds: DynamicSystem
+    _sim: DiscreteTimeSimulator
     _cells: List[List[Cell]]
 
     def __init__(self, width: int = 10, height: int = 10):
-        self._ds = DynamicSystem()
         self._fillBoard(width, height)
         self._defineRelations()
 
     def _fillBoard(self, width: int, height: int):
+        ds = DynamicSystem()
+        self._sim = DiscreteTimeSimulator(ds)
         self._cells = []
         for i in range(height):
             row = []
             for j in range(width):
-                row.append(Cell(self._ds, i, j, state=random() < 0.5))
+                row.append(Cell(ds, i, j, state=random() < 0.5))
             self._cells.append(row)
 
     def _defineRelations(self):
@@ -31,11 +33,9 @@ class Board:
                             self._cells[i][j].add(self._cells[x][y])
 
     def nextGeneration(self):
-        self._ds.getOutput()
-        self._ds.stateTransition()
+        self._sim.computeNextState()
 
     def show(self):
-        self._ds.getOutput()
         for row in self._cells:
             for cell in row:
                 print(str(cell), end="")
