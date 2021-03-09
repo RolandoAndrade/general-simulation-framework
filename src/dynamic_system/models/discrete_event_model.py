@@ -11,17 +11,26 @@ class DiscreteEventModel(BaseModel):
     def receiveInput(self, model_id: str, inputs: BagOfValues):
         pass
 
+    def setUpState(self, state: Any):
+        """s
+
+        Sets up the state of the model.
+
+        :param state: New state of the model.
+        """
+        self._currentState = state
+
     @abstractmethod
     def internalStateTransitionFunction(self, state: Any) -> Any:
         """.. math:: \delta_int(s)
 
         Implements the internal state transition function delta.
         The internal state transition function takes the system from its state
-         at the time of the autonomous event to a subsequent state
+        at the time of the autonomous event to a subsequent state.
 
-         .. math:: \delta_int \; : \; S \longrightarrow S
+        .. math:: \delta_int \; : \; S \longrightarrow S
 
-         :param state: Current state of the model.
+        :param state: Current state of the model.
 
         :return s: New state s'
         """
@@ -88,4 +97,4 @@ class DiscreteEventModel(BaseModel):
         :return s: New state s'
         """
         new_state = self.internalStateTransitionFunction(state)
-        return self.externalStateTransitionFunction(new_state, inputs, self.timeAdvanceFunction(self._currentState))
+        return self.externalStateTransitionFunction(new_state, inputs, 0)
