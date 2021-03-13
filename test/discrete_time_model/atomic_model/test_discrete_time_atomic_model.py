@@ -14,7 +14,7 @@ class MyTestCase(unittest.TestCase):
         for t in range(len(x)):
             yt = self.dtam.getOutput()
             self.assertEqual(yt, y[t])
-            self.dtam.stateTransition(x[t])
+            self.dtam.stateTransition(x[t], )
 
 
 if __name__ == '__main__':

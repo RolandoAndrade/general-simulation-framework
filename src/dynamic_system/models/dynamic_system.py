@@ -3,11 +3,11 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Dict, Any, List, Union
 
 if TYPE_CHECKING:
-    from dynamic_system.models.discrete_time_model import DiscreteTimeModel
+    from dynamic_system.models.state_model import StateModel
 
 
 class DynamicSystem:
-    _models: Dict[str, DiscreteTimeModel]
+    _models: Dict[str, StateModel]
     _inputs: Dict[str, List[str]]
     _outputs: Dict[str, Any]
 
@@ -16,12 +16,12 @@ class DynamicSystem:
         self._inputs = dict()
         self._outputs = dict()
 
-    def add(self, model: DiscreteTimeModel):
+    def add(self, model: StateModel):
         """Add a model to the dynamic system.
         :param model: Model to be added."""
         self._models[model.getID()] = model
 
-    def addInput(self, model: DiscreteTimeModel, input_model: DiscreteTimeModel):
+    def addInput(self, model: StateModel, input_model: StateModel):
         """Add a model as an input for the model.
         :param model: Destination model.
         :param input_model: Model defined as an input."""
@@ -61,8 +61,8 @@ class DynamicSystem:
         and value the inputs for that model.
         """
         for model in input_models_values:
-            self._models[model].stateTransition(input_models_values[model])
+            self._models[model].stateTransition(input_models_values[model], )
         for model in self._inputs:
             if model not in input_models_values:
                 vs = self._getValuesToInject(self._inputs[model])
-                self._models[model].stateTransition(vs)
+                self._models[model].stateTransition(vs, )

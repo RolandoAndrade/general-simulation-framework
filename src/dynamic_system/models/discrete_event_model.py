@@ -1,24 +1,39 @@
 from abc import abstractmethod
 from typing import Any
 
-from dynamic_system.models.base_model import BaseModel
-from dynamic_system.utils.bag_of_values import BagOfValues
+from dynamic_system.models.state_model import StateModel
 
 
-class DiscreteEventModel(BaseModel):
-    _currentState: Any
+class DiscreteEventModel(StateModel):
+    def confluentStateTransitionFunction(self, state: Any, inputs: Any) -> Any:
+        """.. math:: \delta_con(s,x)
 
-    def receiveInput(self, model_id: str, inputs: BagOfValues):
-        pass
+        Implements the confluent state transition function delta.
+        The confluent state transition
+        executes an external transition function at the time of an autonomous event.
 
-    def setUpState(self, state: Any):
-        """s
+         .. math:: \delta_con \; : \; S \; x \; X \longrightarrow S
 
-        Sets up the state of the model.
-
-        :param state: New state of the model.
+        :return s: New state s'
         """
-        self._currentState = state
+        new_state = self.internalStateTransitionFunction(state)
+        return self.externalStateTransitionFunction(new_state, inputs, 0)
+
+    def stateTransition(self, inputs: Any = None, event_time: float = 0):
+        """Executes the state transition using the state given by
+        the state transition function.
+
+        :param inputs: Input trajectory x. If it is None, the state transition is autonomous
+        :param event_time: Time of the event. If there are inputs and the time is 0, it is an confluent transition
+        """
+        new_state: Any
+        if inputs is None:  # is an autonomous event
+            new_state = self.internalStateTransitionFunction(self._currentState)
+        elif event_time is 0:
+            new_state = self.confluentStateTransitionFunction(self._currentState, inputs)
+        else:
+            new_state = self.externalStateTransitionFunction(self._currentState, inputs, event_time)
+        self.setUpState(new_state)
 
     @abstractmethod
     def internalStateTransitionFunction(self, state: Any) -> Any:
@@ -70,7 +85,7 @@ class DiscreteEventModel(BaseModel):
         pass
 
     @abstractmethod
-    def outputFunction(self, state: Any) -> Any:
+    def outputFunction(self, state: Any) -> Any:  # Overwritten documentation
         """.. math:: \lambda \; (s)
 
         Implements the output function lambda. The output function describes
@@ -84,17 +99,3 @@ class DiscreteEventModel(BaseModel):
         :returns y: output trajectory y.
         """
         pass
-
-    def confluentStateTransitionFunction(self, state: Any, inputs: Any) -> Any:
-        """.. math:: \delta_con(s,x)
-
-        Implements the confluent state transition function delta.
-        The confluent state transition
-        executes an external transition function at the time of an autonomous event.
-
-         .. math:: \delta_con \; : \; S \; x \; X \longrightarrow S
-
-        :return s: New state s'
-        """
-        new_state = self.internalStateTransitionFunction(state)
-        return self.externalStateTransitionFunction(new_state, inputs, 0)
