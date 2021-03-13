@@ -1,10 +1,18 @@
-from abc import abstractmethod
-from typing import Any
+from __future__ import annotations
 
+from abc import abstractmethod
+from typing import Any, TYPE_CHECKING
 from dynamic_system.models.state_model import StateModel
+
+if TYPE_CHECKING:
+    from dynamic_system.models.dynamic_system import DynamicSystem
 
 
 class DiscreteEventModel(StateModel):
+    def __init__(self, dynamic_system: DynamicSystem, name: str = None, state=None):
+        super().__init__(dynamic_system, name, state)
+        self._currentDynamicSystem.schedule(self, self.timeAdvanceFunction(self._currentState))
+
     def confluentStateTransitionFunction(self, state: Any, inputs: Any) -> Any:
         """.. math:: \delta_con(s,x)
 

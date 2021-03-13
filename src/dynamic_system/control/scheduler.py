@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, List
 from dynamic_system.models.scheduled_model import ScheduledModel
 
 if TYPE_CHECKING:
-    from dynamic_system.models.model import Model
+    from dynamic_system.models.state_model import StateModel
 
 
 class Scheduler:
@@ -15,7 +15,7 @@ class Scheduler:
     def __init__(self):
         self._schedule = []
 
-    def schedule(self, model: Model, time: float):
+    def schedule(self, model: StateModel, time: float):
         """Schedule an event at the specified time
         :param model Model with an autonomous event scheduled
         :param time Time to execute event

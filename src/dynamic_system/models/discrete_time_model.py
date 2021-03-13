@@ -1,18 +1,17 @@
 from __future__ import annotations
 from abc import abstractmethod
-from typing import Any, Set
+from typing import Any
 
 from dynamic_system.models.state_model import StateModel
 
-from dynamic_system.utils.bag_of_values import BagOfValues
-
 
 class DiscreteTimeModel(StateModel):
-    def stateTransition(self, inputs: Any):
+    def stateTransition(self, inputs: Any, event_time: float = 0):
         """Executes the state transition using the state given by
         the state transition function.
 
         :param inputs: Input trajectory x.
+        :param event_time: Time of the event. Zero as it is an discrete-time event
         """
         new_state = self.stateTransitionFunction(self._currentState, inputs)
         self.setUpState(new_state)
