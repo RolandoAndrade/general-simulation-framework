@@ -1,6 +1,6 @@
 from __future__ import annotations
 from dynamic_system.models.discrete_time_model import DiscreteTimeModel
-from dynamic_system.models.dynamic_system import DynamicSystem
+from dynamic_system.models.discrete_event_dynamic_system import DynamicSystem
 
 
 class Cell(DiscreteTimeModel):

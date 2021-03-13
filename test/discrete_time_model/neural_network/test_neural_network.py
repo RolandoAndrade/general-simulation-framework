@@ -1,6 +1,6 @@
 import unittest
 
-from dynamic_system.models.dynamic_system import DynamicSystem
+from dynamic_system.models.discrete_event_dynamic_system import DynamicSystem
 from test.discrete_time_model.neural_network.layer import Layer
 
 

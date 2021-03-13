@@ -9,10 +9,10 @@ if TYPE_CHECKING:
 
 
 class DynamicSystem:
-    _models: Dict[str, StateModel]
-    _inputs: Dict[str, List[str]]
-    _outputs: Dict[str, Any]
-    _scheduler: Scheduler
+    _models: Dict[str, StateModel]  # All the models in the dynamic system
+    _inputs: Dict[str, List[str]]   # Models and their models that act as an input
+    _outputs: Dict[str, Any]        # Output of all the models
+    _scheduler: Scheduler           # Scheduler of events
 
     def __init__(self, scheduler: Scheduler = Scheduler()):
         self._models = dict()
@@ -48,6 +48,7 @@ class DynamicSystem:
 
     def getOutput(self) -> Dict[str, Any]:
         """Gets the output of all the models in the dynamic system"""
+        # TODO Not compute all outputs of discrete-event models
         for model in self._models:
             self._outputs[model] = self._models[model].getOutput()
         return self._outputs
@@ -78,3 +79,7 @@ class DynamicSystem:
             if model not in input_models_values:
                 vs = self._getValuesToInject(self._inputs[model])
                 self._models[model].stateTransition(vs, event_time)
+
+    def getTimeOfNextEvent(self) -> float:
+        """Get time of the next event"""
+        return self._scheduler.getTimeOfNextEvent()

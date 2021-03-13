@@ -4,7 +4,7 @@ from random import random
 from typing import Dict, List
 
 from dynamic_system.models.discrete_time_model import DiscreteTimeModel
-from dynamic_system.models.dynamic_system import DynamicSystem
+from dynamic_system.models.discrete_event_dynamic_system import DynamicSystem
 
 
 class Layer(DiscreteTimeModel):

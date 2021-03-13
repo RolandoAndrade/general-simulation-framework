@@ -5,22 +5,28 @@ from dynamic_system.models.dynamic_system import DynamicSystem
 
 class DiscreteTimeSimulator:
     _dynamicSystem: DynamicSystem
-    _time: int
     _isOutputUpToUpdate: bool
+    _lastEventTime: float
 
     def __init__(self, dynamic_system: DynamicSystem):
         self._dynamicSystem = dynamic_system
-        self._time = 0
+        self._lastEventTime = 0
         self._isOutputUpToUpdate = False
 
-    def computeNextState(self, inputs: Dict[str, Any] = {}):
+    def _nextEventTime(self) -> float:
+        """Get time of the next event"""
+        return self._dynamicSystem.getTimeOfNextEvent()
+
+    def computeNextState(self, inputs: Dict[str, Any] = {}, time: float = 0):
         """Compute the next state of the dynamic system
 
         :param inputs: Input for the dynamic system
+        :param time: time of the event.
         """
-        self.computeOutput()
-        self._time = self._time + 1
-        self._dynamicSystem.stateTransition(inputs)
+        if time is self._nextEventTime():  # Time to change the output
+            self.computeOutput()
+        self._lastEventTime = time
+        self._dynamicSystem.stateTransition(inputs, time - self._lastEventTime)
         self._isOutputUpToUpdate = False
 
     def computeOutput(self):

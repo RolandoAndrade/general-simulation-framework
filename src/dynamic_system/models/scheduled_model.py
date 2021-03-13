@@ -9,6 +9,7 @@ if TYPE_CHECKING:
 
 @dataclass
 class ScheduledModel:
+    """Event scheduled"""
     _model: StateModel
     _time: float
 
