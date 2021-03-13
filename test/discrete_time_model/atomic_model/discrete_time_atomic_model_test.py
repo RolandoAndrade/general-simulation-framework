@@ -1,5 +1,4 @@
 from dynamic_system.models.discrete_time_model import DiscreteTimeModel
-from dynamic_system.utils.bag_of_values import BagOfValues
 
 
 class DiscreteTimeAtomicModelTest(DiscreteTimeModel):

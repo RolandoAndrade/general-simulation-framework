@@ -1,6 +1,4 @@
 import unittest
-
-from dynamic_system.utils.bag_of_values import BagOfValues
 from test.discrete_time_model.atomic_model.discrete_time_atomic_model_test import DiscreteTimeAtomicModelTest
 
 

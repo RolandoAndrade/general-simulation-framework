@@ -12,25 +12,16 @@ class DynamicSystem:
     _models: Dict[str, StateModel]  # All the models in the dynamic system
     _inputs: Dict[str, List[str]]   # Models and their models that act as an input
     _outputs: Dict[str, Any]        # Output of all the models
-    _scheduler: Scheduler           # Scheduler of events
 
-    def __init__(self, scheduler: Scheduler = Scheduler()):
+    def __init__(self):
         self._models = dict()
         self._inputs = dict()
         self._outputs = dict()
-        self._scheduler = scheduler
 
     def add(self, model: StateModel):
         """Adds a model to the dynamic system.
         :param model: Model to be added."""
         self._models[model.getID()] = model
-
-    def schedule(self, model: StateModel, time: float):
-        """Schedules an event at the specified time
-        :param model Model with an autonomous event scheduled
-        :param time Time to execute event
-        """
-        self._scheduler.schedule(model, time)
 
     def addInput(self, model: StateModel, input_model: StateModel):
         """Adds a model as an input for the given model.
@@ -48,7 +39,6 @@ class DynamicSystem:
 
     def getOutput(self) -> Dict[str, Any]:
         """Gets the output of all the models in the dynamic system"""
-        # TODO Not compute all outputs of discrete-event models
         for model in self._models:
             self._outputs[model] = self._models[model].getOutput()
         return self._outputs
@@ -65,21 +55,19 @@ class DynamicSystem:
         else:
             return self._outputs[input_models[0]]
 
-    def stateTransition(self, input_models_values: Dict[str, Any] = {}, event_time: float = 0):
+    def stateTransition(self, input_models_values: Dict[str, Any] = None):
         """Executes the state transition of the models. If an input is given,
         the models defined as its inputs will be ignored.
 
         :param input_models_values: Dictionary with key the identifier of the model
-        :param event_time: Time of the event.
         and value the inputs for that model.
         """
+        if input_models_values is None:
+            input_models_values = {}
+
         for model in input_models_values:
-            self._models[model].stateTransition(input_models_values[model], event_time)
+            self._models[model].stateTransition(input_models_values[model])
         for model in self._inputs:
             if model not in input_models_values:
                 vs = self._getValuesToInject(self._inputs[model])
-                self._models[model].stateTransition(vs, event_time)
-
-    def getTimeOfNextEvent(self) -> float:
-        """Get time of the next event"""
-        return self._scheduler.getTimeOfNextEvent()
+                self._models[model].stateTransition(vs)

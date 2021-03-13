@@ -1,7 +1,7 @@
 from random import random
 from typing import List
 
-from dynamic_system.models.discrete_event_dynamic_system import DynamicSystem
+from dynamic_system.models.dynamic_system import DynamicSystem
 from simulation.discrete_time_simulator import DiscreteTimeSimulator
 from test.discrete_time_model.game_of_life.cell import Cell
 

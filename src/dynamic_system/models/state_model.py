@@ -61,12 +61,8 @@ class StateModel(BaseModel):
         pass
 
     @abstractmethod
-    def stateTransition(self, inputs: Any, event_time: float = 0):
-        """Executes the state transition.
-
-        :param inputs: Input trajectory x.
-        :param event_time: Time of the event arrival.
-        """
+    def stateTransition(self, *args, **kwargs):
+        """Executes the state transition."""
         pass
 
     def receiveInput(self, model_id: str, inputs: BagOfValues):
