@@ -5,7 +5,6 @@ from typing import Any
 
 from dynamic_system.models.base_model import BaseModel
 from dynamic_system.models.dynamic_system import DynamicSystem
-from dynamic_system.utils.bag_of_values import BagOfValues
 
 
 class StateModel(BaseModel):
@@ -63,7 +62,4 @@ class StateModel(BaseModel):
     @abstractmethod
     def stateTransition(self, *args, **kwargs):
         """Executes the state transition."""
-        pass
-
-    def receiveInput(self, model_id: str, inputs: BagOfValues):
         pass

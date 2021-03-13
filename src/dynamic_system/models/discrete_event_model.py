@@ -5,11 +5,13 @@ from typing import Any, TYPE_CHECKING
 from dynamic_system.models.state_model import StateModel
 
 if TYPE_CHECKING:
-    from dynamic_system.models.dynamic_system import DynamicSystem
+    from dynamic_system.models.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 
 
 class DiscreteEventModel(StateModel):
-    def __init__(self, dynamic_system: DynamicSystem, name: str = None, state=None):
+    _currentDynamicSystem: DiscreteEventDynamicSystem
+
+    def __init__(self, dynamic_system: DiscreteEventDynamicSystem, name: str = None, state=None):
         super().__init__(dynamic_system, name, state)
         self._currentDynamicSystem.schedule(self, self.timeAdvanceFunction(self._currentState))
 
@@ -39,9 +41,9 @@ class DiscreteEventModel(StateModel):
         new_state: Any
         if inputs is None:  # is an autonomous event
             new_state = self.internalStateTransitionFunction(self._currentState)
-        elif event_time is self.timeAdvanceFunction(self._currentState):
+        elif event_time is self.timeAdvanceFunction(self._currentState) or event_time is 0:  # is an confluent event
             new_state = self.confluentStateTransitionFunction(self._currentState, inputs)
-        else:
+        else:  # time is between autonomous events, so it is an external event
             new_state = self.externalStateTransitionFunction(self._currentState, inputs, event_time)
         self.setUpState(new_state)
 

@@ -1,17 +1,15 @@
 from typing import Dict, Any
 
 from dynamic_system.models.dynamic_system import DynamicSystem
+from simulation.base_simulator import BaseSimulator
 
 
-class DiscreteTimeSimulator:
-    _dynamicSystem: DynamicSystem
-    _isOutputUpToUpdate: bool
+class DiscreteTimeSimulator(BaseSimulator):
     _time: float
 
     def __init__(self, dynamic_system: DynamicSystem):
-        self._dynamicSystem = dynamic_system
+        super().__init__(dynamic_system)
         self._time = 0
-        self._isOutputUpToUpdate = False
 
     def computeNextState(self, inputs: Dict[str, Any] = None):
         """Compute the next state of the dynamic system
