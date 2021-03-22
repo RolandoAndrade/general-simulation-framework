@@ -29,7 +29,7 @@ class SimulationEngine:
             event_bus.emit(ExternalStateTransitionEvent(time - self._timeOfLastEvent))
         elif time == self._scheduler.getTimeOfNextEvent():  # Confluent with autonomous action
             self.computeOutput()  # Compute the output at the time
-            model = self._scheduler.getNextModel()
+            model = self._scheduler.getNextModels()
             if is_external:
                 model.confluentTransition()
             else:

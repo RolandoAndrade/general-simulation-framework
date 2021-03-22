@@ -1,7 +1,7 @@
 from __future__ import annotations
 import heapq
 
-from typing import TYPE_CHECKING, List, Optional
+from typing import TYPE_CHECKING, List, Optional, Set
 from dynamic_system.models.scheduled_model import ScheduledModel
 
 if TYPE_CHECKING:
@@ -36,17 +36,22 @@ class Scheduler:
         for i in range(len(self._futureEventList)):
             self._futureEventList[i].decreaseTime(delta_time)
 
-    def getNextModel(self) -> Optional[StateModel]:
-        """Gets the next model that will execute an autonomous event"""
-        if len(self._futureEventList) > 0:
-            return self._futureEventList[0].getModel()
-        return None
+    def getNextModels(self) -> Set[StateModel]:
+        """Gets the next models that will execute an autonomous event"""
+        s = set()
+        i = 0
+        while i < len(self._futureEventList) and self._futureEventList[i].getTime() == self.getTimeOfNextEvent():
+            s.add(self._futureEventList[i].getModel())
+            i = i + 1
+        return s
 
-    def popNextModel(self) -> Optional[StateModel]:
-        """Gets the next model that will execute an autonomous event and removes it from the heap"""
-        if len(self._futureEventList) > 0:
-            return heapq.heappop(self._futureEventList).getModel()
-        return None
+    def popNextModels(self) -> Set[StateModel]:
+        """Gets the next models that will execute an autonomous event and removes it from the heap"""
+        s = set()
+        time = self.getTimeOfNextEvent()
+        while len(self._futureEventList) > 0 and self._futureEventList[0].getTime() == time:
+            s.add(heapq.heappop(self._futureEventList).getModel())
+        return s
 
     def getFutureEventList(self) -> List[ScheduledModel]:
         """Returns the future event list"""

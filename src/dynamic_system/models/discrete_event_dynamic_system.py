@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Dict, Any, List, Union, cast
+from typing import TYPE_CHECKING, Dict, Any, List, Union, cast, Set
 
 from dynamic_system.control.scheduler import Scheduler
-from dynamic_system.models.discrete_event_model import DiscreteEventModel
 from dynamic_system.models.dynamic_system import DynamicSystem
 
 if TYPE_CHECKING:
@@ -12,12 +11,14 @@ if TYPE_CHECKING:
 
 class DiscreteEventDynamicSystem(DynamicSystem):
     _scheduler: Scheduler  # Scheduler of events
+    _changedModels: Set[StateModel]
     _wasOutputComputed: bool
 
     def __init__(self, scheduler: Scheduler = Scheduler()):
         super().__init__()
         self._scheduler = scheduler
         self._wasOutputComputed = False
+        self._changedModels = set()
 
     def add(self, model: StateModel):
         super(DiscreteEventDynamicSystem, self).add(model)
@@ -38,14 +39,12 @@ class DiscreteEventDynamicSystem(DynamicSystem):
                 self._outputs[model] = self._models[model].getOutput()
             self._wasOutputComputed = True
         else:
-            model = self._scheduler.getNextModel()
-            if model is not None:
+            models = self._scheduler.getNextModels()
+            for model in models:
                 self._outputs[model.getID()] = model.getOutput()
-                for mm in self._inputs:
-                    if model.getID() in self._inputs[mm]:
-                        vs = self._getValuesToInject(self._inputs[mm])
-                        self._models[mm].stateTransition(vs, self.getTimeOfNextEvent())
-                self._scheduler.schedule(model, cast(DiscreteEventModel, model).timeAdvanceFunction(model._currentState))
+                for nn in self._inputs:
+                    if model.getID() in self._inputs[nn]:
+                        self._changedModels.add(self._models[nn])
         return self._outputs
 
     def stateTransition(self, input_models_values: Dict[str, Any] = None, event_time: float = 0):
@@ -56,16 +55,37 @@ class DiscreteEventDynamicSystem(DynamicSystem):
         :param event_time: Time of the event.
         and value the inputs for that model.
         """
-        if input_models_values is None:  # is an autonomous event
-            model = self._scheduler.popNextModel()
-            model.stateTransition(None, event_time)
-        else:
+        self._scheduler.updateTime(event_time)
+
+        input_models = set()
+
+        if input_models_values is not None:  # execute external transition
             for model in input_models_values:
                 self._models[model].stateTransition(input_models_values[model], event_time)
+            input_models = set([self._models[inp] for inp in input_models_values])
 
-    def getNextModel(self) -> StateModel:
+        if self.getTimeOfNextEvent() is 0:  # there are models expecting an autonomous event
+            r_autonomous_models = self._scheduler.popNextModels().difference(input_models)
+            external_models = self._changedModels
+            external_models = external_models.difference(input_models)  # do not repeat
+            autonomous_models = r_autonomous_models.difference(external_models)  # it is not autonomous, is confluent
+            autonomous_models = autonomous_models.difference(input_models)  # do not repeat
+
+            for model in autonomous_models:  # execute autonomous events
+                model.stateTransition(None, event_time)
+
+            for model in external_models:  # execute external transition for models that changed their inputs
+                vs = self._getValuesToInject(self._inputs[model.getID()])
+                model.stateTransition(vs, event_time)
+
+            for model in r_autonomous_models:
+                self._scheduler.schedule(model, model.timeAdvanceFunction(model._currentState))
+
+        self._changedModels = set()
+
+    def getNextModel(self) -> Set[StateModel]:
         """Get the next model that will execute an autonomous event"""
-        return self._scheduler.getNextModel()
+        return self._scheduler.getNextModels()
 
     def getTimeOfNextEvent(self) -> float:
         """Get time of the next event"""

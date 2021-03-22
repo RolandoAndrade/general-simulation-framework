@@ -13,7 +13,7 @@ class Drill(DiscreteEventModel):
 
     def internalStateTransitionFunction(self, state: Dict[str, float]) -> Dict[str, float]:
         state["p"] = max(state["p"] - 1, 0)
-        state["s"] = 1
+        state["s"] = 2
         return state
 
     def externalStateTransitionFunction(self, state: Dict[str, float], parts: int, event_time: float) -> \

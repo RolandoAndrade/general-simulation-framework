@@ -12,22 +12,25 @@ class TestDrill(unittest.TestCase):
         drill = Drill(ds)
         drill.add(press)
 
-        inputs = [{press.getID(): 1}, {press.getID(): 2}, None, None, None, None, None]
+        inputs = [{press.getID(): 1}, {press.getID(): 2}, None, None, None, None, None, None]
 
         i = 0
-        while i < 7:
+        while i < 8:
             print("------------------")
             print("time -> " + str(i))
             if inputs[i] is not None:
                 print("Inserting " + str(inputs[i]["Press"]) + " part(s)")
             print("output -> " + str(ds.getOutput()))
             print("--")
-            ds.stateTransition(inputs[i], i)
+            if i < 1:
+                ds.stateTransition(inputs[i], 0)
+            else:
+                ds.stateTransition(inputs[i], 1)
             print(str(press))
             print(str(drill))
             print("--")
             print(ds._scheduler)
-            i = i + 1
+            i = i + ds.getTimeOfNextEvent()
 
 
 if __name__ == '__main__':
