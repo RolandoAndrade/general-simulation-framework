@@ -1,7 +1,7 @@
 from __future__ import annotations
 import heapq
 
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, List, Optional
 from dynamic_system.models.scheduled_model import ScheduledModel
 
 if TYPE_CHECKING:
@@ -25,19 +25,25 @@ class Scheduler:
             heapq.heappush(self._futureEventList, sm)
 
     def getTimeOfNextEvent(self) -> float:
-        """Get time of the next event"""
+        """Gets the time of the next event"""
         if len(self._futureEventList) > 0:
             return self._futureEventList[0].getTime()
         return 0
 
     def updateTime(self, delta_time: float):
-        """Update the time of the events
+        """Updates the time of the events
         :param delta_time Time that has passed since the last update"""
         for i in range(len(self._futureEventList)):
             self._futureEventList[i].decreaseTime(delta_time)
 
-    def getNextModel(self) -> StateModel:
-        """Get the next model that will execute an autonomous event"""
+    def getNextModel(self) -> Optional[StateModel]:
+        """Gets the next model that will execute an autonomous event"""
+        if len(self._futureEventList) > 0:
+            return self._futureEventList[0].getModel()
+        return None
+
+    def popNextModel(self) -> Optional[StateModel]:
+        """Gets the next model that will execute an autonomous event and removes it from the heap"""
         if len(self._futureEventList) > 0:
             return heapq.heappop(self._futureEventList).getModel()
         return None
@@ -45,6 +51,15 @@ class Scheduler:
     def getFutureEventList(self) -> List[ScheduledModel]:
         """Returns the future event list"""
         return self._futureEventList
+
+    def __str__(self):
+        s = "Future event list\n"
+        if len(self._futureEventList) > 0:
+            for event in self._futureEventList:
+                s += event.getModel().getID() + " -> " + str(event.getTime()) + "\n"
+        else:
+            s += "empty\n"
+        return s
 
 
 static_scheduler = Scheduler()

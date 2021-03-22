@@ -41,7 +41,7 @@ class DiscreteEventModel(StateModel):
         new_state: Any
         if inputs is None:  # is an autonomous event
             new_state = self.internalStateTransitionFunction(self._currentState)
-        elif event_time is self.timeAdvanceFunction(self._currentState) or event_time is 0:  # is an confluent event
+        elif event_time is self.timeAdvanceFunction(self._currentState):  # is an confluent event
             new_state = self.confluentStateTransitionFunction(self._currentState, inputs)
         else:  # time is between autonomous events, so it is an external event
             new_state = self.externalStateTransitionFunction(self._currentState, inputs, event_time)
