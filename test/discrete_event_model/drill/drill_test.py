@@ -15,7 +15,7 @@ class TestDrill(unittest.TestCase):
         inputs = [{press.getID(): 1}, {press.getID(): 2}, None, None, None, None, None, None]
 
         i = 0
-        while i < 8:
+        while True:
             print("------------------")
             print("time -> " + str(i))
             if inputs[i] is not None:
@@ -25,11 +25,13 @@ class TestDrill(unittest.TestCase):
             if i < 1:
                 ds.stateTransition(inputs[i], 0)
             else:
-                ds.stateTransition(inputs[i], 1)
+                ds.stateTransition(inputs[i], ds.getTimeOfNextEvent())
             print(str(press))
             print(str(drill))
             print("--")
             print(ds._scheduler)
+            if ds.getTimeOfNextEvent() == 0:
+                break
             i = i + ds.getTimeOfNextEvent()
 
 
