@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from typing import List, TYPE_CHECKING, Dict, Any
 
 if TYPE_CHECKING:
@@ -12,6 +13,7 @@ class EventBus:
         self._events = {}
 
     "Subscribe an object to event."
+
     def subscribe(self, event: str, subscriber: Subscriber):
         if event in self._events:
             self._events[event].append(subscriber)
@@ -19,6 +21,7 @@ class EventBus:
             self._events[event] = [subscriber]
 
     "Unsubscribe an object to event."
+
     def unsubscribe(self, event: str, subscriber: Subscriber):
         if event in self._events:
             self._events[event].remove(subscriber)
@@ -26,6 +29,7 @@ class EventBus:
             raise Exception("Event is not defined")
 
     "Send a message to all subscribers for an event"
+
     def emit(self, event: str, message: Any):
         if event in self._events:
             for e in self._events[event]:

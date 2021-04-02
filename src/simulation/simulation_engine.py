@@ -6,7 +6,6 @@ from core.events.event_bus import event_bus
 from dynamic_system.events.compute_output_event import ComputeOutputEvent
 from dynamic_system.events.external_state_transition_event import ExternalStateTransitionEvent
 
-
 if TYPE_CHECKING:
     from dynamic_system.control.scheduler import Scheduler
 

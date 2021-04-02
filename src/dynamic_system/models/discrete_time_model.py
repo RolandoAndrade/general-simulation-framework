@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from abc import abstractmethod
 from typing import Any
 
@@ -32,5 +33,3 @@ class DiscreteTimeModel(StateModel):
          :return s: New state s'
         """
         pass
-
-

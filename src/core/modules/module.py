@@ -2,11 +2,9 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, List
 
-
 from core.modules.module_metadata import ModuleMetadata
 
 if TYPE_CHECKING:
-    from core.modules.provider import Provider
     from core.modules.component import Component
 
 
@@ -16,7 +14,6 @@ class Module:
 
     def __init__(self, module_metadata: ModuleMetadata):
         pass
-
 
     def get_exported_dependencies(self) -> List[Component]:
         dependencies: List[Component] = []

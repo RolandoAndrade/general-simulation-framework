@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from abc import abstractmethod
 from typing import Any, TYPE_CHECKING
+
 from dynamic_system.models.state_model import StateModel
 
 if TYPE_CHECKING:

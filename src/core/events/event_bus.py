@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from typing import Type, Callable
 
 from pyeventbus3.pyeventbus3 import Mode, PyBus

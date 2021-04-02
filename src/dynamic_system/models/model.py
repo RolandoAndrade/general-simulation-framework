@@ -1,12 +1,12 @@
 from __future__ import annotations
+
 from abc import abstractmethod
 from typing import TYPE_CHECKING, Any
 
 from core.events.event_bus import subscriber, subscribe
-from dynamic_system.events.external_state_transition_event import ExternalStateTransitionEvent
-
-from dynamic_system.control.scheduler import static_scheduler
 from dynamic_system.control.input_manager import InputManager
+from dynamic_system.control.scheduler import static_scheduler
+from dynamic_system.events.external_state_transition_event import ExternalStateTransitionEvent
 from dynamic_system.utils.bag_of_values import BagOfValues
 
 if TYPE_CHECKING:

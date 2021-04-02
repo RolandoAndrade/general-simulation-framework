@@ -1,7 +1,8 @@
 from __future__ import annotations
-import heapq
 
-from typing import TYPE_CHECKING, List, Optional, Set
+import heapq
+from typing import TYPE_CHECKING, List, Set
+
 from dynamic_system.models.scheduled_model import ScheduledModel
 
 if TYPE_CHECKING:

@@ -5,7 +5,6 @@ from typing import TYPE_CHECKING, List
 if TYPE_CHECKING:
     from core.modules.module import Module
     from core.modules.provider import Provider
-    from core.modules.component import Component
 
 
 class ModuleMetadata:

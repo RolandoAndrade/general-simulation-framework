@@ -1,8 +1,8 @@
 from __future__ import annotations
+
 from typing import Union
 
 from dynamic_system.utils.bag_of_values import BagOfValues
-
 
 
 class InputManager:

@@ -8,8 +8,8 @@ if TYPE_CHECKING:
 
 class DynamicSystem:
     _models: Dict[str, StateModel]  # All the models in the dynamic system
-    _inputs: Dict[str, List[str]]   # Models and their models that act as an input
-    _outputs: Dict[str, Any]        # Output of all the models
+    _inputs: Dict[str, List[str]]  # Models and their models that act as an input
+    _outputs: Dict[str, Any]  # Output of all the models
 
     def __init__(self):
         self._models = dict()

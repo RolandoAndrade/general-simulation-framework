@@ -1,7 +1,5 @@
-import logging
-from typing import List
+from injector import Module
 
-from injector import inject, Injector, Module, provider
 
 class BaseModule(Module):
 
