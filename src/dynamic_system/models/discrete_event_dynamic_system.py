@@ -39,6 +39,7 @@ class DiscreteEventDynamicSystem(DynamicSystem):
                 self._outputs[model] = self._models[model].getOutput()
             self._wasOutputComputed = True
         else:
+            self._outputs = {}
             models = self._scheduler.getNextModels()
             for model in models:
                 self._outputs[model.getID()] = model.getOutput()
