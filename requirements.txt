@@ -1,0 +1,6 @@
+gevent==21.1.2
+greenlet==1.0.0
+pyeventbus3==0.10
+tabulate==0.8.9
+zope.event==4.5.0
+zope.interface==5.3.0

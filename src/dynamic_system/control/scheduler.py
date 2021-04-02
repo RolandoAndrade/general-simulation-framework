@@ -4,6 +4,7 @@ import heapq
 from typing import TYPE_CHECKING, List, Set
 
 from dynamic_system.models.scheduled_model import ScheduledModel
+from tabulate import tabulate
 
 if TYPE_CHECKING:
     from dynamic_system.models.state_model import StateModel
@@ -59,12 +60,11 @@ class Scheduler:
         return self._futureEventList
 
     def __str__(self):
-        s = "Future event list\n"
+        data = []
         if len(self._futureEventList) > 0:
             for event in self._futureEventList:
-                s += event.getModel().getID() + " -> " + str(event.getTime()) + "\n"
-        else:
-            s += "empty\n"
+                data += [[event.getModel().getID(), str(event.getTime())]]
+        s = "FUTURE EVENT LIST (FEL)\n" + tabulate(data, headers=("MODEL", "TIME"), tablefmt="fancy_grid")
         return s
 
 
