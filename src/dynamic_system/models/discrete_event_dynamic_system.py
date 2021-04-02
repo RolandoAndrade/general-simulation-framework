@@ -80,7 +80,7 @@ class DiscreteEventDynamicSystem(DynamicSystem):
                 model.stateTransition(vs, event_time)
 
             for model in r_autonomous_models:
-                self._scheduler.schedule(model, model.timeAdvanceFunction(model._currentState))
+                self._scheduler.schedule(model, model.getTime())
 
         self._changedModels = set()
 

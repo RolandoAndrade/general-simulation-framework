@@ -97,6 +97,9 @@ class DiscreteEventModel(StateModel):
         """
         pass
 
+    def getTime(self):
+        return self.timeAdvanceFunction(self._currentState)
+
     @abstractmethod
     def outputFunction(self, state: Any) -> Any:  # Overwritten documentation
         """.. math:: \lambda \; (s)
