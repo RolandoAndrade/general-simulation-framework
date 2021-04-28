@@ -63,3 +63,6 @@ class StateModel(BaseModel):
     def stateTransition(self, *args, **kwargs):
         """Executes the state transition."""
         pass
+
+    def getTime(self):
+        return 1

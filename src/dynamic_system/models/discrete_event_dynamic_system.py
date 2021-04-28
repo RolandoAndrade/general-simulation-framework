@@ -8,32 +8,48 @@ from dynamic_system.models.dynamic_system import DynamicSystem
 if TYPE_CHECKING:
     from dynamic_system.models.state_model import StateModel
 
+DynamicSystemOutput = Dict[str, Any]
+DynamicSystemInput = Dict[str, Any]
+
 
 class DiscreteEventDynamicSystem(DynamicSystem):
+    """Discrete event dynamic system implementation"""
     _scheduler: Scheduler  # Scheduler of events
     _changedModels: Set[StateModel]
     _wasOutputComputed: bool
 
     def __init__(self, scheduler: Scheduler = Scheduler()):
+        """
+        Args:
+            scheduler (Scheduler): Future event list manager
+        """
         super().__init__()
         self._scheduler = scheduler
         self._wasOutputComputed = False
         self._changedModels = set()
 
     def add(self, model: StateModel):
+        """Adds a model to the dynamic system
+
+        Args:
+            model (StateModel): model to be added
+        """
         super(DiscreteEventDynamicSystem, self).add(model)
         self._wasOutputComputed = False
 
     def schedule(self, model: StateModel, time: float):
         """Schedules an event at the specified time
-        :param model Model with an autonomous event scheduled
-        :param time Time to execute event
+
+        Args:
+            model (StateModel): Model with an autonomous event scheduled
+            time (float): Time to execute event
         """
         self._scheduler.schedule(model, time)
 
-    def getOutput(self) -> Dict[str, Any]:
-        """Gets the output of all the models in the dynamic system. Changes only the model that changes
-        at time t"""
+    def getOutput(self) -> DynamicSystemOutput:
+        """Gets the output of all the models in the dynamic system. Changes only
+        the model that changes at time t
+        """
         if not self._wasOutputComputed:  # if the output of the network is not computed yet
             for model in self._models:
                 self._outputs[model] = self._models[model].getOutput()
@@ -48,13 +64,13 @@ class DiscreteEventDynamicSystem(DynamicSystem):
                         self._changedModels.add(self._models[nn])
         return self._outputs
 
-    def stateTransition(self, input_models_values: Dict[str, Any] = None, event_time: float = 0):
+    def stateTransition(self, input_models_values: DynamicSystemInput = None, event_time: float = 0):
         """Executes the state transition of the models. If an input is given,
         the models defined as its inputs will be ignored.
 
-        :param input_models_values: Dictionary with key the identifier of the model
-        :param event_time: Time of the event.
-        and value the inputs for that model.
+        Args:
+            input_models_values (DynamicSystemInput): Dictionary with key the identifier of the model
+            event_time (float): Time of the event.
         """
         self._scheduler.updateTime(event_time)
 
@@ -66,10 +82,17 @@ class DiscreteEventDynamicSystem(DynamicSystem):
             input_models = set([self._models[inp] for inp in input_models_values])
 
         if self.getTimeOfNextEvent() is 0:  # there are models expecting an autonomous event
-            r_autonomous_models = self._scheduler.popNextModels().difference(input_models)
+            # get models that changed their input by the external events executed above
             external_models = self._changedModels
-            external_models = external_models.difference(input_models)  # do not repeat
-            autonomous_models = r_autonomous_models.difference(external_models)  # it is not autonomous, is confluent
+            external_models = external_models.difference(input_models)
+
+            # get autonomous models that did not executed an external event (not confluent)
+            r_autonomous_models = self._scheduler.popNextModels().difference(input_models)
+
+            # remove models which inputs changed (not changed)
+            autonomous_models = r_autonomous_models.difference(external_models)
+
+            # TODO verify if this is necessary
             autonomous_models = autonomous_models.difference(input_models)  # do not repeat
 
             for model in autonomous_models:  # execute autonomous events
@@ -79,7 +102,7 @@ class DiscreteEventDynamicSystem(DynamicSystem):
                 vs = self._getValuesToInject(self._inputs[model.getID()])
                 model.stateTransition(vs, event_time)
 
-            for model in r_autonomous_models:
+            for model in r_autonomous_models:  # schedule all the models to its next time
                 self._scheduler.schedule(model, model.getTime())
 
         self._changedModels = set()
