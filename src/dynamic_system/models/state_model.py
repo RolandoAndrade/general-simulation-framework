@@ -77,5 +77,6 @@ class StateModel(BaseModel):
         """
         pass
 
-    def getTime(self):
+    def getTime(self) -> float:
+        """Gets the time of the next autonomous event."""
         return 1
