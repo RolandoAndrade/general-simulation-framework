@@ -31,3 +31,6 @@ class ScheduledModel:
 
     def __lt__(self, other: ScheduledModel):
         return self._time < other._time
+
+    def __eq__(self, other: ScheduledModel):
+        return self._model == other._model

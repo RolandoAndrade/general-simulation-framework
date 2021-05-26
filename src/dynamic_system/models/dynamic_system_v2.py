@@ -75,8 +75,7 @@ class DynamicSystem:
         if input_models_values is not None:
             for model in input_models_values:
                 self._models[model].stateTransition(input_models_values[model], event_time)
-                input_models.add(input_models_values[model])
-
+                input_models.add(self._models[model])
         # there are models expecting an autonomous event
         if self.getTimeOfNextEvent() is 0:
             # get the models that will execute an autonomous event
@@ -90,7 +89,7 @@ class DynamicSystem:
 
             affected_models = set()
 
-            for model in autonomous_models:
+            for model in all_autonomous_models:
                 outputs = model.getOutputModels().difference(input_models)
                 for out in outputs:
                     # adds affected model to confluent models
@@ -115,5 +114,6 @@ class DynamicSystem:
 
             for model in affected_models:
                 model.stateTransition(affected_models_inputs[model.getID()], event_time)
+
             for model in all_autonomous_models:
                 self.schedule(model, model.getTime())

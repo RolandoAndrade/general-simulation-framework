@@ -25,7 +25,8 @@ class Scheduler:
         """
         if time > 0:
             sm = ScheduledModel(model, time)
-            heapq.heappush(self._futureEventList, sm)
+            if sm not in self._futureEventList:
+                heapq.heappush(self._futureEventList, sm)
 
     def getTimeOfNextEvent(self) -> float:
         """Gets the time of the next event"""
