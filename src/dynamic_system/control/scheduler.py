@@ -3,11 +3,12 @@ from __future__ import annotations
 import heapq
 from typing import TYPE_CHECKING, List, Set
 
+
 from dynamic_system.models.scheduled_model import ScheduledModel
 from tabulate import tabulate
 
 if TYPE_CHECKING:
-    from dynamic_system.models.state_model import StateModel
+    from dynamic_system.models.model import Model
 
 
 class Scheduler:
@@ -17,7 +18,7 @@ class Scheduler:
     def __init__(self):
         self._futureEventList = []
 
-    def schedule(self, model: StateModel, time: float):
+    def schedule(self, model: Model, time: float):
         """Schedule an event at the specified time
         :param model Model with an autonomous event scheduled
         :param time Time to execute event
@@ -38,7 +39,7 @@ class Scheduler:
         for i in range(len(self._futureEventList)):
             self._futureEventList[i].decreaseTime(delta_time)
 
-    def getNextModels(self) -> Set[StateModel]:
+    def getNextModels(self) -> Set[Model]:
         """Gets the next models that will execute an autonomous event"""
         s = set()
         i = 0
@@ -47,7 +48,7 @@ class Scheduler:
             i = i + 1
         return s
 
-    def popNextModels(self) -> Set[StateModel]:
+    def popNextModels(self) -> Set[Model]:
         """Gets the next models that will execute an autonomous event and removes it from the heap"""
         s = set()
         time = self.getTimeOfNextEvent()

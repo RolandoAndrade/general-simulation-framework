@@ -1,110 +1,171 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import TYPE_CHECKING, Any
-
-from core.events.event_bus import subscriber, subscribe
-from dynamic_system.control.input_manager import InputManager
-from dynamic_system.control.scheduler import static_scheduler
-from dynamic_system.events.external_state_transition_event import ExternalStateTransitionEvent
-from dynamic_system.utils.bag_of_values import BagOfValues
-
-if TYPE_CHECKING:
-    from dynamic_system.control.scheduler import Scheduler, static_scheduler
+from typing import Any, Set, List, Dict
 
 from dynamic_system.models.base_model import BaseModel
+from dynamic_system.models.dynamic_system_v2 import DynamicSystem
+
+ModelInput = Dict[str, Any]
+ModelState = Any
 
 
-@subscriber
 class Model(BaseModel):
-    """A dynamic system that changes in response to its environment and affects
-    its environment as it changes
-    """
+    """Model with an state"""
+    _currentState: ModelState
+    _currentDynamicSystem: DynamicSystem
 
-    _input_manager: InputManager
-    _last_inputs: BagOfValues
-    _scheduler: Scheduler
+    _outputModels: Set[Model]
 
-    def __init__(self, name: str = None, scheduler: Scheduler = static_scheduler):
+    def __init__(self, dynamic_system: DynamicSystem, name: str = None, state=None):
+        """
+        Args:
+            dynamic_system (DynamicSystem): Dynamic system of the model.
+            name (str): Name of the model.
+            state (Any): Initial state of the model.
+        """
         super().__init__(name)
-        self._scheduler = scheduler
-        self._scheduler.schedule(self, self.timeAdvanceFunction())
-        self._input_manager = InputManager()
-        self._last_inputs = None
+        # Init the model
+        self.setUpState(state)
+        # Add the model to the dynamic system
+        self._currentDynamicSystem = dynamic_system
+        self._currentDynamicSystem.add(self)
+        self._outputModels = set()
 
-    def receiveInput(self, model_id: str, inputs: BagOfValues):
-        self._input_manager.saveInput(model_id, inputs)
-        if self._input_manager.isReady():
-            self._last_inputs = self._input_manager.getInputs()
-            out = BagOfValues()
-            out[self.getID()] = self.outputFunction(self._last_inputs)
-            self.notifyOutput(out)
-            self._input_manager.clear()
+    def add(self, model: Model):
+        """Adds a model as an input for the current model in the dynamic system.
 
-    def internalTransition(self):
-        return self.internalStateTransitionFunction()
+        Args:
+            model (StateModel):Model to be an input.
+        """
+        self._currentDynamicSystem.add(model)
+        self._outputModels.add(model)
 
-    def confluentTransition(self):
-        return self.confluentStateTransitionFunction(self._last_inputs)
+    def getDynamicSystem(self) -> DynamicSystem:
+        """Returns the dynamic system where the current model belongs with"""
+        return self._currentDynamicSystem
 
-    @subscribe(ExternalStateTransitionEvent)
-    def _externalTransition(self, event: ExternalStateTransitionEvent):
-        return self.externalStateTransitionFunction(self._last_inputs, event.getTime())
+    def getOutput(self) -> Any:
+        """Gets the output of the model."""
+        return self.outputFunction(self._currentState)
 
-    def add(self, model: BaseModel):
-        self._input_manager.addInput(model.getID())
-        model.addListener(self)
+    def setUpState(self, state: ModelState):
+        """s
 
-    def getOutput(self):
-        return self.outputFunction(self._last_inputs)
+        Sets up the state of the model.
+
+        Args:
+            state (Any): New state of the model.
+        """
+        self._currentState = state
+
+    def stateTransition(self, inputs: ModelInput = None, event_time: float = 0):
+        """Executes the state transition using the state given by the state
+        transition function. If there are not inputs is an internal
+        transition, otherwise it is an external transition.
+
+        Args:
+            inputs (Any): Input trajectory x. If it is None, the state
+                transition is autonomous
+            event_time (float): Time of the event. If there are inputs and the
+                time is ta(s), it is an confluent transition.
+        """
+        new_state: ModelState
+        if inputs is None:
+            # is an autonomous event
+            new_state = self.internalStateTransitionFunction(self._currentState)
+        elif event_time is self.getTime():
+            # is an confluent event
+            new_state = self.confluentStateTransitionFunction(self._currentState, inputs)
+        else:
+            # time is between autonomous events, so it is an external event
+            new_state = self.externalStateTransitionFunction(self._currentState, inputs, event_time)
+        self.setUpState(new_state)
+
+    def confluentStateTransitionFunction(self, state: ModelState, inputs: ModelInput) -> ModelState:
+        """
+        .. math:: \delta_con(s,x)
+
+        Implements the confluent state transition function delta. The
+        confluent state transition executes an external transition function at
+        the time of an autonomous event.
+
+        .. math:: \delta_con \; : \; S \; x \; X \longrightarrow S
+
+        Args:
+            state (Any):
+            inputs (Any):
+        """
+        new_state = self.internalStateTransitionFunction(state)
+        return self.externalStateTransitionFunction(new_state, inputs, 0)  # 0 because is equal to (e = ta(s)) ½ ta(s)
 
     @abstractmethod
-    def internalStateTransitionFunction(self):
-        """Implements the internal state transition function. The internal state transition function computes the next state
-        of the model from the state of an autonomous action
+    def internalStateTransitionFunction(self, state: ModelState) -> ModelState:
+        """
+        .. math:: \delta_int(s)
 
-         .. math:: \delta_int \; : \; S \longrightarrow S
+        Implements the internal state transition function delta. The internal
+        state transition function takes the system from its state at the time of
+        the autonomous event to a subsequent state.
+
+        .. math:: \delta_int \; : \; S \longrightarrow S
+
+        Args:
+            state (Any): Current state of the model.
         """
         pass
 
     @abstractmethod
-    def externalStateTransitionFunction(self, xb: BagOfValues, event_time: float):
-        """Implements the external state transition function. The external state transition function computes the
-        next state of the model from its current total state Q and a bag xb of inputs in X
-
-         .. math:: \delta_ext \; : \; Q \; x \; X^b \longrightarrow S
-
-        :param xb: Inputs for the transition
-        :param event_time: time of event
+    def externalStateTransitionFunction(self, state: ModelState, inputs: ModelInput, event_time: float) -> ModelState:
         """
-        pass
+        .. math:: \delta_ext((s,e), x)
 
-    def confluentStateTransitionFunction(self, xb: BagOfValues):
-        """Implements the confluent state transition function. The confluent state transition function computes the
-        next state of the model from its current state S and a bag xb of inputs in X
+        Implements the external state transition function delta. The external
+        state transition function computes the next state of the model from its
+        current total state (s,e) Q at time of an input and the input itself.
 
-         .. math:: \delta_con \; : \; S \; x \; X^b \longrightarrow S
+            .. math:: \delta_ext \; : \; Q \; x \; X \longrightarrow S
 
-        """
-        self.internalStateTransitionFunction()
-        return self.externalStateTransitionFunction(xb, self.timeAdvanceFunction())
-
-    @abstractmethod
-    def outputFunction(self, output_bag: BagOfValues) -> Any:
-        """Implements the output function. The output function maps the current state S
-        to a bag yb of outputs in Y
-
-        .. math:: \lambda \; : \; S \; \longrightarrow Y^b
-
-        :param output_bag: set of bags with elements in Y (outputs set) where state will be mapped
-        :returns bag yb of outputs in Y
+        Args:
+            state (Any): Current state of the model.
+            inputs (Any): Input trajectory x.
+            event_time (float): Time of event e.
         """
         pass
 
     @abstractmethod
-    def timeAdvanceFunction(self) -> float:
-        """Implement the model’s time advance function.
+    def timeAdvanceFunction(self, state: ModelState) -> float:
+        """ta(s)
 
-        :returns time of the autonomous event
+        Implement the model’s time advance function ta. The time advance
+        function schedules output from the model and autonomous changes in its
+        state.
+
+        .. math:: ta \; : \; S \longrightarrow R_{0^\infty}
+
+        Args:
+            state (Any): Current state of the system.
         """
         pass
+
+    def getTime(self) -> float:
+        """Gets the time of the next autonomous event."""
+        return self.timeAdvanceFunction(self._currentState)
+
+    @abstractmethod
+    def outputFunction(self, state: ModelState) -> Any:
+        """
+        .. math:: \lambda \; (s)
+
+        Implements the output function lambda. The output function describes
+        how the state of the system appears to an observer when e=ta(s).
+
+        .. math:: \lambda \; : \; S \; \longrightarrow Y
+
+        Args:
+            state (Any): current state s of the model.
+        """
+        pass
+
+    def getOutputModels(self) -> Set[Model]:
+        return self._outputModels
