@@ -5,9 +5,8 @@ from dynamic_system.control.scheduler import Scheduler
 
 if TYPE_CHECKING:
     from dynamic_system.models.model import Model, ModelInput
-
-DynamicSystemOutput = DynamicSystemInput = Dict[str, Any]
-DynamicSystemModels = Dict[str, Model]
+    DynamicSystemOutput = DynamicSystemInput = Dict[str, Any]
+    DynamicSystemModels = Dict[str, Model]
 
 
 class DynamicSystem:
@@ -81,7 +80,10 @@ class DynamicSystem:
         # there are models expecting an autonomous event
         if self.getTimeOfNextEvent() is 0:
             # get the models that will execute an autonomous event
-            autonomous_models = self._scheduler.popNextModels().difference(input_models)
+            all_autonomous_models = self._scheduler.popNextModels()
+
+            # remove models that executed an external event
+            autonomous_models = all_autonomous_models.difference(input_models)
 
             # get models that will change by the output computed
             affected_models_inputs: Dict[str, ModelInput] = {}
@@ -95,7 +97,7 @@ class DynamicSystem:
                     affected_models.add(out)
 
                     # checks if the model exist
-                    if affected_models_inputs[out.getID()]:
+                    if out.getID() in affected_models_inputs:
                         # adds an input to an existing affected model
                         affected_models_inputs[out.getID()][model.getID()] = self._outputs[model.getID()]
                     else:
@@ -113,3 +115,5 @@ class DynamicSystem:
 
             for model in affected_models:
                 model.stateTransition(affected_models_inputs[model.getID()], event_time)
+            for model in all_autonomous_models:
+                self.schedule(model, model.getTime())

@@ -31,6 +31,7 @@ class Model(BaseModel):
         self._currentDynamicSystem = dynamic_system
         self._currentDynamicSystem.add(self)
         self._outputModels = set()
+        self._currentDynamicSystem.schedule(self, self.getTime())
 
     def add(self, model: Model):
         """Adds a model as an input for the current model in the dynamic system.

@@ -1,49 +1,42 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Dict
 
-from core.events.event_bus import event_bus
-from dynamic_system.events.compute_output_event import ComputeOutputEvent
-from dynamic_system.events.external_state_transition_event import ExternalStateTransitionEvent
+from simulation.base_simulator import BaseSimulator
 
 if TYPE_CHECKING:
-    from dynamic_system.control.scheduler import Scheduler
+    from dynamic_system.models.model import ModelInput
+    from dynamic_system.models.dynamic_system_v2 import DynamicSystem
 
 
-class SimulationEngine:
-    _scheduler: Scheduler
-    _isOutputUpToDate: bool
-    _timeOfLastEvent: float
+class SimulationEngine(BaseSimulator):
+    _dynamicSystem: DynamicSystem
+    _lastEventTime: float
 
-    def __init__(self, scheduler: Scheduler):
-        self._scheduler = scheduler
+    def __init__(self, dynamic_system: DynamicSystem):
+        super().__init__(dynamic_system)
+        self._dynamicSystem = dynamic_system
+        self._lastEventTime = 0
+        self._isOutputUpToUpdate = False
 
-    def computeNextState(self, time: float, is_external=True):
-        """Computes the next state with external, internal or confluent state transition function
+    def _getTimeOfNextEvent(self) -> float:
+        """Get time of the next event"""
+        return self._dynamicSystem.getTimeOfNextEvent()
 
-        :param time: Time of the event
-        :param is_external: Is an external event
+    def computeNextState(self, inputs: Dict[str, ModelInput] = None, time: float = 0):
+        """Compute the next state of the dynamic system
+
+        :param inputs: Input for the dynamic system
+        :param time: time of the event.
         """
-        if time < self._scheduler.getTimeOfNextEvent() and is_external:  # If this is an external event
-            event_bus.emit(ExternalStateTransitionEvent(time - self._timeOfLastEvent))
-        elif time == self._scheduler.getTimeOfNextEvent():  # Confluent with autonomous action
-            self.computeOutput()  # Compute the output at the time
-            model = self._scheduler.getNextModels()
-            if is_external:
-                model.confluentTransition()
-            else:
-                model.internalTransition()
-
-        self._timeOfLastEvent = time
-        self._isOutputUpToDate = False
-
-    def executeNextEvent(self):
-        """Computes the output and next state of the model at the next event time"""
-        self.computeNextState(self._scheduler.getTimeOfNextEvent(), False)
+        if time - self._lastEventTime is self._getTimeOfNextEvent():  # Time to change the output
+            self.computeOutput()
+        self._dynamicSystem.stateTransition(inputs, time - self._lastEventTime)
+        self._lastEventTime = time
+        self._isOutputUpToUpdate = False
 
     def computeOutput(self):
-        """Invokes the model's output function and inform to listeners of the consequent
-        output values; it does not change the state of the model"""
-        if not self._isOutputUpToDate:
-            self._isOutputUpToDate = True
-            event_bus.emit(ComputeOutputEvent)
+        """Compute the output of the dynamic system if it has not computed yet"""
+        if not self._isOutputUpToUpdate:
+            self._isOutputUpToUpdate = True
+            self._dynamicSystem.getOutput()
