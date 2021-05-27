@@ -4,7 +4,7 @@ from abc import abstractmethod
 from typing import Any, Set, List, Dict
 
 from dynamic_system.models.base_model import BaseModel
-from dynamic_system.models.dynamic_system_v2 import DynamicSystem
+from dynamic_system.models.dynamic_system import DynamicSystem
 
 ModelInput = Dict[str, Any]
 ModelState = Any

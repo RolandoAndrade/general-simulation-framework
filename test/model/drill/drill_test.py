@@ -1,6 +1,6 @@
 import unittest
 
-from dynamic_system.models.dynamic_system_v2 import DynamicSystem
+from dynamic_system.models.dynamic_system import DynamicSystem
 from test.model.drill.drill import Drill
 from test.model.drill.press import Press
 

@@ -1,7 +1,7 @@
 from random import random, seed
 from typing import List
 
-from dynamic_system.models.dynamic_system_v2 import DynamicSystem
+from dynamic_system.models.dynamic_system import DynamicSystem
 from simulation.simulation_engine import SimulationEngine
 from test.model.game_of_life.cell import Cell
 

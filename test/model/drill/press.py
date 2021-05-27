@@ -1,4 +1,4 @@
-from dynamic_system.models.dynamic_system_v2 import DynamicSystem
+from dynamic_system.models.dynamic_system import DynamicSystem
 from dynamic_system.models.model import Model, ModelState, ModelInput
 
 
