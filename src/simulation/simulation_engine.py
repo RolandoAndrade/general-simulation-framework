@@ -6,7 +6,7 @@ from simulation.base_simulator import BaseSimulator
 
 if TYPE_CHECKING:
     from dynamic_system.models.model import ModelInput
-    from dynamic_system.models.dynamic_system import DynamicSystem
+    from dynamic_system.models.discrete_event_dynamic_system import DynamicSystem
 
 
 class SimulationEngine(BaseSimulator):
