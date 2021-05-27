@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Dict, Any, List, Union, Set
-from dynamic_system.control.scheduler import Scheduler
+from dynamic_system.future_event_list.scheduler import Scheduler
 
 if TYPE_CHECKING:
     from dynamic_system.models.model import Model, ModelInput

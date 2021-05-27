@@ -37,18 +37,26 @@ class Model(BaseModel):
         """Adds a model as an input for the current model in the dynamic system.
 
         Args:
-            model (StateModel):Model to be an input.
+            model (Model): Model to be an input.
         """
         self._currentDynamicSystem.add(model)
         self._outputModels.add(model)
+
+    def getOutputModels(self) -> Set[Model]:
+        """Returns the output models of the current model"""
+        return self._outputModels
 
     def getDynamicSystem(self) -> DynamicSystem:
         """Returns the dynamic system where the current model belongs with"""
         return self._currentDynamicSystem
 
-    def getOutput(self) -> Any:
-        """Gets the output of the model."""
-        return self.outputFunction(self._currentState)
+    def schedule(self, time: float):
+        """Schedules an autonomous event
+
+        Args:
+            time (float): Time when the event will be executed.
+        """
+        self._currentDynamicSystem.schedule(self, time)
 
     def setUpState(self, state: ModelState):
         """s
@@ -56,17 +64,25 @@ class Model(BaseModel):
         Sets up the state of the model.
 
         Args:
-            state (Any): New state of the model.
+            state (ModelState): New state of the model.
         """
         self._currentState = state
 
+    def getOutput(self) -> Any:
+        """Gets the output of the model."""
+        return self.outputFunction(self._currentState)
+
+    def getTime(self) -> float:
+        """Gets the time of the next autonomous event."""
+        return self.timeAdvanceFunction(self._currentState)
+
     def stateTransition(self, inputs: ModelInput = None, event_time: float = 0):
         """Executes the state transition using the state given by the state
-        transition function. If there are not inputs is an internal
-        transition, otherwise it is an external transition.
+        transition function. If there are not inputs is an internal transition,
+        otherwise it is an external transition.
 
         Args:
-            inputs (Any): Input trajectory x. If it is None, the state
+            inputs (ModelInput): Input trajectory x. If it is None, the state
                 transition is autonomous
             event_time (float): Time of the event. If there are inputs and the
                 time is ta(s), it is an confluent transition.
@@ -94,8 +110,8 @@ class Model(BaseModel):
         .. math:: \delta_con \; : \; S \; x \; X \longrightarrow S
 
         Args:
-            state (Any):
-            inputs (Any):
+            state (ModelState): Current state of the model.
+            inputs (ModelInput): Input trajectory x.
         """
         new_state = self.internalStateTransitionFunction(state)
         return self.externalStateTransitionFunction(new_state, inputs, 0)  # 0 because is equal to (e = ta(s)) ½ ta(s)
@@ -112,7 +128,7 @@ class Model(BaseModel):
         .. math:: \delta_int \; : \; S \longrightarrow S
 
         Args:
-            state (Any): Current state of the model.
+            state (ModelState): Current state of the model.
         """
         pass
 
@@ -128,8 +144,8 @@ class Model(BaseModel):
             .. math:: \delta_ext \; : \; Q \; x \; X \longrightarrow S
 
         Args:
-            state (Any): Current state of the model.
-            inputs (Any): Input trajectory x.
+            state (ModelState): Current state of the model.
+            inputs (ModelInput): Input trajectory x.
             event_time (float): Time of event e.
         """
         pass
@@ -145,13 +161,9 @@ class Model(BaseModel):
         .. math:: ta \; : \; S \longrightarrow R_{0^\infty}
 
         Args:
-            state (Any): Current state of the system.
+            state (ModelState): Current state of the system.
         """
         pass
-
-    def getTime(self) -> float:
-        """Gets the time of the next autonomous event."""
-        return self.timeAdvanceFunction(self._currentState)
 
     @abstractmethod
     def outputFunction(self, state: ModelState) -> Any:
@@ -164,9 +176,6 @@ class Model(BaseModel):
         .. math:: \lambda \; : \; S \; \longrightarrow Y
 
         Args:
-            state (Any): current state s of the model.
+            state (ModelState): current state s of the model.
         """
         pass
-
-    def getOutputModels(self) -> Set[Model]:
-        return self._outputModels
