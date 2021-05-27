@@ -10,10 +10,15 @@ if TYPE_CHECKING:
 
 
 class SimulationEngine(BaseSimulator):
+    """Simulation engine for discrete-event simulation"""
     _dynamicSystem: DynamicSystem
     _lastEventTime: float
 
     def __init__(self, dynamic_system: DynamicSystem):
+        """
+        Args:
+            dynamic_system (DynamicSystem):
+        """
         super().__init__(dynamic_system)
         self._dynamicSystem = dynamic_system
         self._lastEventTime = 0
@@ -26,8 +31,9 @@ class SimulationEngine(BaseSimulator):
     def computeNextState(self, inputs: Dict[str, ModelInput] = None, time: float = 0):
         """Compute the next state of the dynamic system
 
-        :param inputs: Input for the dynamic system
-        :param time: time of the event.
+        Args:
+            inputs: Input for the dynamic system
+            time (float): time of the event.
         """
         if time - self._lastEventTime is self._getTimeOfNextEvent():  # Time to change the output
             self.computeOutput()
@@ -36,7 +42,9 @@ class SimulationEngine(BaseSimulator):
         self._isOutputUpToUpdate = False
 
     def computeOutput(self):
-        """Compute the output of the dynamic system if it has not computed yet"""
+        """Compute the output of the dynamic system if it has not computed
+        yet
+        """
         if not self._isOutputUpToUpdate:
             self._isOutputUpToUpdate = True
             self._dynamicSystem.getOutput()

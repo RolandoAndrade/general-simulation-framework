@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, Set, List, Dict, TYPE_CHECKING
+from typing import Any, Set, Dict, TYPE_CHECKING
 
 from dynamic_system.models.base_model import BaseModel
 from dynamic_system.models.discrete_event_dynamic_system import DynamicSystem
@@ -13,17 +13,22 @@ if TYPE_CHECKING:
 
 class Model(BaseModel):
     """Model with an state"""
+
+    # current state of the model
     _currentState: ModelState
+
+    # current dynamic system of the model
     _currentDynamicSystem: DynamicSystem
 
+    # output models of the model
     _outputModels: Set[Model]
 
-    def __init__(self, dynamic_system: DynamicSystem, name: str = None, state=None):
+    def __init__(self, dynamic_system: DynamicSystem, name: str = None, state: ModelState = None):
         """
         Args:
             dynamic_system (DynamicSystem): Dynamic system of the model.
             name (str): Name of the model.
-            state (Any): Initial state of the model.
+            state (ModelState): Initial state of the model.
         """
         super().__init__(name)
         # Init the model
@@ -180,3 +185,8 @@ class Model(BaseModel):
             state (ModelState): current state s of the model.
         """
         pass
+
+    def __str__(self):
+        name = self.getID()
+        state = self._currentState
+        return name + ": {'state': " + str(state) + "}"

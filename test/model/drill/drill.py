@@ -1,5 +1,12 @@
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
 from dynamic_system.models.discrete_event_dynamic_system import DynamicSystem
-from dynamic_system.models.model import Model, ModelState, ModelInput
+
+from dynamic_system.models.model import Model
+if TYPE_CHECKING:
+    from dynamic_system.models.model import ModelState, ModelInput
 
 
 class Drill(Model):
@@ -33,6 +40,3 @@ class Drill(Model):
         if state["p"] > 0:
             return 1
         return 0
-
-    def __str__(self):
-        return self.getID() + " -> s" + str(self._currentState)
