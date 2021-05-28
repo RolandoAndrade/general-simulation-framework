@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, List, Set
 
 
 from dynamic_system.discrete_events.models.scheduled_model import ScheduledModel
-from tabulate import tabulate
+from prettytable import PrettyTable
 
 if TYPE_CHECKING:
     from dynamic_system.discrete_events.models.discrete_event_model import DiscreteEventModel
@@ -70,12 +70,21 @@ class Scheduler:
         return self._futureEventList
 
     def __str__(self):
-        data = []
+        x = PrettyTable()
+        x.title = "Future Event List (FEL)"
+        x.field_names = ["Model ID", "Priority", "Time"]
+        x.align["Priority"] = "r"
+        x.align["Model ID"] = "l"
+        x.align["Time"] = "r"
+        priority = 0
+        lastTime = 0
         if len(self._futureEventList) > 0:
             for event in self._futureEventList:
-                data += [[event.getModel().getID(), str(event.getTime())]]
-        s = "FUTURE EVENT LIST (FEL)\n" + tabulate(data, headers=("MODEL", "TIME"), tablefmt="fancy_grid")
-        return s
+                if lastTime != event.getTime():
+                    priority = priority + 1
+                x.add_row([event.getModel().getID(), priority, str(event.getTime())])
+                lastTime = event.getTime()
+        return str(x)
 
 
 static_scheduler = Scheduler()
