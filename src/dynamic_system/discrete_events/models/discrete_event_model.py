@@ -3,6 +3,7 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any, Set, Dict, TYPE_CHECKING
 
+from core.debug.domain.debug import debug
 from dynamic_system.core.base_model import BaseModel
 from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 
@@ -39,6 +40,7 @@ class DiscreteEventModel(BaseModel):
         self._outputModels = set()
         self._currentDynamicSystem.schedule(self, self.getTime())
 
+    @debug("Add output")
     def add(self, model: DiscreteEventModel):
         """Adds a model as an input for the current model in the dynamic system.
 
@@ -56,6 +58,7 @@ class DiscreteEventModel(BaseModel):
         """Returns the dynamic system where the current model belongs with"""
         return self._currentDynamicSystem
 
+    @debug("Schedule model")
     def schedule(self, time: float):
         """Schedules an autonomous event
 
@@ -64,6 +67,7 @@ class DiscreteEventModel(BaseModel):
         """
         self._currentDynamicSystem.schedule(self, time)
 
+    @debug("Setting up the state")
     def setUpState(self, state: ModelState):
         """s
 
@@ -82,6 +86,7 @@ class DiscreteEventModel(BaseModel):
         """Gets the time of the next autonomous event."""
         return self.timeAdvanceFunction(self._currentState)
 
+    @debug("Executing state transition")
     def stateTransition(self, inputs: ModelInput = None, event_time: float = 0):
         """Executes the state transition using the state given by the state
         transition function. If there are not inputs is an internal transition,
