@@ -49,10 +49,10 @@ class Scheduler:
     def getNextModels(self) -> Set[DiscreteEventModel]:
         """Gets the next models that will execute an autonomous event"""
         s = set()
-        i = 0
-        while i < len(self._futureEventList) and self._futureEventList[i].getTime() == self.getTimeOfNextEvent():
-            s.add(self._futureEventList[i].getModel())
-            i = i + 1
+        fel = self._futureEventList.copy()
+        time = self.getTimeOfNextEvent()
+        while len(fel) > 0 and fel[0].getTime() == time:
+            s.add(heapq.heappop(fel).getModel())
         return s
 
     def popNextModels(self) -> Set[DiscreteEventModel]:
