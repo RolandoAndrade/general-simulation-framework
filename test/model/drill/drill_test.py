@@ -1,6 +1,6 @@
 import unittest
 
-from dynamic_system.models.discrete_event_dynamic_system import DynamicSystem
+from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DynamicSystem
 from test.model.drill.drill import Drill
 from test.model.drill.press import Press
 

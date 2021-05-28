@@ -1,8 +1,8 @@
 from __future__ import annotations
-from typing import Any, Dict
+from typing import Dict
 
-from dynamic_system.models.discrete_event_dynamic_system import DynamicSystem
-from dynamic_system.models.model import Model, ModelState, ModelInput
+from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DynamicSystem
+from dynamic_system.discrete_events.models.model import Model, ModelState
 
 
 class Cell(Model):

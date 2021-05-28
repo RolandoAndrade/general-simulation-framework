@@ -3,8 +3,8 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any, Set, Dict, TYPE_CHECKING
 
-from dynamic_system.models.base_model import BaseModel
-from dynamic_system.models.discrete_event_dynamic_system import DynamicSystem
+from dynamic_system.core.base_model import BaseModel
+from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DynamicSystem
 
 if TYPE_CHECKING:
     ModelInput = Dict[str, Any]

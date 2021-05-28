@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from dynamic_system.models.discrete_event_dynamic_system import DynamicSystem
+from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DynamicSystem
 
-from dynamic_system.models.model import Model
+from dynamic_system.discrete_events.models.model import Model
 if TYPE_CHECKING:
-    from dynamic_system.models.model import ModelState, ModelInput
+    from dynamic_system.discrete_events.models.model import ModelState, ModelInput
 
 
 class Drill(Model):

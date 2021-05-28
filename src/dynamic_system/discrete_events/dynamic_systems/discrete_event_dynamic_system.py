@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Dict, Any, List, Union, Set
-from dynamic_system.future_event_list.scheduler import Scheduler
+from typing import TYPE_CHECKING, Dict, Any, Set
+from dynamic_system.discrete_events.future_event_list.scheduler import Scheduler
 
 if TYPE_CHECKING:
-    from dynamic_system.models.model import Model, ModelInput
+    from dynamic_system.discrete_events.models.model import Model, ModelInput
     DynamicSystemOutput = Dict[str, Any]
     DynamicSystemModels = Dict[str, Model]
     DynamicSystemInput = Dict[str, ModelInput]

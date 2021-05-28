@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from dynamic_system.models.model import Model
+    from dynamic_system.discrete_events.models.model import Model
 
 
 @dataclass

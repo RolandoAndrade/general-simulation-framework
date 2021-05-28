@@ -4,11 +4,11 @@ import heapq
 from typing import TYPE_CHECKING, List, Set
 
 
-from dynamic_system.models.scheduled_model import ScheduledModel
+from dynamic_system.discrete_events.models.scheduled_model import ScheduledModel
 from tabulate import tabulate
 
 if TYPE_CHECKING:
-    from dynamic_system.models.model import Model
+    from dynamic_system.discrete_events.models.model import Model
 
 
 class Scheduler:
