@@ -4,29 +4,29 @@ from abc import abstractmethod
 from typing import Any, Set, Dict, TYPE_CHECKING
 
 from dynamic_system.core.base_model import BaseModel
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DynamicSystem
+from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 
 if TYPE_CHECKING:
     ModelInput = Dict[str, Any]
     ModelState = Any
 
 
-class Model(BaseModel):
-    """Model with an state"""
+class DiscreteEventModel(BaseModel):
+    """DiscreteEventModel with an state"""
 
     # current state of the model
     _currentState: ModelState
 
     # current dynamic system of the model
-    _currentDynamicSystem: DynamicSystem
+    _currentDynamicSystem: DiscreteEventDynamicSystem
 
     # output models of the model
-    _outputModels: Set[Model]
+    _outputModels: Set[DiscreteEventModel]
 
-    def __init__(self, dynamic_system: DynamicSystem, name: str = None, state: ModelState = None):
+    def __init__(self, dynamic_system: DiscreteEventDynamicSystem, name: str = None, state: ModelState = None):
         """
         Args:
-            dynamic_system (DynamicSystem): Dynamic system of the model.
+            dynamic_system (DiscreteEventDynamicSystem): Dynamic system of the model.
             name (str): Name of the model.
             state (ModelState): Initial state of the model.
         """
@@ -39,20 +39,20 @@ class Model(BaseModel):
         self._outputModels = set()
         self._currentDynamicSystem.schedule(self, self.getTime())
 
-    def add(self, model: Model):
+    def add(self, model: DiscreteEventModel):
         """Adds a model as an input for the current model in the dynamic system.
 
         Args:
-            model (Model): Model to be an input.
+            model (DiscreteEventModel): Model to be an input.
         """
         self._currentDynamicSystem.add(model)
         self._outputModels.add(model)
 
-    def getOutputModels(self) -> Set[Model]:
+    def getOutputModels(self) -> Set[DiscreteEventModel]:
         """Returns the output models of the current model"""
         return self._outputModels
 
-    def getDynamicSystem(self) -> DynamicSystem:
+    def getDynamicSystem(self) -> DiscreteEventDynamicSystem:
         """Returns the dynamic system where the current model belongs with"""
         return self._currentDynamicSystem
 

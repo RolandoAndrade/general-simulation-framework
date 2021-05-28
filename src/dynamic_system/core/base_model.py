@@ -6,7 +6,7 @@ from core.components.entity import Entity
 
 
 class BaseModel(Entity):
-    """"Model in a dynamic system"""
+    """"DiscreteEventModel in a dynamic system"""
     _serial_id = 0
 
     def __init__(self, name: str = None):

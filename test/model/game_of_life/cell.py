@@ -1,15 +1,15 @@
 from __future__ import annotations
 from typing import Dict
 
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DynamicSystem
-from dynamic_system.discrete_events.models.model import Model, ModelState
+from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
+from dynamic_system.discrete_events.models.discrete_event_model import DiscreteEventModel, ModelState
 
 
-class Cell(Model):
+class Cell(DiscreteEventModel):
     ALIVE = True
     DEAD = False
 
-    def __init__(self, dynamic_system: DynamicSystem, i: int, j: int, state: bool = DEAD):
+    def __init__(self, dynamic_system: DiscreteEventDynamicSystem, i: int, j: int, state: bool = DEAD):
         super().__init__(dynamic_system, str(i) + "," + str(j))
         self.setUpState(state)
 

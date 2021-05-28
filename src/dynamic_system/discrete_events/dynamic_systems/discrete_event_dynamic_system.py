@@ -4,13 +4,13 @@ from typing import TYPE_CHECKING, Dict, Any, Set
 from dynamic_system.discrete_events.future_event_list.scheduler import Scheduler
 
 if TYPE_CHECKING:
-    from dynamic_system.discrete_events.models.model import Model, ModelInput
+    from dynamic_system.discrete_events.models.discrete_event_model import DiscreteEventModel, ModelInput
     DynamicSystemOutput = Dict[str, Any]
-    DynamicSystemModels = Dict[str, Model]
+    DynamicSystemModels = Dict[str, DiscreteEventModel]
     DynamicSystemInput = Dict[str, ModelInput]
 
 
-class DynamicSystem:
+class DiscreteEventDynamicSystem:
     """Dynamic system for discrete-event models"""
     _models: DynamicSystemModels
     _outputs: DynamicSystemOutput  # Output of all the models
@@ -24,26 +24,26 @@ class DynamicSystem:
         self._models = dict()
         self._scheduler = scheduler
 
-    def add(self, model: Model):
+    def add(self, model: DiscreteEventModel):
         """Adds a model to the dynamic system.
 
         Args:
-            model (Model): Model to be added.
+            model (DiscreteEventModel): Model to be added.
         """
         if model.getDynamicSystem() != self:
             raise Exception("Invalid dynamic system")
         self._models[model.getID()] = model
 
-    def schedule(self, model: Model, time: float):
+    def schedule(self, model: DiscreteEventModel, time: float):
         """Schedules an event at the specified time
 
         Args:
-            model (Model): Model with an autonomous event scheduled
+            model (DiscreteEventModel): Model with an autonomous event scheduled
             time (float): Time to execute event
         """
         self._scheduler.schedule(model, time)
 
-    def getNextModels(self) -> Set[Model]:
+    def getNextModels(self) -> Set[DiscreteEventModel]:
         """Gets the next models that will execute an autonomous event"""
         return self._scheduler.getNextModels()
 
@@ -82,7 +82,7 @@ class DynamicSystem:
         for model in autonomousModels:
             self.schedule(model, model.getTime())
 
-    def _executeAutonomous(self, eventTime: float, inputModels: Set[Model]) -> Set[Model]:
+    def _executeAutonomous(self, eventTime: float, inputModels: Set[DiscreteEventModel]) -> Set[DiscreteEventModel]:
         """Executes autonomous transition for the given input and external
         events of the affected models.
 
@@ -113,7 +113,7 @@ class DynamicSystem:
 
         return allAutonomousModels
 
-    def _getAffectedModelsInputs(self, allAutonomousModels: Set[Model], inputModels: Set[Model]) -> (Set[Model], Dict[str, ModelInput]):
+    def _getAffectedModelsInputs(self, allAutonomousModels: Set[DiscreteEventModel], inputModels: Set[DiscreteEventModel]) -> (Set[DiscreteEventModel], Dict[str, ModelInput]):
         """Gets models that will change by the output computed
 
         Args:
@@ -139,7 +139,7 @@ class DynamicSystem:
                     }
         return affectedModels, affectedModelsInputs
 
-    def _executeExternal(self, inputModelValues: DynamicSystemInput, eventTime: float) -> Set[Model]:
+    def _executeExternal(self, inputModelValues: DynamicSystemInput, eventTime: float) -> Set[DiscreteEventModel]:
         """Executes external transition for the given input.
 
         Args:

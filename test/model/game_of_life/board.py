@@ -1,7 +1,7 @@
 from random import random, seed
 from typing import List
 
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DynamicSystem
+from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 from simulation.simulation_engine import SimulationEngine
 from test.model.game_of_life.cell import Cell
 
@@ -18,7 +18,7 @@ class Board:
         self._generation = 0
 
     def _fillBoard(self, width: int, height: int):
-        ds = DynamicSystem()
+        ds = DiscreteEventDynamicSystem()
         self._sim = SimulationEngine(ds)
         self._cells = []
         for i in range(height):

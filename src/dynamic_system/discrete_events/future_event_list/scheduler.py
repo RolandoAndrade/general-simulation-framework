@@ -8,20 +8,23 @@ from dynamic_system.discrete_events.models.scheduled_model import ScheduledModel
 from tabulate import tabulate
 
 if TYPE_CHECKING:
-    from dynamic_system.discrete_events.models.model import Model
+    from dynamic_system.discrete_events.models.discrete_event_model import DiscreteEventModel
 
 
 class Scheduler:
-    """Scheduler for execution of the autonomous events of discrete-event models"""
+    """Scheduler for execution of the autonomous events of discrete-event
+    models
+    """
     _futureEventList: List[ScheduledModel]
 
     def __init__(self):
         self._futureEventList = []
 
-    def schedule(self, model: Model, time: float):
-        """Schedule an event at the specified time
-        :param model Model with an autonomous event scheduled
-        :param time Time to execute event
+    def schedule(self, model: DiscreteEventModel, time: float):
+        """Schedule an event at the specified time :param model
+        Args:
+            model (DiscreteEventModel): DiscreteEventModel with an autonomous event scheduled
+            time (float): Time to execute an autonomous event
         """
         if time > 0:
             sm = ScheduledModel(model, time)
@@ -36,11 +39,14 @@ class Scheduler:
 
     def updateTime(self, delta_time: float):
         """Updates the time of the events
-        :param delta_time Time that has passed since the last update"""
+
+        Args:
+            delta_time (float): Time that has passed since the last update
+        """
         for i in range(len(self._futureEventList)):
             self._futureEventList[i].decreaseTime(delta_time)
 
-    def getNextModels(self) -> Set[Model]:
+    def getNextModels(self) -> Set[DiscreteEventModel]:
         """Gets the next models that will execute an autonomous event"""
         s = set()
         i = 0
@@ -49,8 +55,10 @@ class Scheduler:
             i = i + 1
         return s
 
-    def popNextModels(self) -> Set[Model]:
-        """Gets the next models that will execute an autonomous event and removes it from the heap"""
+    def popNextModels(self) -> Set[DiscreteEventModel]:
+        """Gets the next models that will execute an autonomous event and
+        removes it from the heap
+        """
         s = set()
         time = self.getTimeOfNextEvent()
         while len(self._futureEventList) > 0 and self._futureEventList[0].getTime() == time:

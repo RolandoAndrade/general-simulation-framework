@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from abc import abstractmethod
 
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DynamicSystem
+from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 
 
 class BaseSimulator:
-    _dynamicSystem: DynamicSystem
+    _dynamicSystem: DiscreteEventDynamicSystem
     _isOutputUpToUpdate: bool
 
-    def __init__(self, dynamic_system: DynamicSystem):
+    def __init__(self, dynamic_system: DiscreteEventDynamicSystem):
         self._dynamicSystem = dynamic_system
         self._isOutputUpToUpdate = False
 

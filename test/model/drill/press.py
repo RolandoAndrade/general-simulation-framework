@@ -2,17 +2,17 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DynamicSystem
+from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 
-from dynamic_system.discrete_events.models.model import Model
+from dynamic_system.discrete_events.models.discrete_event_model import DiscreteEventModel
 
 if TYPE_CHECKING:
-    from dynamic_system.discrete_events.models.model import ModelState, ModelInput
+    from dynamic_system.discrete_events.models.discrete_event_model import ModelState, ModelInput
 
 
 
-class Press(Model):
-    def __init__(self, dynamic_system: DynamicSystem, name: str):
+class Press(DiscreteEventModel):
+    def __init__(self, dynamic_system: DiscreteEventDynamicSystem, name: str):
         super().__init__(dynamic_system, state={
             "p": 0,
             "s": 0

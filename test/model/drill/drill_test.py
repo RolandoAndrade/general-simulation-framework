@@ -1,13 +1,13 @@
 import unittest
 
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DynamicSystem
+from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 from test.model.drill.drill import Drill
 from test.model.drill.press import Press
 
 
 class TestDrill(unittest.TestCase):
     def test_table(self):
-        ds = DynamicSystem()
+        ds = DiscreteEventDynamicSystem()
         press = Press(ds, "Press 1")
         drill = Drill(ds, "Drill 1")
         press.add(drill)

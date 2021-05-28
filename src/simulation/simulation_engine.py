@@ -5,19 +5,19 @@ from typing import TYPE_CHECKING, Dict
 from simulation.base_simulator import BaseSimulator
 
 if TYPE_CHECKING:
-    from dynamic_system.discrete_events.models.model import ModelInput
-    from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DynamicSystem
+    from dynamic_system.discrete_events.models.discrete_event_model import ModelInput
+    from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 
 
 class SimulationEngine(BaseSimulator):
     """Simulation engine for discrete-event simulation"""
-    _dynamicSystem: DynamicSystem
+    _dynamicSystem: DiscreteEventDynamicSystem
     _lastEventTime: float
 
-    def __init__(self, dynamic_system: DynamicSystem):
+    def __init__(self, dynamic_system: DiscreteEventDynamicSystem):
         """
         Args:
-            dynamic_system (DynamicSystem):
+            dynamic_system (DiscreteEventDynamicSystem):
         """
         super().__init__(dynamic_system)
         self._dynamicSystem = dynamic_system
