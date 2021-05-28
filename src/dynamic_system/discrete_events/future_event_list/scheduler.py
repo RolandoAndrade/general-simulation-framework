@@ -3,7 +3,7 @@ from __future__ import annotations
 import heapq
 from typing import TYPE_CHECKING, List, Set
 
-
+from core.debug.infrastructure.providers import TableProvider
 from dynamic_system.discrete_events.models.scheduled_model import ScheduledModel
 from prettytable import PrettyTable
 
@@ -70,21 +70,18 @@ class Scheduler:
         return self._futureEventList
 
     def __str__(self):
-        x = PrettyTable()
-        x.title = "Future Event List (FEL)"
-        x.field_names = ["Model ID", "Priority", "Time"]
-        x.align["Priority"] = "r"
-        x.align["Model ID"] = "l"
-        x.align["Time"] = "r"
+        x = TableProvider()
+        x.setTitle("Future Event List (FEL)").setLabels(["Model ID", "Priority", "Time"])
+        x.setAlignment(["l", "r", "r"])
         priority = 0
         lastTime = 0
         if len(self._futureEventList) > 0:
             for event in self._futureEventList:
                 if lastTime != event.getTime():
                     priority = priority + 1
-                x.add_row([event.getModel().getID(), priority, str(event.getTime())])
+                x.addRow([event.getModel().getID(), priority, str(event.getTime())])
                 lastTime = event.getTime()
-        return str(x)
+        return x.build()
 
 
 static_scheduler = Scheduler()
