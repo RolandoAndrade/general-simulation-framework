@@ -1,0 +1,464 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>src.dynamic_system.discrete_events.models namespace &#8212; General Simulation Framework 1.0.0 documentation</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="src.dynamic_system.discrete_events.future_event_list namespace" href="src.dynamic_system.discrete_events.future_event_list.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      
+      <h1 class="site-logo" id="site-title">General Simulation Framework 1.0.0 documentation</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  Contents:
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="modules.html">
+   src
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2 current active has-children">
+    <a class="reference internal" href="src.html">
+     src package
+    </a>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="current">
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="src.core.html">
+       src.core namespace
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+      <label for="toctree-checkbox-3">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="src.core.components.html">
+         src.core.components namespace
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="src.core.events.html">
+         src.core.events namespace
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="src.core.modules.html">
+         src.core.modules namespace
+        </a>
+       </li>
+      </ul>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="src.simulation.html">
+       src.simulation namespace
+      </a>
+     </li>
+     <li class="toctree-l3 current active has-children">
+      <a class="reference internal" href="src.dynamic_system.html">
+       src.dynamic_system namespace
+      </a>
+      <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+      <label for="toctree-checkbox-4">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul class="current">
+       <li class="toctree-l4">
+        <a class="reference internal" href="src.dynamic_system.core.html">
+         src.dynamic_system.core namespace
+        </a>
+       </li>
+       <li class="toctree-l4 current active">
+        <a class="reference internal" href="src.dynamic_system.discrete_events.html">
+         src.dynamic_system.discrete_events namespace
+        </a>
+       </li>
+      </ul>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/src/src.dynamic_system.discrete_events.models.rst.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.rst</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#submodules">
+   Submodules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.dynamic_system.discrete_events.models.discrete_event_model">
+   src.dynamic_system.discrete_events.models.discrete_event_model module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.dynamic_system.discrete_events.models.scheduled_model">
+   src.dynamic_system.discrete_events.models.scheduled_model module
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="src-dynamic-system-discrete-events-models-namespace">
+<h1>src.dynamic_system.discrete_events.models namespace<a class="headerlink" href="#src-dynamic-system-discrete-events-models-namespace" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-src.dynamic_system.discrete_events.models.discrete_event_model">
+<span id="src-dynamic-system-discrete-events-models-discrete-event-model-module"></span><h2>src.dynamic_system.discrete_events.models.discrete_event_model module<a class="headerlink" href="#module-src.dynamic_system.discrete_events.models.discrete_event_model" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.dynamic_system.discrete_events.models.discrete_event_model.</span></code><code class="sig-name descname"><span class="pre">DiscreteEventModel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dynamic_system</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DiscreteEventDynamicSystem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ModelState</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">dynamic_system.core.base_model.BaseModel</span></code></p>
+<p>DiscreteEventModel with an state</p>
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.add">
+<code class="sig-name descname"><span class="pre">add</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.add" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.confluentStateTransitionFunction">
+<code class="sig-name descname"><span class="pre">confluentStateTransitionFunction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ModelState</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ModelInput</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">ModelState</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.confluentStateTransitionFunction" title="Permalink to this definition">¶</a></dt>
+<dd><div class="math">
+<p><img src="../_images/math/d1ec07dc4c14755c30e4ea8589c0ad74bc26efd4.svg" alt="\delta_con(s,x)"/></p>
+</div><p>Implements the confluent state transition function delta. The
+confluent state transition executes an external transition function at
+the time of an autonomous event.</p>
+<div class="math">
+<p><img src="../_images/math/285bfc8dfd96d5e09aba7f309bb92032a03357f8.svg" alt="\delta_con \; : \; S \; x \; X \longrightarrow S"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>ModelState</em>) – Current state of the model.</p></li>
+<li><p><strong>inputs</strong> (<em>ModelInput</em>) – Input trajectory x.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.externalStateTransitionFunction">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">externalStateTransitionFunction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ModelState</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ModelInput</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">ModelState</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.externalStateTransitionFunction" title="Permalink to this definition">¶</a></dt>
+<dd><div class="math">
+<p><img src="../_images/math/0d403752094870f67aac6502513dbea4ae17c4d8.svg" alt="\delta_ext((s,e), x)"/></p>
+</div><p>Implements the external state transition function delta. The external
+state transition function computes the next state of the model from its
+current total state (s,e) Q at time of an input and the input itself.</p>
+<blockquote>
+<div><div class="math">
+<p><img src="../_images/math/cf03570b00b0e0995056bcb4cc73782478d11fba.svg" alt="\delta_ext \; : \; Q \; x \; X \longrightarrow S"/></p>
+</div></div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>ModelState</em>) – Current state of the model.</p></li>
+<li><p><strong>inputs</strong> (<em>ModelInput</em>) – Input trajectory x.</p></li>
+<li><p><strong>event_time</strong> (<em>float</em>) – Time of event e.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.getDynamicSystem">
+<code class="sig-name descname"><span class="pre">getDynamicSystem</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.getDynamicSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the dynamic system where the current model belongs with</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.getOutput">
+<code class="sig-name descname"><span class="pre">getOutput</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.getOutput" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the output of the model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.getOutputModels">
+<code class="sig-name descname"><span class="pre">getOutputModels</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Set</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel" title="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel"><span class="pre">src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel</span></a><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.getOutputModels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the output models of the current model</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.getTime">
+<code class="sig-name descname"><span class="pre">getTime</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.getTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the time of the next autonomous event.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.internalStateTransitionFunction">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">internalStateTransitionFunction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ModelState</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">ModelState</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.internalStateTransitionFunction" title="Permalink to this definition">¶</a></dt>
+<dd><div class="math">
+<p><img src="../_images/math/e7c43e30b1bf91da0a689d7c01659ef82f55524d.svg" alt="\delta_int(s)"/></p>
+</div><p>Implements the internal state transition function delta. The internal
+state transition function takes the system from its state at the time of
+the autonomous event to a subsequent state.</p>
+<div class="math">
+<p><img src="../_images/math/d1bcc703a0a36fa9a0dc8bdee9ae2ae748c295bc.svg" alt="\delta_int \; : \; S \longrightarrow S"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>ModelState</em>) – Current state of the model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.outputFunction">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">outputFunction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ModelState</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.outputFunction" title="Permalink to this definition">¶</a></dt>
+<dd><div class="math">
+<p><img src="../_images/math/18e328aef1b7c4f601f8425bf6f8799b41eff376.svg" alt="\lambda \; (s)"/></p>
+</div><p>Implements the output function lambda. The output function describes
+how the state of the system appears to an observer when e=ta(s).</p>
+<div class="math">
+<p><img src="../_images/math/aff243cb01e57314485673d89efda8ade2b76981.svg" alt="\lambda \; : \; S \; \longrightarrow Y"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>ModelState</em>) – current state s of the model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.schedule">
+<code class="sig-name descname"><span class="pre">schedule</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.schedule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.setUpState">
+<code class="sig-name descname"><span class="pre">setUpState</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.setUpState" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.stateTransition">
+<code class="sig-name descname"><span class="pre">stateTransition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.stateTransition" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.timeAdvanceFunction">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">timeAdvanceFunction</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ModelState</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.discrete_event_model.DiscreteEventModel.timeAdvanceFunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>ta(s)</p>
+<p>Implement the model’s time advance function ta. The time advance
+function schedules output from the model and autonomous changes in its
+state.</p>
+<div class="math">
+<p><img src="../_images/math/f5549a8e87fb0dbc34d230ec27cf49e1a3fe1feb.svg" alt="ta \; : \; S \longrightarrow R_{0^\infty}"/></p>
+</div><dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>ModelState</em>) – Current state of the system.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.dynamic_system.discrete_events.models.scheduled_model">
+<span id="src-dynamic-system-discrete-events-models-scheduled-model-module"></span><h2>src.dynamic_system.discrete_events.models.scheduled_model module<a class="headerlink" href="#module-src.dynamic_system.discrete_events.models.scheduled_model" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="src.dynamic_system.discrete_events.models.scheduled_model.ScheduledModel">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.dynamic_system.discrete_events.models.scheduled_model.</span></code><code class="sig-name descname"><span class="pre">ScheduledModel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DiscreteEventModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.scheduled_model.ScheduledModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Event scheduled</p>
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.scheduled_model.ScheduledModel.decreaseTime">
+<code class="sig-name descname"><span class="pre">decreaseTime</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.scheduled_model.ScheduledModel.decreaseTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decreases the time for the scheduled model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>float</em>) – Time variation.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.scheduled_model.ScheduledModel.getModel">
+<code class="sig-name descname"><span class="pre">getModel</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">DiscreteEventModel</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.scheduled_model.ScheduledModel.getModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the scheduled model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.discrete_events.models.scheduled_model.ScheduledModel.getTime">
+<code class="sig-name descname"><span class="pre">getTime</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#src.dynamic_system.discrete_events.models.scheduled_model.ScheduledModel.getTime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the time of the scheduled model.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="src.dynamic_system.discrete_events.future_event_list.html" title="previous page">src.dynamic_system.discrete_events.future_event_list namespace</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Rolando Andrade<br/>
+        
+            &copy; Copyright 2021, Rolando Andrade.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>
