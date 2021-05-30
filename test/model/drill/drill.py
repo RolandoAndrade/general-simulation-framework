@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Dict
 
 from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 
@@ -16,18 +16,19 @@ class Drill(DiscreteEventModel):
             "s": 0
         }, name=name)
 
-    def internalStateTransitionFunction(self, state: ModelState) -> ModelState:
+    def internalStateTransitionFunction(self, state: Dict[str, float]) -> ModelState:
         state["p"] = max(state["p"] - 1, 0)
         state["s"] = 2 * min(state["p"], 1)
         return state
 
-    def externalStateTransitionFunction(self, state: ModelState, parts: ModelInput, event_time: float) -> ModelState:
+    def externalStateTransitionFunction(self, state: Dict[str, float],
+                                        parts: ModelInput, event_time: float) -> ModelState:
         values = parts.values()
         state["s"] = state["s"] - event_time
         for part in values:
             if state["p"] > 0:
                 state["p"] = state["p"] + part
-            elif state["p"] is 0:
+            elif state["p"] == 0:
                 state["p"] = part
                 state["s"] = 2
                 self._currentDynamicSystem.schedule(self, 2)

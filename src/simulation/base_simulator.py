@@ -2,7 +2,9 @@ from __future__ import annotations
 
 from abc import abstractmethod
 
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
+from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import (
+    DiscreteEventDynamicSystem,
+)
 
 
 class BaseSimulator:

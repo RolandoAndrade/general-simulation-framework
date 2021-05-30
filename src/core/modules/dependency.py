@@ -1,10 +1,10 @@
 from typing import TypeVar, Callable
 
-R = TypeVar('R')
-A = TypeVar('A')
+R = TypeVar("R")
+A = TypeVar("A")
 Depends = Callable[[R], A]
 
-B = TypeVar('B')
+B = TypeVar("B")
 
 
 def map_(d: Depends[R, A], f: Callable[[A], B]) -> Depends[R, B]:

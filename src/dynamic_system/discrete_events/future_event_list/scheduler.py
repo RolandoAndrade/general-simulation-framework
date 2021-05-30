@@ -5,16 +5,18 @@ from typing import TYPE_CHECKING, List, Set
 
 from core.debug.infrastructure.providers import TableProvider
 from dynamic_system.discrete_events.models.scheduled_model import ScheduledModel
-from prettytable import PrettyTable
 
 if TYPE_CHECKING:
-    from dynamic_system.discrete_events.models.discrete_event_model import DiscreteEventModel
+    from dynamic_system.discrete_events.models.discrete_event_model import (
+        DiscreteEventModel,
+    )
 
 
 class Scheduler:
     """Scheduler for execution of the autonomous events of discrete-event
     models
     """
+
     _futureEventList: List[ScheduledModel]
 
     def __init__(self):
@@ -61,7 +63,10 @@ class Scheduler:
         """
         s = set()
         time = self.getTimeOfNextEvent()
-        while len(self._futureEventList) > 0 and self._futureEventList[0].getTime() == time:
+        while (
+            len(self._futureEventList) > 0
+            and self._futureEventList[0].getTime() == time
+        ):
             s.add(heapq.heappop(self._futureEventList).getModel())
         return s
 
@@ -71,7 +76,9 @@ class Scheduler:
 
     def __str__(self):
         x = TableProvider()
-        x.setTitle("Future Event List (FEL)").setLabels(["Model ID", "Priority", "Time"])
+        x.setTitle("Future Event List (FEL)").setLabels(
+            ["Model ID", "Priority", "Time"]
+        )
         x.setAlignment(["l", "r", "r"])
         priority = 0
         lastTime = 0

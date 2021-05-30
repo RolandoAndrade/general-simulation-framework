@@ -37,7 +37,12 @@ class EventBus:
     def emit(self, event: Event):
         PyBus.Instance().post(event)
 
-    def on(self, on_event: Type[Event], function: Callable, thread_mode: ThreadMode = ThreadMode.POSTING):
+    def on(
+        self,
+        on_event: Type[Event],
+        function: Callable,
+        thread_mode: ThreadMode = ThreadMode.POSTING,
+    ):
         PyBus.Instance().addEventsWithMethods(on_event, function, thread_mode)
 
 

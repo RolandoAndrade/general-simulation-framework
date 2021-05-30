@@ -10,7 +10,6 @@ if TYPE_CHECKING:
     from dynamic_system.discrete_events.models.discrete_event_model import ModelState, ModelInput
 
 
-
 class Press(DiscreteEventModel):
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem, name: str):
         super().__init__(dynamic_system, state={
@@ -29,7 +28,7 @@ class Press(DiscreteEventModel):
         for part in values:
             if state["p"] > 0:
                 state["p"] = state["p"] + part
-            elif state["p"] is 0:
+            elif state["p"] == 0:
                 state["p"] = part
                 state["s"] = 1
                 self._currentDynamicSystem.schedule(self, 1)

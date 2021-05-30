@@ -5,6 +5,7 @@ from typing import Set
 
 class Entity:
     """Unique component with an identification."""
+
     # identification of the entity.
     _id: str
 
@@ -18,7 +19,7 @@ class Entity:
             name (str): Identifier of the entity.
         """
         if name in Entity._savedNames:
-            raise Exception('Name already taken by another entity')
+            raise Exception("Name already taken by another entity")
         else:
             self._id = name
 

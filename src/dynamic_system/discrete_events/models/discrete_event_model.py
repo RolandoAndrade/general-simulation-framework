@@ -5,7 +5,9 @@ from typing import Any, Set, Dict, TYPE_CHECKING
 
 from core.debug.domain.debug import debug
 from dynamic_system.core.base_model import BaseModel
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
+from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import (
+    DiscreteEventDynamicSystem,
+)
 
 if TYPE_CHECKING:
     ModelInput = Dict[str, Any]
@@ -24,7 +26,12 @@ class DiscreteEventModel(BaseModel):
     # output models of the model
     _outputModels: Set[DiscreteEventModel]
 
-    def __init__(self, dynamic_system: DiscreteEventDynamicSystem, name: str = None, state: ModelState = None):
+    def __init__(
+        self,
+        dynamic_system: DiscreteEventDynamicSystem,
+        name: str = None,
+        state: ModelState = None,
+    ):
         """
         Args:
             dynamic_system (DiscreteEventDynamicSystem): Dynamic system of the model.
@@ -104,13 +111,19 @@ class DiscreteEventModel(BaseModel):
             new_state = self.internalStateTransitionFunction(self._currentState)
         elif event_time is self.getTime():
             # is an confluent event
-            new_state = self.confluentStateTransitionFunction(self._currentState, inputs)
+            new_state = self.confluentStateTransitionFunction(
+                self._currentState, inputs
+            )
         else:
             # time is between autonomous events, so it is an external event
-            new_state = self.externalStateTransitionFunction(self._currentState, inputs, event_time)
+            new_state = self.externalStateTransitionFunction(
+                self._currentState, inputs, event_time
+            )
         self.setUpState(new_state)
 
-    def confluentStateTransitionFunction(self, state: ModelState, inputs: ModelInput) -> ModelState:
+    def confluentStateTransitionFunction(
+        self, state: ModelState, inputs: ModelInput
+    ) -> ModelState:
         """
         .. math:: \delta_con(s,x)
 
@@ -125,7 +138,9 @@ class DiscreteEventModel(BaseModel):
             inputs (ModelInput): Input trajectory x.
         """
         new_state = self.internalStateTransitionFunction(state)
-        return self.externalStateTransitionFunction(new_state, inputs, 0)  # 0 because is equal to (e = ta(s)) ½ ta(s)
+        return self.externalStateTransitionFunction(
+            new_state, inputs, 0
+        )  # 0 because is equal to (e = ta(s)) ½ ta(s)
 
     @abstractmethod
     def internalStateTransitionFunction(self, state: ModelState) -> ModelState:
@@ -144,7 +159,9 @@ class DiscreteEventModel(BaseModel):
         pass
 
     @abstractmethod
-    def externalStateTransitionFunction(self, state: ModelState, inputs: ModelInput, event_time: float) -> ModelState:
+    def externalStateTransitionFunction(
+        self, state: ModelState, inputs: ModelInput, event_time: float
+    ) -> ModelState:
         """
         .. math:: \delta_ext((s,e), x)
 

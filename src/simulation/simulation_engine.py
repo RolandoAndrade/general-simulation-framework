@@ -6,11 +6,14 @@ from simulation.base_simulator import BaseSimulator
 
 if TYPE_CHECKING:
     from dynamic_system.discrete_events.models.discrete_event_model import ModelInput
-    from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
+    from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import (
+        DiscreteEventDynamicSystem,
+    )
 
 
 class SimulationEngine(BaseSimulator):
     """Simulation engine for discrete-event simulation"""
+
     _dynamicSystem: DiscreteEventDynamicSystem
     _lastEventTime: float
 
@@ -35,7 +38,9 @@ class SimulationEngine(BaseSimulator):
             inputs: Input for the dynamic system
             time (float): time of the event.
         """
-        if time - self._lastEventTime is self._getTimeOfNextEvent():  # Time to change the output
+        if (
+            time - self._lastEventTime is self._getTimeOfNextEvent()
+        ):  # Time to change the output
             self.computeOutput()
         self._dynamicSystem.stateTransition(inputs, time - self._lastEventTime)
         self._lastEventTime = time

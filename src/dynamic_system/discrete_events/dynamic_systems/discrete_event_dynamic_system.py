@@ -4,7 +4,11 @@ from typing import TYPE_CHECKING, Dict, Any, Set
 from dynamic_system.discrete_events.future_event_list.scheduler import Scheduler
 
 if TYPE_CHECKING:
-    from dynamic_system.discrete_events.models.discrete_event_model import DiscreteEventModel, ModelInput
+    from dynamic_system.discrete_events.models.discrete_event_model import (
+        DiscreteEventModel,
+        ModelInput,
+    )
+
     DynamicSystemOutput = Dict[str, Any]
     DynamicSystemModels = Dict[str, DiscreteEventModel]
     DynamicSystemInput = Dict[str, ModelInput]
@@ -12,6 +16,7 @@ if TYPE_CHECKING:
 
 class DiscreteEventDynamicSystem:
     """Dynamic system for discrete-event models"""
+
     _models: DynamicSystemModels
     _outputs: DynamicSystemOutput  # Output of all the models
     _scheduler: Scheduler  # Scheduler of events
@@ -62,7 +67,9 @@ class DiscreteEventDynamicSystem:
             self._outputs[model.getID()] = output
         return self._outputs
 
-    def stateTransition(self, inputModelsValues: DynamicSystemInput = None, eventTime: float = 0):
+    def stateTransition(
+        self, inputModelsValues: DynamicSystemInput = None, eventTime: float = 0
+    ):
         """Executes the state transition of the models. If an input is given,
         the models defined as its inputs will be ignored.
 
@@ -82,7 +89,9 @@ class DiscreteEventDynamicSystem:
         for model in autonomousModels:
             self.schedule(model, model.getTime())
 
-    def _executeAutonomous(self, eventTime: float, inputModels: Set[DiscreteEventModel]) -> Set[DiscreteEventModel]:
+    def _executeAutonomous(
+        self, eventTime: float, inputModels: Set[DiscreteEventModel]
+    ) -> Set[DiscreteEventModel]:
         """Executes autonomous transition for the given input and external
         events of the affected models.
 
@@ -92,14 +101,16 @@ class DiscreteEventDynamicSystem:
         """
         allAutonomousModels = set()
         # there are models expecting an autonomous event
-        if self.getTimeOfNextEvent() is 0:
+        if self.getTimeOfNextEvent() == 0:
             # get the models that will execute an autonomous event
             allAutonomousModels = self._scheduler.popNextModels()
 
             # remove models that executed an external event
             autonomousModels = allAutonomousModels.difference(inputModels)
 
-            affectedModels, affectedModelsInputs = self._getAffectedModelsInputs(allAutonomousModels, inputModels)
+            affectedModels, affectedModelsInputs = self._getAffectedModelsInputs(
+                allAutonomousModels, inputModels
+            )
 
             # remove from autonomous models, models that will execute a confluent transition
             autonomousModels = autonomousModels.difference(affectedModels)
@@ -113,7 +124,11 @@ class DiscreteEventDynamicSystem:
 
         return allAutonomousModels
 
-    def _getAffectedModelsInputs(self, allAutonomousModels: Set[DiscreteEventModel], inputModels: Set[DiscreteEventModel]) -> (Set[DiscreteEventModel], Dict[str, ModelInput]):
+    def _getAffectedModelsInputs(
+        self,
+        allAutonomousModels: Set[DiscreteEventModel],
+        inputModels: Set[DiscreteEventModel],
+    ) -> (Set[DiscreteEventModel], Dict[str, ModelInput]):
         """Gets models that will change by the output computed
 
         Args:
@@ -131,7 +146,9 @@ class DiscreteEventDynamicSystem:
                 # checks if the model exist
                 if out.getID() in affectedModelsInputs:
                     # adds an input to an existing affected model
-                    affectedModelsInputs[out.getID()][model.getID()] = self._outputs[model.getID()]
+                    affectedModelsInputs[out.getID()][model.getID()] = self._outputs[
+                        model.getID()
+                    ]
                 else:
                     # create a new input map for the affected model
                     affectedModelsInputs[out.getID()] = {
@@ -139,7 +156,9 @@ class DiscreteEventDynamicSystem:
                     }
         return affectedModels, affectedModelsInputs
 
-    def _executeExternal(self, inputModelValues: DynamicSystemInput, eventTime: float) -> Set[DiscreteEventModel]:
+    def _executeExternal(
+        self, inputModelValues: DynamicSystemInput, eventTime: float
+    ) -> Set[DiscreteEventModel]:
         """Executes external transition for the given input.
 
         Args:

@@ -4,12 +4,15 @@ from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    from dynamic_system.discrete_events.models.discrete_event_model import DiscreteEventModel
+    from dynamic_system.discrete_events.models.discrete_event_model import (
+        DiscreteEventModel,
+    )
 
 
 @dataclass
 class ScheduledModel:
     """Event scheduled"""
+
     _model: DiscreteEventModel
     _time: float
 

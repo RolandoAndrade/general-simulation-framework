@@ -3,10 +3,12 @@ import sys
 
 config = {
     "handlers": [
-        {"sink": sys.stderr,
-         "level": "DEBUG",
-         "format": "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <level>{message}</level>"
-         }
+        {
+            "sink": sys.stderr,
+            "level": "DEBUG",
+            "format": "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <level>{"
+                      "message}</level>",
+        }
     ]
 }
 
@@ -17,10 +19,26 @@ def debug(message: str = "", after: bool = False):
     def real_decorator(function):
         def wrapper(*args, **kwargs):
             if not after:
-                logger.debug("[" + str(function.__module__).split(".")[-1] + "] " + function.__name__ + str(args[1:]) + " " + message)
+                logger.debug(
+                    "["
+                    + str(function.__module__).split(".")[-1]
+                    + "] "
+                    + function.__name__
+                    + str(args[1:])
+                    + " "
+                    + message
+                )
             function(*args, **kwargs)
             if after:
-                logger.debug("[" + str(function.__module__).split(".")[-1] + "] " + function.__name__ + str(args[1:]) + " " + message)
+                logger.debug(
+                    "["
+                    + str(function.__module__).split(".")[-1]
+                    + "] "
+                    + function.__name__
+                    + str(args[1:])
+                    + " "
+                    + message
+                )
             return function(*args, **kwargs)
 
         return wrapper

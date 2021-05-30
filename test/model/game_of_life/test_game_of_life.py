@@ -2,6 +2,7 @@ import unittest
 
 from test.model.game_of_life.board import Board
 
+
 class TestGameOfLife(unittest.TestCase):
     def test_game(self):
         self.board = Board(10, 10, 42)
