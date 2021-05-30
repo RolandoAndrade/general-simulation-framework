@@ -1,6 +1,8 @@
 import unittest
 
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
+from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import (
+    DiscreteEventDynamicSystem,
+)
 from test.model.drill.drill import Drill
 from test.model.drill.press import Press
 
@@ -12,7 +14,16 @@ class TestDrill(unittest.TestCase):
         drill = Drill(ds, "Drill 1")
         press.add(drill)
 
-        inputs = [{press.getID(): {"ext": 1}}, {press.getID(): {"ext": 2}}, None, None, None, None, None, None]
+        inputs = [
+            {press.getID(): {"ext": 1}},
+            {press.getID(): {"ext": 2}},
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+        ]
 
         i = 0
         while True:
@@ -42,13 +53,26 @@ class TestDrill(unittest.TestCase):
         press1.add(drill)
         press2.add(drill)
 
-        inputs = [{
-            press1.getID(): {"ext": 1},
-            press2.getID(): {"ext": 2}
-        }, {
-            press1.getID(): {"ext": 2},
-            press2.getID(): {"ext": 3}
-        }, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]
+        inputs = [
+            {press1.getID(): {"ext": 1}, press2.getID(): {"ext": 2}},
+            {press1.getID(): {"ext": 2}, press2.getID(): {"ext": 3}},
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+            None,
+        ]
 
         i = 0
         while True:
@@ -72,5 +96,5 @@ class TestDrill(unittest.TestCase):
             i = i + ds.getTimeOfNextEvent()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

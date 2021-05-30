@@ -13,5 +13,5 @@ class TestGameOfLife(unittest.TestCase):
             self.board.show()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

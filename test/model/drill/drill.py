@@ -2,27 +2,33 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Dict
 
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
+from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import (
+    DiscreteEventDynamicSystem,
+)
 
-from dynamic_system.discrete_events.models.discrete_event_model import DiscreteEventModel
+from dynamic_system.discrete_events.models.discrete_event_model import (
+    DiscreteEventModel,
+)
+
 if TYPE_CHECKING:
-    from dynamic_system.discrete_events.models.discrete_event_model import ModelState, ModelInput
+    from dynamic_system.discrete_events.models.discrete_event_model import (
+        ModelState,
+        ModelInput,
+    )
 
 
 class Drill(DiscreteEventModel):
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem, name: str):
-        super().__init__(dynamic_system, state={
-            "p": 0,
-            "s": 0
-        }, name=name)
+        super().__init__(dynamic_system, state={"p": 0, "s": 0}, name=name)
 
     def internalStateTransitionFunction(self, state: Dict[str, float]) -> ModelState:
         state["p"] = max(state["p"] - 1, 0)
         state["s"] = 2 * min(state["p"], 1)
         return state
 
-    def externalStateTransitionFunction(self, state: Dict[str, float],
-                                        parts: ModelInput, event_time: float) -> ModelState:
+    def externalStateTransitionFunction(
+        self, state: Dict[str, float], parts: ModelInput, event_time: float
+    ) -> ModelState:
         values = parts.values()
         state["s"] = state["s"] - event_time
         for part in values:
