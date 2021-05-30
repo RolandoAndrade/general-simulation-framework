@@ -34,7 +34,8 @@ class DiscreteEventModel(BaseModel):
     ):
         """
         Args:
-            dynamic_system (DiscreteEventDynamicSystem): Dynamic system of the model.
+            dynamic_system (DiscreteEventDynamicSystem): Dynamic system of the
+                model.
             name (str): Name of the model.
             state (ModelState): Initial state of the model.
         """

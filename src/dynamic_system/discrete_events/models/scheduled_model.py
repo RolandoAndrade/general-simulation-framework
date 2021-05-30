@@ -27,7 +27,8 @@ class ScheduledModel:
     def decreaseTime(self, time: float) -> float:
         """Decreases the time for the scheduled model.
 
-        :param time: Time variation.
+        Args:
+            time (float): Time variation.
         """
         self._time = self._time - time
         return self._time

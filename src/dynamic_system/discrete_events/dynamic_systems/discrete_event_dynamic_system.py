@@ -97,7 +97,8 @@ class DiscreteEventDynamicSystem:
 
         Args:
             eventTime (float): Time of the event.
-            inputModels: Models that its state was changed by the external transition.
+            inputModels: Models that its state was changed by the external
+                transition.
         """
         allAutonomousModels = set()
         # there are models expecting an autonomous event
@@ -133,7 +134,8 @@ class DiscreteEventDynamicSystem:
 
         Args:
             allAutonomousModels: Models that its outputs were computed.
-            inputModels: Models that its state was changed by the external transition.
+            inputModels: Models that its state was changed by the external
+                transition.
         """
         affectedModelsInputs: Dict[str, ModelInput] = {}
         affectedModels = set()

@@ -7,12 +7,16 @@ from core.debug.domain.debug import debug
 
 
 class BaseModel(Entity):
-    """ "DiscreteEventModel in a dynamic system"""
+    """DiscreteEventModel in a dynamic system"""
 
     _serial_id = 0
 
     @debug("Initialized Model", True)
     def __init__(self, name: str = None):
+        """
+        Args:
+            name (str): Name of the model.
+        """
         if name is None:
             self.setID("model" + str(BaseModel._serial_id))
             BaseModel._serial_id = BaseModel._serial_id + 1
