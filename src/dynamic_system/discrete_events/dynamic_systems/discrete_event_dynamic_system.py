@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from typing import TYPE_CHECKING, Dict, Any, Set
+
+from core.debug.domain.debug import debug
 from dynamic_system.discrete_events.future_event_list.scheduler import Scheduler
 
 if TYPE_CHECKING:
@@ -29,6 +31,7 @@ class DiscreteEventDynamicSystem:
         self._models = dict()
         self._scheduler = scheduler
 
+    @debug("Adding model to the dynamic system")
     def add(self, model: DiscreteEventModel):
         """Adds a model to the dynamic system.
 
@@ -39,6 +42,7 @@ class DiscreteEventDynamicSystem:
             raise Exception("Invalid dynamic system")
         self._models[model.getID()] = model
 
+    @debug("Scheduling model")
     def schedule(self, model: DiscreteEventModel, time: float):
         """Schedules an event at the specified time
 
@@ -48,14 +52,17 @@ class DiscreteEventDynamicSystem:
         """
         self._scheduler.schedule(model, time)
 
+    @debug("Retrieving next models")
     def getNextModels(self) -> Set[DiscreteEventModel]:
         """Gets the next models that will execute an autonomous event"""
         return self._scheduler.getNextModels()
 
+    @debug("Getting time of next event")
     def getTimeOfNextEvent(self) -> float:
         """Get time of the next event"""
         return self._scheduler.getTimeOfNextEvent()
 
+    @debug("Getting output of the dynamic system")
     def getOutput(self) -> DynamicSystemOutput:
         """Gets the output of all the models in the dynamic system. Changes only
         the model that changes at time t
@@ -67,6 +74,7 @@ class DiscreteEventDynamicSystem:
             self._outputs[model.getID()] = output
         return self._outputs
 
+    @debug("Executing state transition")
     def stateTransition(
         self, inputModelsValues: DynamicSystemInput = None, eventTime: float = 0
     ):

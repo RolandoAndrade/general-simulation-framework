@@ -46,9 +46,9 @@ class DiscreteEventModel(BaseModel):
         self._currentDynamicSystem = dynamic_system
         self._currentDynamicSystem.add(self)
         self._outputModels = set()
-        self._currentDynamicSystem.schedule(self, self.getTime())
+        self.schedule(self.getTime())
 
-    @debug("Add output")
+    @debug("Adding output")
     def add(self, model: DiscreteEventModel):
         """Adds a model as an input for the current model in the dynamic system.
 
@@ -58,15 +58,17 @@ class DiscreteEventModel(BaseModel):
         self._currentDynamicSystem.add(model)
         self._outputModels.add(model)
 
+    @debug("Getting output models")
     def getOutputModels(self) -> Set[DiscreteEventModel]:
         """Returns the output models of the current model"""
         return self._outputModels
 
+    @debug("Retrieving dynamic system")
     def getDynamicSystem(self) -> DiscreteEventDynamicSystem:
         """Returns the dynamic system where the current model belongs with"""
         return self._currentDynamicSystem
 
-    @debug("Schedule model")
+    @debug("Scheduling model")
     def schedule(self, time: float):
         """Schedules an autonomous event
 
@@ -86,10 +88,12 @@ class DiscreteEventModel(BaseModel):
         """
         self._currentState = state
 
+    @debug("Getting output")
     def getOutput(self) -> Any:
         """Gets the output of the model."""
         return self.outputFunction(self._currentState)
 
+    @debug("Getting time")
     def getTime(self) -> float:
         """Gets the time of the next autonomous event."""
         return self.timeAdvanceFunction(self._currentState)

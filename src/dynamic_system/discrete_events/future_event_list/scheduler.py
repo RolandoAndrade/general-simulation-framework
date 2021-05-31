@@ -3,6 +3,7 @@ from __future__ import annotations
 import heapq
 from typing import TYPE_CHECKING, List, Set
 
+from core.debug.domain.debug import debug
 from core.debug.infrastructure.providers import TableProvider
 from dynamic_system.discrete_events.models.scheduled_model import ScheduledModel
 
@@ -22,8 +23,9 @@ class Scheduler:
     def __init__(self):
         self._futureEventList = []
 
+    @debug("Scheduling model")
     def schedule(self, model: DiscreteEventModel, time: float):
-        """Schedule an event at the specified time :param model
+        """Schedule an event at the specified time
         Args:
             model (DiscreteEventModel): DiscreteEventModel with an autonomous event scheduled
             time (float): Time to execute an autonomous event
@@ -33,12 +35,14 @@ class Scheduler:
             if sm not in self._futureEventList:
                 heapq.heappush(self._futureEventList, sm)
 
+    @debug("Getting time of next event")
     def getTimeOfNextEvent(self) -> float:
         """Gets the time of the next event"""
         if len(self._futureEventList) > 0:
             return self._futureEventList[0].getTime()
         return 0
 
+    @debug("Updating time")
     def updateTime(self, delta_time: float):
         """Updates the time of the events
 
@@ -48,6 +52,7 @@ class Scheduler:
         for i in range(len(self._futureEventList)):
             self._futureEventList[i].decreaseTime(delta_time)
 
+    @debug("Getting next models")
     def getNextModels(self) -> Set[DiscreteEventModel]:
         """Gets the next models that will execute an autonomous event"""
         s = set()
@@ -57,6 +62,7 @@ class Scheduler:
             s.add(heapq.heappop(fel).getModel())
         return s
 
+    @debug("Removing models from the heap")
     def popNextModels(self) -> Set[DiscreteEventModel]:
         """Gets the next models that will execute an autonomous event and
         removes it from the heap
@@ -70,6 +76,7 @@ class Scheduler:
             s.add(heapq.heappop(self._futureEventList).getModel())
         return s
 
+    @debug("Getting future event list")
     def getFutureEventList(self) -> List[ScheduledModel]:
         """Returns the future event list"""
         return self._futureEventList
@@ -89,6 +96,3 @@ class Scheduler:
                 x.addRow([event.getModel().getID(), priority, str(event.getTime())])
                 lastTime = event.getTime()
         return x.build()
-
-
-static_scheduler = Scheduler()
