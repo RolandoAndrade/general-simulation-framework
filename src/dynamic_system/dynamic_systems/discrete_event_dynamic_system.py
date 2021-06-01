@@ -3,10 +3,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Dict, Any, Set
 
 from core.debug.domain.debug import debug
-from dynamic_system.discrete_events.future_event_list.scheduler import Scheduler
+from dynamic_system.future_event_list.scheduler import Scheduler
 
 if TYPE_CHECKING:
-    from dynamic_system.discrete_events.models.discrete_event_model import (
+    from dynamic_system.models.discrete_event_model import (
         DiscreteEventModel,
         ModelInput,
     )

@@ -1,7 +1,7 @@
 from random import random, seed
 from typing import List
 
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import (
+from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
 from simulation.simulation_engines.discrete_event_simulation_engine import DiscreteEventSimulationEngine

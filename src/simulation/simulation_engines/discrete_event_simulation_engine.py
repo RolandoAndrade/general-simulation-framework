@@ -5,8 +5,8 @@ from typing import TYPE_CHECKING, Dict
 from simulation.core.base_simulator import BaseSimulator
 
 if TYPE_CHECKING:
-    from dynamic_system.discrete_events.models.discrete_event_model import ModelInput
-    from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import (
+    from dynamic_system.models.discrete_event_model import ModelInput
+    from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
         DiscreteEventDynamicSystem,
     )
 

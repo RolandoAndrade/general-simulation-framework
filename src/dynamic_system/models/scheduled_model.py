@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 from core.debug.domain.debug import debug
 
 if TYPE_CHECKING:
-    from dynamic_system.discrete_events.models.discrete_event_model import (
+    from dynamic_system.models.discrete_event_model import (
         DiscreteEventModel,
     )
 

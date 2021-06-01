@@ -6,12 +6,12 @@ from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_syste
     DiscreteEventDynamicSystem,
 )
 
-from dynamic_system.discrete_events.models.discrete_event_model import (
+from dynamic_system.models.discrete_event_model import (
     DiscreteEventModel,
 )
 
 if TYPE_CHECKING:
-    from dynamic_system.discrete_events.models.discrete_event_model import (
+    from dynamic_system.models.discrete_event_model import (
         ModelState,
         ModelInput,
     )

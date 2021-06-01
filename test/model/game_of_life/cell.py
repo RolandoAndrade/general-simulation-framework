@@ -1,10 +1,10 @@
 from __future__ import annotations
 from typing import Dict
 
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import (
+from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
-from dynamic_system.discrete_events.models.discrete_event_model import (
+from dynamic_system.models.discrete_event_model import (
     DiscreteEventModel,
     ModelState,
 )
