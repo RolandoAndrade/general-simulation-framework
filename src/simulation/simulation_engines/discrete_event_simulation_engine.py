@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Dict
 
-from simulation.base_simulator import BaseSimulator
+from simulation.core.base_simulator import BaseSimulator
 
 if TYPE_CHECKING:
     from dynamic_system.discrete_events.models.discrete_event_model import ModelInput
@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     )
 
 
-class SimulationEngine(BaseSimulator):
+class DiscreteEventSimulationEngine(BaseSimulator):
     """Simulation engine for discrete-event simulation"""
 
     _dynamicSystem: DiscreteEventDynamicSystem

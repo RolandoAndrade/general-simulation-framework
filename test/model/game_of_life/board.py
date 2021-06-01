@@ -4,12 +4,12 @@ from typing import List
 from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
-from simulation.simulation_engine import SimulationEngine
+from simulation.simulation_engines.discrete_event_simulation_engine import DiscreteEventSimulationEngine
 from test.model.game_of_life.cell import Cell
 
 
 class Board:
-    _sim: SimulationEngine
+    _sim: DiscreteEventSimulationEngine
     _cells: List[List[Cell]]
     _generation: int
 
@@ -21,7 +21,7 @@ class Board:
 
     def _fillBoard(self, width: int, height: int):
         ds = DiscreteEventDynamicSystem()
-        self._sim = SimulationEngine(ds)
+        self._sim = DiscreteEventSimulationEngine(ds)
         self._cells = []
         for i in range(height):
             row = []
