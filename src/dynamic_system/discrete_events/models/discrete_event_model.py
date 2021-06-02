@@ -161,7 +161,7 @@ class DiscreteEventModel(BaseModel):
         Args:
             state (ModelState): Current state of the model.
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def externalStateTransitionFunction(
@@ -181,7 +181,7 @@ class DiscreteEventModel(BaseModel):
             inputs (ModelInput): Input trajectory x.
             event_time (float): Time of event e.
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def timeAdvanceFunction(self, state: ModelState) -> float:
@@ -196,7 +196,7 @@ class DiscreteEventModel(BaseModel):
         Args:
             state (ModelState): Current state of the system.
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def outputFunction(self, state: ModelState) -> Any:
@@ -211,7 +211,7 @@ class DiscreteEventModel(BaseModel):
         Args:
             state (ModelState): current state s of the model.
         """
-        pass
+        raise NotImplementedError
 
     def __str__(self):
         name = self.getID()

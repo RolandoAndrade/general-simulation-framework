@@ -26,4 +26,4 @@ class BaseModel(Entity):
     @abstractmethod
     def summary(self):
         """Prints a summary of the model"""
-        pass
+        raise NotImplementedError
