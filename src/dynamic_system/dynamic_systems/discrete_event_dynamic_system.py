@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Dict, Any, Set
 
 from core.debug.domain.debug import debug
+from dynamic_system.core.base_dynamic_sytem import BaseDynamicSystem
 from dynamic_system.future_event_list.scheduler import Scheduler
 
 if TYPE_CHECKING:
@@ -16,7 +17,7 @@ if TYPE_CHECKING:
     DynamicSystemInput = Dict[str, ModelInput]
 
 
-class DiscreteEventDynamicSystem:
+class DiscreteEventDynamicSystem(BaseDynamicSystem):
     """Dynamic system for discrete-event models"""
 
     _models: DynamicSystemModels

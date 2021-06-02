@@ -1,29 +1,22 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, Set, Dict, TYPE_CHECKING
+from typing import Any, Set, Dict
 
 from core.debug.domain.debug import debug
-from dynamic_system.core.base_model import BaseModel
+from dynamic_system.core.base_model import BaseModel, ModelState
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
 
 ModelInput = Dict[str, Any]
-ModelState = Any
 
 
 class DiscreteEventModel(BaseModel):
     """DiscreteEventModel with an state"""
 
-    __currentState: ModelState
-    """Current state of the model"""
-
-    __currentDynamicSystem: DiscreteEventDynamicSystem
+    _currentDynamicSystem: DiscreteEventDynamicSystem
     """Current dynamic system of the model"""
-
-    __outputModels: Set[DiscreteEventModel]
-    """Output models of the model"""
 
     def __init__(
             self,
@@ -38,34 +31,9 @@ class DiscreteEventModel(BaseModel):
             name (str): Name of the model.
             state (ModelState): Initial state of the model.
         """
-        super().__init__(name)
-        # Init the model
-        self.setUpState(state)
+        super().__init__(dynamic_system, name, state)
         # Add the model to the dynamic system
-        self.__currentDynamicSystem = dynamic_system
-        self.__currentDynamicSystem.add(self)
-        self.__outputModels = set()
         self.schedule(self.getTime())
-
-    @debug("Adding output")
-    def add(self, model: DiscreteEventModel):
-        """Adds a model as an input for the current model in the dynamic system.
-
-        Args:
-            model (DiscreteEventModel): Model to be an input.
-        """
-        self.__currentDynamicSystem.add(model)
-        self.__outputModels.add(model)
-
-    @debug("Getting output models")
-    def getOutputModels(self) -> Set[DiscreteEventModel]:
-        """Returns the output models of the current model"""
-        return self.__outputModels
-
-    @debug("Retrieving dynamic system")
-    def getDynamicSystem(self) -> DiscreteEventDynamicSystem:
-        """Returns the dynamic system where the current model belongs with"""
-        return self.__currentDynamicSystem
 
     @debug("Scheduling model")
     def schedule(self, time: float):
@@ -74,23 +42,7 @@ class DiscreteEventModel(BaseModel):
         Args:
             time (float): Time when the event will be executed.
         """
-        self.__currentDynamicSystem.schedule(self, time)
-
-    @debug("Setting up the state")
-    def setUpState(self, state: ModelState):
-        """s
-
-        Sets up the state of the model.
-
-        Args:
-            state (ModelState): New state of the model.
-        """
-        self.__currentState = state
-
-    @debug("Getting output")
-    def getOutput(self) -> Any:
-        """Gets the output of the model."""
-        return self._outputFunction(self.__currentState)
+        self._currentDynamicSystem.schedule(self, time)
 
     @debug("Getting time")
     def getTime(self) -> float:
@@ -194,21 +146,6 @@ class DiscreteEventModel(BaseModel):
 
         Args:
             state (ModelState): Current state of the system.
-        """
-        raise NotImplementedError
-
-    @abstractmethod
-    def _outputFunction(self, state: ModelState) -> Any:
-        """
-        .. math:: \lambda \; (s)
-
-        Implements the output function lambda. The output function describes
-        how the state of the system appears to an observer when e=ta(s).
-
-        .. math:: \lambda \; : \; S \; \longrightarrow Y
-
-        Args:
-            state (ModelState): current state s of the model.
         """
         raise NotImplementedError
 

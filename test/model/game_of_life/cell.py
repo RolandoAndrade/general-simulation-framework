@@ -6,8 +6,8 @@ from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
 )
 from dynamic_system.models.discrete_event_model import (
     DiscreteEventModel,
-    ModelState,
 )
+from dynamic_system.core.base_model import ModelState
 
 
 class Cell(DiscreteEventModel):

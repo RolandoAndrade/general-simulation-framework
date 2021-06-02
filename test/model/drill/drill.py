@@ -12,9 +12,9 @@ from dynamic_system.models.discrete_event_model import (
 
 if TYPE_CHECKING:
     from dynamic_system.models.discrete_event_model import (
-        ModelState,
         ModelInput,
     )
+    from dynamic_system.core.base_model import ModelState
 
 
 class Drill(DiscreteEventModel):
