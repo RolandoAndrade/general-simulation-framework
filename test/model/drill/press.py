@@ -37,7 +37,7 @@ class Press(DiscreteEventModel):
             elif state["p"] == 0:
                 state["p"] = part
                 state["s"] = 1
-                self.__currentDynamicSystem.schedule(self, 1)
+                self.schedule(1)
         return state
 
     def _timeAdvanceFunction(self, state: ModelState) -> float:

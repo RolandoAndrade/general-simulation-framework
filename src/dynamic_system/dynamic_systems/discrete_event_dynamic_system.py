@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Dict, Any, Set
 
 from core.debug.domain.debug import debug
-from dynamic_system.core.base_dynamic_sytem import BaseDynamicSystem
+from dynamic_system.core.base_dynamic_sytem import BaseDynamicSystem, DynamicSystemOutput
 from dynamic_system.future_event_list.scheduler import Scheduler
 
 if TYPE_CHECKING:
@@ -11,8 +11,6 @@ if TYPE_CHECKING:
         DiscreteEventModel,
         ModelInput,
     )
-
-    DynamicSystemOutput = Dict[str, Any]
     DynamicSystemModels = Dict[str, DiscreteEventModel]
     DynamicSystemInput = Dict[str, ModelInput]
 
@@ -21,27 +19,21 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem):
     """Dynamic system for discrete-event models"""
 
     _models: DynamicSystemModels
-    _outputs: DynamicSystemOutput  # Output of all the models
-    _scheduler: Scheduler  # Scheduler of events
+    """Models of the dynamic system"""
+
+    _outputs: DynamicSystemOutput
+    """Output of the models"""
+
+    _scheduler: Scheduler
+    """Scheduler of events"""
 
     def __init__(self, scheduler: Scheduler = Scheduler()):
         """
         Args:
             scheduler (Scheduler): Future event list manager
         """
-        self._models = dict()
+        super().__init__()
         self._scheduler = scheduler
-
-    @debug("Adding model to the dynamic system")
-    def add(self, model: DiscreteEventModel):
-        """Adds a model to the dynamic system.
-
-        Args:
-            model (DiscreteEventModel): Model to be added.
-        """
-        if model.getDynamicSystem() != self:
-            raise Exception("Invalid dynamic system")
-        self._models[model.getID()] = model
 
     @debug("Scheduling model")
     def schedule(self, model: DiscreteEventModel, time: float):

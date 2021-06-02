@@ -47,7 +47,7 @@ class DiscreteEventModel(BaseModel):
     @debug("Getting time")
     def getTime(self) -> float:
         """Gets the time of the next autonomous event."""
-        return self._timeAdvanceFunction(self.__currentState)
+        return self._timeAdvanceFunction(self.getState())
 
     @debug("Executing state transition")
     def stateTransition(self, inputs: ModelInput = None, event_time: float = 0):
@@ -64,16 +64,16 @@ class DiscreteEventModel(BaseModel):
         new_state: ModelState
         if inputs is None:
             # is an autonomous event
-            new_state = self._internalStateTransitionFunction(self.__currentState)
+            new_state = self._internalStateTransitionFunction(self.getState())
         elif event_time is self.getTime():
             # is an confluent event
             new_state = self._confluentStateTransitionFunction(
-                self.__currentState, inputs
+                self.getState(), inputs
             )
         else:
             # time is between autonomous events, so it is an external event
             new_state = self._externalStateTransitionFunction(
-                self.__currentState, inputs, event_time
+                self.getState(), inputs, event_time
             )
         self.setUpState(new_state)
 
@@ -148,8 +148,3 @@ class DiscreteEventModel(BaseModel):
             state (ModelState): Current state of the system.
         """
         raise NotImplementedError
-
-    def __str__(self):
-        name = self.getID()
-        state = self.__currentState
-        return name + ": {'state': " + str(state) + "}"

@@ -39,8 +39,6 @@ class DiscreteEventSimulationEngine(BaseSimulator):
             inputs: Input for the dynamic system
             time (float): time of the event.
         """
-        print(time - self._lastEventTime)
-        print(self._getTimeOfNextEvent())
         if (
                 time - self._lastEventTime is self._getTimeOfNextEvent()
         ):  # Time to change the output

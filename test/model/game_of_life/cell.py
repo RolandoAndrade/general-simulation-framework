@@ -44,7 +44,7 @@ class Cell(DiscreteEventModel):
         return 1
 
     def __str__(self):
-        if self.__currentState:
+        if self.getState():
             return "\u2665"
         else:
             return "-"

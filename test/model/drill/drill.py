@@ -37,7 +37,7 @@ class Drill(DiscreteEventModel):
             elif state["p"] == 0:
                 state["p"] = part
                 state["s"] = 2
-                self.__currentDynamicSystem.schedule(self, 2)
+                self.schedule(2)
         return state
 
     def _timeAdvanceFunction(self, state: ModelState) -> float:

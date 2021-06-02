@@ -9,6 +9,8 @@ from core.debug.domain.debug import debug
 if TYPE_CHECKING:
     from dynamic_system.core.base_dynamic_sytem import BaseDynamicSystem
 
+ModelState = Any
+
 
 class BaseModel(Entity):
     """DiscreteEventModel in a dynamic system"""
@@ -60,6 +62,11 @@ class BaseModel(Entity):
         """
         self.__currentState = state
 
+    @debug("Getting the state")
+    def getState(self) -> ModelState:
+        """Returns the current state"""
+        return self.__currentState
+
     @debug("Adding output")
     def add(self, model: BaseModel):
         """Adds a model as an input for the current model in the dynamic system.
@@ -110,5 +117,7 @@ class BaseModel(Entity):
         """Prints a summary of the model"""
         raise NotImplementedError
 
-
-ModelState = Any
+    def __str__(self):
+        name = self.getID()
+        state = self.getState()
+        return name + ": {'state': " + str(state) + "}"
