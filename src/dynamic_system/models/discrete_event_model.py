@@ -5,7 +5,7 @@ from typing import Any, Set, Dict, TYPE_CHECKING
 
 from core.debug.domain.debug import debug
 from dynamic_system.core.base_model import BaseModel
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import (
+from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
 

@@ -1,6 +1,6 @@
 import unittest
 
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import (
+from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
 from test.model.drill.drill import Drill

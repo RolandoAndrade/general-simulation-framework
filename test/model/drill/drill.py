@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Dict
 
-from dynamic_system.discrete_events.dynamic_systems.discrete_event_dynamic_system import (
+from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
 
