@@ -21,12 +21,12 @@ class Press(DiscreteEventModel):
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem, name: str):
         super().__init__(dynamic_system, state={"p": 0, "s": 0}, name=name)
 
-    def internalStateTransitionFunction(self, state: ModelState) -> ModelState:
+    def _internalStateTransitionFunction(self, state: ModelState) -> ModelState:
         state["p"] = max(state["p"] - 1, 0)
         state["s"] = 1 * min(state["p"], 1)
         return state
 
-    def externalStateTransitionFunction(
+    def _externalStateTransitionFunction(
         self, state: ModelState, parts: ModelInput, event_time: float
     ) -> ModelState:
         values = parts.values()
@@ -37,13 +37,13 @@ class Press(DiscreteEventModel):
             elif state["p"] == 0:
                 state["p"] = part
                 state["s"] = 1
-                self._currentDynamicSystem.schedule(self, 1)
+                self.__currentDynamicSystem.schedule(self, 1)
         return state
 
-    def timeAdvanceFunction(self, state: ModelState) -> float:
+    def _timeAdvanceFunction(self, state: ModelState) -> float:
         return state["s"]
 
-    def outputFunction(self, state: ModelState) -> int:
+    def _outputFunction(self, state: ModelState) -> int:
         if state["p"] > 0:
             return 1
         return 0

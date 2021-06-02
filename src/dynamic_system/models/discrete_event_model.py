@@ -16,14 +16,14 @@ ModelState = Any
 class DiscreteEventModel(BaseModel):
     """DiscreteEventModel with an state"""
 
-    # current state of the model
-    _currentState: ModelState
+    __currentState: ModelState
+    """Current state of the model"""
 
-    # current dynamic system of the model
-    _currentDynamicSystem: DiscreteEventDynamicSystem
+    __currentDynamicSystem: DiscreteEventDynamicSystem
+    """Current dynamic system of the model"""
 
-    # output models of the model
-    _outputModels: Set[DiscreteEventModel]
+    __outputModels: Set[DiscreteEventModel]
+    """Output models of the model"""
 
     def __init__(
             self,
@@ -42,9 +42,9 @@ class DiscreteEventModel(BaseModel):
         # Init the model
         self.setUpState(state)
         # Add the model to the dynamic system
-        self._currentDynamicSystem = dynamic_system
-        self._currentDynamicSystem.add(self)
-        self._outputModels = set()
+        self.__currentDynamicSystem = dynamic_system
+        self.__currentDynamicSystem.add(self)
+        self.__outputModels = set()
         self.schedule(self.getTime())
 
     @debug("Adding output")
@@ -54,18 +54,18 @@ class DiscreteEventModel(BaseModel):
         Args:
             model (DiscreteEventModel): Model to be an input.
         """
-        self._currentDynamicSystem.add(model)
-        self._outputModels.add(model)
+        self.__currentDynamicSystem.add(model)
+        self.__outputModels.add(model)
 
     @debug("Getting output models")
     def getOutputModels(self) -> Set[DiscreteEventModel]:
         """Returns the output models of the current model"""
-        return self._outputModels
+        return self.__outputModels
 
     @debug("Retrieving dynamic system")
     def getDynamicSystem(self) -> DiscreteEventDynamicSystem:
         """Returns the dynamic system where the current model belongs with"""
-        return self._currentDynamicSystem
+        return self.__currentDynamicSystem
 
     @debug("Scheduling model")
     def schedule(self, time: float):
@@ -74,7 +74,7 @@ class DiscreteEventModel(BaseModel):
         Args:
             time (float): Time when the event will be executed.
         """
-        self._currentDynamicSystem.schedule(self, time)
+        self.__currentDynamicSystem.schedule(self, time)
 
     @debug("Setting up the state")
     def setUpState(self, state: ModelState):
@@ -85,17 +85,17 @@ class DiscreteEventModel(BaseModel):
         Args:
             state (ModelState): New state of the model.
         """
-        self._currentState = state
+        self.__currentState = state
 
     @debug("Getting output")
     def getOutput(self) -> Any:
         """Gets the output of the model."""
-        return self.outputFunction(self._currentState)
+        return self._outputFunction(self.__currentState)
 
     @debug("Getting time")
     def getTime(self) -> float:
         """Gets the time of the next autonomous event."""
-        return self.timeAdvanceFunction(self._currentState)
+        return self._timeAdvanceFunction(self.__currentState)
 
     @debug("Executing state transition")
     def stateTransition(self, inputs: ModelInput = None, event_time: float = 0):
@@ -112,20 +112,20 @@ class DiscreteEventModel(BaseModel):
         new_state: ModelState
         if inputs is None:
             # is an autonomous event
-            new_state = self.internalStateTransitionFunction(self._currentState)
+            new_state = self._internalStateTransitionFunction(self.__currentState)
         elif event_time is self.getTime():
             # is an confluent event
-            new_state = self.confluentStateTransitionFunction(
-                self._currentState, inputs
+            new_state = self._confluentStateTransitionFunction(
+                self.__currentState, inputs
             )
         else:
             # time is between autonomous events, so it is an external event
-            new_state = self.externalStateTransitionFunction(
-                self._currentState, inputs, event_time
+            new_state = self._externalStateTransitionFunction(
+                self.__currentState, inputs, event_time
             )
         self.setUpState(new_state)
 
-    def confluentStateTransitionFunction(
+    def _confluentStateTransitionFunction(
             self, state: ModelState, inputs: ModelInput
     ) -> ModelState:
         """
@@ -141,13 +141,13 @@ class DiscreteEventModel(BaseModel):
             state (ModelState): Current state of the model.
             inputs (ModelInput): Input trajectory x.
         """
-        new_state = self.internalStateTransitionFunction(state)
-        return self.externalStateTransitionFunction(
+        new_state = self._internalStateTransitionFunction(state)
+        return self._externalStateTransitionFunction(
             new_state, inputs, 0
         )  # 0 because is equal to (e = ta(s)) ½ ta(s)
 
     @abstractmethod
-    def internalStateTransitionFunction(self, state: ModelState) -> ModelState:
+    def _internalStateTransitionFunction(self, state: ModelState) -> ModelState:
         """
         .. math:: \delta_int(s)
 
@@ -163,7 +163,7 @@ class DiscreteEventModel(BaseModel):
         raise NotImplementedError
 
     @abstractmethod
-    def externalStateTransitionFunction(
+    def _externalStateTransitionFunction(
             self, state: ModelState, inputs: ModelInput, event_time: float
     ) -> ModelState:
         """
@@ -183,7 +183,7 @@ class DiscreteEventModel(BaseModel):
         raise NotImplementedError
 
     @abstractmethod
-    def timeAdvanceFunction(self, state: ModelState) -> float:
+    def _timeAdvanceFunction(self, state: ModelState) -> float:
         """ta(s)
 
         Implement the model’s time advance function ta. The time advance
@@ -198,7 +198,7 @@ class DiscreteEventModel(BaseModel):
         raise NotImplementedError
 
     @abstractmethod
-    def outputFunction(self, state: ModelState) -> Any:
+    def _outputFunction(self, state: ModelState) -> Any:
         """
         .. math:: \lambda \; (s)
 
@@ -214,5 +214,5 @@ class DiscreteEventModel(BaseModel):
 
     def __str__(self):
         name = self.getID()
-        state = self._currentState
+        state = self.__currentState
         return name + ": {'state': " + str(state) + "}"
