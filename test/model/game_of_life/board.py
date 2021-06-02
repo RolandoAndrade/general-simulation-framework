@@ -8,11 +8,12 @@ from simulation.simulation_engines.discrete_event_simulation_engine import (
     DiscreteEventSimulationEngine,
 )
 from test.model.game_of_life.cell import Cell
-
+from reports.report_generators.default_report import DefaultReport
 
 class Board:
     _sim: DiscreteEventSimulationEngine
     _cells: List[List[Cell]]
+    _report: DefaultReport
     _generation: int
 
     def __init__(self, width: int = 10, height: int = 10, randomSeed: int = 42):
@@ -23,7 +24,8 @@ class Board:
 
     def _fillBoard(self, width: int, height: int):
         ds = DiscreteEventDynamicSystem()
-        self._sim = DiscreteEventSimulationEngine(ds)
+        self._report = DefaultReport()
+        self._sim = DiscreteEventSimulationEngine(ds, self._report)
         self._cells = []
         for i in range(height):
             row = []

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING, Dict
 
+from reports.core.base_report import BaseReport
 from simulation.core.base_simulator import BaseSimulator
 
 if TYPE_CHECKING:
@@ -17,12 +18,12 @@ class DiscreteEventSimulationEngine(BaseSimulator):
     _dynamicSystem: DiscreteEventDynamicSystem
     _lastEventTime: float
 
-    def __init__(self, dynamic_system: DiscreteEventDynamicSystem):
+    def __init__(self, dynamic_system: DiscreteEventDynamicSystem, reportGenerator: BaseReport):
         """
         Args:
             dynamic_system (DiscreteEventDynamicSystem):
         """
-        super().__init__(dynamic_system)
+        super().__init__(dynamic_system, reportGenerator)
         self._dynamicSystem = dynamic_system
         self._lastEventTime = 0
         self._isOutputUpToUpdate = False

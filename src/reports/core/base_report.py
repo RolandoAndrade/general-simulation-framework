@@ -1,26 +1,29 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import TYPE_CHECKING, Dict, Any, List
+from typing import Dict, Any, Set
 
-if TYPE_CHECKING:
-    DynamicSystemOutput = Dict[str, Any]
-    ReportResult = Any
+DynamicSystemOutput = Dict[str, Any]
+ReportResult = Any
+Time = float
 
 
 class BaseReport:
-    # TODO May outputs + time could be a dict?
-    _outputs: List[DynamicSystemOutput]
-    _times: List[float]
+    _outputs: Dict[Time, DynamicSystemOutput]
+    _headers: Set[str]
 
     def __init__(self):
-        self._outputs = []
-        self._times = []
+        self._outputs = {}
+        self._headers = {}
 
     def addOutput(self, output: DynamicSystemOutput, time: float):
-        self._outputs.append(output)
-        self._times.append(time)
+        for key in output:
+            self._headers.add(key)
+        self._outputs[time] = output
+
+    def generateReport(self) -> ReportResult:
+        return self._getResults(self._headers, self._outputs)
 
     @abstractmethod
-    def getResults(self, output: DynamicSystemOutput, time: float) -> ReportResult:
-        pass
+    def _getResults(self, headers: Set[str], outputs: Dict[Time, DynamicSystemOutput]) -> ReportResult:
+        raise NotImplementedError

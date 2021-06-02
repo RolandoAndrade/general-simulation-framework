@@ -5,15 +5,18 @@ from abc import abstractmethod
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
+from reports.core.base_report import BaseReport
 
 
 class BaseSimulator:
     _dynamicSystem: DiscreteEventDynamicSystem
     _isOutputUpToUpdate: bool
+    _reportGenerator: BaseReport
 
-    def __init__(self, dynamic_system: DiscreteEventDynamicSystem):
+    def __init__(self, dynamic_system: DiscreteEventDynamicSystem, reportGenerator: BaseReport):
         self._dynamicSystem = dynamic_system
         self._isOutputUpToUpdate = False
+        self._reportGenerator = reportGenerator
 
     @abstractmethod
     def computeNextState(self, *args, **kwargs):
