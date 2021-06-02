@@ -50,3 +50,6 @@ class Board:
             for cell in row:
                 print(str(cell), end="")
             print()
+
+    def simReport(self):
+        print(self._report.generateReport())

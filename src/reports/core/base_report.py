@@ -14,7 +14,7 @@ class BaseReport:
 
     def __init__(self):
         self._outputs = {}
-        self._headers = {}
+        self._headers = set()
 
     def addOutput(self, output: DynamicSystemOutput, time: float):
         for key in output:

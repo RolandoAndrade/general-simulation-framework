@@ -39,10 +39,14 @@ class DiscreteEventSimulationEngine(BaseSimulator):
             inputs: Input for the dynamic system
             time (float): time of the event.
         """
+        print(time - self._lastEventTime)
+        print(self._getTimeOfNextEvent())
         if (
-            time - self._lastEventTime is self._getTimeOfNextEvent()
+                time - self._lastEventTime is self._getTimeOfNextEvent()
         ):  # Time to change the output
-            self.computeOutput()
+            out = self.computeOutput()
+            if out:
+                self._reportGenerator.addOutput(out, time)
         self._dynamicSystem.stateTransition(inputs, time - self._lastEventTime)
         self._lastEventTime = time
         self._isOutputUpToUpdate = False
@@ -53,4 +57,5 @@ class DiscreteEventSimulationEngine(BaseSimulator):
         """
         if not self._isOutputUpToUpdate:
             self._isOutputUpToUpdate = True
-            self._dynamicSystem.getOutput()
+            return self._dynamicSystem.getOutput()
+        return None

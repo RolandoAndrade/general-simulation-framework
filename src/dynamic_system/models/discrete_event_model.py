@@ -9,9 +9,8 @@ from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
 
-if TYPE_CHECKING:
-    ModelInput = Dict[str, Any]
-    ModelState = Any
+ModelInput = Dict[str, Any]
+ModelState = Any
 
 
 class DiscreteEventModel(BaseModel):
@@ -27,10 +26,10 @@ class DiscreteEventModel(BaseModel):
     _outputModels: Set[DiscreteEventModel]
 
     def __init__(
-        self,
-        dynamic_system: DiscreteEventDynamicSystem,
-        name: str = None,
-        state: ModelState = None,
+            self,
+            dynamic_system: DiscreteEventDynamicSystem,
+            name: str = None,
+            state: ModelState = None,
     ):
         """
         Args:
@@ -127,7 +126,7 @@ class DiscreteEventModel(BaseModel):
         self.setUpState(new_state)
 
     def confluentStateTransitionFunction(
-        self, state: ModelState, inputs: ModelInput
+            self, state: ModelState, inputs: ModelInput
     ) -> ModelState:
         """
         .. math:: \delta_con(s,x)
@@ -165,7 +164,7 @@ class DiscreteEventModel(BaseModel):
 
     @abstractmethod
     def externalStateTransitionFunction(
-        self, state: ModelState, inputs: ModelInput, event_time: float
+            self, state: ModelState, inputs: ModelInput, event_time: float
     ) -> ModelState:
         """
         .. math:: \delta_ext((s,e), x)

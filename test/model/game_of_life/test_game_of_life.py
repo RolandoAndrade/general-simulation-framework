@@ -11,6 +11,7 @@ class TestGameOfLife(unittest.TestCase):
             print("generation " + str(i + 1))
             self.board.nextGeneration()
             self.board.show()
+        self.board.simReport()
 
 
 if __name__ == "__main__":

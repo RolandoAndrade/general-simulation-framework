@@ -28,17 +28,16 @@ def debug(message: str = "", after: bool = False):
                     + " "
                     + message
                 )
-            function(*args, **kwargs)
-            if after:
-                logger.debug(
-                    "["
-                    + str(function.__module__).split(".")[-1]
-                    + "] "
-                    + function.__name__
-                    + str(args[1:])
-                    + " "
-                    + message
-                )
+                return function(*args, **kwargs)
+            logger.debug(
+                "["
+                + str(function.__module__).split(".")[-1]
+                + "] "
+                + function.__name__
+                + str(args[1:])
+                + " "
+                + message
+            )
             return function(*args, **kwargs)
 
         return wrapper
