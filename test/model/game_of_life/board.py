@@ -4,7 +4,9 @@ from typing import List
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
-from simulation.simulation_engines.discrete_event_simulation_engine import DiscreteEventSimulationEngine
+from simulation.simulation_engines.discrete_event_simulation_engine import (
+    DiscreteEventSimulationEngine,
+)
 from test.model.game_of_life.cell import Cell
 
 

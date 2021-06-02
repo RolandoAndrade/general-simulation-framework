@@ -14,6 +14,7 @@ config = {
 
 logger.configure(**config)
 
+
 def debug(message: str = "", after: bool = False):
     def real_decorator(function):
         def wrapper(*args, **kwargs):
