@@ -18,9 +18,9 @@ class BaseSimulator:
     @abstractmethod
     def computeNextState(self, *args, **kwargs):
         """Compute the next state of the dynamic system."""
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def computeOutput(self):
         """Compute the output of the dynamic system if it has not computed yet"""
-        pass
+        raise NotImplementedError

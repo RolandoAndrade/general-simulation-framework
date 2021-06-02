@@ -8,7 +8,7 @@ class SummaryTable:
     @abstractmethod
     def build(self) -> str:
         """Returns the table in string format"""
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def addRow(self, row: List[Any]) -> SummaryTable:
@@ -17,7 +17,7 @@ class SummaryTable:
         Args:
             row: Row to be added.
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def setTitle(self, title: str) -> SummaryTable:
@@ -26,7 +26,7 @@ class SummaryTable:
         Args:
             title (str): Title of the table.
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def setLabels(self, labels: List[str]) -> SummaryTable:
@@ -35,7 +35,7 @@ class SummaryTable:
         Args:
             labels: Fields of the table.
         """
-        pass
+        raise NotImplementedError
 
     @abstractmethod
     def setAlignment(self, align: List[str]) -> SummaryTable:
@@ -44,4 +44,4 @@ class SummaryTable:
         Args:
             align: Alignment of each column.
         """
-        pass
+        raise NotImplementedError
