@@ -48,7 +48,7 @@ class DiscreteEventModel(BaseModel):
 
     def getOutput(self) -> Any:
         """Gets the output of the model."""
-        return self._outputFunction(self.__currentState)
+        return self._outputFunction(self.getState())
 
     @debug("Executing state transition")
     def stateTransition(self, inputs: ModelInput = None, event_time: float = 0):
