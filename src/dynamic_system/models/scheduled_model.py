@@ -6,8 +6,8 @@ from typing import TYPE_CHECKING
 from core.debug.domain.debug import debug
 
 if TYPE_CHECKING:
-    from dynamic_system.models.discrete_event_model import (
-        DiscreteEventModel,
+    from dynamic_system.core.base_model import (
+        BaseModel,
     )
 
 
@@ -15,11 +15,11 @@ if TYPE_CHECKING:
 class ScheduledModel:
     """Event scheduled"""
 
-    _model: DiscreteEventModel
+    _model: BaseModel
     _time: float
 
     @debug("Getting the model")
-    def getModel(self) -> DiscreteEventModel:
+    def getModel(self) -> BaseModel:
         """Gets the scheduled model."""
         return self._model
 
