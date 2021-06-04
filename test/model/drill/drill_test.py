@@ -95,6 +95,26 @@ class TestDrill(unittest.TestCase):
                 break
             i = i + ds.getTimeOfNextEvent()
 
+    def test_add_remove(self):
+        ds = DiscreteEventDynamicSystem()
+        press1 = Press(ds, "Press 1")
+        press2 = Press(ds, "Press 2")
+        drill = Drill(ds, "Drill")
+        press1.add(drill)
+        press2.add(drill)
+
+        self.assertTrue(len(press1.getOutputModels()) == 1, "It should have an output")
+        self.assertTrue(len(press2.getOutputModels()) == 1, "It should have an output")
+
+        press2.remove(drill)
+
+        self.assertTrue(len(press1.getOutputModels()) == 1, "It should have an output")
+        self.assertTrue(len(press2.getOutputModels()) == 0, "It should have no outputs")
+
+        ds.remove(drill)
+
+        self.assertTrue(len(press1.getOutputModels()) == 0, "It should have no outputs")
+        self.assertTrue(len(press2.getOutputModels()) == 0, "It should have no outputs")
 
 if __name__ == "__main__":
     unittest.main()

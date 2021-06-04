@@ -86,7 +86,8 @@ class BaseModel(Entity):
         Args:
             model (BaseModel): Model to be removed.
         """
-        self.__outputModels.remove(model)
+        if model in self.__outputModels:
+            self.__outputModels.remove(model)
 
     @debug("Getting output models")
     def getOutputModels(self) -> Set[BaseModel]:
