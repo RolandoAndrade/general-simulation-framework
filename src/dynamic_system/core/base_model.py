@@ -87,24 +87,9 @@ class BaseModel(Entity):
         """Returns the dynamic system where the current model belongs with"""
         return self.__currentDynamicSystem
 
-    @debug("Getting output")
+    @abstractmethod
     def getOutput(self) -> Any:
         """Gets the output of the model."""
-        return self._outputFunction(self.__currentState)
-
-    @abstractmethod
-    def _outputFunction(self, state: ModelState) -> Any:
-        """
-        .. math:: \lambda \; (s)
-
-        Implements the output function lambda. The output function describes
-        how the state of the system appears to an observer when e=ta(s).
-
-        .. math:: \lambda \; : \; S \; \longrightarrow Y
-
-        Args:
-            state (ModelState): current state s of the model.
-        """
         raise NotImplementedError
 
     @abstractmethod

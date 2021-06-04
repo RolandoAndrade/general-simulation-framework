@@ -46,6 +46,10 @@ class DiscreteEventModel(BaseModel):
         """Gets the time of the next autonomous event."""
         return self._timeAdvanceFunction(self.getState())
 
+    def getOutput(self) -> Any:
+        """Gets the output of the model."""
+        return self._outputFunction(self.__currentState)
+
     @debug("Executing state transition")
     def stateTransition(self, inputs: ModelInput = None, event_time: float = 0):
         """Executes the state transition using the state given by the state
@@ -143,5 +147,20 @@ class DiscreteEventModel(BaseModel):
 
         Args:
             state (ModelState): Current state of the system.
+        """
+        raise NotImplementedError
+
+    @abstractmethod
+    def _outputFunction(self, state: ModelState) -> Any:
+        """
+        .. math:: \lambda \; (s)
+
+        Implements the output function lambda. The output function describes
+        how the state of the system appears to an observer when e=ta(s).
+
+        .. math:: \lambda \; : \; S \; \longrightarrow Y
+
+        Args:
+            state (ModelState): current state s of the model.
         """
         raise NotImplementedError
