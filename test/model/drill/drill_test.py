@@ -1,8 +1,11 @@
 import unittest
+from random import random, seed
 
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
+from reports.report_generators.default_report import DefaultReport
+from simulation.simulation_engines.discrete_event_simulation_engine import DiscreteEventSimulationEngine
 from test.model.drill.drill import Drill
 from test.model.drill.press import Press
 
@@ -94,6 +97,24 @@ class TestDrill(unittest.TestCase):
             if ds.getTimeOfNextEvent() == 0:
                 break
             i = i + ds.getTimeOfNextEvent()
+
+    def test_simple_simulation(self):
+        ds = DiscreteEventDynamicSystem()
+        report = DefaultReport()
+        engine = DiscreteEventSimulationEngine(ds, report)
+        press = Press(ds, "Press 1")
+        drill = Drill(ds, "Drill 1")
+        press.add(drill)
+        seed(42)
+        for time in range(10):
+            x = random()
+            k = None
+            if x < 0.3:
+                k = {press.getID(): {"ext": 1}}
+                print("Inserting 1 element in time " + str(time))
+            engine.computeNextState(k, time)
+        print(report.generateReport())
+
 
     def test_add_remove(self):
         ds = DiscreteEventDynamicSystem()
