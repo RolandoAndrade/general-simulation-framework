@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, Set, Dict
+from typing import Any, Set, Dict, cast
 
 from core.debug.domain.debug import debug
 from dynamic_system.core.base_model import BaseModel, ModelState
@@ -14,9 +14,6 @@ ModelInput = Dict[str, Any]
 
 class DiscreteEventModel(BaseModel):
     """DiscreteEventModel with an state"""
-
-    _currentDynamicSystem: DiscreteEventDynamicSystem
-    """Current dynamic system of the model"""
 
     def __init__(
             self,
@@ -42,7 +39,7 @@ class DiscreteEventModel(BaseModel):
         Args:
             time (float): Time when the event will be executed.
         """
-        self._currentDynamicSystem.schedule(self, time)
+        cast(DiscreteEventDynamicSystem, self.getDynamicSystem()).schedule(self, time)
 
     @debug("Getting time")
     def getTime(self) -> float:

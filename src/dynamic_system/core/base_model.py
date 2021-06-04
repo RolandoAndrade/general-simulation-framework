@@ -13,12 +13,12 @@ ModelState = Any
 
 
 class BaseModel(Entity):
-    """DiscreteEventModel in a dynamic system"""
+    """Base model in a dynamic system"""
 
     _serial_id = 0
     """Serial of the model"""
 
-    _currentDynamicSystem: BaseDynamicSystem
+    __currentDynamicSystem: BaseDynamicSystem
     """Current dynamic system of the model"""
 
     __currentState: ModelState
@@ -48,8 +48,8 @@ class BaseModel(Entity):
         self.setUpState(state)
         self.__outputModels = set()
         # Set dynamic system
-        self._currentDynamicSystem = dynamic_system
-        self._currentDynamicSystem.add(self)
+        self.__currentDynamicSystem = dynamic_system
+        self.__currentDynamicSystem.add(self)
 
     @debug("Setting up the state")
     def setUpState(self, state: ModelState):
@@ -72,9 +72,9 @@ class BaseModel(Entity):
         """Adds a model as an input for the current model in the dynamic system.
 
         Args:
-            model (DiscreteEventModel): Model to be an input.
+            model (BaseModel): Model to be an input.
         """
-        self._currentDynamicSystem.add(model)
+        self.__currentDynamicSystem.add(model)
         self.__outputModels.add(model)
 
     @debug("Getting output models")
@@ -85,7 +85,7 @@ class BaseModel(Entity):
     @debug("Retrieving dynamic system")
     def getDynamicSystem(self) -> BaseDynamicSystem:
         """Returns the dynamic system where the current model belongs with"""
-        return self._currentDynamicSystem
+        return self.__currentDynamicSystem
 
     @debug("Getting output")
     def getOutput(self) -> Any:
@@ -110,11 +110,6 @@ class BaseModel(Entity):
     @abstractmethod
     def stateTransition(self, *args, **kwargs):
         """Executes the state transition function"""
-        raise NotImplementedError
-
-    @abstractmethod
-    def summary(self):
-        """Prints a summary of the model"""
         raise NotImplementedError
 
     def __str__(self):
