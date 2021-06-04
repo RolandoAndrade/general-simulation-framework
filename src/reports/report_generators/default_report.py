@@ -5,7 +5,9 @@ from reports.core.base_report import BaseReport, Time, DynamicSystemOutput, Repo
 
 
 class DefaultReport(BaseReport):
-    def _getResults(self, headers: Set[str], outputs: Dict[Time, DynamicSystemOutput]) -> ReportResult:
+    def _getResults(
+        self, headers: Set[str], outputs: Dict[Time, DynamicSystemOutput]
+    ) -> ReportResult:
         x = TableProvider()
         x.setLabels(["time"] + list(headers)).setTitle("Simulation report")
         for time in outputs:

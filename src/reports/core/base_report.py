@@ -25,5 +25,7 @@ class BaseReport:
         return self._getResults(self._headers, self._outputs)
 
     @abstractmethod
-    def _getResults(self, headers: Set[str], outputs: Dict[Time, DynamicSystemOutput]) -> ReportResult:
+    def _getResults(
+        self, headers: Set[str], outputs: Dict[Time, DynamicSystemOutput]
+    ) -> ReportResult:
         raise NotImplementedError

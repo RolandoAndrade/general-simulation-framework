@@ -13,7 +13,9 @@ class BaseSimulator:
     _isOutputUpToUpdate: bool
     _reportGenerator: BaseReport
 
-    def __init__(self, dynamic_system: DiscreteEventDynamicSystem, reportGenerator: BaseReport):
+    def __init__(
+        self, dynamic_system: DiscreteEventDynamicSystem, reportGenerator: BaseReport
+    ):
         self._dynamicSystem = dynamic_system
         self._isOutputUpToUpdate = False
         self._reportGenerator = reportGenerator

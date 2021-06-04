@@ -18,7 +18,9 @@ class DiscreteEventSimulationEngine(BaseSimulator):
     _dynamicSystem: DiscreteEventDynamicSystem
     _lastEventTime: float
 
-    def __init__(self, dynamic_system: DiscreteEventDynamicSystem, reportGenerator: BaseReport):
+    def __init__(
+        self, dynamic_system: DiscreteEventDynamicSystem, reportGenerator: BaseReport
+    ):
         """
         Args:
             dynamic_system (DiscreteEventDynamicSystem):
@@ -40,7 +42,7 @@ class DiscreteEventSimulationEngine(BaseSimulator):
             time (float): time of the event.
         """
         if (
-                time - self._lastEventTime is self._getTimeOfNextEvent()
+            time - self._lastEventTime is self._getTimeOfNextEvent()
         ):  # Time to change the output
             out = self.computeOutput()
             if out:

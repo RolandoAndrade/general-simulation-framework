@@ -28,10 +28,12 @@ class BaseModel(Entity):
     """Output models of the model"""
 
     @debug("Initialized Model", True)
-    def __init__(self,
-                 dynamic_system: BaseDynamicSystem,
-                 name: str = None,
-                 state: ModelState = None, ):
+    def __init__(
+        self,
+        dynamic_system: BaseDynamicSystem,
+        name: str = None,
+        state: ModelState = None,
+    ):
         """
         Args:
             dynamic_system (BaseDynamicSystem): Dynamic system of the

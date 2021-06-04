@@ -10,6 +10,7 @@ from simulation.simulation_engines.discrete_event_simulation_engine import (
 from test.model.game_of_life.cell import Cell
 from reports.report_generators.default_report import DefaultReport
 
+
 class Board:
     _sim: DiscreteEventSimulationEngine
     _cells: List[List[Cell]]

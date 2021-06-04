@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, Set, Dict, cast
+from typing import Any, Dict, cast
 
 from core.debug.domain.debug import debug
 from dynamic_system.core.base_model import BaseModel, ModelState
@@ -16,10 +16,10 @@ class DiscreteEventModel(BaseModel):
     """DiscreteEventModel with an state"""
 
     def __init__(
-            self,
-            dynamic_system: DiscreteEventDynamicSystem,
-            name: str = None,
-            state: ModelState = None,
+        self,
+        dynamic_system: DiscreteEventDynamicSystem,
+        name: str = None,
+        state: ModelState = None,
     ):
         """
         Args:
@@ -68,9 +68,7 @@ class DiscreteEventModel(BaseModel):
             new_state = self._internalStateTransitionFunction(self.getState())
         elif event_time is self.getTime():
             # is an confluent event
-            new_state = self._confluentStateTransitionFunction(
-                self.getState(), inputs
-            )
+            new_state = self._confluentStateTransitionFunction(self.getState(), inputs)
         else:
             # time is between autonomous events, so it is an external event
             new_state = self._externalStateTransitionFunction(
@@ -79,7 +77,7 @@ class DiscreteEventModel(BaseModel):
         self.setUpState(new_state)
 
     def _confluentStateTransitionFunction(
-            self, state: ModelState, inputs: ModelInput
+        self, state: ModelState, inputs: ModelInput
     ) -> ModelState:
         """
         .. math:: \delta_con(s,x)
@@ -117,7 +115,7 @@ class DiscreteEventModel(BaseModel):
 
     @abstractmethod
     def _externalStateTransitionFunction(
-            self, state: ModelState, inputs: ModelInput, event_time: float
+        self, state: ModelState, inputs: ModelInput, event_time: float
     ) -> ModelState:
         """
         .. math:: \delta_ext((s,e), x)
