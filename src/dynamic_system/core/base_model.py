@@ -72,10 +72,19 @@ class BaseModel(Entity):
         """Adds a model as an input for the current model in the dynamic system.
 
         Args:
-            model (BaseModel): Model to be an input.
+            model (BaseModel): Output model to be added.
         """
         self.__currentDynamicSystem.add(model)
         self.__outputModels.add(model)
+
+    @debug("Adding output")
+    def remove(self, model: BaseModel):
+        """Removes an specified output
+
+        Args:
+            model (BaseModel): Model to be removed.
+        """
+        self.__outputModels.remove(model)
 
     @debug("Getting output models")
     def getOutputModels(self) -> Set[BaseModel]:

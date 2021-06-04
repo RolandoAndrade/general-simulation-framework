@@ -32,6 +32,21 @@ class BaseDynamicSystem:
             raise Exception("Invalid dynamic system")
         self._models[model.getID()] = model
 
+    @debug("Removing model of the dynamic system")
+    def remove(self, model: BaseModel):
+        """Removes a model of the dynamic system.
+
+        Args:
+            model (BaseModel): Model to be removed.
+        """
+        if model.getID() in self._models:
+            self._models.pop(model.getID())
+            for m in self._models:
+                # Removes the model from all the existing models
+                self._models[m].remove(model)
+        else:
+            raise Exception("Model not found")
+
     @abstractmethod
     def getOutput(self) -> DynamicSystemOutput:
         raise NotImplementedError
