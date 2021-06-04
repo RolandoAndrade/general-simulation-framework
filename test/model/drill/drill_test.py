@@ -5,7 +5,9 @@ from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
 from reports.report_generators.default_report import DefaultReport
-from simulation.simulation_engines.discrete_event_simulation_engine import DiscreteEventSimulationEngine
+from simulation.simulation_engines.discrete_event_simulation_engine import (
+    DiscreteEventSimulationEngine,
+)
 from test.model.drill.drill import Drill
 from test.model.drill.press import Press
 
@@ -115,7 +117,6 @@ class TestDrill(unittest.TestCase):
             engine.computeNextState(k, time)
         print(report.generateReport())
 
-
     def test_add_remove(self):
         ds = DiscreteEventDynamicSystem()
         press1 = Press(ds, "Press 1")
@@ -136,6 +137,7 @@ class TestDrill(unittest.TestCase):
 
         self.assertTrue(len(press1.getOutputModels()) == 0, "It should have no outputs")
         self.assertTrue(len(press2.getOutputModels()) == 0, "It should have no outputs")
+
 
 if __name__ == "__main__":
     unittest.main()
