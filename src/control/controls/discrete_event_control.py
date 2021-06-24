@@ -10,8 +10,13 @@ if TYPE_CHECKING:
 
 
 class DiscreteEventControl(ThreadControl):
+    """Control that executes the discrete-event simulation in a new thread"""
+
     _simulator: DiscreteEventSimulationEngine
+    """Overrides simulator type"""
+
     _time: float
+    """Current time of the simulation"""
 
     def __init__(self, simulator: DiscreteEventSimulationEngine):
         ThreadControl.__init__(self, simulator)

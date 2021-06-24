@@ -12,7 +12,10 @@ if TYPE_CHECKING:
 
 
 class ThreadControl(BaseControl, ABC):
+    """Control that executes the simulation in a new thread"""
+
     _thread: Thread
+    """Thread of the simulation"""
 
     def __init__(self, simulator: BaseSimulator):
         BaseControl.__init__(self, simulator)
