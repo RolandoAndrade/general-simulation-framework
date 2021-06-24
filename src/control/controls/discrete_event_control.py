@@ -6,7 +6,9 @@ from control.core.thread_control import ThreadControl
 from models.models.discrete_event_model import ModelInput
 
 if TYPE_CHECKING:
-    from simulation.simulation_engines.discrete_event_simulation_engine import DiscreteEventSimulationEngine
+    from simulation.simulation_engines.discrete_event_simulation_engine import (
+        DiscreteEventSimulationEngine,
+    )
 
 
 class DiscreteEventControl(ThreadControl):
@@ -29,7 +31,12 @@ class DiscreteEventControl(ThreadControl):
             self._simulator.computeNextState(time=self._time)
             sleep(wait_time)
 
-    def start(self, start_input: Dict[str, ModelInput] = None, frequency: float = 0, wait_time: float = 0):
+    def start(
+        self,
+        start_input: Dict[str, ModelInput] = None,
+        frequency: float = 0,
+        wait_time: float = 0,
+    ):
         self._isPaused = False
         self._simulator.computeNextState(start_input)
         self._thread.start()

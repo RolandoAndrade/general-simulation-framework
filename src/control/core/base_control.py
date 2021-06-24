@@ -37,7 +37,12 @@ class BaseControl:
         raise NotImplementedError
 
     @abstractmethod
-    def start(self, start_input: Dict[str, ModelInput] = None, frequency: float = 0, wait_time: float = 0):
+    def start(
+        self,
+        start_input: Dict[str, ModelInput] = None,
+        frequency: float = 0,
+        wait_time: float = 0,
+    ):
         """Starts the simulation
 
         Args:
