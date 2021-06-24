@@ -4,6 +4,8 @@ from abc import abstractmethod
 
 from typing import TYPE_CHECKING, Dict
 
+from core.debug.domain.debug import debug
+
 if TYPE_CHECKING:
     from models.models.discrete_event_model import ModelInput
     from simulation.core.base_simulator import BaseSimulator
@@ -18,6 +20,7 @@ class BaseControl:
     _isPaused: bool
     """Boolean that indicates if the simulation is paused"""
 
+    @debug("Control initialized", True)
     def __init__(self, simulator: BaseSimulator):
         """
         Args:
