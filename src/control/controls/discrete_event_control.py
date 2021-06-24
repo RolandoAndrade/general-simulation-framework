@@ -16,6 +16,7 @@ class DiscreteEventControl(ThreadControl):
     def __init__(self, simulator: DiscreteEventSimulationEngine):
         ThreadControl.__init__(self, simulator)
         self._time = 0
+        self._isPaused = False
 
     def _execute(self, frequency: float = 0, wait_time: float = 0):
         while not self._isPaused:
