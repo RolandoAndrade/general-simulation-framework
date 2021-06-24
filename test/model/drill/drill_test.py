@@ -1,6 +1,8 @@
 import unittest
+from time import sleep
 from random import random, seed
 
+from control.controls.discrete_event_control import DiscreteEventControl
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
@@ -137,6 +139,20 @@ class TestDrill(unittest.TestCase):
 
         self.assertTrue(len(press1.getOutputModels()) == 0, "It should have no outputs")
         self.assertTrue(len(press2.getOutputModels()) == 0, "It should have no outputs")
+
+    def test_control(self):
+        ds = DiscreteEventDynamicSystem()
+        report = DefaultReport()
+        engine = DiscreteEventSimulationEngine(ds, report)
+        control = DiscreteEventControl(engine)
+        press = Press(ds, "Press 1")
+        drill = Drill(ds, "Drill 1")
+        press.add(drill)
+        k = {press.getID(): {"ext": 1}}
+        control.start(k)
+        sleep(0.1)
+        print(report.generateReport())
+        control.stop()
 
 
 if __name__ == "__main__":

@@ -15,10 +15,11 @@ class DiscreteEventControl(ThreadControl):
 
     def __init__(self, simulator: DiscreteEventSimulationEngine):
         ThreadControl.__init__(self, simulator)
+        self._time = 0
 
     def _execute(self, frequency: float = 0, wait_time: float = 0):
         while not self._isPaused:
-            self._time = self._simulator.getTimeOfNextEvent()
+            self._time += self._simulator.getTimeOfNextEvent()
             self._simulator.computeNextState(time=self._time)
             sleep(wait_time)
 
