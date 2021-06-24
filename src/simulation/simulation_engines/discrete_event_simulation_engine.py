@@ -30,7 +30,7 @@ class DiscreteEventSimulationEngine(BaseSimulator):
         self._lastEventTime = 0
         self._isOutputUpToUpdate = False
 
-    def _getTimeOfNextEvent(self) -> float:
+    def getTimeOfNextEvent(self) -> float:
         """Get time of the next event"""
         return self._dynamicSystem.getTimeOfNextEvent()
 
@@ -42,7 +42,7 @@ class DiscreteEventSimulationEngine(BaseSimulator):
             time (float): time of the event.
         """
         if (
-            time - self._lastEventTime is self._getTimeOfNextEvent()
+            time - self._lastEventTime is self.getTimeOfNextEvent()
         ):  # Time to change the output
             out = self.computeOutput()
             if out:
