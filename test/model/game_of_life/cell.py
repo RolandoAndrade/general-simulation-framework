@@ -4,10 +4,10 @@ from typing import Dict
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
-from dynamic_system.models.discrete_event_model import (
+from models.models.discrete_event_model import (
     DiscreteEventModel,
 )
-from dynamic_system.core.base_model import ModelState
+from models.core.base_model import ModelState
 
 
 class Cell(DiscreteEventModel):

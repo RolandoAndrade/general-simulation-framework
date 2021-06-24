@@ -6,15 +6,15 @@ from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
 
-from dynamic_system.models.discrete_event_model import (
+from models.models.discrete_event_model import (
     DiscreteEventModel,
 )
 
 if TYPE_CHECKING:
-    from dynamic_system.models.discrete_event_model import (
+    from models.models.discrete_event_model import (
         ModelInput,
     )
-    from dynamic_system.core.base_model import ModelState
+    from models.core.base_model import ModelState
 
 
 class Drill(DiscreteEventModel):

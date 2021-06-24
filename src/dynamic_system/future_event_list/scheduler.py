@@ -5,10 +5,10 @@ from typing import TYPE_CHECKING, List, Set
 
 from core.debug.domain.debug import debug
 from core.debug.infrastructure.providers import TableProvider
-from dynamic_system.models.scheduled_model import ScheduledModel
+from dynamic_system.future_event_list.scheduled_model import ScheduledModel
 
 if TYPE_CHECKING:
-    from dynamic_system.models.discrete_event_model import (
+    from models.models.discrete_event_model import (
         DiscreteEventModel,
     )
 

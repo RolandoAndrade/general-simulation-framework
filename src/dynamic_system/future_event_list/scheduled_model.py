@@ -6,7 +6,7 @@ from typing import TYPE_CHECKING
 from core.debug.domain.debug import debug
 
 if TYPE_CHECKING:
-    from dynamic_system.core.base_model import (
+    from models.core.base_model import (
         BaseModel,
     )
 

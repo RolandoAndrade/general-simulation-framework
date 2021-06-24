@@ -4,7 +4,7 @@ from abc import abstractmethod
 from typing import Any, Dict, cast
 
 from core.debug.domain.debug import debug
-from dynamic_system.core.base_model import BaseModel, ModelState
+from models.core.base_model import BaseModel, ModelState
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )

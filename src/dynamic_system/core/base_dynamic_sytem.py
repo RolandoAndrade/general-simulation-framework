@@ -9,7 +9,7 @@ from typing import Any, TYPE_CHECKING, Dict
 DynamicSystemOutput = Dict[str, Any]
 
 if TYPE_CHECKING:
-    from dynamic_system.models.discrete_event_model import BaseModel
+    from models.models.discrete_event_model import BaseModel
 
     DynamicSystemModels = Dict[str, BaseModel]
 

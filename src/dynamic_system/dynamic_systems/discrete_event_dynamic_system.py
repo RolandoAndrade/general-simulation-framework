@@ -10,7 +10,7 @@ from dynamic_system.core.base_dynamic_sytem import (
 from dynamic_system.future_event_list.scheduler import Scheduler
 
 if TYPE_CHECKING:
-    from dynamic_system.models.discrete_event_model import (
+    from models.models.discrete_event_model import (
         DiscreteEventModel,
         ModelInput,
     )
