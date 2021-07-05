@@ -1,5 +1,5 @@
 from __future__ import annotations
-
+from abc import ABC
 from typing import TYPE_CHECKING, Dict, Set
 
 from core.debug.domain.debug import debug
@@ -19,7 +19,7 @@ if TYPE_CHECKING:
     DynamicSystemInput = Dict[str, ModelInput]
 
 
-class DiscreteEventDynamicSystem(BaseDynamicSystem):
+class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
     """Dynamic system for discrete-event models"""
 
     _models: DynamicSystemModels

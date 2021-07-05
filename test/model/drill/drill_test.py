@@ -11,12 +11,13 @@ from simulation.simulation_engines.discrete_event_simulation_engine import (
     DiscreteEventSimulationEngine,
 )
 from test.model.drill.drill import Drill
+from test.model.drill.factory_system import FactorySystem
 from test.model.drill.press import Press
 
 
 class TestDrill(unittest.TestCase):
     def test_table(self):
-        ds = DiscreteEventDynamicSystem()
+        ds = FactorySystem()
         press = Press(ds, "Press 1")
         drill = Drill(ds, "Drill 1")
         press.add(drill)
@@ -53,7 +54,7 @@ class TestDrill(unittest.TestCase):
             i = i + ds.getTimeOfNextEvent()
 
     def test_network(self):
-        ds = DiscreteEventDynamicSystem()
+        ds = FactorySystem()
         press1 = Press(ds, "Press 1")
         press2 = Press(ds, "Press 2")
         drill = Drill(ds, "Drill")
@@ -103,7 +104,7 @@ class TestDrill(unittest.TestCase):
             i = i + ds.getTimeOfNextEvent()
 
     def test_simple_simulation(self):
-        ds = DiscreteEventDynamicSystem()
+        ds = FactorySystem()
         report = DefaultReport()
         engine = DiscreteEventSimulationEngine(ds, report)
         press = Press(ds, "Press 1")
@@ -120,7 +121,7 @@ class TestDrill(unittest.TestCase):
         print(report.generateReport())
 
     def test_add_remove(self):
-        ds = DiscreteEventDynamicSystem()
+        ds = FactorySystem()
         press1 = Press(ds, "Press 1")
         press2 = Press(ds, "Press 2")
         drill = Drill(ds, "Drill")
@@ -141,7 +142,7 @@ class TestDrill(unittest.TestCase):
         self.assertTrue(len(press2.getOutputModels()) == 0, "It should have no outputs")
 
     def test_control(self):
-        ds = DiscreteEventDynamicSystem()
+        ds = FactorySystem()
         report = DefaultReport()
         engine = DiscreteEventSimulationEngine(ds, report)
         control = DiscreteEventControl(engine)
