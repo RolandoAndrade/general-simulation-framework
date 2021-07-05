@@ -3,7 +3,8 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any, Set, TYPE_CHECKING
 
-from core.components.entity import Entity
+from core.components.entity.entity import Entity
+from core.components.entity.entity_property import EntityProperties
 from core.debug.domain.debug import debug
 
 if TYPE_CHECKING:
@@ -28,25 +29,22 @@ class BaseModel(Entity):
     """Output models of the model"""
 
     @debug("Initialized Model", True)
-    def __init__(
-        self,
-        dynamic_system: BaseDynamicSystem,
-        name: str = None,
-        state: ModelState = None,
-    ):
+    def __init__(self, dynamic_system: BaseDynamicSystem, name: str = None,
+                 state: ModelState = None, properties: EntityProperties = None):
         """
         Args:
             dynamic_system (BaseDynamicSystem): Dynamic system of the
                 model.
             name (str): Name of the model.
             state (ModelState): Initial state of the model.
+            properties (EntityProperties): Properties of the model.
         """
         # Init the model
         if name is None:
-            self.setID("model" + str(BaseModel._serial_id))
+            super().__init__("model" + str(BaseModel._serial_id), properties)
             BaseModel._serial_id = BaseModel._serial_id + 1
         else:
-            self.setID(name)
+            super().__init__(name, properties)
         self.setUpState(state)
         self.__outputModels = set()
         # Set dynamic system
