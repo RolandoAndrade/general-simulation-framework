@@ -143,6 +143,7 @@ class TestDrill(unittest.TestCase):
 
     def test_control(self):
         ds = FactorySystem()
+        print(isinstance(ds, DiscreteEventDynamicSystem))
         report = DefaultReport()
         engine = DiscreteEventSimulationEngine(ds, report)
         control = DiscreteEventControl(engine)

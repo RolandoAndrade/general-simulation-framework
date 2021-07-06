@@ -44,6 +44,14 @@ class DiscreteEventModel(BaseModel):
         """
         cast(DiscreteEventDynamicSystem, self.getDynamicSystem()).schedule(self, time)
 
+    def add(self, model: DiscreteEventModel) -> DiscreteEventModel:
+        """Adds a model as an input for the current model in the dynamic system.
+
+        Args:
+            model (DiscreteEventModel): Output model to be added.
+        """
+        return cast(DiscreteEventModel, super().add(model))
+
     @debug("Getting time")
     def getTime(self) -> float:
         """Gets the time of the next autonomous event."""
