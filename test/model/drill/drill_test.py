@@ -6,6 +6,7 @@ from control.controls.discrete_event_control import DiscreteEventControl
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
+from experiments.experiment_builders.discrete_event_experiment import DiscreteEventExperiment
 from reports.report_generators.default_report import DefaultReport
 from simulation.simulation_engines.discrete_event_simulation_engine import (
     DiscreteEventSimulationEngine,
@@ -143,7 +144,6 @@ class TestDrill(unittest.TestCase):
 
     def test_control(self):
         ds = FactorySystem()
-        print(isinstance(ds, DiscreteEventDynamicSystem))
         report = DefaultReport()
         engine = DiscreteEventSimulationEngine(ds, report)
         control = DiscreteEventControl(engine)
@@ -155,6 +155,18 @@ class TestDrill(unittest.TestCase):
         sleep(0.1)
         print(report.generateReport())
         control.stop()
+
+    def test_experiment(self):
+        ds = FactorySystem()
+        press = Press(ds, "Press 1")
+        drill = Drill(ds, "Drill 1")
+        press.add(drill)
+        experiment = DiscreteEventExperiment(ds)
+        k = {press.getID(): {"ext": 2}}
+        experiment.simulationControl.start(k)
+        sleep(0.1)
+        print(experiment.simulationReport.generateReport())
+        experiment.simulationControl.stop()
 
 
 if __name__ == "__main__":

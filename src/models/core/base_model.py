@@ -69,14 +69,14 @@ class BaseModel(Entity):
 
     @debug("Adding output")
     def add(self, model: BaseModel) -> BaseModel:
-        """Adds a model as an input for the current model in the dynamic system.
-
+        """Adds a model as an input for the current model in the dynamic system and returns the model added.
+        
         Args:
             model (BaseModel): Output model to be added.
         """
         self.__currentDynamicSystem.add(model)
         self.__outputModels.add(model)
-        return self
+        return model
 
     @debug("Adding output")
     def remove(self, model: BaseModel):

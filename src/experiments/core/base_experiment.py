@@ -36,18 +36,22 @@ class BaseExperiment(ABC):
         self.__control = control
         self.__report = report
 
+    @property
     def dynamicSystem(self) -> BaseDynamicSystem:
         """Gets the dynamic system of the experiment"""
         return self.__dynamicSystem
 
+    @property
     def simulator(self) -> BaseSimulator:
         """Gets the simulator of the experiment"""
         return self.__simulator
 
+    @property
     def simulationControl(self) -> BaseControl:
         """Gets the simulation control of the experiment"""
         return self.__control
 
+    @property
     def simulationReport(self) -> BaseReport:
         """Gets the simulation report of the experiment"""
         return self.__report

@@ -28,13 +28,9 @@ class DiscreteEventControl(ThreadControl):
 
     def _execute(self, frequency: float = 0, wait_time: float = 0):
         while not self._isPaused:
-            dt = self._simulator.getTimeOfNextEvent()
-            if dt > 0:
-                self._time += dt
-                self._simulator.computeNextState(time=self._time)
-                sleep(wait_time)
-            else:
-                self._isPaused = True
+            self._time += self._simulator.getTimeOfNextEvent()
+            self._simulator.computeNextState(time=self._time)
+            sleep(wait_time)
 
     @debug("Simulation starts")
     def start(
