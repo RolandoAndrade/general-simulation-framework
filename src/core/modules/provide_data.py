@@ -1,2 +1,0 @@
-class ProvideData:
-    pass
