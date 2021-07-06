@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Set, Dict, Any
+from typing import Set, Any
 
 from core.components.entity.entity_property import EntityProperties
 
@@ -59,4 +59,7 @@ class Entity:
             property_name (str): Name of the property
             value: Value of the property
         """
-        self._properties[property_name] = value
+        if property_name in self._properties:
+            self._properties[property_name].setValue(value)
+        else:
+            raise Exception("Property does not exist")

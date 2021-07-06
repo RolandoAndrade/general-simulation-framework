@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, Set, Type
+from typing import Any, Dict
 
 from core.components.entity.property_type import PropertyType
 
@@ -36,9 +36,12 @@ class EntityProperty:
         """Returns the value of the property"""
         return self.__value
 
-    def setValue(self, value):
+    def setValue(self, value: Any):
         """Sets the value of the property"""
-        if not PropertyType.validate(value, self.getType()):
+        if value is not None and not PropertyType.validate(value, self.getType()):
             raise Exception("Expected " + self.getType() + "typing, but received " + type(value))
         self.__value = value
 
+
+EntityProperties = Dict[str, EntityProperty]
+"""Group of properties of an entity"""
