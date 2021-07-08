@@ -1,3 +1,6 @@
+from typing import List
+
+from core.components.entity.entity import Entity
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 from models.core.base_model import ModelState
 from models.models.discrete_event_model import DiscreteEventModel, ModelInput
@@ -10,6 +13,8 @@ from test.queue_simulator.source.properties.source_property_type import SourcePr
 
 
 class Source(DiscreteEventModel):
+    entityNumber = 0
+
     def __init__(self,
                  dynamic_system: DiscreteEventDynamicSystem,
                  name: str,
@@ -22,8 +27,12 @@ class Source(DiscreteEventModel):
             SourcePropertyType.SOURCE_INTER_ARRIVAL_TIME: inter_arrival_time,
         })
 
-    def __getInterArrivalTime(self) -> SourceInterArrivalTime:
+    def __getInterArrivalTime(self) -> float:
         return self.getProperty(SourcePropertyType.SOURCE_INTER_ARRIVAL_TIME).getValue().evaluate()
+
+    def __getEntityType(self) -> Entity:
+        Source.entityNumber += 1
+        return Entity("Entity" + str(Source.entityNumber))
 
     def _internalStateTransitionFunction(self, state: ModelState) -> ModelState:
         state['created_entities'] = self.__getInterArrivalTime()
@@ -35,5 +44,5 @@ class Source(DiscreteEventModel):
     def _timeAdvanceFunction(self, state: ModelState) -> float:
         return 1
 
-    def _outputFunction(self, state: ModelState) -> int:
-        return state['created_entities']
+    def _outputFunction(self, state: ModelState) -> List[Entity]:
+        return [self.__getEntityType()] * state['created_entities']

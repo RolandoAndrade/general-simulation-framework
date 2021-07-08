@@ -30,12 +30,13 @@ class BaseControl:
         self._isPaused = True
 
     @abstractmethod
-    def _execute(self, frequency: float = 0, wait_time: float = 0):
+    def _execute(self, frequency: float = 0, wait_time: float = 0, stop_time: float = 0):
         """Executes the simulation loop number of seconds.
 
         Args:
             frequency (float): Frequency of the simulation computation.
             wait_time (float): Delay execution for a given.
+            stop_time (float): Duration of the simulation.
         """
         raise NotImplementedError
 
@@ -44,6 +45,7 @@ class BaseControl:
         self,
         start_input: Dict[str, ModelInput] = None,
         frequency: float = 0,
+        stop_time: float = 0,
         wait_time: float = 0,
     ):
         """Starts the simulation
@@ -52,6 +54,7 @@ class BaseControl:
             start_input: Input of the dynamic system.
             frequency (float): Frequency of the simulation computation.
             wait_time (float): Delay execution for a given number of seconds.
+            stop_time: Time of the simulation
         """
         raise NotImplementedError
 
