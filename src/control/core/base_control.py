@@ -67,3 +67,8 @@ class BaseControl:
     def stop(self):
         """Stops the simulation"""
         raise NotImplementedError
+
+    @abstractmethod
+    def wait(self, timeout: float = None):
+        """Waits the simulation end"""
+        raise NotImplementedError

@@ -21,7 +21,8 @@ class Source(DiscreteEventModel):
                  entity_type: SourceEntityType = SourceEntityType(""),
                  inter_arrival_time: SourceInterArrivalTime = SourceInterArrivalTime(None)):
         super().__init__(dynamic_system, name, {
-            'created_entities': 0
+            'created_entities': 0,
+            'outputs': 0
         }, {
             SourcePropertyType.SOURCE_ENTITY_TYPE: entity_type,
             SourcePropertyType.SOURCE_INTER_ARRIVAL_TIME: inter_arrival_time,
@@ -36,6 +37,7 @@ class Source(DiscreteEventModel):
 
     def _internalStateTransitionFunction(self, state: ModelState) -> ModelState:
         state['created_entities'] = self.__getInterArrivalTime()
+        state['outputs'] += state['created_entities']
         return state
 
     def _externalStateTransitionFunction(self, state: ModelState, inputs: ModelInput, event_time: float) -> ModelState:
