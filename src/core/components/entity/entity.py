@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-from typing import Set, Any
+from typing import Set, Any, Union
 
-from core.components.entity.entity_property import EntityProperties
-
+from core.components.entity.entity_property import EntityProperties, EntityProperty
 
 class Entity:
     """Unique component with an identification."""
@@ -63,3 +62,7 @@ class Entity:
             self._properties[property_name].setValue(value)
         else:
             raise Exception("Property does not exist")
+
+    def getProperty(self, property_name: str) -> EntityProperty:
+        """Gets the property of the entity"""
+        return self._properties[property_name]

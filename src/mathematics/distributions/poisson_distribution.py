@@ -30,6 +30,6 @@ class PoissonDistribution(RandomDistribution):
         """
         return np.random.poisson(self.__mean, size)
 
-    def evaluate(self):
+    def evaluate(self) -> int:
         """Evaluates the expression"""
         return self.generate()
