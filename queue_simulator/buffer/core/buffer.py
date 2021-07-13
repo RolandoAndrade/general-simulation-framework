@@ -42,6 +42,7 @@ class Buffer(Entity, ABC):
         self.capacity = capacity
         self._content = []
         self.policy = policy
+        self.numberEntered = NumberProperty(0)
 
     def add(self, entityEmitter: EntityEmitter, quantity: int = 1) -> int:
         """Adds an element to the buffer and returns the number of elements that
