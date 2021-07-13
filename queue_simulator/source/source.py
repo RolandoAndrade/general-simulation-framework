@@ -1,7 +1,11 @@
-from typing import List
+from typing import List, Optional
 
 from core.components.entity.core.entity import Entity
+from core.components.entity.core.entity_emitter import EntityEmitter
+from core.components.entity.core.entity_property import EntityProperties
+from core.components.expresions.expression import Expression
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
+from mathematics.values.numeric_value import NumericValue
 from models.core.base_model import ModelState
 from models.models.discrete_event_model import DiscreteEventModel, ModelInput
 from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
@@ -11,40 +15,50 @@ from queue_simulator.source.properties.source_inter_arrival_time import SourceIn
 # https://simulemos.cl/books/simio/page/source
 from queue_simulator.source.properties.source_property_type import SourcePropertyType
 
+class SourceState:
+    OutputBuffer: OutputBuffer
+
+
 
 class Source(DiscreteEventModel):
+    """Source of entities"""
     entityNumber = 0
+
+    interArrivalTime: Optional[Expression]
+    """InterArrival time of the entities"""
+
+    entityEmitter: Optional[EntityEmitter]
+    """Emitter of entities"""
+
+    def getProperties(self) -> EntityProperties:
+        return {
+            SourcePropertyType.SOURCE_ENTITY_TYPE: self.entityEmitter,
+            SourcePropertyType.SOURCE_INTER_ARRIVAL_TIME: self.interArrivalTime
+        }
 
     def __init__(self,
                  dynamic_system: DiscreteEventDynamicSystem,
-                 name: str):
-        super().__init__(dynamic_system, name, properties={
-            SourcePropertyType.SOURCE_ENTITY_TYPE: SourceEntityType(),
-            SourcePropertyType.SOURCE_INTER_ARRIVAL_TIME: SourceInterArrivalTime(),
-        })
-        ob = OutputBuffer(dynamic_system, name, self.getTime())
-        self.add(ob)
+                 name: str,
+                 entityEmitter: EntityEmitter = None,
+                 interArrivalTime: Expression = None,
+                 ):
+        super().__init__(dynamic_system, name)
         self.setUpState({
-            "OutputBuffer": ob
+            "OutputBuffer": OutputBuffer(name)
         })
-
-    def add(self):
+        self.interArrivalTime = interArrivalTime
+        self.entityEmitter = entityEmitter
 
     def __areValidProperties(self):
-        return not (self[SourcePropertyType.SOURCE_INTER_ARRIVAL_TIME].getValue() is None or
-                    self[SourcePropertyType.SOURCE_ENTITY_TYPE].getValue() is None)
+        return not (self.interArrivalTime is None or
+                    self.interArrivalTime is None)
 
-    def __getInterArrivalTime(self) -> float:
-        return self[SourcePropertyType.SOURCE_INTER_ARRIVAL_TIME].getValue().evaluate()
 
-    def __getEntityType(self) -> Entity:
-        Source.entityNumber += 1
-        return Entity("Entity" + str(Source.entityNumber))
-
-    def _internalStateTransitionFunction(self, state: ModelState) -> ModelState:
+    def _internalStateTransitionFunction(self, state: SourceState) -> ModelState:
+        state.O
         if self.__areValidProperties():
-            state['created_entities'] = self.__getInterArrivalTime()
-            state['outputs'] += state['created_entities']
+            outputBuffer: OutputBuffer = state['OutputBuffer']
+            outputBuffer.add(self.entityEmitter)
         return state
 
     def _externalStateTransitionFunction(self, state: ModelState, inputs: ModelInput, event_time: float) -> ModelState:
@@ -54,4 +68,4 @@ class Source(DiscreteEventModel):
         return 1
 
     def _outputFunction(self, state: ModelState) -> List[Entity]:
-        return [self.__getEntityType()] * state['created_entities']
+        return state['OutputBuffer']

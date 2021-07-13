@@ -69,6 +69,18 @@ class Buffer(Entity, ABC):
         shuffle(randomOrder)
         return randomOrder
 
+    def empty(self) -> List[Entity]:
+        """Gets the content of the buffer"""
+        data = self._content.copy()
+        self._content = []
+        if self.policy == BufferPolicy.FIFO:
+            return data
+        elif self.policy == BufferPolicy.LIFO:
+            return data[::-1]
+        randomOrder = data.copy()
+        shuffle(randomOrder)
+        return randomOrder
+
     def pop(self) -> Optional[Entity]:
         """Pops the next element in the buffer"""
         if self.currentNumberOfEntities > 0:

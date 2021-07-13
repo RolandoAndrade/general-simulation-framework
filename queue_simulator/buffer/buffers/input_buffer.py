@@ -18,4 +18,4 @@ class InputBuffer(Buffer):
             capacity (NumberProperty): Capacity of the buffer.
             policy (StringProperty): Policy of the buffer.
         """
-        super().__init__(name + ".OutputBuffer", capacity, policy)
+        super().__init__(name + ".InputBuffer", capacity, policy)
