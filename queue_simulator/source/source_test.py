@@ -3,8 +3,8 @@ import unittest
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 from experiments.experiment_builders.discrete_event_experiment import DiscreteEventExperiment
 from mathematics.distributions.poisson_distribution import PoissonDistribution
-from test.queue_simulator.source.properties.source_property_type import SourcePropertyType
-from test.queue_simulator.source.source import Source
+from queue_simulator.source.properties.source_property_type import SourcePropertyType
+from queue_simulator.source.source import Source
 
 
 class MyTestCase(unittest.TestCase):

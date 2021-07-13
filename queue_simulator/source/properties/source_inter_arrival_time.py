@@ -3,7 +3,7 @@ from __future__ import annotations
 from core.components.entity.core.entity_property import EntityProperty
 from core.components.entity.core.property_type import PropertyType
 from core.components.expresions.expression import Expression
-from test.queue_simulator.source.properties.source_property_type import SourcePropertyType
+from queue_simulator.source.properties.source_property_type import SourcePropertyType
 
 
 class SourceInterArrivalTime(EntityProperty):

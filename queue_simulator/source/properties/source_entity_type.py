@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from core.components.entity.core.entity_property import EntityProperty
-from test.queue_simulator.source.properties.source_property_type import SourcePropertyType
+from queue_simulator.source.properties.source_property_type import SourcePropertyType
 
 
 class SourceEntityType(EntityProperty):

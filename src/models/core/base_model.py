@@ -4,7 +4,6 @@ from abc import abstractmethod
 from typing import Any, Set, TYPE_CHECKING
 
 from core.components.entity.core.entity import Entity
-from core.components.entity.core.entity_property import EntityProperties
 from core.debug.domain.debug import debug
 
 if TYPE_CHECKING:
@@ -30,21 +29,20 @@ class BaseModel(Entity):
 
     @debug("Initialized Model", True)
     def __init__(self, dynamic_system: BaseDynamicSystem, name: str = None,
-                 state: ModelState = None, properties: EntityProperties = None):
+                 state: ModelState = None):
         """
         Args:
             dynamic_system (BaseDynamicSystem): Dynamic system of the
                 model.
             name (str): Name of the model.
             state (ModelState): Initial state of the model.
-            properties (EntityProperties): Properties of the model.
         """
         # Init the model
         if name is None:
-            super().__init__("model" + str(BaseModel._serial_id), properties)
+            super().__init__("model" + str(BaseModel._serial_id))
             BaseModel._serial_id = BaseModel._serial_id + 1
         else:
-            super().__init__(name, properties)
+            super().__init__(name)
         self.setUpState(state)
         self.__outputModels = set()
         # Set dynamic system

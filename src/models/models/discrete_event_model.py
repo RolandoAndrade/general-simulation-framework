@@ -3,7 +3,6 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any, Dict, cast
 
-from core.components.entity.core.entity_property import EntityProperties
 from core.debug.domain.debug import debug
 from models.core.base_model import BaseModel, ModelState
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
@@ -21,7 +20,6 @@ class DiscreteEventModel(BaseModel):
         dynamic_system: DiscreteEventDynamicSystem,
         name: str = None,
         state: ModelState = None,
-        properties: EntityProperties = None
     ):
         """
         Args:
@@ -29,9 +27,8 @@ class DiscreteEventModel(BaseModel):
                 model.
             name (str): Name of the model.
             state (ModelState): Initial state of the model.
-            properties (EntityProperties): Properties of the model.
         """
-        super().__init__(dynamic_system, name, state, properties)
+        super().__init__(dynamic_system, name, state)
         # Add the model to the dynamic system
         self.schedule(self.getTime())
 

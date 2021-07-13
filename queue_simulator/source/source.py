@@ -4,12 +4,12 @@ from core.components.entity.core.entity import Entity
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 from models.core.base_model import ModelState
 from models.models.discrete_event_model import DiscreteEventModel, ModelInput
-from test.queue_simulator.buffer.output_buffer import OutputBuffer
-from test.queue_simulator.source.properties.source_entity_type import SourceEntityType
-from test.queue_simulator.source.properties.source_inter_arrival_time import SourceInterArrivalTime
+from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
+from queue_simulator.source.properties.source_entity_type import SourceEntityType
+from queue_simulator.source.properties.source_inter_arrival_time import SourceInterArrivalTime
 
 # https://simulemos.cl/books/simio/page/source
-from test.queue_simulator.source.properties.source_property_type import SourcePropertyType
+from queue_simulator.source.properties.source_property_type import SourcePropertyType
 
 
 class Source(DiscreteEventModel):
