@@ -7,6 +7,7 @@ from core.components.expresions.expression import Expression
 expectedTypes = {
     "STRING": str,
     "BOOLEAN": bool,
+    "NUMBER": float,
     "EXPRESSION": Expression,
     "EVENT": Any
 }
@@ -18,6 +19,7 @@ class PropertyType:
     BOOLEAN = "BOOLEAN"
     EXPRESSION = "EXPRESSION"
     EVENT = "EVENT"
+    NUMBER = "NUMBER"
 
     @staticmethod
     def validate(value: Any, property_type: str) -> bool:

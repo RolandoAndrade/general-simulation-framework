@@ -7,6 +7,8 @@ from test.queue_simulator.buffer.buffer import Buffer
 
 
 class OutputBuffer(Buffer):
+
+    def __init__(self):
     def _internalStateTransitionFunction(self, state: ModelState) -> ModelState:
         return state
 

@@ -4,6 +4,7 @@ from core.components.entity.entity import Entity
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 from models.core.base_model import ModelState
 from models.models.discrete_event_model import DiscreteEventModel, ModelInput
+from test.queue_simulator.buffer.output_buffer import OutputBuffer
 from test.queue_simulator.source.properties.source_entity_type import SourceEntityType
 from test.queue_simulator.source.properties.source_inter_arrival_time import SourceInterArrivalTime
 
@@ -17,13 +18,17 @@ class Source(DiscreteEventModel):
     def __init__(self,
                  dynamic_system: DiscreteEventDynamicSystem,
                  name: str):
-        super().__init__(dynamic_system, name, {
-            'created_entities': 0,
-            'outputs': 0
-        }, {
-                             SourcePropertyType.SOURCE_ENTITY_TYPE: SourceEntityType(),
-                             SourcePropertyType.SOURCE_INTER_ARRIVAL_TIME: SourceInterArrivalTime(),
-                         })
+        super().__init__(dynamic_system, name, properties={
+            SourcePropertyType.SOURCE_ENTITY_TYPE: SourceEntityType(),
+            SourcePropertyType.SOURCE_INTER_ARRIVAL_TIME: SourceInterArrivalTime(),
+        })
+        ob = OutputBuffer(dynamic_system, name, self.getTime())
+        self.add(ob)
+        self.setUpState({
+            "OutputBuffer": ob
+        })
+
+    def add(self):
 
     def __areValidProperties(self):
         return not (self[SourcePropertyType.SOURCE_INTER_ARRIVAL_TIME].getValue() is None or
