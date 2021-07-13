@@ -8,25 +8,17 @@ from core.components.entity.property_type import PropertyType
 class EntityProperty:
     """Property of an entity"""
 
-    __name: str
-    """Property name"""
-
     __value: Any
     """Property value"""
 
     __type: str
     """Property type"""
 
-    def __init__(self, name: str,
+    def __init__(self,
                  value: Any = None,
                  property_type: str = PropertyType.STRING):
-        self.__name = name
         self.__value = value
         self.__type = property_type
-
-    def getName(self) -> str:
-        """Returns the name of the property"""
-        return self.__name
 
     def getType(self) -> str:
         """Returns the name of the property"""

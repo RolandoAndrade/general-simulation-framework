@@ -12,8 +12,8 @@ class Buffer(Entity, ABC):
     def __init__(self,
                  name: str, capacity: float = float('inf')):
         super().__init__(name, {
-            'numberEntered': NumberProperty(),
-            'capacity': capacity,
+            'numberEntered': NumberProperty(0),
+            'capacity': NumberProperty("capacity"),
             'contents': [],
             'policy': 'FIFO'
         })

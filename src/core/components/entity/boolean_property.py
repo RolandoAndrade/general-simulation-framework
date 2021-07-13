@@ -3,8 +3,14 @@ from core.components.entity.property_type import PropertyType
 
 
 class BooleanProperty(EntityProperty):
-    def __init__(self, property_name: str, value: bool):
-        super().__init__(property_name, value, PropertyType.BOOLEAN)
+    def __init__(self, value: bool):
+        super().__init__(value, PropertyType.BOOLEAN)
+
+    def __bool__(self):
+        return self.getValue()
+
+    def __eq__(self, other):
+        return other == self.getValue()
 
     def getValue(self) -> bool:
         """Returns the value of the property"""
