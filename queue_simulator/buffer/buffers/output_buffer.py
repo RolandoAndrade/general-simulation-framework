@@ -12,4 +12,10 @@ class OutputBuffer(Buffer):
                  capacity: NumberProperty = NumberProperty(float("inf")),
                  policy: StringProperty = StringProperty(BufferPolicy.FIFO)
                  ):
+        """
+        Args:
+            name (str): Name of the buffer.
+            capacity (NumberProperty): Capacity of the buffer.
+            policy (StringProperty): Policy of the buffer.
+        """
         super().__init__(name + ".OutputBuffer", capacity, policy)

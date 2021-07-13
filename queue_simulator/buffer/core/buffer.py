@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import random
 from abc import ABC
 from random import shuffle, randint
 from typing import List, Optional
@@ -60,8 +59,7 @@ class Buffer(Entity, ABC):
         return quantity - rQuantity
 
     def getContent(self) -> List[Entity]:
-        """Gets the content of the buffer
-        """
+        """Gets the content of the buffer"""
         if self.policy == BufferPolicy.FIFO:
             return self._content
         elif self.policy == BufferPolicy.LIFO:
@@ -71,8 +69,7 @@ class Buffer(Entity, ABC):
         return randomOrder
 
     def pop(self) -> Optional[Entity]:
-        """Pops the next element in the buffer
-        """
+        """Pops the next element in the buffer"""
         if self.currentNumberOfEntities > 0:
             if self.policy == BufferPolicy.FIFO:
                 return self._content.pop(0)
