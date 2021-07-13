@@ -5,7 +5,7 @@ from test.queue_simulator.source.properties.source_property_type import SourcePr
 
 
 class SourceEntityType(EntityProperty):
-    def __init__(self, entity_name: str):
+    def __init__(self, entity_name: str = None):
         super().__init__(SourcePropertyType.SOURCE_ENTITY_TYPE,
                          entity_name)
 

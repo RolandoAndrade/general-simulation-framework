@@ -66,3 +66,9 @@ class Entity:
     def getProperty(self, property_name: str) -> EntityProperty:
         """Gets the property of the entity"""
         return self._properties[property_name]
+
+    def __getitem__(self, item: str) -> Union[Any, EntityProperty]:
+        return self.getProperty(item)
+
+    def __setitem__(self, key: str, value: EntityProperty):
+        self.setProperty(key, value)

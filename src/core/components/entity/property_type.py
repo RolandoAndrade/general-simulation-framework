@@ -2,10 +2,12 @@ from __future__ import annotations
 
 from typing import Any
 
+from core.components.expresions.expression import Expression
+
 expectedTypes = {
     "STRING": str,
     "BOOLEAN": bool,
-    "EXPRESSION": Any,
+    "EXPRESSION": Expression,
     "EVENT": Any
 }
 
@@ -20,4 +22,4 @@ class PropertyType:
     @staticmethod
     def validate(value: Any, property_type: str) -> bool:
         """Validates if the value type equals to the expected type"""
-        return type(value) == expectedTypes[property_type]
+        return type(value) == expectedTypes.get(property_type) or isinstance(value, expectedTypes.get(property_type))

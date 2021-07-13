@@ -7,7 +7,7 @@ from test.queue_simulator.source.properties.source_property_type import SourcePr
 
 
 class SourceInterArrivalTime(EntityProperty):
-    def __init__(self, time: Expression):
+    def __init__(self, time: Expression = None):
         super().__init__(SourcePropertyType.SOURCE_INTER_ARRIVAL_TIME,
                          time, PropertyType.EXPRESSION)
 
