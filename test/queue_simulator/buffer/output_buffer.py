@@ -1,6 +1,6 @@
-from typing import Any, List
+from typing import List
 
-from core.components.entity.entity import Entity
+from core.components.entity.core.entity import Entity
 from models.core.base_model import ModelState
 from models.models.discrete_event_model import ModelInput
 from test.queue_simulator.buffer.buffer import Buffer

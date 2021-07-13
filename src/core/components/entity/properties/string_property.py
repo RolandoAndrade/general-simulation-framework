@@ -1,5 +1,5 @@
-from core.components.entity.entity_property import EntityProperty
-from core.components.entity.property_type import PropertyType
+from core.components.entity.core.entity_property import EntityProperty
+from core.components.entity.core.property_type import PropertyType
 
 
 class StringProperty(str, EntityProperty):

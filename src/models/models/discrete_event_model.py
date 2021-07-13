@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any, Dict, cast
 
-from core.components.entity.entity_property import EntityProperties
+from core.components.entity.core.entity_property import EntityProperties
 from core.debug.domain.debug import debug
 from models.core.base_model import BaseModel, ModelState
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (

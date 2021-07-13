@@ -1,14 +1,16 @@
 import unittest
 
-from core.components.entity.boolean_property import BooleanProperty
-from core.components.entity.number_property import NumberProperty
-from core.components.entity.string_property import StringProperty
+from core.components.entity.properties.boolean_property import BooleanProperty
+from core.components.entity.properties.number_property import NumberProperty
+from core.components.entity.properties.string_property import StringProperty
 
 
 class MyTestCase(unittest.TestCase):
     def test_number(self):
         a = NumberProperty(5)
         self.assertEqual(2 + a, 7, "Error")
+        a += 5
+        self.assertEqual(a, 10, "Error")
 
     def test_bool(self):
         a = BooleanProperty(True)

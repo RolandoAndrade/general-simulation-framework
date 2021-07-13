@@ -3,8 +3,8 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any, Set, TYPE_CHECKING
 
-from core.components.entity.entity import Entity
-from core.components.entity.entity_property import EntityProperties
+from core.components.entity.core.entity import Entity
+from core.components.entity.core.entity_property import EntityProperties
 from core.debug.domain.debug import debug
 
 if TYPE_CHECKING:

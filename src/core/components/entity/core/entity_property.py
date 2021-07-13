@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Dict
 
-from core.components.entity.property_type import PropertyType
+from core.components.entity.core.property_type import PropertyType
 
 
 class EntityProperty:

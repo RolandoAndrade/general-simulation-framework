@@ -1,6 +1,6 @@
 from typing import List
 
-from core.components.entity.entity import Entity
+from core.components.entity.core.entity import Entity
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 from models.core.base_model import ModelState
 from models.models.discrete_event_model import DiscreteEventModel, ModelInput

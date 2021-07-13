@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Set, Any, Union
 
-from core.components.entity.entity_property import EntityProperties, EntityProperty
+from core.components.entity.core.entity_property import EntityProperties, EntityProperty
 
 
 class Entity:
