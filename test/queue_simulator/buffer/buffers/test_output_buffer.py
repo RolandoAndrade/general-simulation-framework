@@ -4,6 +4,7 @@ from random import seed
 from core.components.entity.properties.number_property import NumberProperty
 from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
 from queue_simulator.buffer.core.buffer_policy import BufferPolicy
+from queue_simulator.buffer.core.buffer_property import BufferProperty
 from test.queue_simulator.buffer.mocks.mock_emitter import MockEmitter
 
 
@@ -68,9 +69,9 @@ class TestOutputBuffer(unittest.TestCase):
         self.buffer.add(MockEmitter(), 3)
         self.buffer.pop()
         properties = self.buffer.getProperties()
-        self.assertEqual(float('inf'), properties.get('capacity'))
-        self.assertEqual(BufferPolicy.FIFO, properties.get('policy'))
-        self.assertEqual(3, properties.get('numberEntered'))
+        self.assertEqual(float('inf'), properties.get(BufferProperty.CAPACITY))
+        self.assertEqual(BufferPolicy.FIFO, properties.get(BufferProperty.POLICY))
+        self.assertEqual(3, properties.get(BufferProperty.NUMBER_ENTERED))
 
     def test_buffer_full(self):
         """Should be trunc the buffer and return

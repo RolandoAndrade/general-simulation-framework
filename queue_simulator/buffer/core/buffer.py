@@ -10,6 +10,7 @@ from core.components.entity.core.entity_property import EntityProperties
 from core.components.entity.properties.number_property import NumberProperty
 from core.components.entity.properties.string_property import StringProperty
 from queue_simulator.buffer.core.buffer_policy import BufferPolicy
+from queue_simulator.buffer.core.buffer_property import BufferProperty
 
 
 class Buffer(Entity, ABC):
@@ -81,9 +82,9 @@ class Buffer(Entity, ABC):
     def getProperties(self) -> EntityProperties:
         """Lists the properties of the entity"""
         return {
-            'capacity': self.capacity,
-            'policy': self.policy,
-            'numberEntered': self.numberEntered
+            BufferProperty.CAPACITY: self.capacity,
+            BufferProperty.POLICY: self.policy,
+            BufferProperty.NUMBER_ENTERED: self.numberEntered
         }
 
     @property
