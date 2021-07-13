@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+import random
 from abc import ABC
-from typing import List
+from random import shuffle, randint
+from typing import List, Optional
 
 from core.components.entity.core.entity import Entity
+from core.components.entity.core.entity_emitter import EntityEmitter
+from core.components.entity.core.entity_property import EntityProperties
 from core.components.entity.properties.number_property import NumberProperty
 from core.components.entity.properties.string_property import StringProperty
 from queue_simulator.buffer.core.buffer_policy import BufferPolicy
@@ -39,16 +43,52 @@ class Buffer(Entity, ABC):
         self._content = []
         self.policy = policy
 
-    def add(self, entity: Entity, quantity: int = 1) -> int:
+    def add(self, entityEmitter: EntityEmitter, quantity: int = 1) -> int:
         """Adds an element to the buffer and returns the number of elements that
         cannot be added because the buffer capacity
 
         Args:
-            entity (Entity): Entity to be created
-            quantity (int):
+            entityEmitter (EntityEmitter): Entity emitter of an specific type.
+            quantity (int): Quantity to be emitted.
         """
-        capacity = self.capacity - len(self._content)
+        capacity = self.capacity - self.currentNumberOfEntities
         rQuantity = int(min(capacity, quantity))
         self.numberEntered += rQuantity
-        self._content += [entity] * rQuantity
+        for i in range(rQuantity):
+            self._content.append(entityEmitter.generate())
         return quantity - rQuantity
+
+    def getContent(self) -> List[Entity]:
+        """Gets the content of the buffer
+        """
+        if self.policy == BufferPolicy.FIFO:
+            return self._content
+        elif self.policy == BufferPolicy.LIFO:
+            return self._content[::-1]
+        randomOrder = self._content.copy()
+        shuffle(randomOrder)
+        return randomOrder
+
+    def pop(self) -> Optional[Entity]:
+        """Pops the next element in the buffer
+        """
+        if self.currentNumberOfEntities > 0:
+            if self.policy == BufferPolicy.FIFO:
+                return self._content.pop(0)
+            elif self.policy == BufferPolicy.LIFO:
+                return self._content.pop()
+            return self._content.pop(randint(0, self.currentNumberOfEntities))
+        return None
+
+    def getProperties(self) -> EntityProperties:
+        """Lists the properties of the entity"""
+        return {
+            'capacity': self.capacity,
+            'policy': self.policy,
+            'numberEntered': self.numberEntered
+        }
+
+    @property
+    def currentNumberOfEntities(self):
+        """Returns the current number of entities into the buffer"""
+        return len(self._content)
