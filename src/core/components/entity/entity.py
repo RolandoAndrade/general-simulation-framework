@@ -4,6 +4,7 @@ from typing import Set, Any, Union
 
 from core.components.entity.entity_property import EntityProperties, EntityProperty
 
+
 class Entity:
     """Unique component with an identification."""
 
