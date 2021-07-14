@@ -63,10 +63,10 @@ class Source(DiscreteEventModel):
             state (ModelState): Current state of the model.
         """
         if self.__areValidProperties():
-            state.outputBuffer.add(self.entityEmitter.getValue())
+            state.outputBuffer.add(self.entityEmitter.getValue(), self.interArrivalTime.getValue().evaluate())
         return state
 
-    def _externalStateTransitionFunction(self, state: ModelState, inputs: ModelInput, event_time: float) -> ModelState:
+    def _externalStateTransitionFunction(self, state: SourceState, inputs: ModelInput, event_time: float) -> ModelState:
         """Returns the current state
         Args:
             state (ModelState): Current state of the model.
@@ -75,16 +75,20 @@ class Source(DiscreteEventModel):
         """
         return state
 
-    def _timeAdvanceFunction(self, state: ModelState) -> float:
+    def _timeAdvanceFunction(self, state: SourceState) -> float:
         """Time for an autonomous event.
         Args:
             state (ModelState):
         """
         return 1
 
-    def _outputFunction(self, state: ModelState) -> List[Entity]:
+    def _outputFunction(self, state: SourceState) -> List[Entity]:
         """Return the entities created.
         Args:
             state (ModelState):
         """
         return state.outputBuffer.empty()
+
+    def getState(self) -> SourceState:
+        """Returns the current state"""
+        return super(Source, self).getState()
