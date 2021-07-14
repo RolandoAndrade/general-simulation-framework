@@ -11,11 +11,9 @@ from mathematics.values.numeric_value import NumericValue
 from models.core.base_model import ModelState
 from models.models.discrete_event_model import DiscreteEventModel, ModelInput
 from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
-from queue_simulator.source.properties.source_entity_type import SourceEntityType
-from queue_simulator.source.properties.source_inter_arrival_time import SourceInterArrivalTime
 
 # https://simulemos.cl/books/simio/page/source
-from queue_simulator.source.properties.source_property_type import SourceProperty
+from queue_simulator.source.properties.source_property import SourceProperty
 
 class SourceState:
     OutputBuffer: OutputBuffer
@@ -26,7 +24,7 @@ class Source(DiscreteEventModel):
     """Source of entities"""
     entityNumber = 0
 
-    interArrivalTime: Optional[ExpressionProperty[Expression]]
+    interArrivalTime: Optional[ExpressionProperty]
     """InterArrival time of the entities"""
 
     entityEmitter: Optional[AnyProperty[EntityEmitter]]
@@ -34,15 +32,15 @@ class Source(DiscreteEventModel):
 
     def getProperties(self) -> EntityProperties:
         return {
-            SourceProperty.SOURCE_ENTITY_TYPE: self.entityEmitter,
-            SourceProperty.SOURCE_INTER_ARRIVAL_TIME: self.interArrivalTime
+            SourceProperty.ENTITY_TYPE: self.entityEmitter,
+            SourceProperty.INTER_ARRIVAL_TIME: self.interArrivalTime
         }
 
     def __init__(self,
                  dynamic_system: DiscreteEventDynamicSystem,
                  name: str,
                  entityEmitter: AnyProperty[EntityEmitter] = None,
-                 interArrivalTime: ExpressionProperty[Expression] = None,
+                 interArrivalTime: ExpressionProperty = None,
                  ):
         super().__init__(dynamic_system, name)
         self.setUpState({
