@@ -3,6 +3,7 @@ from typing import List, Optional
 from core.components.entity.core.entity import Entity
 from core.components.entity.core.entity_emitter import EntityEmitter
 from core.components.entity.core.entity_property import EntityProperties, EntityProperty
+from core.components.entity.properties.any_property import AnyProperty
 from core.components.entity.properties.expression_property import ExpressionProperty
 from core.components.expresions.expression import Expression
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
@@ -28,7 +29,7 @@ class Source(DiscreteEventModel):
     interArrivalTime: Optional[ExpressionProperty[Expression]]
     """InterArrival time of the entities"""
 
-    entityEmitter: Optional[EntityEmitter]
+    entityEmitter: Optional[AnyProperty[EntityEmitter]]
     """Emitter of entities"""
 
     def getProperties(self) -> EntityProperties:
@@ -40,7 +41,7 @@ class Source(DiscreteEventModel):
     def __init__(self,
                  dynamic_system: DiscreteEventDynamicSystem,
                  name: str,
-                 entityEmitter: ExpressionProperty[EntityEmitter] = None,
+                 entityEmitter: AnyProperty[EntityEmitter] = None,
                  interArrivalTime: ExpressionProperty[Expression] = None,
                  ):
         super().__init__(dynamic_system, name)
@@ -58,7 +59,7 @@ class Source(DiscreteEventModel):
     def _internalStateTransitionFunction(self, state: SourceState) -> ModelState:
         if self.__areValidProperties():
             outputBuffer: OutputBuffer = state['OutputBuffer']
-            outputBuffer.add(self.entityEmitter)
+            outputBuffer.add(self.entityEmitter.getValue())
         return state
 
     def _externalStateTransitionFunction(self, state: ModelState, inputs: ModelInput, event_time: float) -> ModelState:

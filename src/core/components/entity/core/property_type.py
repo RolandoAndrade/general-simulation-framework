@@ -9,6 +9,7 @@ expectedTypes = {
     "BOOLEAN": bool,
     "NUMBER": float,
     "EXPRESSION": Expression,
+    "ANY": Any,
     "EVENT": Any
 }
 
@@ -20,8 +21,11 @@ class PropertyType:
     EXPRESSION = "EXPRESSION"
     EVENT = "EVENT"
     NUMBER = "NUMBER"
+    ANY = "ANY"
 
     @staticmethod
     def validate(value: Any, property_type: str) -> bool:
         """Validates if the value type equals to the expected type"""
+        if property_type == PropertyType.ANY:
+            return True
         return type(value) == expectedTypes.get(property_type) or isinstance(value, expectedTypes.get(property_type))

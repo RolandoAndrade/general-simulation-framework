@@ -19,18 +19,18 @@ class Buffer(Entity, ABC):
     _content: List[Entity]
     """Content of the buffer"""
 
-    capacity: NumberProperty
+    capacity: NumberProperty[float]
     """Capacity of the buffer"""
 
     policy: StringProperty
     """Policy of the buffer"""
 
-    numberEntered: NumberProperty
+    numberEntered: NumberProperty[int]
     """Number of entities that entered into the buffer"""
 
     def __init__(self,
                  name: str,
-                 capacity: NumberProperty = NumberProperty(float("inf")),
+                 capacity: NumberProperty[float] = NumberProperty(float("inf")),
                  policy: StringProperty = StringProperty(BufferPolicy.FIFO)):
         """
         Args:
