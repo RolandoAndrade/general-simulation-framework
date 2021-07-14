@@ -70,7 +70,7 @@ class Buffer(Entity, ABC):
         return randomOrder
 
     def empty(self) -> List[Entity]:
-        """Gets the content of the buffer"""
+        """Gets the content of the buffer and empties the buffer"""
         data = self._content.copy()
         self._content = []
         if self.policy == BufferPolicy.FIFO:
