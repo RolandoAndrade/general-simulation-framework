@@ -16,10 +16,10 @@ class DiscreteEventModel(BaseModel):
     """DiscreteEventModel with an state"""
 
     def __init__(
-        self,
-        dynamic_system: DiscreteEventDynamicSystem,
-        name: str = None,
-        state: ModelState = None,
+            self,
+            dynamic_system: DiscreteEventDynamicSystem,
+            name: str = None,
+            state: ModelState = None,
     ):
         """
         Args:
@@ -52,7 +52,10 @@ class DiscreteEventModel(BaseModel):
     @debug("Getting time")
     def getTime(self) -> float:
         """Gets the time of the next autonomous event."""
-        return self._timeAdvanceFunction(self.getState())
+        try:
+            return self._timeAdvanceFunction(self.getState())
+        except AttributeError:
+            return 0
 
     def getOutput(self) -> Any:
         """Gets the output of the model."""
@@ -85,7 +88,7 @@ class DiscreteEventModel(BaseModel):
         self.setUpState(new_state)
 
     def _confluentStateTransitionFunction(
-        self, state: ModelState, inputs: ModelInput
+            self, state: ModelState, inputs: ModelInput
     ) -> ModelState:
         """
         .. math:: \delta_con(s,x)
@@ -123,7 +126,7 @@ class DiscreteEventModel(BaseModel):
 
     @abstractmethod
     def _externalStateTransitionFunction(
-        self, state: ModelState, inputs: ModelInput, event_time: float
+            self, state: ModelState, inputs: ModelInput, event_time: float
     ) -> ModelState:
         """
         .. math:: \delta_ext((s,e), x)

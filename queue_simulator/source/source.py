@@ -11,14 +11,18 @@ from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
 from queue_simulator.source.properties.source_property import SourceProperty
 from queue_simulator.source.properties.source_state import SourceState
 
+
 # https://simulemos.cl/books/simio/page/source
 
 class Source(DiscreteEventModel):
     """Source of entities"""
     entityNumber = 0
 
-    interArrivalTime: Optional[ExpressionProperty]
+    _interArrivalTime: Optional[ExpressionProperty]
     """InterArrival time of the entities"""
+
+    entitiesPerArrival: Optional[ExpressionProperty]
+    """Entities created per arrival"""
 
     entityEmitter: Optional[AnyProperty[EntityEmitter]]
     """Emitter of entities"""
@@ -34,6 +38,7 @@ class Source(DiscreteEventModel):
                  name: str,
                  entityEmitter: AnyProperty[EntityEmitter] = None,
                  interArrivalTime: ExpressionProperty = None,
+                 entitiesPerArrival: ExpressionProperty = None,
                  ):
         """
         Args:
@@ -47,25 +52,29 @@ class Source(DiscreteEventModel):
         self.setUpState(SourceState(OutputBuffer(name)))
         self.interArrivalTime = interArrivalTime
         self.entityEmitter = entityEmitter
+        self.entitiesPerArrival = entitiesPerArrival
+
 
     def __areValidProperties(self):
         """Checks if the properties are valid"""
         return not (self.interArrivalTime is None or
-                    self.interArrivalTime is None)
+                    self.entityEmitter is None or
+                    self.entitiesPerArrival is None)
 
     def _internalStateTransitionFunction(self, state: SourceState) -> SourceState:
         """Creates an entity
         Args:
-            state (ModelState): Current state of the model.
+            state (SourceState): Current state of the model.
         """
         if self.__areValidProperties():
-            state.outputBuffer.add(self.entityEmitter.getValue(), self.interArrivalTime.getValue().evaluate())
+            state.outputBuffer.add(self.entityEmitter.getValue(), self.entitiesPerArrival.getValue().evaluate())
         return state
 
-    def _externalStateTransitionFunction(self, state: SourceState, inputs: ModelInput, event_time: float) -> SourceState:
+    def _externalStateTransitionFunction(self, state: SourceState, inputs: ModelInput,
+                                         event_time: float) -> SourceState:
         """Returns the current state
         Args:
-            state (ModelState): Current state of the model.
+            state (SourceState): Current state of the model.
             inputs (ModelInput): Input trajectory x.
             event_time (float): Time of event e.
         """
@@ -74,16 +83,27 @@ class Source(DiscreteEventModel):
     def _timeAdvanceFunction(self, state: SourceState) -> float:
         """Time for an autonomous event.
         Args:
-            state (ModelState):
+            state (SourceState): Current state of the model.
         """
-        return 1
+        if self.interArrivalTime is not None:
+            return self.interArrivalTime.getValue().evaluate()
+        return 0
 
     def _outputFunction(self, state: SourceState) -> List[Entity]:
         """Return the entities created.
         Args:
-            state (ModelState):
+            state (SourceState):
         """
         return state.outputBuffer.empty()
+
+    @property
+    def interArrivalTime(self):
+        return self._interArrivalTime
+
+    @interArrivalTime.setter
+    def interArrivalTime(self, value: ExpressionProperty):
+        self._interArrivalTime = value
+        self.schedule(self.getTime())
 
     def getState(self) -> SourceState:
         """Returns the current state"""
