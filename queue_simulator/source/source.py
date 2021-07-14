@@ -2,20 +2,16 @@ from typing import List, Optional
 
 from core.components.entity.core.entity import Entity
 from core.components.entity.core.entity_emitter import EntityEmitter
-from core.components.entity.core.entity_property import EntityProperties, EntityProperty
+from core.components.entity.core.entity_property import EntityProperties
 from core.components.entity.properties.any_property import AnyProperty
 from core.components.entity.properties.expression_property import ExpressionProperty
-from core.components.expresions.expression import Expression
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
-from mathematics.values.numeric_value import NumericValue
-from models.core.base_model import ModelState
 from models.models.discrete_event_model import DiscreteEventModel, ModelInput
 from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
-
-# https://simulemos.cl/books/simio/page/source
 from queue_simulator.source.properties.source_property import SourceProperty
 from queue_simulator.source.properties.source_state import SourceState
 
+# https://simulemos.cl/books/simio/page/source
 
 class Source(DiscreteEventModel):
     """Source of entities"""
@@ -57,7 +53,7 @@ class Source(DiscreteEventModel):
         return not (self.interArrivalTime is None or
                     self.interArrivalTime is None)
 
-    def _internalStateTransitionFunction(self, state: SourceState) -> ModelState:
+    def _internalStateTransitionFunction(self, state: SourceState) -> SourceState:
         """Creates an entity
         Args:
             state (ModelState): Current state of the model.
@@ -66,7 +62,7 @@ class Source(DiscreteEventModel):
             state.outputBuffer.add(self.entityEmitter.getValue(), self.interArrivalTime.getValue().evaluate())
         return state
 
-    def _externalStateTransitionFunction(self, state: SourceState, inputs: ModelInput, event_time: float) -> ModelState:
+    def _externalStateTransitionFunction(self, state: SourceState, inputs: ModelInput, event_time: float) -> SourceState:
         """Returns the current state
         Args:
             state (ModelState): Current state of the model.
