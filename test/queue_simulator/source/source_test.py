@@ -36,7 +36,6 @@ class TestSource(unittest.TestCase):
         self.experiment.simulationControl.wait()
         # results
         total = self.source.getState().outputBuffer.numberEntered
-        print(total / 120)
         self.assertTrue(0.15 < (total / 120) < 0.35, "Wrong")
 
     def test_entities_per_arrival(self):
@@ -51,7 +50,6 @@ class TestSource(unittest.TestCase):
         self.experiment.simulationControl.wait()
         # results
         total = self.source.getState().outputBuffer.numberEntered
-        print(total / 120)
         self.assertTrue(4 < (total / 120) < 6, "Wrong")
 
 
