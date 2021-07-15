@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
 
+from core.config import FLOATING_POINT_DIGITS
 from core.debug.domain.debug import debug
 
 if TYPE_CHECKING:
@@ -35,7 +36,7 @@ class ScheduledModel:
         Args:
             time (float): Time variation.
         """
-        self._time = self._time - time
+        self._time = round(self._time - time, FLOATING_POINT_DIGITS)
         return self._time
 
     def __lt__(self, other: ScheduledModel):

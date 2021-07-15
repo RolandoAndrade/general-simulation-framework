@@ -86,7 +86,7 @@ class Source(DiscreteEventModel):
             state (SourceState): Current state of the model.
         """
         if self.interArrivalTime is not None:
-            return self.interArrivalTime.getValue().evaluate()
+            return max(self.interArrivalTime.getValue().evaluate(), 0.00001)
         return 0
 
     def _outputFunction(self, state: SourceState) -> List[Entity]:

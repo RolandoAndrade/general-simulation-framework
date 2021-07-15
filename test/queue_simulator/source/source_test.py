@@ -17,27 +17,41 @@ class TestSource(unittest.TestCase):
     ds: DiscreteEventDynamicSystem
 
     def setUp(self) -> None:
+        """Setups the source, dynamic system and experiment"""
         self.ds = DiscreteEventDynamicSystem()
         self.source = Source(self.ds,
                              name="Source1",
                              entityEmitter=AnyProperty(MockEmitter()))
         self.experiment = DiscreteEventExperiment(self.ds)
-        seed(42)
 
-    def test_arrival_time(self):
+    def test_inter_arrival_time(self):
+        """Should be able to create entities with a distribution expression as interarrival value"""
         # config
         interArrivalTime = ExpressionProperty(PoissonDistribution(5))
         entitiesPerArrival = ExpressionProperty(Value(1))
         self.source.interArrivalTime = interArrivalTime
-        self.entitiesPerArrival = entitiesPerArrival
-
-        print(self.ds.getTimeOfNextEvent())
+        self.source.entitiesPerArrival = entitiesPerArrival
         # simulate
         self.experiment.simulationControl.start(stop_time=120)
         self.experiment.simulationControl.wait()
         # results
         total = self.source.getState().outputBuffer.numberEntered
-        print(total)
+        print(total / 120)
+        self.assertTrue(0.15 < (total / 120) < 0.35, "Wrong")
+
+    def test_entities_per_arrival(self):
+        """Should be able to create entities with a distribution expression as entities per arrival value"""
+        # config
+        interArrivalTime = ExpressionProperty(Value(1))
+        entitiesPerArrival = ExpressionProperty(PoissonDistribution(5))
+        self.source.interArrivalTime = interArrivalTime
+        self.source.entitiesPerArrival = entitiesPerArrival
+        # simulate
+        self.experiment.simulationControl.start(stop_time=120)
+        self.experiment.simulationControl.wait()
+        # results
+        total = self.source.getState().outputBuffer.numberEntered
+        print(total / 120)
         self.assertTrue(4 < (total / 120) < 6, "Wrong")
 
 

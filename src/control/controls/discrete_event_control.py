@@ -3,6 +3,7 @@ from __future__ import annotations
 from time import sleep
 from typing import TYPE_CHECKING, Dict
 from control.core.thread_control import ThreadControl
+from core.config import FLOATING_POINT_DIGITS
 from core.debug.domain.debug import debug
 from models.models.discrete_event_model import ModelInput
 
@@ -28,7 +29,7 @@ class DiscreteEventControl(ThreadControl):
 
     def _execute(self, frequency: float = 0, wait_time: float = 0, stop_time: float = 0):
         while not self._isPaused:
-            self._time += self._simulator.getTimeOfNextEvent()
+            self._time = round(self._time + self._simulator.getTimeOfNextEvent(), FLOATING_POINT_DIGITS)
             self._simulator.computeNextState(time=self._time)
             sleep(wait_time)
             if 0 < stop_time < self._time:
