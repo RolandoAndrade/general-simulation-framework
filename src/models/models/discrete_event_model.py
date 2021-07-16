@@ -1,13 +1,17 @@
 from __future__ import annotations
 
 from abc import abstractmethod
+from functools import singledispatchmethod
 from typing import Any, Dict, cast
 
+from core.components.entity.properties.expression_property import ExpressionProperty
 from core.debug.domain.debug import debug
+from mathematics.values.value import Value
 from models.core.base_model import BaseModel, ModelState
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
+from models.core.path import Path
 
 ModelInput = Dict[str, Any]
 
@@ -41,13 +45,27 @@ class DiscreteEventModel(BaseModel):
         """
         cast(DiscreteEventDynamicSystem, self.getDynamicSystem()).schedule(self, time)
 
-    def add(self, model: DiscreteEventModel) -> DiscreteEventModel:
-        """Adds a model as an input for the current model in the dynamic system.
+    @singledispatchmethod
+    def add(self, model: DiscreteEventModel,
+            weight: ExpressionProperty = ExpressionProperty(Value(1)),
+            name: str = None) -> DiscreteEventModel:
+        """Adds a model as an input for the current model in the dynamic system and returns the model added.
 
         Args:
-            model (DiscreteEventModel): Output model to be added.
+            model (BaseModel): Output model to be added.
+            weight (ExpressionProperty): Weight of the path.
+            name (str): Name of the path.
         """
-        return cast(DiscreteEventModel, super().add(model))
+        return cast(DiscreteEventModel, super().add(model, weight, name))
+
+    @add.register
+    def _(self, path: Path) -> DiscreteEventModel:
+        """Adds a model as an input for the current model in the dynamic system and returns the model added.
+
+        Args:
+            path (Path): Connection to a model.
+        """
+        return cast(DiscreteEventModel, super().add(path))
 
     @debug("Getting time")
     def getTime(self) -> float:

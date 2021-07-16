@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 from abc import abstractmethod
+from functools import singledispatchmethod
 from typing import Any, Set, TYPE_CHECKING
 
 from core.components.entity.core.entity import Entity
+from core.components.entity.properties.expression_property import ExpressionProperty
 from core.debug.domain.debug import debug
+from mathematics.values.value import Value
+from models.core.path import Path
 
 if TYPE_CHECKING:
     from dynamic_system.core.base_dynamic_sytem import BaseDynamicSystem
@@ -24,7 +28,7 @@ class BaseModel(Entity):
     __currentState: ModelState
     """Current state of the model"""
 
-    __outputModels: Set[BaseModel]
+    __outputModels: Set[Path]
     """Output models of the model"""
 
     @debug("Initialized Model", True)
@@ -65,16 +69,33 @@ class BaseModel(Entity):
         """Returns the current state"""
         return self.__currentState
 
+    @singledispatchmethod
     @debug("Adding output")
-    def add(self, model: BaseModel) -> BaseModel:
+    def add(self, model: BaseModel,
+            weight: ExpressionProperty = ExpressionProperty(Value(1)),
+            name: str = None) -> BaseModel:
         """Adds a model as an input for the current model in the dynamic system and returns the model added.
         
         Args:
             model (BaseModel): Output model to be added.
+            weight (ExpressionProperty): Weight of the path.
+            name (str): Name of the path.
         """
         self.__currentDynamicSystem.add(model)
-        self.__outputModels.add(model)
+        self.__outputModels.add(Path(model, weight, name))
         return model
+
+    @add.register
+    @debug("Adding output")
+    def _(self, path: Path) -> BaseModel:
+        """Adds a model as an input for the current model in the dynamic system and returns the model added.
+
+        Args:
+            path (Path): Connection to a model.
+        """
+        self.__currentDynamicSystem.add(path.getModel())
+        self.__outputModels.add(path)
+        return path.getModel()
 
     @debug("Adding output")
     def remove(self, model: BaseModel):
