@@ -1,9 +1,13 @@
-from typing import Any
+from __future__ import annotations
+
+from typing import Any, TYPE_CHECKING
 
 from core.components.entity.core.entity import Entity
 from core.components.entity.core.entity_property import EntityProperties
 from core.components.entity.properties.expression_property import ExpressionProperty
-from models.core.base_model import BaseModel
+
+if TYPE_CHECKING:
+    from models.core.base_model import BaseModel
 
 
 class Path(Entity):
@@ -45,3 +49,6 @@ class Path(Entity):
     def getWeight(self) -> Any:
         """Return the evaluation of the weight."""
         return self._weight.getValue().evaluate()
+
+    def __eq__(self, other):
+        return self._to == other

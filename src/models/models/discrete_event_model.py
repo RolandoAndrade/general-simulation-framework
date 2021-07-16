@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from functools import singledispatchmethod
 from typing import Any, Dict, cast
 
 from core.components.entity.properties.expression_property import ExpressionProperty
@@ -45,7 +44,6 @@ class DiscreteEventModel(BaseModel):
         """
         cast(DiscreteEventDynamicSystem, self.getDynamicSystem()).schedule(self, time)
 
-    @singledispatchmethod
     def add(self, model: DiscreteEventModel,
             weight: ExpressionProperty = ExpressionProperty(Value(1)),
             name: str = None) -> DiscreteEventModel:
@@ -58,9 +56,8 @@ class DiscreteEventModel(BaseModel):
         """
         return cast(DiscreteEventModel, super().add(model, weight, name))
 
-    @add.register
-    def _(self, path: Path) -> DiscreteEventModel:
-        """Adds a model as an input for the current model in the dynamic system and returns the model added.
+    def addPath(self, path: Path) -> DiscreteEventModel:
+        """Adds a path for the current model in the dynamic system and returns the model added.
 
         Args:
             path (Path): Connection to a model.

@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from functools import singledispatchmethod
-from typing import Any, Set, TYPE_CHECKING
+from singledispatchmethod import singledispatchmethod
+from typing import Any, Set, TYPE_CHECKING, cast
 
 from core.components.entity.core.entity import Entity
 from core.components.entity.properties.expression_property import ExpressionProperty
@@ -69,11 +69,10 @@ class BaseModel(Entity):
         """Returns the current state"""
         return self.__currentState
 
-    @singledispatchmethod
     @debug("Adding output")
     def add(self, model: BaseModel,
             weight: ExpressionProperty = ExpressionProperty(Value(1)),
-            name: str = None) -> BaseModel:
+            name: str = None):
         """Adds a model as an input for the current model in the dynamic system and returns the model added.
         
         Args:
@@ -81,14 +80,11 @@ class BaseModel(Entity):
             weight (ExpressionProperty): Weight of the path.
             name (str): Name of the path.
         """
-        self.__currentDynamicSystem.add(model)
-        self.__outputModels.add(Path(model, weight, name))
-        return model
+        return self.addPath(Path(model, weight, name))
 
-    @add.register
-    @debug("Adding output")
-    def _(self, path: Path) -> BaseModel:
-        """Adds a model as an input for the current model in the dynamic system and returns the model added.
+    @debug("Adding path")
+    def addPath(self, path: Path):
+        """Adds a path for the current model in the dynamic system and returns the model added.
 
         Args:
             path (Path): Connection to a model.
@@ -97,7 +93,7 @@ class BaseModel(Entity):
         self.__outputModels.add(path)
         return path.getModel()
 
-    @debug("Adding output")
+    @debug("Removing output")
     def remove(self, model: BaseModel):
         """Removes an specified output
 
@@ -105,10 +101,10 @@ class BaseModel(Entity):
             model (BaseModel): Model to be removed.
         """
         if model in self.__outputModels:
-            self.__outputModels.remove(model)
+            self.__outputModels.remove(cast(Any, model))
 
     @debug("Getting output models")
-    def getOutputModels(self) -> Set[BaseModel]:
+    def getOutputModels(self) -> Set[Path]:
         """Returns the output models of the current model"""
         return self.__outputModels
 
