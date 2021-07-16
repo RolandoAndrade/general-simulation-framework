@@ -53,5 +53,8 @@ class Path(Entity):
     def __eq__(self, other):
         return self._to == other
 
+    def __hash__(self):
+        return id(self)
+
     def __lt__(self, other):
         return self.getWeight() < other.getWeight()

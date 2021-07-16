@@ -62,7 +62,7 @@ class DiscreteEventModel(BaseModel):
         Args:
             path (Path): Connection to a model.
         """
-        return cast(DiscreteEventModel, super().add(path))
+        return cast(DiscreteEventModel, super().addPath(path))
 
     @debug("Getting time")
     def getTime(self) -> float:

@@ -1,7 +1,7 @@
 from __future__ import annotations
 from abc import ABC
 from random import random
-from typing import TYPE_CHECKING, Dict, Set, cast
+from typing import TYPE_CHECKING, Dict, Set, cast, Any
 
 from core.debug.domain.debug import debug
 from dynamic_system.core.base_dynamic_sytem import (
@@ -141,7 +141,7 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
         """
         ones = [path.getModel() for path in outputs if path.getWeight() == 1]
         if len(ones) > 0:
-            return cast(Set[DiscreteEventModel], ones)
+            return cast(Any, ones)
         probability = random()
         a_probability = 0
         outs = list(outputs)
