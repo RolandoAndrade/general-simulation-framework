@@ -7,6 +7,7 @@ from dynamic_system.dynamic_systems.discrete_event_dynamic_system import Discret
 from experiments.experiment_builders.discrete_event_experiment import DiscreteEventExperiment
 from mathematics.distributions.poisson_distribution import PoissonDistribution
 from mathematics.values.value import Value
+from models.core.path import Path
 from queue_simulator.source.source import Source
 from test.queue_simulator.buffer.mocks.mock_emitter import MockEmitter
 
