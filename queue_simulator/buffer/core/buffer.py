@@ -51,9 +51,8 @@ class Buffer(Entity, ABC):
         Args:
             entities: Entities to be added.
         """
-        capacity = self.capacity - self.currentNumberOfEntities
         quantity = len(entities)
-        rQuantity = int(min(capacity, quantity))
+        rQuantity = int(min(self.remainingCapacity, quantity))
         self.numberEntered += rQuantity
         for i in range(rQuantity):
             self._content.append(entities[i])

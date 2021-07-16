@@ -1,4 +1,4 @@
-from typing import Any, List, Union
+from typing import Any, List, Union, Dict
 
 from core.components.entity.core.entity import Entity
 from core.components.entity.core.entity_property import EntityProperties
@@ -19,6 +19,9 @@ class Server(DiscreteEventModel):
     _processingTime: ExpressionProperty
     """Processing time of the server"""
 
+    _isBusy: bool
+    """Processing time of the server"""
+
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem,
                  name: str,
                  processing_time: Union[ExpressionProperty, Expression] = None):
@@ -30,26 +33,38 @@ class Server(DiscreteEventModel):
                              ProcessBuffer(name)
                          )
                          )
+        self.processingTime = processing_time
+        self._isBusy = False
 
-    def _internalStateTransitionFunction(self, state: ServerState) -> ServerState:
-        state.outputBuffer.add(state.processBuffer.empty())
+    def _process(self, state: ServerState):
         for i in range(state.inputBuffer.currentNumberOfEntities):
             if not state.processBuffer.isFull:
                 state.processBuffer.add([state.inputBuffer.pop()])
+                self._isBusy = True
             else:
                 break
-        if not state.inputBuffer.isEmpty:
+
+    def _internalStateTransitionFunction(self, state: ServerState) -> ServerState:
+        self._isBusy = False
+        print("internal")
+        print(self._isBusy)
+        state.outputBuffer.add(state.processBuffer.empty())
+        self._process(state)
+
+        if self._isBusy:
             self.schedule(self.getTime())
         return state
 
-    def _externalStateTransitionFunction(self, state: ServerState, inputs: List[Entity],
+    def _externalStateTransitionFunction(self, state: ServerState,
+                                         inputs: Dict[str, List[Entity]],
                                          event_time: float) -> ServerState:
-        rest = 0
-        if (state.inputBuffer.currentNumberOfEntities == 0 and
-                len(inputs) > 0):
+        r_inputs = []
+        for i in inputs:
+            r_inputs += inputs[i]
+        state.inputBuffer.add(r_inputs)
+        if not self._isBusy and len(r_inputs) > 0:
             self.schedule(self.getTime())
-            rest = state.processBuffer.add(inputs)
-        state.inputBuffer.add(inputs[rest:])
+            self._process(state)
         return state
 
     def _timeAdvanceFunction(self, state: ServerState) -> float:
@@ -76,3 +91,7 @@ class Server(DiscreteEventModel):
             self._processingTime = value
         else:
             self._processingTime = ExpressionProperty(value)
+
+    def getState(self) -> ServerState:
+        """Returns the current state"""
+        return super(Server, self).getState()
