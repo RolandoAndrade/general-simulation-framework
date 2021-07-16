@@ -48,8 +48,7 @@ class Source(DiscreteEventModel):
             entityEmitter: Emitter of entities.
             interArrivalTime (ExpressionProperty): InterArrival time of the entities.
         """
-        super().__init__(dynamic_system, name)
-        self.setUpState(SourceState(OutputBuffer(name)))
+        super().__init__(dynamic_system, name, SourceState(OutputBuffer(name)))
         self.interArrivalTime = interArrivalTime
         self.entityEmitter = entityEmitter
         self.entitiesPerArrival = entitiesPerArrival
@@ -67,7 +66,10 @@ class Source(DiscreteEventModel):
             state (SourceState): Current state of the model.
         """
         if self.__areValidProperties():
-            state.outputBuffer.add(self.entityEmitter.getValue(), self.entitiesPerArrival.getValue().evaluate())
+            entities = []
+            for i in range(self.entitiesPerArrival.getValue().evaluate()):
+                entities.append(self.entityEmitter.getValue().generate())
+            state.outputBuffer.add(entities)
         return state
 
     def _externalStateTransitionFunction(self, state: SourceState, inputs: ModelInput,

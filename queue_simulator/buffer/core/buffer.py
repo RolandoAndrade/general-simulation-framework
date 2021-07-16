@@ -44,19 +44,19 @@ class Buffer(Entity, ABC):
         self.policy = policy
         self.numberEntered = NumberProperty(0)
 
-    def add(self, entityEmitter: EntityEmitter, quantity: int = 1) -> int:
+    def add(self, entities: List[Entity]) -> int:
         """Adds an element to the buffer and returns the number of elements that
         cannot be added because the buffer capacity
 
         Args:
-            entityEmitter (EntityEmitter): Entity emitter of an specific type.
-            quantity (int): Quantity to be emitted.
+            entities: Entities to be added.
         """
         capacity = self.capacity - self.currentNumberOfEntities
+        quantity = len(entities)
         rQuantity = int(min(capacity, quantity))
         self.numberEntered += rQuantity
         for i in range(rQuantity):
-            self._content.append(entityEmitter.generate())
+            self._content.append(entities[i])
         return quantity - rQuantity
 
     def getContent(self) -> List[Entity]:
@@ -103,3 +103,18 @@ class Buffer(Entity, ABC):
     def currentNumberOfEntities(self):
         """Returns the current number of entities into the buffer"""
         return len(self._content)
+
+    @property
+    def remainingCapacity(self):
+        """Returns the current number of entities capable to be appended into the buffer"""
+        return self.capacity - self.currentNumberOfEntities
+
+    @property
+    def isEmpty(self):
+        """Returns true if the buffer is empty"""
+        return self.currentNumberOfEntities == 0
+
+    @property
+    def isFull(self):
+        """Returns true if the buffer is empty"""
+        return self.remainingCapacity == 0
