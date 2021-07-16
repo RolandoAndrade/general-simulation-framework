@@ -24,16 +24,6 @@ class TestSource(unittest.TestCase):
                              entityEmitter=AnyProperty(MockEmitter()))
         self.experiment = DiscreteEventExperiment(self.ds)
 
-    def test_equals_models(self):
-        m1 = Source(self.ds, name="m1")
-        m2 = Source(self.ds, name="m2")
-        print(m1 == m2)
-        print([i.getID() for i in {m1, m2}.difference({m1})])
-        s = {m1, m2}
-        print(s)
-        s.remove(m1)
-        print(s)
-
     def test_inter_arrival_time(self):
         """Should be able to create entities with a distribution expression as interarrival value"""
         # config
