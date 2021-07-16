@@ -36,22 +36,22 @@ class Source(DiscreteEventModel):
     def __init__(self,
                  dynamic_system: DiscreteEventDynamicSystem,
                  name: str,
-                 entityEmitter: AnyProperty[EntityEmitter] = None,
-                 interArrivalTime: ExpressionProperty = None,
-                 entitiesPerArrival: ExpressionProperty = None,
+                 entity_emitter: AnyProperty[EntityEmitter] = None,
+                 inter_arrival_time: ExpressionProperty = None,
+                 entities_per_arrival: ExpressionProperty = None,
                  ):
         """
         Args:
             dynamic_system (DiscreteEventDynamicSystem): Dynamic system of the
                 model.
             name (str): Name of the model.
-            entityEmitter: Emitter of entities.
-            interArrivalTime (ExpressionProperty): InterArrival time of the entities.
+            entity_emitter: Emitter of entities.
+            inter_arrival_time (ExpressionProperty): InterArrival time of the entities.
         """
         super().__init__(dynamic_system, name, SourceState(OutputBuffer(name)))
-        self.interArrivalTime = interArrivalTime
-        self.entityEmitter = entityEmitter
-        self.entitiesPerArrival = entitiesPerArrival
+        self.interArrivalTime = inter_arrival_time
+        self.entityEmitter = entity_emitter
+        self.entitiesPerArrival = entities_per_arrival
 
 
     def __areValidProperties(self):

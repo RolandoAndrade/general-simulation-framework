@@ -22,7 +22,7 @@ class TestSource(unittest.TestCase):
         self.ds = DiscreteEventDynamicSystem()
         self.source = Source(self.ds,
                              name="Source1",
-                             entityEmitter=AnyProperty(MockEmitter()))
+                             entity_emitter=AnyProperty(MockEmitter()))
         self.experiment = DiscreteEventExperiment(self.ds)
 
     def test_inter_arrival_time(self):

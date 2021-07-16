@@ -19,7 +19,8 @@ class Server(DiscreteEventModel):
     """Processing time of the server"""
 
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem,
-                 name: str, ):
+                 name: str,
+                 processing_time: ExpressionProperty = None):
         super().__init__(dynamic_system,
                          name,
                          ServerState(
