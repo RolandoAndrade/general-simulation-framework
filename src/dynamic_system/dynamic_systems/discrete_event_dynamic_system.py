@@ -1,6 +1,7 @@
 from __future__ import annotations
 from abc import ABC
-from typing import TYPE_CHECKING, Dict, Set
+from random import random
+from typing import TYPE_CHECKING, Dict, Set, cast
 
 from core.debug.domain.debug import debug
 from dynamic_system.core.base_dynamic_sytem import (
@@ -8,6 +9,7 @@ from dynamic_system.core.base_dynamic_sytem import (
     DynamicSystemOutput,
 )
 from dynamic_system.future_event_list.scheduler import Scheduler
+from models.core.path import Path
 
 if TYPE_CHECKING:
     from models.models.discrete_event_model import (
@@ -73,7 +75,7 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
 
     @debug("Executing state transition")
     def stateTransition(
-        self, inputModelsValues: DynamicSystemInput = None, eventTime: float = 0
+            self, inputModelsValues: DynamicSystemInput = None, eventTime: float = 0
     ):
         """Executes the state transition of the models. If an input is given,
         the models defined as its inputs will be ignored.
@@ -95,7 +97,7 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
             self.schedule(model, model.getTime())
 
     def _executeAutonomous(
-        self, eventTime: float, inputModels: Set[DiscreteEventModel]
+            self, eventTime: float, inputModels: Set[DiscreteEventModel]
     ) -> Set[DiscreteEventModel]:
         """Executes autonomous transition for the given input and external
         events of the affected models.
@@ -130,10 +132,30 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
 
         return allAutonomousModels
 
+    def _selectOutputsFromMultipleOutputs(self, outputs: Set[Path]) -> Set[DiscreteEventModel]:
+        """Returns outputs given its weights. Weight 1 ignores any other
+        weights. Weights represent percentage of propagation
+
+        Args:
+            outputs: Set of output paths for a model.
+        """
+        ones = [path.getModel() for path in outputs if path.getWeight() == 1]
+        if len(ones) > 0:
+            return cast(Set[DiscreteEventModel], ones)
+        probability = random()
+        a_probability = 0
+        outs = list(outputs)
+        outs.sort()
+        for o in outs:
+            if probability <= o.getWeight() + a_probability:
+                return cast(Set[DiscreteEventModel], {o.getModel()})
+            a_probability += o.getWeight()
+        return set()
+
     def _getAffectedModelsInputs(
-        self,
-        allAutonomousModels: Set[DiscreteEventModel],
-        inputModels: Set[DiscreteEventModel],
+            self,
+            allAutonomousModels: Set[DiscreteEventModel],
+            inputModels: Set[DiscreteEventModel],
     ) -> (Set[DiscreteEventModel], Dict[str, ModelInput]):
         """Gets models that will change by the output computed
 
@@ -145,7 +167,12 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
         affectedModelsInputs: Dict[str, ModelInput] = {}
         affectedModels = set()
         for model in allAutonomousModels:
+            # get all output models
             outputs = model.getOutputModels().difference(inputModels)
+
+            # extract relevant outputs by weight
+            outputs = self._selectOutputsFromMultipleOutputs(outputs)
+
             for out in outputs:
                 # adds affected model to confluent models
                 affectedModels.add(out)
@@ -164,7 +191,7 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
         return affectedModels, affectedModelsInputs
 
     def _executeExternal(
-        self, inputModelValues: DynamicSystemInput, eventTime: float
+            self, inputModelValues: DynamicSystemInput, eventTime: float
     ) -> Set[DiscreteEventModel]:
         """Executes external transition for the given input.
 

@@ -46,9 +46,12 @@ class Path(Entity):
         """Return the destination model"""
         return self._to
 
-    def getWeight(self) -> Any:
+    def getWeight(self) -> float:
         """Return the evaluation of the weight."""
         return self._weight.getValue().evaluate()
 
     def __eq__(self, other):
         return self._to == other
+
+    def __lt__(self, other):
+        return self.getWeight() < other.getWeight()
