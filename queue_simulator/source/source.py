@@ -8,8 +8,8 @@ from core.components.entity.properties.expression_property import ExpressionProp
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 from models.models.discrete_event_model import DiscreteEventModel, ModelInput
 from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
-from queue_simulator.source.properties.source_property import SourceProperty
-from queue_simulator.source.properties.source_state import SourceState
+from queue_simulator.source.source_property import SourceProperty
+from queue_simulator.source.source_state import SourceState
 
 
 # https://simulemos.cl/books/simio/page/source
