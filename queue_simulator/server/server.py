@@ -1,8 +1,9 @@
-from typing import Any, List
+from typing import Any, List, Union
 
 from core.components.entity.core.entity import Entity
 from core.components.entity.core.entity_property import EntityProperties
 from core.components.entity.properties.expression_property import ExpressionProperty
+from core.components.expresions.expression import Expression
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 from models.core.base_model import ModelState
 from models.models.discrete_event_model import DiscreteEventModel, ModelInput
@@ -15,12 +16,12 @@ from queue_simulator.server.server_state import ServerState
 class Server(DiscreteEventModel):
     """Server of processes"""
 
-    processingTime: ExpressionProperty
+    _processingTime: ExpressionProperty
     """Processing time of the server"""
 
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem,
                  name: str,
-                 processing_time: ExpressionProperty = None):
+                 processing_time: Union[ExpressionProperty, Expression] = None):
         super().__init__(dynamic_system,
                          name,
                          ServerState(
@@ -64,3 +65,14 @@ class Server(DiscreteEventModel):
         return {
 
         }
+
+    @property
+    def processingTime(self):
+        return self._processingTime
+
+    @processingTime.setter
+    def processingTime(self, value: Union[ExpressionProperty, Expression]):
+        if isinstance(value, ExpressionProperty):
+            self._processingTime = value
+        else:
+            self._processingTime = ExpressionProperty(value)
