@@ -70,6 +70,7 @@ class Source(DiscreteEventModel):
             for i in range(self.entitiesPerArrival.getValue().evaluate()):
                 entities.append(self.entityEmitter.getValue().generate())
             state.outputBuffer.add(entities)
+            self.schedule(self.getTime())
         return state
 
     def _externalStateTransitionFunction(self, state: SourceState, inputs: ModelInput,

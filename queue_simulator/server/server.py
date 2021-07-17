@@ -48,6 +48,10 @@ class Server(DiscreteEventModel):
         self._isBusy = False
         state.outputBuffer.add(state.processBuffer.empty())
         self._process(state)
+        # recalculate the processing time
+        state.processingRemainingTime = self.processingTime.getValue().evaluate()
+        if self._isBusy:
+            self.schedule(self.getTime())
         return state
 
     def _externalStateTransitionFunction(self, state: ServerState,
@@ -61,8 +65,6 @@ class Server(DiscreteEventModel):
             state.processingRemainingTime = self.processingTime.getValue().evaluate()
             self.schedule(self.getTime())
             self._process(state)
-        elif self._isBusy:
-            state.processingRemainingTime -= event_time
         return state
 
     def _timeAdvanceFunction(self, state: ServerState) -> float:

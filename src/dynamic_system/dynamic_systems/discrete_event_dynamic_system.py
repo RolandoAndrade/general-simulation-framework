@@ -92,10 +92,6 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
 
         autonomousModels = self._executeAutonomous(eventTime, inputModels)
 
-        # schedules models that executed its autonomous transition
-        for model in autonomousModels:
-            self.schedule(model, model.getTime())
-
     def _executeAutonomous(
             self, eventTime: float, inputModels: Set[DiscreteEventModel]
     ) -> Set[DiscreteEventModel]:
