@@ -46,13 +46,8 @@ class Server(DiscreteEventModel):
 
     def _internalStateTransitionFunction(self, state: ServerState) -> ServerState:
         self._isBusy = False
-        print("internal")
-        print(self._isBusy)
         state.outputBuffer.add(state.processBuffer.empty())
         self._process(state)
-
-        if self._isBusy:
-            self.schedule(self.getTime())
         return state
 
     def _externalStateTransitionFunction(self, state: ServerState,
@@ -63,15 +58,15 @@ class Server(DiscreteEventModel):
             r_inputs += inputs[i]
         state.inputBuffer.add(r_inputs)
         if not self._isBusy and len(r_inputs) > 0:
+            state.processingRemainingTime = self.processingTime.getValue().evaluate()
             self.schedule(self.getTime())
             self._process(state)
+        elif self._isBusy:
+            state.processingRemainingTime -= event_time
         return state
 
     def _timeAdvanceFunction(self, state: ServerState) -> float:
-        if self.processingTime is not None:
-            if state.inputBuffer.currentNumberOfEntities > 0:
-                return self.processingTime.getValue().evaluate()
-        return 0
+        return state.processingRemainingTime.getValue()
 
     def _outputFunction(self, state: ServerState) -> Any:
         return state.outputBuffer.empty()

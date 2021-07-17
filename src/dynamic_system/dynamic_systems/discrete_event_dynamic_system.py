@@ -114,20 +114,27 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
             allAutonomousModels = self._scheduler.popNextModels()
 
             # remove models that executed an external event
-            autonomousModels = allAutonomousModels.difference(inputModels)
+            autonomousModels: Set[DiscreteEventModel] = allAutonomousModels.difference(inputModels)
 
             affectedModels, affectedModelsInputs = self._getAffectedModelsInputs(
                 allAutonomousModels, inputModels
             )
 
             # remove from autonomous models, models that will execute a confluent transition
+            confluentModels = autonomousModels.intersection(affectedModels)
             autonomousModels = autonomousModels.difference(affectedModels)
+            externalModels = affectedModels.difference(confluentModels)
 
             # execute autonomous event
             for model in autonomousModels:
                 model.stateTransition(None, eventTime)
 
-            for model in affectedModels:
+            # execute confluent event
+            for model in confluentModels:
+                model.stateTransition(affectedModelsInputs[model.getID()], model.getTime())
+
+            # execute external event
+            for model in externalModels:
                 model.stateTransition(affectedModelsInputs[model.getID()], eventTime)
 
         return allAutonomousModels
