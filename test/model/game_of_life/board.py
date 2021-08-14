@@ -44,7 +44,7 @@ class Board:
 
     def nextGeneration(self):
         self._generation = self._generation + 1
-        self._sim.computeNextState(None, self._generation)
+        self._sim.compute_next_state(None, self._generation)
 
     def show(self):
         for row in self._cells:
@@ -53,4 +53,4 @@ class Board:
             print()
 
     def simReport(self):
-        print(self._report.generateReport())
+        print(self._report.generate_report())

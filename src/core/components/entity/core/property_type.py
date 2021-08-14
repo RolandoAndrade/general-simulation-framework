@@ -4,7 +4,7 @@ from typing import Any
 
 from core.components.expresions.expression import Expression
 
-expectedTypes = {
+expected_types = {
     "STRING": str,
     "BOOLEAN": bool,
     "NUMBER": float,
@@ -28,4 +28,4 @@ class PropertyType:
         """Validates if the value type equals to the expected type"""
         if property_type == PropertyType.ANY:
             return True
-        return type(value) == expectedTypes.get(property_type) or isinstance(value, expectedTypes.get(property_type))
+        return type(value) == expected_types.get(property_type) or isinstance(value, expected_types.get(property_type))

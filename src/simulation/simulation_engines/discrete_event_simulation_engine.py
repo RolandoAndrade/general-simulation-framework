@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 class DiscreteEventSimulationEngine(BaseSimulator):
     """Simulation engine for discrete-event simulation"""
 
-    _dynamicSystem: DiscreteEventDynamicSystem
+    _dynamic_system: DiscreteEventDynamicSystem
     _lastEventTime: float
 
     def __init__(
@@ -32,9 +32,9 @@ class DiscreteEventSimulationEngine(BaseSimulator):
 
     def getTimeOfNextEvent(self) -> float:
         """Get time of the next event"""
-        return self._dynamicSystem.getTimeOfNextEvent()
+        return self._dynamicSystem.get_time_of_next_events()
 
-    def computeNextState(self, inputs: Dict[str, ModelInput] = None, time: float = 0):
+    def compute_next_state(self, inputs: Dict[str, ModelInput] = None, time: float = 0):
         """Compute the next state of the dynamic system
 
         Args:
@@ -44,18 +44,18 @@ class DiscreteEventSimulationEngine(BaseSimulator):
         if (
             time - self._lastEventTime is self.getTimeOfNextEvent()
         ):  # Time to change the output
-            out = self.computeOutput()
+            out = self.compute_output()
             if out:
-                self._reportGenerator.addOutput(out, time)
-        self._dynamicSystem.stateTransition(inputs, time - self._lastEventTime)
+                self._report_generator.add_output(out, time)
+        self._dynamicSystem.state_transition(inputs, time - self._lastEventTime)
         self._lastEventTime = time
         self._isOutputUpToUpdate = False
 
-    def computeOutput(self):
+    def compute_output(self):
         """Compute the output of the dynamic system if it has not computed
         yet
         """
         if not self._isOutputUpToUpdate:
             self._isOutputUpToUpdate = True
-            return self._dynamicSystem.getOutput()
+            return self._dynamicSystem.get_output()
         return None

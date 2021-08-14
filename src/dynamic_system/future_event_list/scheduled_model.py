@@ -20,17 +20,17 @@ class ScheduledModel:
     _time: float
 
     @debug("Getting the model")
-    def getModel(self) -> BaseModel:
+    def get_model(self) -> BaseModel:
         """Gets the scheduled model."""
         return self._model
 
     @debug("Getting the time")
-    def getTime(self) -> float:
+    def get_time(self) -> float:
         """Gets the time of the scheduled model."""
         return self._time
 
     @debug("Decreasing time")
-    def decreaseTime(self, time: float) -> float:
+    def decrease_time(self, time: float) -> float:
         """Decreases the time for the scheduled model.
 
         Args:

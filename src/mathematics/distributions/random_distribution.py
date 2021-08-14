@@ -14,7 +14,7 @@ class RandomDistribution(Expression):
         raise NotImplementedError
 
     @abstractmethod
-    def generateList(self, size: int) -> Union[List[float], List[int]]:
+    def generate_list(self, size: int) -> Union[List[float], List[int]]:
         """Generates a list of values following the distribution
 
         Args:

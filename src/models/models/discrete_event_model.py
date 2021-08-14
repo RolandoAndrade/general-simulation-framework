@@ -33,7 +33,7 @@ class DiscreteEventModel(BaseModel):
         """
         super().__init__(dynamic_system, name, state)
         # Add the model to the dynamic system
-        self.schedule(self.getTime())
+        self.schedule(self.get_time())
 
     @debug("Scheduling model")
     def schedule(self, time: float):
@@ -42,7 +42,7 @@ class DiscreteEventModel(BaseModel):
         Args:
             time (float): Time when the event will be executed.
         """
-        cast(DiscreteEventDynamicSystem, self.getDynamicSystem()).schedule(self, time)
+        cast(DiscreteEventDynamicSystem, self.get_dynamic_system()).schedule(self, time)
 
     def add(self, model: DiscreteEventModel,
             weight: ExpressionProperty = ExpressionProperty(Value(1)),
@@ -56,28 +56,28 @@ class DiscreteEventModel(BaseModel):
         """
         return cast(DiscreteEventModel, super().add(model, weight, name))
 
-    def addPath(self, path: Path) -> DiscreteEventModel:
+    def add_path(self, path: Path) -> DiscreteEventModel:
         """Adds a path for the current model in the dynamic system and returns the model added.
 
         Args:
             path (Path): Connection to a model.
         """
-        return cast(DiscreteEventModel, super().addPath(path))
+        return cast(DiscreteEventModel, super().add_path(path))
 
     @debug("Getting time")
-    def getTime(self) -> float:
+    def get_time(self) -> float:
         """Gets the time of the next autonomous event."""
         try:
-            return self._timeAdvanceFunction(self.getState())
+            return self._time_advance_function(self.get_state())
         except AttributeError:
             return 0
 
-    def getOutput(self) -> Any:
+    def get_output(self) -> Any:
         """Gets the output of the model."""
-        return self._outputFunction(self.getState())
+        return self._output_function(self.get_state())
 
     @debug("Executing state transition")
-    def stateTransition(self, inputs: ModelInput = None, event_time: float = 0):
+    def state_transition(self, inputs: ModelInput = None, event_time: float = 0):
         """Executes the state transition using the state given by the state
         transition function. If there are not inputs is an internal transition,
         otherwise it is an external transition.
@@ -91,18 +91,18 @@ class DiscreteEventModel(BaseModel):
         new_state: ModelState
         if inputs is None:
             # is an autonomous event
-            new_state = self._internalStateTransitionFunction(self.getState())
-        elif event_time is self.getTime():
+            new_state = self._internal_state_transition_function(self.get_state())
+        elif event_time is self.get_time():
             # is an confluent event
-            new_state = self._confluentStateTransitionFunction(self.getState(), inputs)
+            new_state = self._confluent_state_transition_function(self.get_state(), inputs)
         else:
             # time is between autonomous events, so it is an external event
-            new_state = self._externalStateTransitionFunction(
-                self.getState(), inputs, event_time
+            new_state = self._external_state_transition_function(
+                self.get_state(), inputs, event_time
             )
-        self.setUpState(new_state)
+        self.set_up_state(new_state)
 
-    def _confluentStateTransitionFunction(
+    def _confluent_state_transition_function(
             self, state: ModelState, inputs: ModelInput
     ) -> ModelState:
         """
@@ -118,13 +118,13 @@ class DiscreteEventModel(BaseModel):
             state (ModelState): Current state of the model.
             inputs (ModelInput): Input trajectory x.
         """
-        new_state = self._internalStateTransitionFunction(state)
-        return self._externalStateTransitionFunction(
+        new_state = self._internal_state_transition_function(state)
+        return self._external_state_transition_function(
             new_state, inputs, 0
         )  # 0 because is equal to (e = ta(s)) ½ ta(s)
 
     @abstractmethod
-    def _internalStateTransitionFunction(self, state: ModelState) -> ModelState:
+    def _internal_state_transition_function(self, state: ModelState) -> ModelState:
         """
         .. math:: \delta_int(s)
 
@@ -140,7 +140,7 @@ class DiscreteEventModel(BaseModel):
         raise NotImplementedError
 
     @abstractmethod
-    def _externalStateTransitionFunction(
+    def _external_state_transition_function(
             self, state: ModelState, inputs: ModelInput, event_time: float
     ) -> ModelState:
         """
@@ -160,7 +160,7 @@ class DiscreteEventModel(BaseModel):
         raise NotImplementedError
 
     @abstractmethod
-    def _timeAdvanceFunction(self, state: ModelState) -> float:
+    def _time_advance_function(self, state: ModelState) -> float:
         """ta(s)
 
         Implement the model’s time advance function ta. The time advance
@@ -175,7 +175,7 @@ class DiscreteEventModel(BaseModel):
         raise NotImplementedError
 
     @abstractmethod
-    def _outputFunction(self, state: ModelState) -> Any:
+    def _output_function(self, state: ModelState) -> Any:
         """
         .. math:: \lambda \; (s)
 

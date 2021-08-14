@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from abc import abstractmethod
-
 from dynamic_system.core.base_dynamic_sytem import BaseDynamicSystem
 from simulation.core.base_simulator import BaseSimulator
 

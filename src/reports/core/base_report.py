@@ -16,16 +16,16 @@ class BaseReport:
         self._outputs = {}
         self._headers = set()
 
-    def addOutput(self, output: DynamicSystemOutput, time: float):
+    def add_output(self, output: DynamicSystemOutput, time: float):
         for key in output:
             self._headers.add(key)
         self._outputs[time] = output
 
-    def generateReport(self) -> ReportResult:
-        return self._getResults(self._headers, self._outputs)
+    def generate_report(self) -> ReportResult:
+        return self._get_results(self._headers, self._outputs)
 
     @abstractmethod
-    def _getResults(
+    def _get_results(
         self, headers: Set[str], outputs: Dict[Time, DynamicSystemOutput]
     ) -> ReportResult:
         raise NotImplementedError

@@ -17,7 +17,7 @@ class BaseControl:
     _simulator: BaseSimulator
     """Simulator to be executed"""
 
-    _isPaused: bool
+    _is_paused: bool
     """Boolean that indicates if the simulation is paused"""
 
     @debug("Control initialized", True)
@@ -27,7 +27,7 @@ class BaseControl:
             simulator (BaseSimulator): Simulation engine to be executed.
         """
         self._simulator = simulator
-        self._isPaused = True
+        self._is_paused = True
 
     @abstractmethod
     def _execute(self, frequency: float = 0, wait_time: float = 0, stop_time: float = 0):

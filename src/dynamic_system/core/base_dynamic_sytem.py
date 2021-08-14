@@ -28,9 +28,9 @@ class BaseDynamicSystem:
         Args:
             model (BaseModel): Model to be added.
         """
-        if model.getDynamicSystem() != self:
+        if model.get_dynamic_system() != self:
             raise Exception("Invalid dynamic system")
-        self._models[model.getID()] = model
+        self._models[model.get_id()] = model
 
     @debug("Removing model of the dynamic system")
     def remove(self, model: BaseModel):
@@ -39,8 +39,8 @@ class BaseDynamicSystem:
         Args:
             model (BaseModel): Model to be removed.
         """
-        if model.getID() in self._models:
-            self._models.pop(model.getID())
+        if model.get_id() in self._models:
+            self._models.pop(model.get_id())
             for m in self._models:
                 # Removes the model from all the existing models
                 self._models[m].remove(model)
@@ -48,9 +48,9 @@ class BaseDynamicSystem:
             raise Exception("Model not found")
 
     @abstractmethod
-    def getOutput(self) -> DynamicSystemOutput:
+    def get_output(self) -> DynamicSystemOutput:
         raise NotImplementedError
 
     @abstractmethod
-    def stateTransition(self, *args, **kwargs) -> DynamicSystemOutput:
+    def state_transition(self, *args, **kwargs) -> DynamicSystemOutput:
         raise NotImplementedError

@@ -7,6 +7,6 @@ class ExpressionProperty(EntityProperty):
     def __init__(self, value: Expression):
         super().__init__(value, PropertyType.EXPRESSION)
 
-    def getValue(self) -> Expression:
+    def get_value(self) -> Expression:
         """Returns the value of the property"""
-        return super().getValue()
+        return super().get_value()

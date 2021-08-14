@@ -28,7 +28,7 @@ class Source(DiscreteEventModel):
     _entityEmitter: Optional[AnyProperty[EntityEmitter]]
     """Emitter of entities"""
 
-    def getProperties(self) -> EntityProperties:
+    def get_properties(self) -> EntityProperties:
         return {
             SourceProperty.ENTITY_TYPE: self.entityEmitter,
             SourceProperty.INTER_ARRIVAL_TIME: self.interArrivalTime
@@ -60,21 +60,21 @@ class Source(DiscreteEventModel):
                     self.entityEmitter is None or
                     self.entitiesPerArrival is None)
 
-    def _internalStateTransitionFunction(self, state: SourceState) -> SourceState:
+    def _internal_state_transition_function(self, state: SourceState) -> SourceState:
         """Creates an entity
         Args:
             state (SourceState): Current state of the model.
         """
         if self.__areValidProperties():
             entities = []
-            for i in range(self.entitiesPerArrival.getValue().evaluate()):
-                entities.append(self.entityEmitter.getValue().generate())
+            for i in range(self.entitiesPerArrival.get_value().evaluate()):
+                entities.append(self.entityEmitter.get_value().generate())
             state.outputBuffer.add(entities)
-            self.schedule(self.getTime())
+            self.schedule(self.get_time())
         return state
 
-    def _externalStateTransitionFunction(self, state: SourceState, inputs: ModelInput,
-                                         event_time: float) -> SourceState:
+    def _external_state_transition_function(self, state: SourceState, inputs: ModelInput,
+                                            event_time: float) -> SourceState:
         """Returns the current state
         Args:
             state (SourceState): Current state of the model.
@@ -83,16 +83,16 @@ class Source(DiscreteEventModel):
         """
         return state
 
-    def _timeAdvanceFunction(self, state: SourceState) -> float:
+    def _time_advance_function(self, state: SourceState) -> float:
         """Time for an autonomous event.
         Args:
             state (SourceState): Current state of the model.
         """
         if self.interArrivalTime is not None:
-            return max(self.interArrivalTime.getValue().evaluate(), 0.00001)
+            return max(self.interArrivalTime.get_value().evaluate(), 0.00001)
         return 0
 
-    def _outputFunction(self, state: SourceState) -> List[Entity]:
+    def _output_function(self, state: SourceState) -> List[Entity]:
         """Return the entities created.
         Args:
             state (SourceState):
@@ -109,7 +109,7 @@ class Source(DiscreteEventModel):
             self._interArrivalTime = value
         else:
             self._interArrivalTime = ExpressionProperty(value)
-        self.schedule(self.getTime())
+        self.schedule(self.get_time())
 
     @property
     def entityEmitter(self):
@@ -133,6 +133,6 @@ class Source(DiscreteEventModel):
         else:
             self._entitiesPerArrival = ExpressionProperty(value)
 
-    def getState(self) -> SourceState:
+    def get_state(self) -> SourceState:
         """Returns the current state"""
-        return super(Source, self).getState()
+        return super(Source, self).get_state()

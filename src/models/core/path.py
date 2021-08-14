@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, TYPE_CHECKING
+from typing import TYPE_CHECKING
 
 from core.components.entity.core.entity import Entity
 from core.components.entity.core.entity_property import EntityProperties
@@ -21,7 +21,7 @@ class Path(Entity):
     _weight: ExpressionProperty
     """Weight of the path"""
 
-    def getProperties(self) -> EntityProperties:
+    def get_properties(self) -> EntityProperties:
         """Lists the properties of the entity"""
         return {
             "Weight": self._weight
@@ -42,13 +42,13 @@ class Path(Entity):
         self._to = to
         self._weight = weight
 
-    def getModel(self) -> BaseModel:
+    def get_model(self) -> BaseModel:
         """Return the destination model"""
         return self._to
 
-    def getWeight(self) -> float:
+    def get_weight(self) -> float:
         """Return the evaluation of the weight."""
-        return self._weight.getValue().evaluate()
+        return self._weight.get_value().evaluate()
 
     def __eq__(self, other):
         return self._to == other
@@ -57,4 +57,4 @@ class Path(Entity):
         return hash(self._to)
 
     def __lt__(self, other):
-        return self.getWeight() < other.getWeight()
+        return self.get_weight() < other.get_weight()

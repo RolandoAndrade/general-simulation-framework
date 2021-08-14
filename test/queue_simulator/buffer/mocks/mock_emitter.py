@@ -13,7 +13,7 @@ class MockEntity(Entity):
         """
         super().__init__(name)
 
-    def getProperties(self) -> EntityProperties:
+    def get_properties(self) -> EntityProperties:
         """Lists the properties of the entity"""
         return {
             'type': StringProperty('Mock')

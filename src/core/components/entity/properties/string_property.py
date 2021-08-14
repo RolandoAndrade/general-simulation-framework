@@ -9,6 +9,6 @@ class StringProperty(str, EntityProperty):
     def __init__(self, value: str):
         super().__init__(value, PropertyType.STRING)
 
-    def getValue(self) -> str:
+    def get_value(self) -> str:
         """Returns the value of the property"""
-        return super().getValue()
+        return super().get_value()

@@ -90,7 +90,7 @@ class Buffer(Entity, ABC):
             return self._content.pop(randint(0, self.currentNumberOfEntities))
         return None
 
-    def getProperties(self) -> EntityProperties:
+    def get_properties(self) -> EntityProperties:
         """Lists the properties of the entity"""
         return {
             BufferProperty.CAPACITY: self.capacity,

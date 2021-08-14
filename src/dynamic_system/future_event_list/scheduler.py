@@ -18,10 +18,10 @@ class Scheduler:
     models
     """
 
-    _futureEventList: List[ScheduledModel]
+    _future_event_list: List[ScheduledModel]
 
     def __init__(self):
-        self._futureEventList = []
+        self._future_event_list = []
 
     @debug("Scheduling model")
     def schedule(self, model: DiscreteEventModel, time: float):
@@ -32,67 +32,67 @@ class Scheduler:
         """
         if time > 0:
             sm = ScheduledModel(model, time)
-            if sm not in self._futureEventList:
-                heapq.heappush(self._futureEventList, sm)
+            if sm not in self._future_event_list:
+                heapq.heappush(self._future_event_list, sm)
 
     @debug("Getting time of next event")
-    def getTimeOfNextEvent(self) -> float:
+    def get_time_of_next_event(self) -> float:
         """Gets the time of the next event"""
-        if len(self._futureEventList) > 0:
-            return self._futureEventList[0].getTime()
+        if len(self._future_event_list) > 0:
+            return self._future_event_list[0].get_time()
         return 0
 
     @debug("Updating time")
-    def updateTime(self, delta_time: float):
+    def update_time(self, delta_time: float):
         """Updates the time of the events
 
         Args:
             delta_time (float): Time that has passed since the last update
         """
-        for i in range(len(self._futureEventList)):
-            self._futureEventList[i].decreaseTime(delta_time)
+        for i in range(len(self._future_event_list)):
+            self._future_event_list[i].decrease_time(delta_time)
 
     @debug("Getting next models")
-    def getNextModels(self) -> Set[DiscreteEventModel]:
+    def get_next_models(self) -> Set[DiscreteEventModel]:
         """Gets the next models that will execute an autonomous event"""
         s = set()
-        fel = self._futureEventList.copy()
-        time = self.getTimeOfNextEvent()
-        while len(fel) > 0 and fel[0].getTime() == time:
-            s.add(heapq.heappop(fel).getModel())
+        fel = self._future_event_list.copy()
+        time = self.get_time_of_next_event()
+        while len(fel) > 0 and fel[0].get_time() == time:
+            s.add(heapq.heappop(fel).get_model())
         return s
 
     @debug("Removing models from the heap")
-    def popNextModels(self) -> Set[DiscreteEventModel]:
+    def pop_next_models(self) -> Set[DiscreteEventModel]:
         """Gets the next models that will execute an autonomous event and
         removes it from the heap
         """
         s = set()
-        time = self.getTimeOfNextEvent()
+        time = self.get_time_of_next_event()
         while (
-            len(self._futureEventList) > 0
-            and self._futureEventList[0].getTime() == time
+                len(self._future_event_list) > 0
+                and self._future_event_list[0].get_time() == time
         ):
-            s.add(heapq.heappop(self._futureEventList).getModel())
+            s.add(heapq.heappop(self._future_event_list).get_model())
         return s
 
     @debug("Getting future event list")
-    def getFutureEventList(self) -> List[ScheduledModel]:
+    def get_future_event_list(self) -> List[ScheduledModel]:
         """Returns the future event list"""
-        return self._futureEventList
+        return self._future_event_list
 
     def __str__(self):
         x = TableProvider()
-        x.setTitle("Future Event List (FEL)").setLabels(
+        x.set_title("Future Event List (FEL)").set_labels(
             ["Model ID", "Priority", "Time"]
         )
-        x.setAlignment(["l", "r", "r"])
+        x.set_alignment(["l", "r", "r"])
         priority = 0
-        lastTime = 0
-        if len(self._futureEventList) > 0:
-            for event in self._futureEventList:
-                if lastTime != event.getTime():
+        last_time = 0
+        if len(self._future_event_list) > 0:
+            for event in self._future_event_list:
+                if last_time != event.get_time():
                     priority = priority + 1
-                x.addRow([event.getModel().getID(), priority, str(event.getTime())])
-                lastTime = event.getTime()
+                x.add_row([event.get_model().get_id(), priority, str(event.get_time())])
+                last_time = event.get_time()
         return x.build()

@@ -22,7 +22,7 @@ class PoissonDistribution(RandomDistribution):
         """Generates a value following the distribution"""
         return np.random.poisson(self.__mean)
 
-    def generateList(self, size: int) -> np.ndarray:
+    def generate_list(self, size: int) -> np.ndarray:
         """Generates a ndarray of values following the distribution
 
         Args:

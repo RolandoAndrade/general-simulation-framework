@@ -11,7 +11,7 @@ class SummaryTable:
         raise NotImplementedError
 
     @abstractmethod
-    def addRow(self, row: List[Any]) -> SummaryTable:
+    def add_row(self, row: List[Any]) -> SummaryTable:
         """Adds a row to the table
 
         Args:
@@ -20,7 +20,7 @@ class SummaryTable:
         raise NotImplementedError
 
     @abstractmethod
-    def setTitle(self, title: str) -> SummaryTable:
+    def set_title(self, title: str) -> SummaryTable:
         """Sets the title of the table
 
         Args:
@@ -29,7 +29,7 @@ class SummaryTable:
         raise NotImplementedError
 
     @abstractmethod
-    def setLabels(self, labels: List[str]) -> SummaryTable:
+    def set_labels(self, labels: List[str]) -> SummaryTable:
         """Sets the labels of the table
 
         Args:
@@ -38,7 +38,7 @@ class SummaryTable:
         raise NotImplementedError
 
     @abstractmethod
-    def setAlignment(self, align: List[str]) -> SummaryTable:
+    def set_alignment(self, align: List[str]) -> SummaryTable:
         """Sets the alignment of the columns
 
         Args:

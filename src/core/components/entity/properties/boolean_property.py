@@ -7,11 +7,11 @@ class BooleanProperty(EntityProperty):
         super().__init__(value, PropertyType.BOOLEAN)
 
     def __bool__(self):
-        return self.getValue()
+        return self.get_value()
 
     def __eq__(self, other):
-        return other == self.getValue()
+        return other == self.get_value()
 
-    def getValue(self) -> bool:
+    def get_value(self) -> bool:
         """Returns the value of the property"""
-        return super().getValue()
+        return super().get_value()

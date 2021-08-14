@@ -10,11 +10,11 @@ class NumberProperty(float, EntityProperty):
         super().__init__(value, PropertyType.NUMBER)
 
     def __add__(self, other):
-        return NumberProperty(self.getValue() + other)
+        return NumberProperty(self.get_value() + other)
 
     def __sub__(self, other):
-        return NumberProperty(self.getValue() - other)
+        return NumberProperty(self.get_value() - other)
 
-    def getValue(self) -> float:
+    def get_value(self) -> float:
         """Returns the value of the property"""
-        return super().getValue()
+        return super().get_value()

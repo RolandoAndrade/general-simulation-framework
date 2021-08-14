@@ -37,14 +37,14 @@ class SimulationTest(unittest.TestCase):
         source.add(server)
 
         experiment = DiscreteEventExperiment(self.ds)
-        experiment.simulationControl.start(stop_time=simulation_time_seconds)
-        experiment.simulationControl.wait()
-        print("Generated: " + str(source.getState().outputBuffer.numberEntered))
-        print("Entered at server: " + str(server.getState().inputBuffer.numberEntered))
-        print("Waiting at server: " + str(server.getState().inputBuffer.currentNumberOfEntities))
-        print("Processing at server: " + str(server.getState().processBuffer.currentNumberOfEntities))
-        print("Processed at server: " + str(server.getState().processBuffer.numberEntered))
-        print("Finished: " + str(server.getState().outputBuffer.numberEntered))
+        experiment.simulation_control.start(stop_time=simulation_time_seconds)
+        experiment.simulation_control.wait()
+        print("Generated: " + str(source.get_state().outputBuffer.numberEntered))
+        print("Entered at server: " + str(server.get_state().inputBuffer.numberEntered))
+        print("Waiting at server: " + str(server.get_state().inputBuffer.currentNumberOfEntities))
+        print("Processing at server: " + str(server.get_state().processBuffer.currentNumberOfEntities))
+        print("Processed at server: " + str(server.get_state().processBuffer.numberEntered))
+        print("Finished: " + str(server.get_state().outputBuffer.numberEntered))
 
 
 if __name__ == '__main__':

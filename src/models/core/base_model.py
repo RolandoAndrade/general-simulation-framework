@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from singledispatchmethod import singledispatchmethod
 from typing import Any, Set, TYPE_CHECKING, cast
 
 from core.components.entity.core.entity import Entity
@@ -22,13 +21,13 @@ class BaseModel(Entity):
     _serial_id = 0
     """Serial of the model"""
 
-    __currentDynamicSystem: BaseDynamicSystem
+    __current_dynamic_system: BaseDynamicSystem
     """Current dynamic system of the model"""
 
-    __currentState: ModelState
+    __current_state: ModelState
     """Current state of the model"""
 
-    __outputModels: Set[Path]
+    __output_models: Set[Path]
     """Output models of the model"""
 
     @debug("Initialized Model", True)
@@ -47,14 +46,14 @@ class BaseModel(Entity):
             BaseModel._serial_id = BaseModel._serial_id + 1
         else:
             super().__init__(name)
-        self.setUpState(state)
-        self.__outputModels = set()
+        self.set_up_state(state)
+        self.__output_models = set()
         # Set dynamic system
-        self.__currentDynamicSystem = dynamic_system
-        self.__currentDynamicSystem.add(self)
+        self.__current_dynamic_system = dynamic_system
+        self.__current_dynamic_system.add(self)
 
     @debug("Setting up the state")
-    def setUpState(self, state: ModelState):
+    def set_up_state(self, state: ModelState):
         """s
 
         Sets up the state of the model.
@@ -62,12 +61,12 @@ class BaseModel(Entity):
         Args:
             state (ModelState): New state of the model.
         """
-        self.__currentState = state
+        self.__current_state = state
 
     @debug("Getting the state")
-    def getState(self) -> ModelState:
+    def get_state(self) -> ModelState:
         """Returns the current state"""
-        return self.__currentState
+        return self.__current_state
 
     @debug("Adding output")
     def add(self, model: BaseModel,
@@ -80,18 +79,18 @@ class BaseModel(Entity):
             weight (ExpressionProperty): Weight of the path.
             name (str): Name of the path.
         """
-        return self.addPath(Path(model, weight, name))
+        return self.add_path(Path(model, weight, name))
 
     @debug("Adding path")
-    def addPath(self, path: Path):
+    def add_path(self, path: Path):
         """Adds a path for the current model in the dynamic system and returns the model added.
 
         Args:
             path (Path): Connection to a model.
         """
-        self.__currentDynamicSystem.add(path.getModel())
-        self.__outputModels.add(path)
-        return path.getModel()
+        self.__current_dynamic_system.add(path.get_model())
+        self.__output_models.add(path)
+        return path.get_model()
 
     @debug("Removing output")
     def remove(self, model: BaseModel):
@@ -100,30 +99,30 @@ class BaseModel(Entity):
         Args:
             model (BaseModel): Model to be removed.
         """
-        if model in self.__outputModels:
-            self.__outputModels.remove(cast(Any, model))
+        if model in self.__output_models:
+            self.__output_models.remove(cast(Any, model))
 
     @debug("Getting output models")
-    def getOutputModels(self) -> Set[Path]:
+    def get_output_models(self) -> Set[Path]:
         """Returns the output models of the current model"""
-        return self.__outputModels
+        return self.__output_models
 
     @debug("Retrieving dynamic system")
-    def getDynamicSystem(self) -> BaseDynamicSystem:
+    def get_dynamic_system(self) -> BaseDynamicSystem:
         """Returns the dynamic system where the current model belongs with"""
-        return self.__currentDynamicSystem
+        return self.__current_dynamic_system
 
     @abstractmethod
-    def getOutput(self) -> Any:
+    def get_output(self) -> Any:
         """Gets the output of the model."""
         raise NotImplementedError
 
     @abstractmethod
-    def stateTransition(self, *args, **kwargs):
+    def state_transition(self, *args, **kwargs):
         """Executes the state transition function"""
         raise NotImplementedError
 
     def __str__(self):
-        name = self.getID()
-        state = self.getState()
+        name = self.get_id()
+        state = self.get_state()
         return name + ": {'state': " + str(state) + "}"

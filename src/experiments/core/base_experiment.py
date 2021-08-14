@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 class BaseExperiment(ABC):
     """Simulation experiment"""
 
-    __dynamicSystem: BaseDynamicSystem
+    __dynamic_system: BaseDynamicSystem
     """Dynamic system where things will be built"""
 
     __simulator: BaseSimulator
@@ -31,15 +31,15 @@ class BaseExperiment(ABC):
                  simulator: BaseSimulator,
                  control: BaseControl,
                  report: BaseReport):
-        self.__dynamicSystem = dynamic_system
+        self.__dynamic_system = dynamic_system
         self.__simulator = simulator
         self.__control = control
         self.__report = report
 
     @property
-    def dynamicSystem(self) -> BaseDynamicSystem:
+    def dynamic_system(self) -> BaseDynamicSystem:
         """Gets the dynamic system of the experiment"""
-        return self.__dynamicSystem
+        return self.__dynamic_system
 
     @property
     def simulator(self) -> BaseSimulator:
@@ -47,11 +47,11 @@ class BaseExperiment(ABC):
         return self.__simulator
 
     @property
-    def simulationControl(self) -> BaseControl:
+    def simulation_control(self) -> BaseControl:
         """Gets the simulation control of the experiment"""
         return self.__control
 
     @property
-    def simulationReport(self) -> BaseReport:
+    def simulation_report(self) -> BaseReport:
         """Gets the simulation report of the experiment"""
         return self.__report

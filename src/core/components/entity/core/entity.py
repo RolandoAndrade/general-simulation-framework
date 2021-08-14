@@ -12,28 +12,28 @@ class Entity:
     _id: str
     """Identification of the entity."""
 
-    _savedNames: Set[str] = ["DYNAMIC_SYSTEM_CALL"]
+    _saved_names: Set[str] = ["DYNAMIC_SYSTEM_CALL"]
     """Static list of entities saved."""
 
     def __init__(self, name: str):
-        self.setID(name)
+        self.set_id(name)
 
-    def setID(self, name: str):
+    def set_id(self, name: str):
         """Sets the identifier of the entity.
 
         Args:
             name (str): Identifier of the entity.
         """
-        if name in Entity._savedNames:
+        if name in Entity._saved_names:
             raise Exception("Name already taken by another entity")
         else:
             self._id = name
 
-    def getID(self) -> str:
+    def get_id(self) -> str:
         """Gets the identifier of the entity."""
         return self._id
 
     @abstractmethod
-    def getProperties(self) -> EntityProperties:
+    def get_properties(self) -> EntityProperties:
         """Lists the properties of the entity"""
         raise NotImplementedError

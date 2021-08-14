@@ -5,11 +5,11 @@ from reports.core.base_report import BaseReport, Time, DynamicSystemOutput, Repo
 
 
 class DefaultReport(BaseReport):
-    def _getResults(
+    def _get_results(
         self, headers: Set[str], outputs: Dict[Time, DynamicSystemOutput]
     ) -> ReportResult:
         x = TableProvider()
-        x.setLabels(["time"] + list(headers)).setTitle("Simulation report")
+        x.set_labels(["time"] + list(headers)).set_title("Simulation report")
         for time in outputs:
             row = [time]
             for model in headers:
@@ -17,5 +17,5 @@ class DefaultReport(BaseReport):
                     row += [outputs[time][model]]
                 else:
                     row += ["-"]
-            x.addRow(row)
+            x.add_row(row)
         return x.build()

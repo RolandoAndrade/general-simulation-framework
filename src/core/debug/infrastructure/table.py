@@ -16,19 +16,19 @@ class Table(SummaryTable):
     def build(self) -> str:
         return str(self._table)
 
-    def addRow(self, row: List[Any]) -> Table:
+    def add_row(self, row: List[Any]) -> Table:
         self._table.add_row(row)
         return self
 
-    def setTitle(self, title: str) -> Table:
+    def set_title(self, title: str) -> Table:
         self._table.title = title
         return self
 
-    def setLabels(self, labels: List[str]) -> Table:
+    def set_labels(self, labels: List[str]) -> Table:
         self._table.field_names = labels
         return self
 
-    def setAlignment(self, align: List[str]) -> SummaryTable:
+    def set_alignment(self, align: List[str]) -> SummaryTable:
         for field, alignment in zip(self._table.field_names, align):
             self._table.align[field] = alignment
         return self

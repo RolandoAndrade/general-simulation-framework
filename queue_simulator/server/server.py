@@ -44,36 +44,36 @@ class Server(DiscreteEventModel):
             else:
                 break
 
-    def _internalStateTransitionFunction(self, state: ServerState) -> ServerState:
+    def _internal_state_transition_function(self, state: ServerState) -> ServerState:
         self._isBusy = False
         state.outputBuffer.add(state.processBuffer.empty())
         self._process(state)
         # recalculate the processing time
-        state.processingRemainingTime = self.processingTime.getValue().evaluate()
+        state.processingRemainingTime = self.processingTime.get_value().evaluate()
         if self._isBusy:
-            self.schedule(self.getTime())
+            self.schedule(self.get_time())
         return state
 
-    def _externalStateTransitionFunction(self, state: ServerState,
-                                         inputs: Dict[str, List[Entity]],
-                                         event_time: float) -> ServerState:
+    def _external_state_transition_function(self, state: ServerState,
+                                            inputs: Dict[str, List[Entity]],
+                                            event_time: float) -> ServerState:
         r_inputs = []
         for i in inputs:
             r_inputs += inputs[i]
         state.inputBuffer.add(r_inputs)
         if not self._isBusy and len(r_inputs) > 0:
-            state.processingRemainingTime = self.processingTime.getValue().evaluate()
-            self.schedule(self.getTime())
+            state.processingRemainingTime = self.processingTime.get_value().evaluate()
+            self.schedule(self.get_time())
             self._process(state)
         return state
 
-    def _timeAdvanceFunction(self, state: ServerState) -> float:
-        return state.processingRemainingTime.getValue()
+    def _time_advance_function(self, state: ServerState) -> float:
+        return state.processingRemainingTime.get_value()
 
-    def _outputFunction(self, state: ServerState) -> Any:
+    def _output_function(self, state: ServerState) -> Any:
         return state.outputBuffer.empty()
 
-    def getProperties(self) -> EntityProperties:
+    def get_properties(self) -> EntityProperties:
         return {
 
         }
@@ -89,6 +89,6 @@ class Server(DiscreteEventModel):
         else:
             self._processingTime = ExpressionProperty(value)
 
-    def getState(self) -> ServerState:
+    def get_state(self) -> ServerState:
         """Returns the current state"""
-        return super(Server, self).getState()
+        return super(Server, self).get_state()
