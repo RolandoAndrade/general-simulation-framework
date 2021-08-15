@@ -3,7 +3,6 @@ from __future__ import annotations
 from time import sleep
 from typing import TYPE_CHECKING, Dict
 from control.core.thread_control import ThreadControl
-from core.config import FLOATING_POINT_DIGITS
 from core.debug.domain.debug import debug
 from models.models.discrete_event_model import ModelInput
 
