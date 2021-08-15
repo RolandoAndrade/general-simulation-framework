@@ -1,5 +1,5 @@
 
-from core.components.expresions.expression import Expression
+from core.expresions.expression import Expression
 from core.entity.core.entity_property import EntityProperty
 from core.entity.core.property_type import PropertyType
 

@@ -2,7 +2,7 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Union, List
 
-from core.components.expresions.expression import Expression
+from core.expresions.expression import Expression
 
 
 class RandomDistribution(Expression):

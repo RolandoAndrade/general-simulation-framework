@@ -1,7 +1,7 @@
 from typing import List, Optional, Union
 
 
-from core.components.expresions.expression import Expression
+from core.expresions.expression import Expression
 from core.entity.core.entity import Entity
 from core.entity.core.entity_emitter import EntityEmitter
 from core.entity.core.entity_property import EntityProperties

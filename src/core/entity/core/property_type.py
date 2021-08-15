@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from core.components.expresions.expression import Expression
+from core.expresions.expression import Expression
 
 expected_types = {
     "STRING": str,

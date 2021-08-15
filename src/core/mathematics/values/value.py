@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Generic, TypeVar
 
-from core.components.expresions.expression import Expression
+from core.expresions.expression import Expression
 
 T = TypeVar('T')
 
