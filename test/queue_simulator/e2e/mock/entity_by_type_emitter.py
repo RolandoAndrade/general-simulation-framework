@@ -1,7 +1,7 @@
-from core.components.entity.core.entity import Entity
-from core.components.entity.core.entity_emitter import EntityEmitter
-from core.components.entity.core.entity_property import EntityProperties
-from core.components.entity.properties.string_property import StringProperty
+from core.entity.core import Entity
+from core.entity.core import EntityEmitter
+from core.entity.core import EntityProperties
+from core.entity.properties.string_property import StringProperty
 
 
 class MockEntity(Entity):

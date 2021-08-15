@@ -3,9 +3,10 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any, Dict, cast
 
-from core.components.entity.properties.expression_property import ExpressionProperty
+
 from core.debug.domain.debug import debug
-from mathematics.values.value import Value
+from core.entity.properties.expression_property import ExpressionProperty
+from core.mathematics.values.value import Value
 from models.core.base_model import BaseModel, ModelState
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Dict, TypeVar, Generic
 
-from core.components.entity.core.property_type import PropertyType
+from core.entity.core.property_type import PropertyType
 
 T = TypeVar('T')
 

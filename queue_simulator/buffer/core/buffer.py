@@ -4,11 +4,10 @@ from abc import ABC
 from random import shuffle, randint
 from typing import List, Optional
 
-from core.components.entity.core.entity import Entity
-from core.components.entity.core.entity_emitter import EntityEmitter
-from core.components.entity.core.entity_property import EntityProperties
-from core.components.entity.properties.number_property import NumberProperty
-from core.components.entity.properties.string_property import StringProperty
+from core.entity.core.entity import Entity
+from core.entity.core.entity_property import EntityProperties
+from core.entity.properties.number_property import NumberProperty
+from core.entity.properties.string_property import StringProperty
 from queue_simulator.buffer.core.buffer_policy import BufferPolicy
 from queue_simulator.buffer.core.buffer_property import BufferProperty
 

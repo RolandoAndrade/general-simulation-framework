@@ -1,6 +1,7 @@
-from core.components.entity.core.entity_property import EntityProperty
-from core.components.entity.core.property_type import PropertyType
+
 from core.components.expresions.expression import Expression
+from core.entity.core.entity_property import EntityProperty
+from core.entity.core.property_type import PropertyType
 
 
 class ExpressionProperty(EntityProperty):

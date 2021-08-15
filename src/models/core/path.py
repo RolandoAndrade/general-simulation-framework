@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from core.components.entity.core.entity import Entity
-from core.components.entity.core.entity_property import EntityProperties
-from core.components.entity.properties.expression_property import ExpressionProperty
+from core.entity.core.entity import Entity
+from core.entity.core.entity_property import EntityProperties
+from core.entity.properties.expression_property import ExpressionProperty
 
 if TYPE_CHECKING:
     from models.core.base_model import BaseModel

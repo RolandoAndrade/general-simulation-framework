@@ -1,8 +1,8 @@
 import unittest
 
-from core.components.entity.properties.boolean_property import BooleanProperty
-from core.components.entity.properties.number_property import NumberProperty
-from core.components.entity.properties.string_property import StringProperty
+from core.entity import BooleanProperty
+from core.entity import NumberProperty
+from core.entity.properties.string_property import StringProperty
 
 
 class MyTestCase(unittest.TestCase):

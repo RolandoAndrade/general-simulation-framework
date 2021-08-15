@@ -2,9 +2,8 @@ import unittest
 
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 from experiments.experiment_builders.discrete_event_experiment import DiscreteEventExperiment
-from mathematics.distributions.exponential_distribution import ExponentialDistribution
-from mathematics.distributions.poisson_distribution import PoissonDistribution
-from mathematics.values.value import Value
+from core.mathematics.distributions.poisson_distribution import PoissonDistribution
+from core.mathematics.values.value import Value
 from queue_simulator.server.server import Server
 from queue_simulator.source.source import Source
 from test.queue_simulator.e2e.mock.entity_by_type_emitter import EntityByTypeEmitter

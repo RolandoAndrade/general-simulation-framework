@@ -1,7 +1,7 @@
 import unittest
 from random import seed
 
-from core.components.entity.properties.number_property import NumberProperty
+from core.entity.properties.number_property import NumberProperty
 from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
 from queue_simulator.buffer.core.buffer_policy import BufferPolicy
 from queue_simulator.buffer.core.buffer_property import BufferProperty

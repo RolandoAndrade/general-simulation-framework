@@ -3,10 +3,11 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any, Set, TYPE_CHECKING, cast
 
-from core.components.entity.core.entity import Entity
-from core.components.entity.properties.expression_property import ExpressionProperty
+
 from core.debug.domain.debug import debug
-from mathematics.values.value import Value
+from core.entity.core.entity import Entity
+from core.entity.properties.expression_property import ExpressionProperty
+from core.mathematics.values.value import Value
 from models.core.path import Path
 
 if TYPE_CHECKING:

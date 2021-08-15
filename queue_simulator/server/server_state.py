@@ -1,6 +1,6 @@
 from typing import Union
 
-from core.components.entity.properties.number_property import NumberProperty
+from core.entity import NumberProperty
 from queue_simulator.buffer.buffers.input_buffer import InputBuffer
 from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
 from queue_simulator.buffer.buffers.process_buffer import ProcessBuffer

@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Set
 
-from core.components.entity.core.entity_property import EntityProperties
+from core.entity.core.entity_property import EntityProperties
 
 
 class Entity:

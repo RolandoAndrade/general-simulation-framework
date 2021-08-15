@@ -1,5 +1,3 @@
-from core.components.entity.properties.number_property import NumberProperty
-from core.components.entity.properties.string_property import StringProperty
 from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
 
 
