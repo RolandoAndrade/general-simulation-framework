@@ -17,7 +17,7 @@ class ScheduledModel:
     """Event scheduled"""
 
     _model: BaseModel
-    _time: float
+    _time: int
 
     @debug("Getting the model")
     def get_model(self) -> BaseModel:
@@ -25,16 +25,16 @@ class ScheduledModel:
         return self._model
 
     @debug("Getting the time")
-    def get_time(self) -> float:
+    def get_time(self) -> int:
         """Gets the time of the scheduled model."""
         return self._time
 
     @debug("Decreasing time")
-    def decrease_time(self, time: float) -> float:
+    def decrease_time(self, time: int) -> int:
         """Decreases the time for the scheduled model.
 
         Args:
-            time (float): Time variation.
+            time (int): Time variation.
         """
         self._time = round(self._time - time, FLOATING_POINT_DIGITS)
         return self._time

@@ -4,6 +4,7 @@ from random import random
 from typing import TYPE_CHECKING, Dict, Set, cast, Any
 
 from core.debug.domain.debug import debug
+
 from dynamic_system.core.base_dynamic_sytem import (
     BaseDynamicSystem,
     DynamicSystemOutput,
@@ -18,7 +19,7 @@ if TYPE_CHECKING:
     )
 
     DynamicSystemModels = Dict[str, DiscreteEventModel]
-    DynamicSystemInput = Dict[str, ModelInput]
+    from core.types import DynamicSystemInput
 
 
 class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
@@ -57,7 +58,7 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
         return self._scheduler.get_next_models()
 
     @debug("Getting time of next event")
-    def get_time_of_next_events(self) -> float:
+    def get_time_of_next_events(self) -> int:
         """Get time of the next event"""
         return self._scheduler.get_time_of_next_event()
 
