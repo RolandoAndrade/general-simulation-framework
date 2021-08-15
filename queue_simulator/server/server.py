@@ -1,9 +1,10 @@
 from typing import Any, List, Union, Dict
 
-from core.entity.core import Entity
-from core.entity.core import EntityProperties
-from core.entity import ExpressionProperty
+
 from core.components.expresions.expression import Expression
+from core.entity.core.entity import Entity
+from core.entity.core.entity_property import EntityProperties
+from core.entity.properties.expression_property import ExpressionProperty
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 from models.models.discrete_event_model import DiscreteEventModel
 from queue_simulator.buffer.buffers.input_buffer import InputBuffer
