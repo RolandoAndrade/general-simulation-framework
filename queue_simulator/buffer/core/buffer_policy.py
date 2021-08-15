@@ -1,7 +1,7 @@
 import enum
 
 
-class BufferPolicy(enum.Enum(str)):
+class BufferPolicy(enum.Enum):
     FIFO = "FIFO"
     LIFO = "LIFO"
     RANDOM = "RANDOM"

@@ -28,8 +28,8 @@ class TestSource(unittest.TestCase):
         # config
         interArrivalTime = ExpressionProperty(PoissonDistribution(5))
         entitiesPerArrival = ExpressionProperty(Value(1))
-        self.source.interArrivalTime = interArrivalTime
-        self.source.entitiesPerArrival = entitiesPerArrival
+        self.source.inter_arrival_time = interArrivalTime
+        self.source.entities_per_arrival = entitiesPerArrival
         # simulate
         self.experiment.simulation_control.start(stop_time=120)
         self.experiment.simulation_control.wait()
@@ -42,8 +42,8 @@ class TestSource(unittest.TestCase):
         # config
         interArrivalTime = ExpressionProperty(Value(1))
         entitiesPerArrival = ExpressionProperty(PoissonDistribution(5))
-        self.source.interArrivalTime = interArrivalTime
-        self.source.entitiesPerArrival = entitiesPerArrival
+        self.source.inter_arrival_time = interArrivalTime
+        self.source.entities_per_arrival = entitiesPerArrival
         # simulate
         self.experiment.simulation_control.start(stop_time=120)
         self.experiment.simulation_control.wait()

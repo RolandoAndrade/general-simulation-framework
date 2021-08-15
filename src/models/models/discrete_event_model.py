@@ -1,19 +1,17 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, Dict, cast
-
+from typing import Any, cast
 
 from core.debug.domain.debug import debug
 from core.entity.properties.expression_property import ExpressionProperty
 from core.mathematics.values.value import Value
+from core.types.model_input import ModelInput
 from models.core.base_model import BaseModel, ModelState
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
 from models.core.path import Path
-
-ModelInput = Dict[str, Any]
 
 
 class DiscreteEventModel(BaseModel):

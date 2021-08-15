@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import heapq
-from typing import TYPE_CHECKING, List, Set, cast
+from typing import TYPE_CHECKING, List, Set, cast, Any
 
 from core.debug.domain.debug import debug
 from core.debug.infrastructure.providers import TableProvider
@@ -60,7 +60,7 @@ class Scheduler:
         time = self.get_time_of_next_event()
         while len(fel) > 0 and fel[0].get_time() == time:
             s.add(heapq.heappop(fel).get_model())
-        return cast(Set[DiscreteEventModel], s)
+        return cast(Set[Any], s)
 
     @debug("Removing models from the heap")
     def pop_next_models(self) -> Set[DiscreteEventModel]:
@@ -74,7 +74,7 @@ class Scheduler:
                 and self._future_event_list[0].get_time() == time
         ):
             s.add(heapq.heappop(self._future_event_list).get_model())
-        return cast(Set[DiscreteEventModel], s)
+        return cast(Set[Any], s)
 
     @debug("Getting future event list")
     def get_future_event_list(self) -> List[ScheduledModel]:

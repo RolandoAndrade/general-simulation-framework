@@ -2,16 +2,17 @@ from typing import List, Optional, Union
 
 from core.entity.core import EntityEmitter, EntityProperties, Entity
 from core.entity.properties import ExpressionProperty, AnyProperty
-from core.expresions.expression import Expression
-from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
-from models.models.discrete_event_model import DiscreteEventModel, ModelInput
-from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
-from queue_simulator.source.source_property import SourceProperty
-from queue_simulator.source.source_state import SourceState
+from core.expresions import Expression
+from core.types.model_input import ModelInput
+
+from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
+from models.models import DiscreteEventModel
+from queue_simulator.buffer.buffers import OutputBuffer
+
+from queue_simulator.source import SourceProperty, SourceState
 
 
 # https://simulemos.cl/books/simio/page/source
-
 class Source(DiscreteEventModel):
     """Source of entities"""
     entityNumber = 0
@@ -27,8 +28,8 @@ class Source(DiscreteEventModel):
 
     def get_properties(self) -> EntityProperties:
         return {
-            SourceProperty.ENTITY_TYPE: self.entityEmitter,
-            SourceProperty.INTER_ARRIVAL_TIME: self.interArrivalTime
+            SourceProperty.ENTITY_TYPE: self.entity_emitter,
+            SourceProperty.INTER_ARRIVAL_TIME: self.inter_arrival_time
         }
 
     def __init__(self,
@@ -47,25 +48,25 @@ class Source(DiscreteEventModel):
             inter_arrival_time (ExpressionProperty): InterArrival time of the entities.
         """
         super().__init__(dynamic_system, name, SourceState(OutputBuffer(name)))
-        self.interArrivalTime = inter_arrival_time
-        self.entityEmitter = entity_emitter
-        self.entitiesPerArrival = entities_per_arrival
+        self.inter_arrival_time = inter_arrival_time
+        self.entity_emitter = entity_emitter
+        self.entities_per_arrival = entities_per_arrival
 
-    def __areValidProperties(self):
+    def __are_valid_properties(self):
         """Checks if the properties are valid"""
-        return not (self.interArrivalTime is None or
-                    self.entityEmitter is None or
-                    self.entitiesPerArrival is None)
+        return not (self.inter_arrival_time is None or
+                    self.entity_emitter is None or
+                    self.entities_per_arrival is None)
 
     def _internal_state_transition_function(self, state: SourceState) -> SourceState:
         """Creates an entity
         Args:
             state (SourceState): Current state of the model.
         """
-        if self.__areValidProperties():
+        if self.__are_valid_properties():
             entities = []
-            for i in range(self.entitiesPerArrival.get_value().evaluate()):
-                entities.append(self.entityEmitter.get_value().generate())
+            for i in range(self.entities_per_arrival.get_value().evaluate()):
+                entities.append(self.entity_emitter.get_value().generate())
             state.outputBuffer.add(entities)
             self.schedule(self.get_time())
         return state
@@ -85,8 +86,8 @@ class Source(DiscreteEventModel):
         Args:
             state (SourceState): Current state of the model.
         """
-        if self.interArrivalTime is not None:
-            return max(self.interArrivalTime.get_value().evaluate(), 0.00001)
+        if self.inter_arrival_time is not None:
+            return max(self.inter_arrival_time.get_value().evaluate(), 0.00001)
         return 0
 
     def _output_function(self, state: SourceState) -> List[Entity]:
@@ -97,11 +98,11 @@ class Source(DiscreteEventModel):
         return state.outputBuffer.empty()
 
     @property
-    def interArrivalTime(self):
+    def inter_arrival_time(self):
         return self._interArrivalTime
 
-    @interArrivalTime.setter
-    def interArrivalTime(self, value: Union[Expression, ExpressionProperty]):
+    @inter_arrival_time.setter
+    def inter_arrival_time(self, value: Union[Expression, ExpressionProperty]):
         if isinstance(value, ExpressionProperty):
             self._interArrivalTime = value
         else:
@@ -109,22 +110,22 @@ class Source(DiscreteEventModel):
         self.schedule(self.get_time())
 
     @property
-    def entityEmitter(self):
+    def entity_emitter(self):
         return self._entityEmitter
 
-    @entityEmitter.setter
-    def entityEmitter(self, value: Union[EntityEmitter, AnyProperty[EntityEmitter]]):
+    @entity_emitter.setter
+    def entity_emitter(self, value: Union[EntityEmitter, AnyProperty[EntityEmitter]]):
         if isinstance(value, AnyProperty):
             self._entityEmitter = value
         else:
             self._entityEmitter = AnyProperty(value)
 
     @property
-    def entitiesPerArrival(self):
+    def entities_per_arrival(self):
         return self._entitiesPerArrival
 
-    @entitiesPerArrival.setter
-    def entitiesPerArrival(self, value: Expression):
+    @entities_per_arrival.setter
+    def entities_per_arrival(self, value: Expression):
         if isinstance(value, ExpressionProperty):
             self._entitiesPerArrival = value
         else:
