@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Dict
-
+from typing import TYPE_CHECKING
 
 from reports.core.base_report import BaseReport
 from simulation.core.base_simulator import BaseSimulator
@@ -10,22 +9,28 @@ if TYPE_CHECKING:
     from core.types import DynamicSystemInput
     from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
         DiscreteEventDynamicSystem,
-)
+    )
 
 
 class DiscreteEventSimulationEngine(BaseSimulator):
     """Simulation engine for discrete-event simulation"""
 
     _dynamic_system: DiscreteEventDynamicSystem
+    """Dynamic system to be simulated."""
+
     _last_event_time: int
+    """Time of the last event recorded."""
+
     _is_output_up_to_update: bool
+    """Indicates if the output was already computed for the current iteration."""
 
     def __init__(
-        self, dynamic_system: DiscreteEventDynamicSystem, base_generator: BaseReport
+            self, dynamic_system: DiscreteEventDynamicSystem, base_generator: BaseReport
     ):
         """
         Args:
-            dynamic_system (DiscreteEventDynamicSystem):
+            dynamic_system (DiscreteEventDynamicSystem): Dynamic system to be simulated.
+            base_generator (BaseReport): Report generator for saving the outputs.
         """
         super().__init__(dynamic_system, base_generator)
         self._dynamic_system = dynamic_system
@@ -40,11 +45,11 @@ class DiscreteEventSimulationEngine(BaseSimulator):
         """Compute the next state of the dynamic system
 
         Args:
-            inputs: Input for the dynamic system
-            time (float): time of the event.
+            inputs (DynamicSystemInput): Input for the dynamic system.
+            time (int): Time of the event.
         """
         if (
-            time - self._last_event_time is self.get_time_of_next_event()
+                time - self._last_event_time is self.get_time_of_next_event()
         ):  # Time to change the output
             out = self.compute_output()
             if out:
