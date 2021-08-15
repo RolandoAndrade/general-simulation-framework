@@ -29,7 +29,7 @@ class DiscreteEventControl(ThreadControl):
 
     def _execute(self, frequency: float = 0, wait_time: float = 0, stop_time: float = 0):
         while not self._is_paused:
-            self._time = round(self._time + self._simulator.getTimeOfNextEvent(), FLOATING_POINT_DIGITS)
+            self._time = round(self._time + self._simulator.get_time_of_next_event(), FLOATING_POINT_DIGITS)
             self._simulator.compute_next_state(time=self._time)
             sleep(wait_time)
             if 0 < stop_time < self._time:

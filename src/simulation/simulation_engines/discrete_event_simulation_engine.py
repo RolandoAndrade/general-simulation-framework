@@ -16,23 +16,24 @@ class DiscreteEventSimulationEngine(BaseSimulator):
     """Simulation engine for discrete-event simulation"""
 
     _dynamic_system: DiscreteEventDynamicSystem
-    _lastEventTime: float
+    _last_event_time: float
+    _is_output_up_to_update: bool
 
     def __init__(
-        self, dynamic_system: DiscreteEventDynamicSystem, reportGenerator: BaseReport
+        self, dynamic_system: DiscreteEventDynamicSystem, base_generator: BaseReport
     ):
         """
         Args:
             dynamic_system (DiscreteEventDynamicSystem):
         """
-        super().__init__(dynamic_system, reportGenerator)
-        self._dynamicSystem = dynamic_system
-        self._lastEventTime = 0
-        self._isOutputUpToUpdate = False
+        super().__init__(dynamic_system, base_generator)
+        self._dynamic_system = dynamic_system
+        self._last_event_time = 0
+        self._is_output_up_to_update = False
 
-    def getTimeOfNextEvent(self) -> float:
+    def get_time_of_next_event(self) -> float:
         """Get time of the next event"""
-        return self._dynamicSystem.get_time_of_next_events()
+        return self._dynamic_system.get_time_of_next_events()
 
     def compute_next_state(self, inputs: Dict[str, ModelInput] = None, time: float = 0):
         """Compute the next state of the dynamic system
@@ -42,20 +43,20 @@ class DiscreteEventSimulationEngine(BaseSimulator):
             time (float): time of the event.
         """
         if (
-            time - self._lastEventTime is self.getTimeOfNextEvent()
+            time - self._last_event_time is self.get_time_of_next_event()
         ):  # Time to change the output
             out = self.compute_output()
             if out:
                 self._report_generator.add_output(out, time)
-        self._dynamicSystem.state_transition(inputs, time - self._lastEventTime)
-        self._lastEventTime = time
-        self._isOutputUpToUpdate = False
+        self._dynamic_system.state_transition(inputs, time - self._last_event_time)
+        self._last_event_time = time
+        self._is_output_up_to_update = False
 
     def compute_output(self):
         """Compute the output of the dynamic system if it has not computed
         yet
         """
-        if not self._isOutputUpToUpdate:
-            self._isOutputUpToUpdate = True
-            return self._dynamicSystem.get_output()
+        if not self._is_output_up_to_update:
+            self._is_output_up_to_update = True
+            return self._dynamic_system.get_output()
         return None
