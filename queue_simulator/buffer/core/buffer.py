@@ -4,12 +4,9 @@ from abc import ABC
 from random import shuffle, randint
 from typing import List, Optional
 
-from core.entity.core.entity import Entity
-from core.entity.core.entity_property import EntityProperties
-from core.entity.properties.number_property import NumberProperty
-from core.entity.properties.string_property import StringProperty
-from queue_simulator.buffer.core.buffer_policy import BufferPolicy
-from queue_simulator.buffer.core.buffer_property import BufferProperty
+from core.entity.core import Entity, EntityProperties
+from core.entity.properties import NumberProperty, StringProperty
+from queue_simulator.buffer.core import BufferPolicy, BufferProperty
 
 
 class Buffer(Entity, ABC):
@@ -24,7 +21,7 @@ class Buffer(Entity, ABC):
     policy: StringProperty
     """Policy of the buffer"""
 
-    numberEntered: NumberProperty[int]
+    number_entered: NumberProperty[int]
     """Number of entities that entered into the buffer"""
 
     def __init__(self,
@@ -41,7 +38,7 @@ class Buffer(Entity, ABC):
         self.capacity = capacity
         self._content = []
         self.policy = policy
-        self.numberEntered = NumberProperty(0)
+        self.number_entered = NumberProperty(0)
 
     def add(self, entities: List[Entity]) -> int:
         """Adds an element to the buffer and returns the number of elements that
@@ -51,21 +48,21 @@ class Buffer(Entity, ABC):
             entities: Entities to be added.
         """
         quantity = len(entities)
-        rQuantity = int(min(self.remainingCapacity, quantity))
-        self.numberEntered += rQuantity
-        for i in range(rQuantity):
+        r_quantity = int(min(self.remaining_capacity, quantity))
+        self.number_entered += r_quantity
+        for i in range(r_quantity):
             self._content.append(entities[i])
-        return quantity - rQuantity
+        return quantity - r_quantity
 
-    def getContent(self) -> List[Entity]:
+    def get_content(self) -> List[Entity]:
         """Gets the content of the buffer"""
         if self.policy == BufferPolicy.FIFO:
             return self._content
         elif self.policy == BufferPolicy.LIFO:
             return self._content[::-1]
-        randomOrder = self._content.copy()
-        shuffle(randomOrder)
-        return randomOrder
+        random_order = self._content.copy()
+        shuffle(random_order)
+        return random_order
 
     def empty(self) -> List[Entity]:
         """Gets the content of the buffer and empties the buffer"""
@@ -75,18 +72,18 @@ class Buffer(Entity, ABC):
             return data
         elif self.policy == BufferPolicy.LIFO:
             return data[::-1]
-        randomOrder = data.copy()
-        shuffle(randomOrder)
-        return randomOrder
+        random_order = data.copy()
+        shuffle(random_order)
+        return random_order
 
     def pop(self) -> Optional[Entity]:
         """Pops the next element in the buffer"""
-        if self.currentNumberOfEntities > 0:
+        if self.current_number_of_entities > 0:
             if self.policy == BufferPolicy.FIFO:
                 return self._content.pop(0)
             elif self.policy == BufferPolicy.LIFO:
                 return self._content.pop()
-            return self._content.pop(randint(0, self.currentNumberOfEntities))
+            return self._content.pop(randint(0, self.current_number_of_entities))
         return None
 
     def get_properties(self) -> EntityProperties:
@@ -94,25 +91,27 @@ class Buffer(Entity, ABC):
         return {
             BufferProperty.CAPACITY: self.capacity,
             BufferProperty.POLICY: self.policy,
-            BufferProperty.NUMBER_ENTERED: self.numberEntered
+            BufferProperty.NUMBER_ENTERED: self.number_entered
         }
 
     @property
-    def currentNumberOfEntities(self):
+    def current_number_of_entities(self):
         """Returns the current number of entities into the buffer"""
         return len(self._content)
 
     @property
-    def remainingCapacity(self):
-        """Returns the current number of entities capable to be appended into the buffer"""
-        return self.capacity - self.currentNumberOfEntities
+    def remaining_capacity(self):
+        """Returns the current number of entities capable to be appended into
+        the buffer
+        """
+        return self.capacity - self.current_number_of_entities
 
     @property
-    def isEmpty(self):
+    def is_empty(self):
         """Returns true if the buffer is empty"""
-        return self.currentNumberOfEntities == 0
+        return self.current_number_of_entities == 0
 
     @property
-    def isFull(self):
+    def is_full(self):
         """Returns true if the buffer is empty"""
-        return self.remainingCapacity == 0
+        return self.remaining_capacity == 0

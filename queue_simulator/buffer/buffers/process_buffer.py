@@ -1,9 +1,7 @@
 from __future__ import annotations
 
-from core.entity import NumberProperty
-from core.entity.properties.string_property import StringProperty
-from queue_simulator.buffer.core.buffer import Buffer
-from queue_simulator.buffer.core.buffer_policy import BufferPolicy
+from core.entity.properties import NumberProperty, StringProperty
+from queue_simulator.buffer.core import Buffer, BufferPolicy
 
 
 class ProcessBuffer(Buffer):

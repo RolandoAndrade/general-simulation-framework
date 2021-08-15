@@ -22,28 +22,28 @@ class TestOutputBuffer(unittest.TestCase):
     def test_add_entity(self):
         """Should add entities to buffer"""
         self.buffer.add(MockEmitter())
-        self.assertEqual(1, self.buffer.currentNumberOfEntities, "Error 0")
+        self.assertEqual(1, self.buffer.current_number_of_entities, "Error 0")
         self.buffer.add(MockEmitter(), 3)
-        self.assertEqual(4, self.buffer.currentNumberOfEntities, "Error 1")
+        self.assertEqual(4, self.buffer.current_number_of_entities, "Error 1")
 
     def test_get_content(self):
         """Should retrieve the content"""
         # FIFO
         self.buffer.add(MockEmitter(), 5)
         ex = ["1", "2", "3", "4", "5"]
-        re = [entity.get_id() for entity in self.buffer.getContent()]
+        re = [entity.get_id() for entity in self.buffer.get_content()]
         self.assertEqual(ex, re, "Error 0")
 
         # LIFO
         self.buffer.policy = BufferPolicy.LIFO
         ex.reverse()
-        re = [entity.get_id() for entity in self.buffer.getContent()]
+        re = [entity.get_id() for entity in self.buffer.get_content()]
         self.assertEqual(ex, re, "Error 1")
 
         # RSM
-        self.buffer.policy = BufferPolicy.RSM
+        self.buffer.policy = BufferPolicy.RANDOM
         ex = ['4', '2', '3', '5', '1']
-        re = [entity.get_id() for entity in self.buffer.getContent()]
+        re = [entity.get_id() for entity in self.buffer.get_content()]
         self.assertEqual(ex, re, "Error 2")
 
     def test_pop_entity(self):
@@ -60,7 +60,7 @@ class TestOutputBuffer(unittest.TestCase):
         self.assertEqual('5', re.get_id(), 'Error 1')
 
         # RSM
-        self.buffer.policy = BufferPolicy.RSM
+        self.buffer.policy = BufferPolicy.RANDOM
         re = self.buffer.pop()
         self.assertEqual('2', re.get_id(), 'Error 2')
 

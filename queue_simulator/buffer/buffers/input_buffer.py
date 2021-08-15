@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from core.entity import NumberProperty
-from core.entity.properties.string_property import StringProperty
+from core.entity.properties import NumberProperty, StringProperty
 from queue_simulator.buffer.core.buffer import Buffer
 from queue_simulator.buffer.core.buffer_policy import BufferPolicy
 
 
 class InputBuffer(Buffer):
     """Input buffer"""
+
     def __init__(self, name: str,
                  capacity: NumberProperty = NumberProperty(float("inf")),
                  policy: StringProperty = StringProperty(BufferPolicy.FIFO)

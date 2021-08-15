@@ -36,8 +36,8 @@ class Server(DiscreteEventModel):
         self._isBusy = False
 
     def _process(self, state: ServerState):
-        for i in range(state.inputBuffer.currentNumberOfEntities):
-            if not state.processBuffer.isFull:
+        for i in range(state.inputBuffer.current_number_of_entities):
+            if not state.processBuffer.is_full:
                 state.processBuffer.add([state.inputBuffer.pop()])
                 self._isBusy = True
             else:

@@ -1,4 +1,8 @@
-class BufferPolicy:
+import enum
+
+
+class BufferPolicy(enum.Enum(str)):
     FIFO = "FIFO"
     LIFO = "LIFO"
-    RSM = "RSM"
+    RANDOM = "RANDOM"
+    ROUND_ROBIN = "ROUND_ROBIN"
