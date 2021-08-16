@@ -21,7 +21,7 @@ class Buffer(Entity, ABC):
     policy: StringProperty
     """Policy of the buffer"""
 
-    number_entered: NumberProperty[int]
+    __number_entered: NumberProperty[int]
     """Number of entities that entered into the buffer"""
 
     def __init__(self,
@@ -38,7 +38,7 @@ class Buffer(Entity, ABC):
         self.capacity = capacity
         self._content = []
         self.policy = policy
-        self.number_entered = NumberProperty(0)
+        self.__number_entered = NumberProperty(0)
 
     def add(self, entities: List[Entity]) -> int:
         """Adds an element to the buffer and returns the number of elements that
@@ -49,7 +49,7 @@ class Buffer(Entity, ABC):
         """
         quantity = len(entities)
         r_quantity = int(min(self.remaining_capacity, quantity))
-        self.number_entered += r_quantity
+        self.__number_entered += r_quantity
         for i in range(r_quantity):
             self._content.append(entities[i])
         return quantity - r_quantity
@@ -86,7 +86,8 @@ class Buffer(Entity, ABC):
             return self._content.pop(randint(0, self.current_number_of_entities - 1))
         return None
 
-    def get_properties(self) -> EntityProperties:
+    @property
+    def properties(self) -> EntityProperties:
         """Lists the properties of the entity"""
         return {
             BufferProperty.CAPACITY: self.capacity,
@@ -115,3 +116,8 @@ class Buffer(Entity, ABC):
     def is_full(self):
         """Returns true if the buffer is empty"""
         return self.remaining_capacity == 0
+
+    @property
+    def number_entered(self) -> NumberProperty[int]:
+        """Returns true if the buffer is empty"""
+        return self.__number_entered

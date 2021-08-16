@@ -69,7 +69,7 @@ class Server(DiscreteEventModel):
     def _output_function(self, state: ServerState) -> Any:
         return state.output_buffer.empty()
 
-    def get_properties(self) -> EntityProperties:
+    def properties(self) -> EntityProperties:
         return {
 
         }

@@ -26,7 +26,7 @@ class Source(DiscreteEventModel):
     _entityEmitter: Optional[AnyProperty[EntityEmitter]]
     """Emitter of entities"""
 
-    def get_properties(self) -> EntityProperties:
+    def properties(self) -> EntityProperties:
         return {
             SourceProperty.ENTITY_TYPE: self.entity_emitter,
             SourceProperty.INTER_ARRIVAL_TIME: self.inter_arrival_time
@@ -67,7 +67,7 @@ class Source(DiscreteEventModel):
             entities = []
             for i in range(self.entities_per_arrival.get_value().evaluate()):
                 entities.append(self.entity_emitter.get_value().generate())
-            state.outputBuffer.add(entities)
+            state.output_buffer.add(entities)
             self.schedule(self.get_time())
         return state
 
@@ -95,7 +95,7 @@ class Source(DiscreteEventModel):
         Args:
             state (SourceState):
         """
-        return state.outputBuffer.empty()
+        return state.output_buffer.empty()
 
     @property
     def inter_arrival_time(self):

@@ -10,7 +10,7 @@ class InputBuffer(Buffer):
 
     def __init__(self, name: str,
                  capacity: NumberProperty = NumberProperty(float("inf")),
-                 policy: StringProperty = StringProperty(BufferPolicy.FIFO)
+                 policy: StringProperty = StringProperty(str(BufferPolicy.FIFO))
                  ):
         """
         Args:

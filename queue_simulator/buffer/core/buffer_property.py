@@ -1,7 +1,7 @@
 import enum
 
 
-class BufferProperty(enum.Enum):
+class BufferProperty(str, enum.Enum):
     CAPACITY = "Capacity"
     POLICY = "Policy"
     NUMBER_ENTERED = "NumberEntered"

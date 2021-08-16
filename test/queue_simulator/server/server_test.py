@@ -41,7 +41,7 @@ class ServerTest(unittest.TestCase):
         self.experiment.simulation_control.start(stop_time=120)
         self.experiment.simulation_control.wait()
         # results
-        total = self.source.get_state().outputBuffer.number_entered
+        total = self.source.get_state().output_buffer.number_entered
         self.assertEqual(121 * 5, total, "Wrong")
         total = self.server.get_state().input_buffer.number_entered
         self.assertEqual(120 * 5, total, "Wrong")
