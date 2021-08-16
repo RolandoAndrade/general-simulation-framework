@@ -36,10 +36,9 @@ class SimulationTest(unittest.TestCase):
                         )
 
         source.add(server)
-        print(server.get_state().output_buffer.properties)
-        label_source_out = Label(source.get_state().output_buffer.properties, BufferProperty.NUMBER_ENTERED)
-        label_server_in = Label(server.get_state().input_buffer.properties, BufferProperty.NUMBER_ENTERED)
-        label_server_out = Label(server.get_state().output_buffer.properties, BufferProperty.NUMBER_ENTERED)
+        label_source_out = Label(source.get_state().output_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
+        label_server_in = Label(server.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
+        label_server_out = Label(server.get_state().output_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
 
         experiment = DiscreteEventExperiment(self.ds)
         experiment.simulation_control.start(stop_time=simulation_time_seconds)
@@ -50,8 +49,6 @@ class SimulationTest(unittest.TestCase):
         print("Processing at server: " + str(server.get_state().process_buffer.current_number_of_entities))
         print("Processed at server: " + str(server.get_state().process_buffer.number_entered))
         print("Finished: " + str(server.get_state().output_buffer.number_entered))
-        print(server.get_state().output_buffer.properties)
-        print(server.get_state().output_buffer.number_entered)
         print(label_source_out.get_value())
         print(label_server_in.get_value())
         print(label_server_out.get_value())

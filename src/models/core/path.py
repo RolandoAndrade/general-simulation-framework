@@ -21,7 +21,7 @@ class Path(Entity):
     _weight: ExpressionProperty
     """Weight of the path"""
 
-    def properties(self) -> EntityProperties:
+    def get_properties(self) -> EntityProperties:
         """Lists the properties of the entity"""
         return {
             "Weight": self._weight

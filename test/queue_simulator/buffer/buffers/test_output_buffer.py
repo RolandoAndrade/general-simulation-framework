@@ -68,7 +68,7 @@ class TestOutputBuffer(unittest.TestCase):
         """Should retrieve the properties of the buffer"""
         self.buffer.add(MockEmitter(), 3)
         self.buffer.pop()
-        properties = self.buffer.properties()
+        properties = self.buffer.get_properties()
         self.assertEqual(float('inf'), properties.get(BufferProperty.CAPACITY))
         self.assertEqual(BufferPolicy.FIFO, properties.get(BufferProperty.POLICY))
         self.assertEqual(3, properties.get(BufferProperty.NUMBER_ENTERED))

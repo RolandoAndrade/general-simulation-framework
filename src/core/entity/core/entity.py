@@ -33,8 +33,7 @@ class Entity:
         """Gets the identifier of the entity."""
         return self._id
 
-    @property
     @abstractmethod
-    def properties(self) -> EntityProperties:
+    def get_properties(self) -> EntityProperties:
         """Lists the properties of the entity"""
         raise NotImplementedError

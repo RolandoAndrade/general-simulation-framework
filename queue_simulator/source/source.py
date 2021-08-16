@@ -26,7 +26,7 @@ class Source(DiscreteEventModel):
     _entityEmitter: Optional[AnyProperty[EntityEmitter]]
     """Emitter of entities"""
 
-    def properties(self) -> EntityProperties:
+    def get_properties(self) -> EntityProperties:
         return {
             SourceProperty.ENTITY_TYPE: self.entity_emitter,
             SourceProperty.INTER_ARRIVAL_TIME: self.inter_arrival_time
