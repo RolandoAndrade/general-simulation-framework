@@ -39,11 +39,11 @@ class SimulationTest(unittest.TestCase):
         experiment.simulation_control.start(stop_time=simulation_time_seconds)
         experiment.simulation_control.wait()
         print("Generated: " + str(source.get_state().outputBuffer.number_entered))
-        print("Entered at server: " + str(server.get_state().inputBuffer.number_entered))
-        print("Waiting at server: " + str(server.get_state().inputBuffer.current_number_of_entities))
-        print("Processing at server: " + str(server.get_state().processBuffer.current_number_of_entities))
-        print("Processed at server: " + str(server.get_state().processBuffer.number_entered))
-        print("Finished: " + str(server.get_state().outputBuffer.number_entered))
+        print("Entered at server: " + str(server.get_state().input_buffer.number_entered))
+        print("Waiting at server: " + str(server.get_state().input_buffer.current_number_of_entities))
+        print("Processing at server: " + str(server.get_state().process_buffer.current_number_of_entities))
+        print("Processed at server: " + str(server.get_state().process_buffer.number_entered))
+        print("Finished: " + str(server.get_state().output_buffer.number_entered))
 
 
 if __name__ == '__main__':

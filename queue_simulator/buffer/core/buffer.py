@@ -27,7 +27,7 @@ class Buffer(Entity, ABC):
     def __init__(self,
                  name: str,
                  capacity: NumberProperty[float] = NumberProperty(float("inf")),
-                 policy: StringProperty = StringProperty(BufferPolicy.FIFO)):
+                 policy: StringProperty = StringProperty(str(BufferPolicy.FIFO))):
         """
         Args:
             name (str): Name of the buffer.
@@ -56,9 +56,9 @@ class Buffer(Entity, ABC):
 
     def get_content(self) -> List[Entity]:
         """Gets the content of the buffer"""
-        if self.policy == BufferPolicy.FIFO:
+        if self.policy.get_value() == BufferPolicy.FIFO:
             return self._content
-        elif self.policy == BufferPolicy.LIFO:
+        elif self.policy.get_value() == BufferPolicy.LIFO:
             return self._content[::-1]
         random_order = self._content.copy()
         shuffle(random_order)
@@ -68,9 +68,9 @@ class Buffer(Entity, ABC):
         """Gets the content of the buffer and empties the buffer"""
         data = self._content.copy()
         self._content = []
-        if self.policy == BufferPolicy.FIFO:
+        if self.policy.get_value() == BufferPolicy.FIFO:
             return data
-        elif self.policy == BufferPolicy.LIFO:
+        elif self.policy.get_value() == BufferPolicy.LIFO:
             return data[::-1]
         random_order = data.copy()
         shuffle(random_order)
@@ -79,11 +79,11 @@ class Buffer(Entity, ABC):
     def pop(self) -> Optional[Entity]:
         """Pops the next element in the buffer"""
         if self.current_number_of_entities > 0:
-            if self.policy == BufferPolicy.FIFO:
+            if self.policy.get_value() == BufferPolicy.FIFO:
                 return self._content.pop(0)
-            elif self.policy == BufferPolicy.LIFO:
+            elif self.policy.get_value() == BufferPolicy.LIFO:
                 return self._content.pop()
-            return self._content.pop(randint(0, self.current_number_of_entities))
+            return self._content.pop(randint(0, self.current_number_of_entities - 1))
         return None
 
     def get_properties(self) -> EntityProperties:

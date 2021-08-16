@@ -26,10 +26,10 @@ class TestSource(unittest.TestCase):
     def test_inter_arrival_time(self):
         """Should be able to create entities with a distribution expression as interarrival value"""
         # config
-        interArrivalTime = ExpressionProperty(PoissonDistribution(5))
-        entitiesPerArrival = ExpressionProperty(Value(1))
-        self.source.inter_arrival_time = interArrivalTime
-        self.source.entities_per_arrival = entitiesPerArrival
+        inter_arrival_time = ExpressionProperty(PoissonDistribution(5))
+        entities_per_arrival = ExpressionProperty(Value(1))
+        self.source.inter_arrival_time = inter_arrival_time
+        self.source.entities_per_arrival = entities_per_arrival
         # simulate
         self.experiment.simulation_control.start(stop_time=120)
         self.experiment.simulation_control.wait()
@@ -40,10 +40,10 @@ class TestSource(unittest.TestCase):
     def test_entities_per_arrival(self):
         """Should be able to create entities with a distribution expression as entities per arrival value"""
         # config
-        interArrivalTime = ExpressionProperty(Value(1))
-        entitiesPerArrival = ExpressionProperty(PoissonDistribution(5))
-        self.source.inter_arrival_time = interArrivalTime
-        self.source.entities_per_arrival = entitiesPerArrival
+        inter_arrival_time = ExpressionProperty(Value(1))
+        entities_per_arrival = ExpressionProperty(PoissonDistribution(5))
+        self.source.inter_arrival_time = inter_arrival_time
+        self.source.entities_per_arrival = entities_per_arrival
         # simulate
         self.experiment.simulation_control.start(stop_time=120)
         self.experiment.simulation_control.wait()
