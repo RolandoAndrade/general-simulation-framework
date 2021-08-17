@@ -76,7 +76,7 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
 
     @debug("Executing state transition")
     def state_transition(
-            self, input_models_values: DynamicSystemInput = None, event_time: float = 0
+            self, input_models_values: DynamicSystemInput = None, event_time: int = 0
     ):
         """Executes the state transition of the models. If an input is given,
         the models defined as its inputs will be ignored.
@@ -94,13 +94,13 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
         autonomous_models = self._execute_autonomous(event_time, input_models)
 
     def _execute_autonomous(
-            self, event_time: float, input_models: Set[DiscreteEventModel]
+            self, event_time: int, input_models: Set[DiscreteEventModel]
     ) -> Set[DiscreteEventModel]:
         """Executes autonomous transition for the given input and external
         events of the affected models.
 
         Args:
-            event_time (float): Time of the event.
+            event_time (int): Time of the event.
             input_models: Models that its state was changed by the external
                 transition.
         """

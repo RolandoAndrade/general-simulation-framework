@@ -159,7 +159,7 @@ class DiscreteEventModel(BaseModel):
         raise NotImplementedError
 
     @abstractmethod
-    def _time_advance_function(self, state: ModelState) -> float:
+    def _time_advance_function(self, state: ModelState) -> int:
         """ta(s)
 
         Implement the model’s time advance function ta. The time advance

@@ -81,13 +81,13 @@ class Source(DiscreteEventModel):
         """
         return state
 
-    def _time_advance_function(self, state: SourceState) -> float:
+    def _time_advance_function(self, state: SourceState) -> int:
         """Time for an autonomous event.
         Args:
             state (SourceState): Current state of the model.
         """
         if self.inter_arrival_time is not None:
-            return max(self.inter_arrival_time.get_value().evaluate(), 0.00001)
+            return round(self.inter_arrival_time.get_value().evaluate())
         return 0
 
     def _output_function(self, state: SourceState) -> List[Entity]:
