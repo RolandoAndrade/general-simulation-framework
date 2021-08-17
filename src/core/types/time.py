@@ -1,1 +1,1 @@
-Time = int
+Time = float

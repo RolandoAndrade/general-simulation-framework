@@ -6,6 +6,7 @@ from typing import Any, cast
 from core.debug.domain.debug import debug
 from core.entity.properties.expression_property import ExpressionProperty
 from core.mathematics.values.value import Value
+from core.types import Time
 from core.types.model_input import ModelInput
 from models.core.base_model import BaseModel, ModelState
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
@@ -31,11 +32,9 @@ class DiscreteEventModel(BaseModel):
             state (ModelState): Initial state of the model.
         """
         super().__init__(dynamic_system, name, state)
-        # Add the model to the dynamic system
-        self.schedule(self.get_time())
 
     @debug("Scheduling model")
-    def schedule(self, time: float):
+    def schedule(self, time: Time):
         """Schedules an autonomous event
 
         Args:
@@ -64,7 +63,7 @@ class DiscreteEventModel(BaseModel):
         return cast(DiscreteEventModel, super().add_path(path))
 
     @debug("Getting time")
-    def get_time(self) -> float:
+    def get_time(self) -> Time:
         """Gets the time of the next autonomous event."""
         try:
             return self._time_advance_function(self.get_state())
@@ -76,7 +75,7 @@ class DiscreteEventModel(BaseModel):
         return self._output_function(self.get_state())
 
     @debug("Executing state transition")
-    def state_transition(self, inputs: ModelInput = None, event_time: float = 0):
+    def state_transition(self, inputs: ModelInput = None, event_time: Time = 0):
         """Executes the state transition using the state given by the state
         transition function. If there are not inputs is an internal transition,
         otherwise it is an external transition.
@@ -84,7 +83,7 @@ class DiscreteEventModel(BaseModel):
         Args:
             inputs (ModelInput): Input trajectory x. If it is None, the state
                 transition is autonomous
-            event_time (float): Time of the event. If there are inputs and the
+            event_time (Time): Time of the event. If there are inputs and the
                 time is ta(s), it is an confluent transition.
         """
         new_state: ModelState
@@ -140,7 +139,7 @@ class DiscreteEventModel(BaseModel):
 
     @abstractmethod
     def _external_state_transition_function(
-            self, state: ModelState, inputs: ModelInput, event_time: float
+            self, state: ModelState, inputs: ModelInput, event_time: Time
     ) -> ModelState:
         """
         .. math:: \delta_ext((s,e), x)
@@ -159,7 +158,7 @@ class DiscreteEventModel(BaseModel):
         raise NotImplementedError
 
     @abstractmethod
-    def _time_advance_function(self, state: ModelState) -> int:
+    def _time_advance_function(self, state: ModelState) -> Time:
         """ta(s)
 
         Implement the model’s time advance function ta. The time advance

@@ -20,7 +20,7 @@ class SimulationTest(unittest.TestCase):
     def test_simulation_1(self):
         """Source - server - sink"""
         arrivals_mean_minutes = 0.25
-        arrivals_mean_ms = 0.25 * 60 * 1000
+        arrivals_mean_ms = arrivals_mean_minutes * 60 * 1000
         interarrival_time_seconds = ExponentialDistribution(arrivals_mean_ms)  # 0.25 * 60 mean second
         entities_per_arrival = Value(1)  # 1 arrival per time
         simulation_time_ms = 1000 * 60 * 60 * 2  # 2 hours
@@ -37,7 +37,7 @@ class SimulationTest(unittest.TestCase):
                         processing_time=processing_time
                         )
 
-        server.add(source)
+        source.add(server)
         label_source_out = Label(source.get_state().output_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
         label_server_in = Label(server.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
         label_server_out = Label(server.get_state().output_buffer.get_properties, BufferProperty.NUMBER_ENTERED)

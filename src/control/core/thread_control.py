@@ -7,6 +7,8 @@ from control.core.base_control import BaseControl
 
 from typing import TYPE_CHECKING
 
+from core.types import Time
+
 if TYPE_CHECKING:
     from simulation.core.base_simulator import BaseSimulator
 
@@ -21,9 +23,9 @@ class ThreadControl(BaseControl, ABC):
         BaseControl.__init__(self, simulator)
         _thread = Thread(target=self._execute)
 
-    def _start_thread(self, frequency: float = 0, wait_time: float = 0, stop_time: float = 0):
+    def _start_thread(self, frequency: Time = 0, wait_time: Time = 0, stop_time: Time = 0):
         self._thread = Thread(target=self._execute, args=(frequency, wait_time, stop_time,))
         self._thread.start()
 
-    def wait(self, timeout: float = None):
+    def wait(self, timeout: Time = None):
         self._thread.join(timeout)

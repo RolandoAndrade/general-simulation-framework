@@ -1,4 +1,4 @@
 from .random_distribution import RandomDistribution
 from .exponential_distribution import ExponentialDistribution
 from .poisson_distribution import PoissonDistribution
-from .trianular_distribution import TriangularDistribution
+from .triangular_distribution import TriangularDistribution

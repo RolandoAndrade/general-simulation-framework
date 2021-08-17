@@ -6,7 +6,7 @@ from reports.core.base_report import BaseReport
 from simulation.core.base_simulator import BaseSimulator
 
 if TYPE_CHECKING:
-    from core.types import DynamicSystemInput
+    from core.types import DynamicSystemInput, Time
     from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
         DiscreteEventDynamicSystem,
     )
@@ -18,7 +18,7 @@ class DiscreteEventSimulationEngine(BaseSimulator):
     _dynamic_system: DiscreteEventDynamicSystem
     """Dynamic system to be simulated."""
 
-    _last_event_time: int
+    _last_event_time: Time
     """Time of the last event recorded."""
 
     _is_output_up_to_update: bool
@@ -37,19 +37,19 @@ class DiscreteEventSimulationEngine(BaseSimulator):
         self._last_event_time = 0
         self._is_output_up_to_update = False
 
-    def get_time_of_next_event(self) -> int:
+    def get_time_of_next_event(self) -> Time:
         """Get time of the next event"""
         return self._dynamic_system.get_time_of_next_events()
 
-    def compute_next_state(self, inputs: DynamicSystemInput = None, time: int = 0):
+    def compute_next_state(self, inputs: DynamicSystemInput = None, time: Time = 0):
         """Compute the next state of the dynamic system
 
         Args:
             inputs (DynamicSystemInput): Input for the dynamic system.
-            time (int): Time of the event.
+            time (Time): Time of the event.
         """
         if (
-                time - self._last_event_time is self.get_time_of_next_event()
+                time - self._last_event_time == self.get_time_of_next_event()
         ):  # Time to change the output
             out = self.compute_output()
             if out:

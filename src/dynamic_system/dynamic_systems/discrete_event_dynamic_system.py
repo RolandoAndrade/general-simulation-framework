@@ -19,7 +19,7 @@ if TYPE_CHECKING:
     )
 
     DynamicSystemModels = Dict[str, DiscreteEventModel]
-    from core.types import DynamicSystemInput
+    from core.types import DynamicSystemInput, Time
 
 
 class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
@@ -43,12 +43,12 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
         self._scheduler = scheduler
 
     @debug("Scheduling model")
-    def schedule(self, model: DiscreteEventModel, time: float):
+    def schedule(self, model: DiscreteEventModel, time: Time):
         """Schedules an event at the specified time
 
         Args:
             model (DiscreteEventModel): Model with an autonomous event scheduled
-            time (float): Time to execute event
+            time (Time): Time to execute event
         """
         self._scheduler.schedule(model, time)
 
@@ -76,7 +76,7 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
 
     @debug("Executing state transition")
     def state_transition(
-            self, input_models_values: DynamicSystemInput = None, event_time: int = 0
+            self, input_models_values: DynamicSystemInput = None, event_time: Time = 0
     ):
         """Executes the state transition of the models. If an input is given,
         the models defined as its inputs will be ignored.
@@ -84,7 +84,7 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
         Args:
             input_models_values (DynamicSystemInput): Dictionary with key the
                 identifier of the model.
-            event_time (float): Time of the event.
+            event_time (Time): Time of the event.
         """
         # subtract time
         self._scheduler.update_time(event_time)
@@ -94,13 +94,13 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
         autonomous_models = self._execute_autonomous(event_time, input_models)
 
     def _execute_autonomous(
-            self, event_time: int, input_models: Set[DiscreteEventModel]
+            self, event_time: Time, input_models: Set[DiscreteEventModel]
     ) -> Set[DiscreteEventModel]:
         """Executes autonomous transition for the given input and external
         events of the affected models.
 
         Args:
-            event_time (int): Time of the event.
+            event_time (Time): Time of the event.
             input_models: Models that its state was changed by the external
                 transition.
         """
@@ -195,14 +195,14 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
         return affected_models, affected_models_inputs
 
     def _execute_external(
-            self, input_model_values: DynamicSystemInput, event_time: float
+            self, input_model_values: DynamicSystemInput, event_time: Time
     ) -> Set[DiscreteEventModel]:
         """Executes external transition for the given input.
 
         Args:
             input_model_values (DynamicSystemInput): Dictionary with key the
                 identifier of the model.
-            event_time (float): Time of the event.
+            event_time (Time): Time of the event.
         """
         input_models = set()
         if input_model_values is not None:

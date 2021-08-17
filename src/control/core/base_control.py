@@ -5,6 +5,7 @@ from abc import abstractmethod
 from typing import TYPE_CHECKING, Dict
 
 from core.debug.domain.debug import debug
+from core.types import Time
 
 if TYPE_CHECKING:
     from models.models.discrete_event_model import ModelInput
@@ -30,13 +31,13 @@ class BaseControl:
         self._is_paused = True
 
     @abstractmethod
-    def _execute(self, frequency: float = 0, wait_time: float = 0, stop_time: float = 0):
+    def _execute(self, frequency: Time = 0, wait_time: Time = 0, stop_time: Time = 0):
         """Executes the simulation loop number of seconds.
 
         Args:
-            frequency (float): Frequency of the simulation computation.
-            wait_time (float): Delay execution for a given.
-            stop_time (float): Duration of the simulation.
+            frequency (Time): Frequency of the simulation computation.
+            wait_time (Time): Delay execution for a given.
+            stop_time (Time): Duration of the simulation.
         """
         raise NotImplementedError
 
@@ -44,17 +45,17 @@ class BaseControl:
     def start(
         self,
         start_input: Dict[str, ModelInput] = None,
-        frequency: float = 0,
-        stop_time: float = 0,
-        wait_time: float = 0,
+        frequency: Time = 0,
+        stop_time: Time = 0,
+        wait_time: Time = 0,
     ):
         """Starts the simulation
 
         Args:
             start_input: Input of the dynamic system.
-            frequency (float): Frequency of the simulation computation.
-            wait_time (float): Delay execution for a given number of seconds.
-            stop_time: Time of the simulation
+            frequency (Time): Frequency of the simulation computation.
+            stop_time (Time): Time of the simulation
+            wait_time (Time): Delay execution for a given number of seconds.
         """
         raise NotImplementedError
 
@@ -69,6 +70,10 @@ class BaseControl:
         raise NotImplementedError
 
     @abstractmethod
-    def wait(self, timeout: float = None):
-        """Waits the simulation end"""
+    def wait(self, timeout: Time = None):
+        """Waits the simulation end
+
+        Args:
+            timeout (Time): Time to wait.
+        """
         raise NotImplementedError

@@ -5,6 +5,7 @@ from typing import TYPE_CHECKING, List, Set, cast, Any
 
 from core.debug.domain.debug import debug
 from core.debug.infrastructure.providers import TableProvider
+from core.types import Time
 from dynamic_system.future_event_list.scheduled_model import ScheduledModel
 
 if TYPE_CHECKING:
@@ -24,11 +25,12 @@ class Scheduler:
         self._future_event_list = []
 
     @debug("Scheduling model")
-    def schedule(self, model: DiscreteEventModel, time: int):
-        """Schedule an event at the specified time
+    def schedule(self, model: DiscreteEventModel, time: Time):
+        """Schedule an event at the specified time.
+
         Args:
             model (DiscreteEventModel): DiscreteEventModel with an autonomous event scheduled
-            time (int): Time to execute an autonomous event
+            time (Time): Time to execute an autonomous event
         """
         if time > 0:
             sm = ScheduledModel(model, time)
@@ -36,18 +38,18 @@ class Scheduler:
                 heapq.heappush(self._future_event_list, sm)
 
     @debug("Getting time of next event")
-    def get_time_of_next_event(self) -> int:
+    def get_time_of_next_event(self) -> Time:
         """Gets the time of the next event"""
         if len(self._future_event_list) > 0:
             return self._future_event_list[0].get_time()
         return 0
 
     @debug("Updating time")
-    def update_time(self, delta_time: int):
+    def update_time(self, delta_time: Time):
         """Updates the time of the events
 
         Args:
-            delta_time (int): Time that has passed since the last update
+            delta_time (Time): Time that has passed since the last update
         """
         for i in range(len(self._future_event_list)):
             self._future_event_list[i].decrease_time(delta_time)
