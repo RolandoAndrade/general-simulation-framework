@@ -165,11 +165,11 @@ class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
         affected_models = set()
         insert_input: Dict[DiscreteEventModel, ModelInput] = {}
         for emitter_model in self._outputs:
-            emitter_model = cast(DiscreteEventModel, emitter_model)
+            emitter_model: DiscreteEventModel = emitter_model
             # get the correct paths
             paths = self._get_effective_paths(emitter_model)
             for path in paths:
-                affected_model = cast(DiscreteEventModel, path.get_destination_model())
+                affected_model: DiscreteEventModel = cast(Any, path.get_destination_model())
                 affected_models.add(affected_model)
                 if affected_model in insert_input:
                     insert_input[affected_model][emitter_model.get_id()] = self._outputs[emitter_model]
