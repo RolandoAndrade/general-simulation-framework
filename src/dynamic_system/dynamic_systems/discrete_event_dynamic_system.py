@@ -193,5 +193,5 @@ class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
                 weights.append(path.get_weight())
                 effective_path.append(path)
             choice = np.random.choice(len(weights), p=weights)
-            return set(effective_path[choice])
+            return {effective_path[choice]}
         return set()
