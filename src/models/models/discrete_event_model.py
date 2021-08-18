@@ -82,7 +82,7 @@ class DiscreteEventModel(BaseModel):
         if inputs is None:
             # is an autonomous event
             new_state = self._internal_state_transition_function(self.get_state())
-        elif event_time is self.get_time():
+        elif event_time == self.get_time() or event_time == 0:
             # is an confluent event
             new_state = self._confluent_state_transition_function(self.get_state(), inputs)
         else:

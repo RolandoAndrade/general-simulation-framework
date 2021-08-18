@@ -41,7 +41,7 @@ class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
         Args:
             scheduler (Scheduler): Future event list manager
         """
-        super(BaseDynamicSystem, self).__init__()
+        BaseDynamicSystem.__init__(self)
         self._outputs = {}
         self._scheduler = scheduler
 

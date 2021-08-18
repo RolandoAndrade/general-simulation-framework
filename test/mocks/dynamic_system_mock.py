@@ -5,4 +5,4 @@ class DynamicSystemMock(DiscreteEventDynamicSystem):
     """Discrete event dynamic system for testing"""
     def __init__(self):
         """Constructs the dynamic system"""
-        super(DiscreteEventDynamicSystem, self).__init__()
+        DiscreteEventDynamicSystem.__init__(self)

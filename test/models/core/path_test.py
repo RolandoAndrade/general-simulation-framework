@@ -1,5 +1,6 @@
 import unittest
 
+from core.entity.core import Entity
 from core.entity.properties import ExpressionProperty
 from core.mathematics.values.value import Value
 from dynamic_system.core import BaseDynamicSystem
@@ -22,6 +23,10 @@ class PathTest(unittest.TestCase):
         self.model_1 = BaseModelMock(self.dynamic_system, "model 1")
         self.model_2 = BaseModelMock(self.dynamic_system, "model 2")
         self.path = Path(self.model_1, self.model_2, ExpressionProperty(Value(1)))
+
+    def tearDown(self) -> None:
+        """Remove changes of the tests."""
+        Entity._saved_names = set()
 
     def test_get_source_model(self):
         """Should return the source model"""
