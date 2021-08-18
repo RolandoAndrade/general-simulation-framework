@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+from decimal import Decimal
+
+from core.config import FLOATING_POINT_DIGITS
 from core.mathematics.distributions.random_distribution import RandomDistribution
 import numpy as np
 
@@ -28,9 +31,9 @@ class TriangularDistribution(RandomDistribution):
         self.__mode = mode
         self.__maximum = maximum
 
-    def generate(self) -> int:
+    def generate(self) -> Decimal:
         """Generates a value following the distribution"""
-        return np.random.triangular(self.__minimum, self.__mode, self.__maximum)
+        return Decimal(round(np.random.triangular(self.__minimum, self.__mode, self.__maximum), FLOATING_POINT_DIGITS))
 
     def generate_list(self, size: int) -> np.ndarray:
         """Generates a ndarray of values following the distribution
@@ -40,6 +43,6 @@ class TriangularDistribution(RandomDistribution):
         """
         return np.random.triangular(self.__minimum, self.__mode, self.__maximum, size)
 
-    def evaluate(self) -> int:
+    def evaluate(self) -> Decimal:
         """Evaluates the expression"""
         return self.generate()

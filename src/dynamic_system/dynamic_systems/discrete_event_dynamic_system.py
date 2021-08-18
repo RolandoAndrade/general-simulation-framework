@@ -58,7 +58,7 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
         return self._scheduler.get_next_models()
 
     @debug("Getting time of next event")
-    def get_time_of_next_events(self) -> int:
+    def get_time_of_next_events(self) -> Time:
         """Get time of the next event"""
         return self._scheduler.get_time_of_next_event()
 

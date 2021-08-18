@@ -1,7 +1,6 @@
 import unittest
 
 from core.entity.properties import AnyProperty, ExpressionProperty, NumberProperty
-from core.mathematics.distributions.poisson_distribution import PoissonDistribution
 from core.mathematics.values.value import Value
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from experiments.experiment_builders.discrete_event_experiment import DiscreteEventExperiment

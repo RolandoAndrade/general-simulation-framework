@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import heapq
+from decimal import Decimal
 from typing import TYPE_CHECKING, List, Set, cast, Any
 
 from core.debug.domain.debug import debug
@@ -42,7 +43,7 @@ class Scheduler:
         """Gets the time of the next event"""
         if len(self._future_event_list) > 0:
             return self._future_event_list[0].get_time()
-        return 0
+        return Decimal(0)
 
     @debug("Updating time")
     def update_time(self, delta_time: Time):

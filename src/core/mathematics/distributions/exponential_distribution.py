@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+from decimal import Decimal
+
+from core.config import FLOATING_POINT_DIGITS
 from core.mathematics.distributions.random_distribution import RandomDistribution
 import numpy as np
 
@@ -18,9 +21,9 @@ class ExponentialDistribution(RandomDistribution):
         """
         self.__mean = mean
 
-    def generate(self) -> int:
+    def generate(self) -> Decimal:
         """Generates a value following the distribution"""
-        return np.random.exponential(self.__mean)
+        return Decimal(round(np.random.exponential(self.__mean), FLOATING_POINT_DIGITS))
 
     def generate_list(self, size: int) -> np.ndarray:
         """Generates a ndarray of values following the distribution
@@ -30,6 +33,6 @@ class ExponentialDistribution(RandomDistribution):
         """
         return np.random.exponential(self.__mean, size)
 
-    def evaluate(self) -> int:
+    def evaluate(self) -> Decimal:
         """Evaluates the expression"""
         return self.generate()

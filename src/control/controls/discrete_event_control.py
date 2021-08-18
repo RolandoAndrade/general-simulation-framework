@@ -29,7 +29,7 @@ class DiscreteEventControl(ThreadControl):
                 executed.
         """
         ThreadControl.__init__(self, simulator)
-        self._time = 0
+        self._time = Time(0)
         self._is_paused = False
 
     def _execute(self, frequency: Time = 0, wait_time: Time = 0, stop_time: Time = 0):

@@ -1,4 +1,5 @@
 import unittest
+from decimal import getcontext
 
 from core.mathematics.distributions import ExponentialDistribution, TriangularDistribution
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
@@ -16,14 +17,14 @@ class SimulationTest(unittest.TestCase):
 
     def setUp(self) -> None:
         self.ds = DiscreteEventDynamicSystem()
+        getcontext().prec = 12
 
     def test_simulation_1(self):
         """Source - server - sink"""
-        arrivals_mean_minutes = 0.25
-        arrivals_mean_ms = arrivals_mean_minutes * 60 * 1000
-        interarrival_time_seconds = ExponentialDistribution(arrivals_mean_ms)  # 0.25 * 60 mean second
-        entities_per_arrival = Value(1)  # 1 arrival per time
-        simulation_time_ms = 1000 * 60 * 60 * 2  # 2 hours
+        print(getcontext())
+        interarrival_time_seconds = ExponentialDistribution(0.25)  # 0.25 mean interarrival time
+        entities_per_arrival = Value(1)  # 1 entity per arrival
+        simulation_time_minutes = 60 * 2  # 2 hours
         processing_time = TriangularDistribution(0.1, 0.2, 0.3)  # 2 seconds
 
         source = Source(self.ds,
@@ -43,7 +44,7 @@ class SimulationTest(unittest.TestCase):
         label_server_out = Label(server.get_state().output_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
 
         experiment = DiscreteEventExperiment(self.ds)
-        experiment.simulation_control.start(stop_time=simulation_time_ms)
+        experiment.simulation_control.start(stop_time=simulation_time_minutes)
         experiment.simulation_control.wait()
         print("Generated: " + str(source.get_state().output_buffer.number_entered))
         print("Entered at server: " + str(server.get_state().input_buffer.number_entered))

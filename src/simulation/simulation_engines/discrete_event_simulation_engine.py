@@ -4,9 +4,10 @@ from typing import TYPE_CHECKING
 
 from reports.core.base_report import BaseReport
 from simulation.core.base_simulator import BaseSimulator
+from core.types import Time
 
 if TYPE_CHECKING:
-    from core.types import DynamicSystemInput, Time
+    from core.types import DynamicSystemInput
     from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
         DiscreteEventDynamicSystem,
     )
@@ -34,7 +35,7 @@ class DiscreteEventSimulationEngine(BaseSimulator):
         """
         super().__init__(dynamic_system, base_generator)
         self._dynamic_system = dynamic_system
-        self._last_event_time = 0
+        self._last_event_time = Time(0)
         self._is_output_up_to_update = False
 
     def get_time_of_next_event(self) -> Time:

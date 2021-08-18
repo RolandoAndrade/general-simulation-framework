@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from typing import TYPE_CHECKING
+
+from core.config import FLOATING_POINT_DIGITS
 from core.debug.domain.debug import debug
 from core.types import Time
 
@@ -35,7 +37,7 @@ class ScheduledModel:
         Args:
             time (int): Time variation.
         """
-        self._time = max(self._time - time, 0)
+        self._time = max(round(self._time - time, FLOATING_POINT_DIGITS), 0)
         return self._time
 
     def __lt__(self, other: ScheduledModel):
