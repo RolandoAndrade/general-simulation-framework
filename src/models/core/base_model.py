@@ -3,7 +3,6 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any, Set, TYPE_CHECKING, cast
 
-
 from core.debug.domain.debug import debug
 from core.entity.core.entity import Entity
 from core.entity.properties.expression_property import ExpressionProperty
@@ -79,14 +78,10 @@ class BaseModel(Entity):
         return self.__current_dynamic_system.link(Path(self, model, weight, name))
 
     @debug("Removing")
-    def remove(self, model: BaseModel):
-        """Removes an specified output
-
-        Args:
-            model (BaseModel): Model to be removed.
-        """
-        if model in self.__output_models:
-            self.__output_models.remove(cast(Any, model))
+    def remove(self):
+        """Removes the model from the dynamic system"""
+        self.__current_dynamic_system.remove(self)
+        Entity._saved_names.remove(self.get_id())
 
     @debug("Retrieving dynamic system")
     def get_dynamic_system(self) -> BaseDynamicSystem:

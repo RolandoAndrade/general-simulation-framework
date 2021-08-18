@@ -76,3 +76,6 @@ class Path(Entity):
         if isinstance(other, Path):
             return super().__eq__(other)
         return self._to == other or self._from == other
+
+    def __hash__(self):
+        return hash(str(self))

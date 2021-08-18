@@ -40,7 +40,7 @@ class BaseDynamicSystem:
             raise Exception("Invalid dynamic system")
         self._models.add(model)
 
-    @debug("Adding model to the dynamic system")
+    @debug("Adding path to the dynamic system")
     def link(self, path: Path) -> BaseModel:
         """Adds a path between two nodes.
 
@@ -53,6 +53,18 @@ class BaseDynamicSystem:
         else:
             self._paths[origin] = {path}
         return origin
+
+    @debug("Deleting path from the dynamic system")
+    def unlink(self, path: Path):
+        """Removes a path between two nodes.
+
+        Args:
+            path (Path): Path to be deleted.
+        """
+        origin = path.get_source_model()
+        if origin in self._paths:
+            if path in self._paths[origin]:
+                self._paths[origin].remove(path)
 
     @debug("Removing model of the dynamic system")
     def remove(self, model: BaseModel):
