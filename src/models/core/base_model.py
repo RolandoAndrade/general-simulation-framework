@@ -86,9 +86,9 @@ class BaseModel(Entity):
         Args:
             path (Path): Connection to a model.
         """
-        self.__current_dynamic_system.add(path.get_model())
+        self.__current_dynamic_system.add(path.get_source_model())
         self.__output_models.add(path)
-        return path.get_model()
+        return path.get_source_model()
 
     @debug("Removing output")
     def remove(self, model: BaseModel):

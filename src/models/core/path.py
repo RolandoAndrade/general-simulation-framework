@@ -15,6 +15,9 @@ class Path(Entity):
     _serial_id = 0
     """Serial of the path"""
 
+    _from: BaseModel
+    """Final model."""
+
     _to: BaseModel
     """Final model."""
 
@@ -27,7 +30,7 @@ class Path(Entity):
             "Weight": self._weight
         }
 
-    def __init__(self, to: BaseModel, weight: ExpressionProperty, name: str = None):
+    def __init__(self, from_model: BaseModel, to_model: BaseModel, weight: ExpressionProperty, name: str = None):
         """
         Args:
             to (BaseModel): Destination model.
@@ -39,10 +42,15 @@ class Path(Entity):
             Path._serial_id = Path._serial_id + 1
         else:
             super().__init__(name)
-        self._to = to
+        self._from = from_model
+        self._to = to_model
         self._weight = weight
 
-    def get_model(self) -> BaseModel:
+    def get_source_model(self) -> BaseModel:
+        """Return the source model"""
+        return self._from
+
+    def get_destination_model(self) -> BaseModel:
         """Return the destination model"""
         return self._to
 
