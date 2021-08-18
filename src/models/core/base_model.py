@@ -28,9 +28,6 @@ class BaseModel(Entity):
     __current_state: ModelState
     """Current state of the model"""
 
-    __output_models: Set[Path]
-    """Output models of the model"""
-
     @debug("Initialized Model", True)
     def __init__(self, dynamic_system: BaseDynamicSystem, name: str = None,
                  state: ModelState = None):

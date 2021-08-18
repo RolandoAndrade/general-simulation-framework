@@ -4,14 +4,14 @@ from abc import abstractmethod
 
 from core.debug.domain.debug import debug
 
-from typing import Any, TYPE_CHECKING, Dict
+from typing import Any, TYPE_CHECKING, Dict, Set
 
 DynamicSystemOutput = Dict[str, Any]
 
 if TYPE_CHECKING:
     from models.models.discrete_event_model import BaseModel
 
-    DynamicSystemModels = Dict[str, BaseModel]
+    DynamicSystemModels = Set[BaseModel]
 
 
 class BaseDynamicSystem:
@@ -19,7 +19,7 @@ class BaseDynamicSystem:
     """Models of the dynamic system"""
 
     def __init__(self):
-        self._models = {}
+        self._models = set()
 
     @debug("Adding model to the dynamic system")
     def add(self, model: BaseModel):
@@ -30,7 +30,7 @@ class BaseDynamicSystem:
         """
         if model.get_dynamic_system() != self:
             raise Exception("Invalid dynamic system")
-        self._models[model.get_id()] = model
+        self._models.add(model)
 
     @debug("Removing model of the dynamic system")
     def remove(self, model: BaseModel):
@@ -39,11 +39,8 @@ class BaseDynamicSystem:
         Args:
             model (BaseModel): Model to be removed.
         """
-        if model.get_id() in self._models:
-            self._models.pop(model.get_id())
-            for m in self._models:
-                # Removes the model from all the existing models
-                self._models[m].remove(model)
+        if model in self._models:
+            self._models.remove(model)
         else:
             raise Exception("Model not found")
 
