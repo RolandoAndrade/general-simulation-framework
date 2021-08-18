@@ -27,7 +27,8 @@ class Path(Entity):
     def __init__(self, from_model: BaseModel, to_model: BaseModel, weight: ExpressionProperty, name: str = None):
         """
         Args:
-            to (BaseModel): Destination model.
+            from_model (BaseModel): Source model of the path.
+            to_model (BaseModel): Destination model of the path.
             weight (ExpressionProperty): Weight of the connection.
             name (str): Name of the path.
         """
@@ -59,10 +60,19 @@ class Path(Entity):
         }
 
     def set_weight(self, weight: ExpressionProperty):
-        """Sets the weight of the path"""
+        """Sets the weight of the path
+
+        Args:
+            weight (ExpressionProperty): Weight of the path.
+        """
         self._weight = weight
 
     def __eq__(self, other):
+        """Checks if the path is equal or contains the given model.
+
+        Args:
+            other: Other model or path.
+        """
         if isinstance(other, Path):
             return super().__eq__(other)
         return self._to == other or self._from == other
