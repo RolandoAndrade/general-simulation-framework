@@ -40,6 +40,7 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
             scheduler (Scheduler): Future event list manager
         """
         super().__init__()
+        self._outputs = {}
         self._scheduler = scheduler
 
     @debug("Scheduling model")

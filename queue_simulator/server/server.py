@@ -3,6 +3,7 @@ from typing import Any, List, Union, Dict
 from core.entity.core import Entity, EntityProperties
 from core.entity.properties import ExpressionProperty
 from core.expresions.expression import Expression
+from core.types import Time
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from models.models import DiscreteEventModel
 from queue_simulator.buffer.buffers import InputBuffer, OutputBuffer, ProcessBuffer
@@ -63,7 +64,7 @@ class Server(DiscreteEventModel):
             self._process(state)
         return state
 
-    def _time_advance_function(self, state: ServerState) -> float:
+    def _time_advance_function(self, state: ServerState) -> Time:
         return state.processing_remaining_time.get_value()
 
     def _output_function(self, state: ServerState) -> Any:

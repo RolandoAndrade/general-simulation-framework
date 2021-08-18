@@ -1,6 +1,7 @@
 import unittest
 from decimal import getcontext
 
+from core.config import FLOATING_POINT_DIGITS
 from core.mathematics.distributions import ExponentialDistribution, TriangularDistribution
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
 from experiments.experiment_builders.discrete_event_experiment import DiscreteEventExperiment
@@ -21,6 +22,7 @@ class SimulationTest(unittest.TestCase):
 
     def test_simulation_1(self):
         """Source - server - sink"""
+        getcontext().prec = FLOATING_POINT_DIGITS
         print(getcontext())
         interarrival_time_seconds = ExponentialDistribution(0.25)  # 0.25 mean interarrival time
         entities_per_arrival = Value(1)  # 1 entity per arrival

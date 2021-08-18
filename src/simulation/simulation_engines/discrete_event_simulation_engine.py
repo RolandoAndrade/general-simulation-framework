@@ -42,7 +42,7 @@ class DiscreteEventSimulationEngine(BaseSimulator):
         """Get time of the next event"""
         return self._dynamic_system.get_time_of_next_events()
 
-    def compute_next_state(self, inputs: DynamicSystemInput = None, time: Time = 0):
+    def compute_next_state(self, inputs: DynamicSystemInput = None, time: Time = Time(0)):
         """Compute the next state of the dynamic system
 
         Args:

@@ -51,6 +51,7 @@ class Source(DiscreteEventModel):
         self.inter_arrival_time = inter_arrival_time
         self.entity_emitter = entity_emitter
         self.entities_per_arrival = entities_per_arrival
+        self.state_transition(event_time=Time(0))
 
     def __are_valid_properties(self):
         """Checks if the properties are valid"""
