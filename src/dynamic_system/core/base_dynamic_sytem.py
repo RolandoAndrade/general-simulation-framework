@@ -15,13 +15,17 @@ if TYPE_CHECKING:
 
 
 class BaseDynamicSystem:
+    """Abstract dynamic system"""
+
     _models: DynamicSystemModels
     """Models of the dynamic system"""
 
     _paths: DynamicSystemPaths
     """Paths of the dynamic system. Dict[Origin, Set[Output]]"""
 
+    @debug("Started the dynamic system", after=True)
     def __init__(self):
+        """Creates a dynamic system"""
         self._models = set()
         self._paths = {}
 
@@ -37,7 +41,7 @@ class BaseDynamicSystem:
         self._models.add(model)
 
     @debug("Adding model to the dynamic system")
-    def link(self, path: Path):
+    def link(self, path: Path) -> BaseModel:
         """Adds a path between two nodes.
 
         Args:
@@ -48,6 +52,7 @@ class BaseDynamicSystem:
             self._paths[origin].add(path)
         else:
             self._paths[origin] = {path}
+        return origin
 
     @debug("Removing model of the dynamic system")
     def remove(self, model: BaseModel):
@@ -62,7 +67,7 @@ class BaseDynamicSystem:
             for path in self._paths:
                 new_paths = []
                 for p in self._paths[path]:
-                    if p.get_destination_model() != model and p.get_source_model() != model:
+                    if p != model:
                         new_paths = new_paths.append(p)
                 self._paths[path] = set(new_paths)
         else:
@@ -70,8 +75,15 @@ class BaseDynamicSystem:
 
     @abstractmethod
     def get_output(self) -> DynamicSystemOutput:
+        """Gets the output of the dynamic system."""
         raise NotImplementedError
 
     @abstractmethod
     def state_transition(self, *args, **kwargs) -> DynamicSystemOutput:
+        """Executes the state transition of the dynamic system.
+
+        Args:
+            *args:
+            **kwargs:
+        """
         raise NotImplementedError

@@ -70,25 +70,14 @@ class BaseModel(Entity):
     def add(self, model: BaseModel,
             weight: ExpressionProperty = ExpressionProperty(Value(1)),
             name: str = None):
-        """Adds a model as an input for the current model in the dynamic system and returns the model added.
+        """Current model will be the input for the given model.
         
         Args:
             model (BaseModel): Output model to be added.
             weight (ExpressionProperty): Weight of the path.
             name (str): Name of the path.
         """
-        return self.add_path(Path(model, weight, name))
-
-    @debug("Adding path")
-    def add_path(self, path: Path):
-        """Adds a path for the current model in the dynamic system and returns the model added.
-
-        Args:
-            path (Path): Connection to a model.
-        """
-        self.__current_dynamic_system.add(path.get_source_model())
-        self.__output_models.add(path)
-        return path.get_source_model()
+        return self.__current_dynamic_system.link(Path(self, model, weight, name))
 
     @debug("Removing output")
     def remove(self, model: BaseModel):

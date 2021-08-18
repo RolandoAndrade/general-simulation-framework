@@ -24,12 +24,6 @@ class Path(Entity):
     _weight: ExpressionProperty
     """Weight of the path"""
 
-    def get_properties(self) -> EntityProperties:
-        """Lists the properties of the entity"""
-        return {
-            "Weight": self._weight
-        }
-
     def __init__(self, from_model: BaseModel, to_model: BaseModel, weight: ExpressionProperty, name: str = None):
         """
         Args:
@@ -58,11 +52,17 @@ class Path(Entity):
         """Return the evaluation of the weight."""
         return self._weight.get_value().evaluate()
 
+    def get_properties(self) -> EntityProperties:
+        """Lists the properties of the entity"""
+        return {
+            "Weight": self._weight
+        }
+
+    def set_weight(self, weight: ExpressionProperty):
+        """Sets the weight of the path"""
+        self._weight = weight
+
     def __eq__(self, other):
-        return self._to == other
-
-    def __hash__(self):
-        return hash(self._to)
-
-    def __lt__(self, other):
-        return self.get_weight() < other.get_weight()
+        if isinstance(other, Path):
+            return super().__eq__(other)
+        return self._to == other or self._from == other

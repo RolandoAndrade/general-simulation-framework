@@ -1,13 +1,10 @@
 from __future__ import annotations
 from abc import ABC
-from typing import TYPE_CHECKING, Dict, Set, cast
+from typing import TYPE_CHECKING, Dict, Set, cast, Any
 
 from core.debug.domain.debug import debug
 
-from dynamic_system.core.base_dynamic_sytem import (
-    BaseDynamicSystem,
-    DynamicSystemOutput,
-)
+from dynamic_system.core.base_dynamic_sytem import BaseDynamicSystem
 from dynamic_system.future_event_list.scheduler import Scheduler
 from models.core.path import Path
 import numpy as np
@@ -20,6 +17,7 @@ if TYPE_CHECKING:
 
     DynamicSystemModels = Set[DiscreteEventModel]
     DynamicSystemPaths = Dict[DiscreteEventModel, Set[Path]]
+    DynamicSystemOutput = Dict[DiscreteEventModel, Any]
     from core.types import DynamicSystemInput, Time
 
 

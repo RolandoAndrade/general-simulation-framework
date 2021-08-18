@@ -1,6 +1,8 @@
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 
 
-class MockDynamicSystem(DiscreteEventDynamicSystem):
+class DynamicSystemMock(DiscreteEventDynamicSystem):
     """Discrete event dynamic system for testing"""
-    pass
+    def __init__(self):
+        """Constructs the dynamic system"""
+        super(DiscreteEventDynamicSystem, self).__init__()
