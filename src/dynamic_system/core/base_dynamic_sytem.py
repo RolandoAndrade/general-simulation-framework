@@ -65,6 +65,8 @@ class BaseDynamicSystem:
         if origin in self._paths:
             if path in self._paths[origin]:
                 self._paths[origin].remove(path)
+                if len(self._paths[origin]) == 0:
+                    self._paths.pop(origin, 1)
 
     @debug("Removing model of the dynamic system")
     def remove(self, model: BaseModel):
@@ -80,7 +82,7 @@ class BaseDynamicSystem:
                 new_paths = []
                 for p in self._paths[path]:
                     if p != model:
-                        new_paths = new_paths.append(p)
+                        new_paths.append(p)
                 self._paths[path] = set(new_paths)
         else:
             raise Exception("Model not found")

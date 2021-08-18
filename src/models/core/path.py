@@ -33,7 +33,7 @@ class Path(Entity):
             name (str): Name of the path.
         """
         if name is None:
-            super().__init__("model" + str(Path._serial_id))
+            super().__init__("path" + str(Path._serial_id))
             Path._serial_id = Path._serial_id + 1
         else:
             super().__init__(name)
