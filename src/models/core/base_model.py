@@ -45,7 +45,6 @@ class BaseModel(Entity):
         else:
             super().__init__(name)
         self.set_up_state(state)
-        self.__output_models = set()
         # Set dynamic system
         self.__current_dynamic_system = dynamic_system
         self.__current_dynamic_system.add(self)
@@ -79,7 +78,7 @@ class BaseModel(Entity):
         """
         return self.__current_dynamic_system.link(Path(self, model, weight, name))
 
-    @debug("Removing output")
+    @debug("Removing")
     def remove(self, model: BaseModel):
         """Removes an specified output
 
@@ -88,11 +87,6 @@ class BaseModel(Entity):
         """
         if model in self.__output_models:
             self.__output_models.remove(cast(Any, model))
-
-    @debug("Getting output models")
-    def get_output_models(self) -> Set[Path]:
-        """Returns the output models of the current model"""
-        return self.__output_models
 
     @debug("Retrieving dynamic system")
     def get_dynamic_system(self) -> BaseDynamicSystem:

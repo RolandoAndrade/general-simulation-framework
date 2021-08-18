@@ -2,26 +2,25 @@ import unittest
 
 from core.entity.properties import ExpressionProperty
 from core.mathematics.values.value import Value
-from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from models.core import Path
-from models.models import DiscreteEventModel
+from dynamic_system.core import BaseDynamicSystem
+from models.core import Path, BaseModel
+from test.mocks.base_model_mock import BaseModelMock
 from test.mocks.dynamic_system_mock import DynamicSystemMock
-from test.mocks.model_mock import ModelMock
 
 
 class PathTest(unittest.TestCase):
     """Path tests"""
-    dynamic_system: DiscreteEventDynamicSystem
+    dynamic_system: BaseDynamicSystem
 
-    model_1: DiscreteEventModel
-    model_2: DiscreteEventModel
+    model_1: BaseModel
+    model_2: BaseModel
     path: Path
 
     def setUp(self) -> None:
         """Set ups tests"""
         self.dynamic_system = DynamicSystemMock()
-        self.model_1 = ModelMock(self.dynamic_system, "model 1")
-        self.model_2 = ModelMock(self.dynamic_system, "model 2")
+        self.model_1 = BaseModelMock(self.dynamic_system, "model 1")
+        self.model_2 = BaseModelMock(self.dynamic_system, "model 2")
         self.path = Path(self.model_1, self.model_2, ExpressionProperty(Value(1)))
 
     def test_get_source_model(self):

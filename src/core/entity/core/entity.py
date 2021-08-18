@@ -12,7 +12,7 @@ class Entity:
     _id: str
     """Identification of the entity."""
 
-    _saved_names: Set[str] = ["DYNAMIC_SYSTEM_CALL"]
+    _saved_names: Set[str] = {"DYNAMIC_SYSTEM_CALL"}
     """Static list of entities saved."""
 
     def __init__(self, name: str):
@@ -25,9 +25,10 @@ class Entity:
             name (str): Identifier of the entity.
         """
         if name in Entity._saved_names:
-            raise Exception("Name already taken by another entity")
+            raise NameError("Name already taken by another entity")
         else:
             self._id = name
+            self._saved_names.add(name)
 
     def get_id(self) -> str:
         """Gets the identifier of the entity."""
