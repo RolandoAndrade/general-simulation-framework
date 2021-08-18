@@ -6,6 +6,8 @@ from core.debug.domain.debug import debug
 
 from typing import Any, TYPE_CHECKING, Dict, Set
 
+from graphviz import Digraph
+
 if TYPE_CHECKING:
     from models.core import Path, BaseModel
 
@@ -101,3 +103,14 @@ class BaseDynamicSystem:
             **kwargs:
         """
         raise NotImplementedError
+
+    def show(self, file_name: str = 'dynamic_system'):
+        """Shows a graph of the dynamic system"""
+        dg = Digraph()
+        for model in self._models:
+            dg.node(model.get_id(), model.get_id())
+        for path in self._paths:
+            for p in self._paths[path]:
+                dg.edge(path.get_id(), p.get_destination_model().get_id())
+
+        dg.render(file_name, view=True)

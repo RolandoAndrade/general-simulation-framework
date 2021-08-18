@@ -88,6 +88,17 @@ class BaseDynamicSystemTest(unittest.TestCase):
         self.assertTrue(m1 not in self.dynamic_system._paths)
         self.assertEqual({m32}, self.dynamic_system._paths[m3])
 
+    def test_show(self) -> None:
+        """Shows a diagram of the dynamic system"""
+        m1 = BaseModelMock(self.dynamic_system)
+        m2 = BaseModelMock(self.dynamic_system)
+        m3 = BaseModelMock(self.dynamic_system)
+        m1.add(m2)
+        m2.add(m3)
+        m3.add(m1)
+        m1.add(m1)
+        self.dynamic_system.show()
+
 
 if __name__ == '__main__':
     unittest.main()
