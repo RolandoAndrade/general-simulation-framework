@@ -1,7 +1,7 @@
 from typing import List, Optional, Union
 
 from core.entity.core import EntityEmitter, EntityProperties, Entity
-from core.entity.properties import ExpressionProperty, AnyProperty
+from core.entity.properties import ExpressionProperty, Property
 from core.expresions import Expression
 from core.types import Time
 from core.types.model_input import ModelInput
@@ -23,21 +23,19 @@ class Source(DiscreteEventModel):
     __entities_per_arrival: Optional[ExpressionProperty]
     """Entities created per arrival"""
 
-    __entity_emitter: Optional[AnyProperty[EntityEmitter]]
-    """Emitter of entities"""
+    __time_offset: Optional[ExpressionProperty]
+    """Time until the first transition"""
 
-    def get_properties(self) -> EntityProperties:
-        return {
-            SourceProperty.ENTITY_TYPE: self.entity_emitter,
-            SourceProperty.INTER_ARRIVAL_TIME: self.inter_arrival_time
-        }
+    __entity_emitter: Optional[Property[EntityEmitter]]
+    """Emitter of entities"""
 
     def __init__(self,
                  dynamic_system: DiscreteEventDynamicSystem,
                  name: str,
-                 entity_emitter: Union[EntityEmitter, AnyProperty[EntityEmitter]] = None,
+                 entity_emitter: Union[EntityEmitter, Property[EntityEmitter]] = None,
                  inter_arrival_time: Union[Expression, ExpressionProperty] = None,
                  entities_per_arrival: Union[Expression, ExpressionProperty] = None,
+                 time_offset: Union[Expression, ExpressionProperty] = None
                  ):
         """
         Args:
@@ -51,25 +49,27 @@ class Source(DiscreteEventModel):
         self.inter_arrival_time = inter_arrival_time
         self.entity_emitter = entity_emitter
         self.entities_per_arrival = entities_per_arrival
-        self.state_transition(event_time=Time(0))
 
-    def __are_valid_properties(self):
+    def __check_properties(self):
         """Checks if the properties are valid"""
-        return not (self.inter_arrival_time is None or
-                    self.entity_emitter is None or
-                    self.entities_per_arrival is None)
+        if self.inter_arrival_time.get_value() is None:
+            raise AttributeError("Interarrival time cannot be None")
+        elif self.entities_per_arrival.get_value() is None:
+            raise AttributeError("Entities per arrival cannot be None")
+        elif self.entity_emitter.get_value() is None:
+            raise AttributeError("Entity emitter cannot be None")
 
     def _internal_state_transition_function(self, state: SourceState) -> SourceState:
         """Creates an entity
         Args:
             state (SourceState): Current state of the model.
         """
-        if self.__are_valid_properties():
-            entities = []
-            for i in range(self.entities_per_arrival.get_value().evaluate()):
-                entities.append(self.entity_emitter.get_value().generate())
-            state.output_buffer.add(entities)
-            self.schedule(self.get_time())
+        self.__check_properties()
+        entities = []
+        for i in range(self.entities_per_arrival.get_value().evaluate()):
+            entities.append(self.entity_emitter.get_value().generate())
+        state.output_buffer.add(entities)
+        self.schedule(self.get_time())
         return state
 
     def _external_state_transition_function(self, state: SourceState, inputs: ModelInput,
@@ -89,7 +89,7 @@ class Source(DiscreteEventModel):
         """
         if self.inter_arrival_time is not None:
             return self.inter_arrival_time.get_value().evaluate()
-        return 0
+        return Time(0)
 
     def _output_function(self, state: SourceState) -> List[Entity]:
         """Return the entities created.
@@ -108,18 +108,17 @@ class Source(DiscreteEventModel):
             self.__inter_arrival_time = value
         else:
             self.__inter_arrival_time = ExpressionProperty(value)
-        self.schedule(self.get_time())
 
     @property
     def entity_emitter(self):
         return self.__entity_emitter
 
     @entity_emitter.setter
-    def entity_emitter(self, value: Union[EntityEmitter, AnyProperty[EntityEmitter]]):
-        if isinstance(value, AnyProperty):
+    def entity_emitter(self, value: Union[EntityEmitter, Property[EntityEmitter]]):
+        if isinstance(value, Property):
             self.__entity_emitter = value
         else:
-            self.__entity_emitter = AnyProperty(value)
+            self.__entity_emitter = Property(value)
 
     @property
     def entities_per_arrival(self):
@@ -135,3 +134,9 @@ class Source(DiscreteEventModel):
     def get_state(self) -> SourceState:
         """Returns the current state"""
         return super(Source, self).get_state()
+
+    def get_properties(self) -> EntityProperties:
+        return {
+            SourceProperty.ENTITY_TYPE: self.entity_emitter,
+            SourceProperty.INTER_ARRIVAL_TIME: self.inter_arrival_time
+        }

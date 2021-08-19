@@ -8,6 +8,6 @@ from core.entity.core.property_type import PropertyType
 T = TypeVar('T')
 
 
-class AnyProperty(EntityProperty, Generic[T]):
+class Property(EntityProperty, Generic[T]):
     def __init__(self, value: Any):
         super().__init__(value, PropertyType.ANY)

@@ -1,55 +1,56 @@
 import unittest
 
-from core.entity.properties.any_property import AnyProperty
-from core.entity.properties.expression_property import ExpressionProperty
-from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
-from experiments.experiment_builders.discrete_event_experiment import DiscreteEventExperiment
-from core.mathematics.distributions.poisson_distribution import PoissonDistribution
+from core.entity.core import Entity
+from core.entity.properties.property import Property
 from core.mathematics.values.value import Value
+from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
+from dynamic_system.future_event_list import Scheduler
 from queue_simulator.source.source import Source
-from test.queue_simulator.buffer.mocks.mock_emitter import MockEmitter
+from test.mocks.mock_emitter import MockEmitter
 
 
 class TestSource(unittest.TestCase):
     source: Source
-    experiment: DiscreteEventExperiment
-    ds: DiscreteEventDynamicSystem
+    dynamic_system: DiscreteEventDynamicSystem
 
     def setUp(self) -> None:
-        """Setups the source, dynamic system and experiment"""
-        self.ds = DiscreteEventDynamicSystem()
-        self.source = Source(self.ds,
+        """Sets up the source"""
+        self.dynamic_system = DiscreteEventDynamicSystem(Scheduler())
+        self.source = Source(self.dynamic_system,
                              name="Source1",
-                             entity_emitter=AnyProperty(MockEmitter()))
-        self.experiment = DiscreteEventExperiment(self.ds)
+                             entity_emitter=Property(MockEmitter()))
 
-    def test_inter_arrival_time(self):
-        """Should be able to create entities with a distribution expression as interarrival value"""
-        # config
-        inter_arrival_time = ExpressionProperty(PoissonDistribution(5))
-        entities_per_arrival = ExpressionProperty(Value(1))
-        self.source.inter_arrival_time = inter_arrival_time
-        self.source.entities_per_arrival = entities_per_arrival
-        # simulate
-        self.experiment.simulation_control.start(stop_time=120)
-        self.experiment.simulation_control.wait()
-        # results
-        total = self.source.get_state().output_buffer.number_entered
-        self.assertTrue(0.15 < (total / 120) < 0.35, "Wrong")
+    def tearDown(self) -> None:
+        """Reset names"""
+        Entity._saved_names = set()
+
+    def test_interarrival_time(self):
+        """Should set and get interarrival time"""
+        self.source.inter_arrival_time = Value(1)
+        self.assertEqual(1, self.source.inter_arrival_time.get_value().evaluate())
 
     def test_entities_per_arrival(self):
-        """Should be able to create entities with a distribution expression as entities per arrival value"""
-        # config
-        inter_arrival_time = ExpressionProperty(Value(1))
-        entities_per_arrival = ExpressionProperty(PoissonDistribution(5))
-        self.source.inter_arrival_time = inter_arrival_time
-        self.source.entities_per_arrival = entities_per_arrival
-        # simulate
-        self.experiment.simulation_control.start(stop_time=120)
-        self.experiment.simulation_control.wait()
-        # results
-        total = self.source.get_state().output_buffer.number_entered
-        self.assertTrue(4 < (total / 120) < 6, "Wrong")
+        """Should set and get entities per arrival"""
+        self.source.entities_per_arrival = Value(1)
+        self.assertEqual(1, self.source.entities_per_arrival.get_value().evaluate())
+
+    def test_entity_emitter(self):
+        """Should set and get entity emitter"""
+        e = MockEmitter()
+        self.source.entity_emitter = e
+        self.assertEqual(e, self.source.entity_emitter.get_value())
+
+    def test_internal_state_transition_function(self):
+        """Should set and get entity emitter"""
+        self.source.entities_per_arrival = Value(5)
+        self.source.inter_arrival_time = Value(1)
+        self.source.state_transition()
+        self.assertEqual(5, self.source.get_state().output_buffer.current_number_of_entities)
+
+    def test_get_time(self):
+        """Should set and get entity emitter"""
+        self.source.inter_arrival_time = Value(1)
+        self.assertEqual(1, self.source.get_time())
 
 
 if __name__ == '__main__':

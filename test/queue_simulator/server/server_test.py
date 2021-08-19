@@ -1,12 +1,12 @@
 import unittest
 
-from core.entity.properties import AnyProperty, ExpressionProperty, NumberProperty
+from core.entity.properties import Property, ExpressionProperty, NumberProperty
 from core.mathematics.values.value import Value
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from experiments.experiment_builders.discrete_event_experiment import DiscreteEventExperiment
 from queue_simulator.server.server import Server
 from queue_simulator.source import Source
-from test.queue_simulator.buffer.mocks.mock_emitter import MockEmitter
+from test.mocks.mock_emitter import MockEmitter
 
 
 class ServerTest(unittest.TestCase):
@@ -20,7 +20,7 @@ class ServerTest(unittest.TestCase):
         self.ds = DiscreteEventDynamicSystem()
         self.source = Source(self.ds,
                              name="Source1",
-                             entity_emitter=AnyProperty(MockEmitter()))
+                             entity_emitter=Property(MockEmitter()))
         self.server = Server(self.ds,
                              name="Server")
         self.source.add(self.server)
