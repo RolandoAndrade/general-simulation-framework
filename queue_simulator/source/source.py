@@ -104,6 +104,7 @@ class Source(DiscreteEventModel):
 
     @inter_arrival_time.setter
     def inter_arrival_time(self, value: Union[Expression, ExpressionProperty]):
+        self.clear()
         if isinstance(value, ExpressionProperty):
             self.__inter_arrival_time = value
         else:
@@ -115,6 +116,7 @@ class Source(DiscreteEventModel):
 
     @entity_emitter.setter
     def entity_emitter(self, value: Union[EntityEmitter, Property[EntityEmitter]]):
+        self.clear()
         if isinstance(value, Property):
             self.__entity_emitter = value
         else:
@@ -126,10 +128,23 @@ class Source(DiscreteEventModel):
 
     @entities_per_arrival.setter
     def entities_per_arrival(self, value: Expression):
+        self.clear()
         if isinstance(value, ExpressionProperty):
             self.__entities_per_arrival = value
         else:
             self.__entities_per_arrival = ExpressionProperty(value)
+
+    @property
+    def time_offset(self):
+        return self.__time_offset
+
+    @time_offset.setter
+    def time_offset(self, value: Expression):
+        self.clear()
+        if isinstance(value, ExpressionProperty):
+            self.__time_offset = value
+        else:
+            self.__time_offset = ExpressionProperty(value)
 
     def get_state(self) -> SourceState:
         """Returns the current state"""
@@ -140,3 +155,7 @@ class Source(DiscreteEventModel):
             SourceProperty.ENTITY_TYPE: self.entity_emitter,
             SourceProperty.INTER_ARRIVAL_TIME: self.inter_arrival_time
         }
+
+    def clear(self):
+        self.get_state().output_buffer.empty()
+        self.unschedule()

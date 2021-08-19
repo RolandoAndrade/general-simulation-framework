@@ -41,6 +41,12 @@ class DiscreteEventModel(BaseModel):
         """
         cast(DiscreteEventDynamicSystem, self.get_dynamic_system()).schedule(self, time)
 
+    @debug("Unschedule model")
+    def unschedule(self):
+        """Unscheduled an autonomous event
+        """
+        cast(DiscreteEventDynamicSystem, self.get_dynamic_system()).unschedule(self)
+
     @debug("Adding path")
     def add(self, model: DiscreteEventModel,
             weight: ExpressionProperty = ExpressionProperty(Value(1)),

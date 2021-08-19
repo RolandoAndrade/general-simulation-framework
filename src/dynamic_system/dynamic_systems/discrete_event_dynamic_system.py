@@ -55,6 +55,24 @@ class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
         """
         self._scheduler.schedule(model, time)
 
+    @debug("Scheduling model")
+    def unschedule(self, model: DiscreteEventModel):
+        """Undo a scheduled event
+
+        Args:
+            model (DiscreteEventModel): Model with an autonomous event scheduled
+        """
+        self._scheduler.unschedule(model)
+
+    def remove(self, model: DiscreteEventModel):
+        """Removes a model of the dynamic system.
+
+        Args:
+            model (DiscreteEventModel): Model to be removed.
+        """
+        super(DiscreteEventDynamicSystem, self).remove(model)
+        self.unschedule(model)
+
     @debug("Retrieving next models")
     def get_next_models(self) -> Set[DiscreteEventModel]:
         """Gets the next models that will execute an autonomous event"""

@@ -38,6 +38,16 @@ class Scheduler:
             if sm not in self._future_event_list:
                 heapq.heappush(self._future_event_list, sm)
 
+    @debug("Undo unschedule")
+    def unschedule(self, model: DiscreteEventModel):
+        """Drop a model from schedule.
+
+        Args:
+            model (DiscreteEventModel): DiscreteEventModel with an autonomous event scheduled.
+        """
+        if model in self._future_event_list:
+            self._future_event_list.remove(model)
+
     @debug("Getting time of next event")
     def get_time_of_next_event(self) -> Time:
         """Gets the time of the next event"""

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Union
 
 from core.config import FLOATING_POINT_DIGITS
 from core.debug.domain.debug import debug
@@ -37,11 +37,13 @@ class ScheduledModel:
         Args:
             time (int): Time variation.
         """
-        self._time = max(round(self._time - time, FLOATING_POINT_DIGITS), 0)
+        self._time = max(self._time - time, Time(0))
         return self._time
 
     def __lt__(self, other: ScheduledModel):
         return self._time < other._time
 
-    def __eq__(self, other: ScheduledModel):
-        return self._model == other._model
+    def __eq__(self, other: Union[ScheduledModel, BaseModel]):
+        if isinstance(other, ScheduledModel):
+            return super().__eq__(other) or self._model == other._model
+        return self._model == other
