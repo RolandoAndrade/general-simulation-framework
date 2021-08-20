@@ -48,9 +48,20 @@ class TestSource(unittest.TestCase):
         self.assertEqual(5, self.source.get_state().output_buffer.current_number_of_entities)
 
     def test_get_time(self):
-        """Should set and get entity emitter"""
+        """Should get the time"""
         self.source.inter_arrival_time = Value(1)
         self.assertEqual(1, self.source.get_time())
+
+    def test_time_offset(self):
+        """Should set and get time offset"""
+        self.source.time_offset = Value(5)
+        self.assertEqual(5, self.source.time_offset.get_value().evaluate())
+        
+    def test_get_properties(self):
+        """Should have the expected properties"""
+        expect_keys = {'Entities Per Arrival', 'Time Offset', 'Interarrival Time', 'Entity Type'}
+        actual_keys = set(self.source.get_properties().keys())
+        self.assertEqual(expect_keys, actual_keys)
 
 
 if __name__ == '__main__':

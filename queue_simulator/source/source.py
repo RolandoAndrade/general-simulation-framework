@@ -3,6 +3,8 @@ from typing import List, Optional, Union
 from core.entity.core import EntityEmitter, EntityProperties, Entity
 from core.entity.properties import ExpressionProperty, Property
 from core.expresions import Expression
+from core.mathematics.distributions import ExponentialDistribution
+from core.mathematics.values.value import Value
 from core.types import Time
 from core.types.model_input import ModelInput
 
@@ -33,9 +35,9 @@ class Source(DiscreteEventModel):
                  dynamic_system: DiscreteEventDynamicSystem,
                  name: str,
                  entity_emitter: Union[EntityEmitter, Property[EntityEmitter]] = None,
-                 inter_arrival_time: Union[Expression, ExpressionProperty] = None,
-                 entities_per_arrival: Union[Expression, ExpressionProperty] = None,
-                 time_offset: Union[Expression, ExpressionProperty] = None
+                 inter_arrival_time: Union[Expression, ExpressionProperty] = ExponentialDistribution(0.25),
+                 entities_per_arrival: Union[Expression, ExpressionProperty] = Value(1),
+                 time_offset: Union[Expression, ExpressionProperty] = Value(0)
                  ):
         """
         Args:
@@ -49,6 +51,7 @@ class Source(DiscreteEventModel):
         self.inter_arrival_time = inter_arrival_time
         self.entity_emitter = entity_emitter
         self.entities_per_arrival = entities_per_arrival
+        self.time_offset = time_offset
 
     def __check_properties(self):
         """Checks if the properties are valid"""
@@ -153,9 +156,16 @@ class Source(DiscreteEventModel):
     def get_properties(self) -> EntityProperties:
         return {
             SourceProperty.ENTITY_TYPE: self.entity_emitter,
-            SourceProperty.INTER_ARRIVAL_TIME: self.inter_arrival_time
+            SourceProperty.INTER_ARRIVAL_TIME: self.inter_arrival_time,
+            SourceProperty.TIME_OFFSET: self.time_offset,
+            SourceProperty.ENTITIES_PER_ARRIVAL: self.entities_per_arrival
         }
 
     def clear(self):
         self.get_state().output_buffer.empty()
         self.unschedule()
+
+    def init(self):
+        self.clear()
+        self.state_transition()
+        self.schedule(self.time_offset.get_value().evaluate() + self.get_time())
