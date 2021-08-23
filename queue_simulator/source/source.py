@@ -28,6 +28,9 @@ class Source(DiscreteEventModel):
     __time_offset: Optional[ExpressionProperty]
     """Time until the first transition"""
 
+    __used_offset: Optional[ExpressionProperty]
+    """Time until the first transition"""
+
     __entity_emitter: Optional[Property[EntityEmitter]]
     """Emitter of entities"""
 
@@ -91,7 +94,7 @@ class Source(DiscreteEventModel):
             state (SourceState): Current state of the model.
         """
         if self.inter_arrival_time is not None:
-            return self.inter_arrival_time.get_value().evaluate()
+            return self.inter_arrival_time.get_value().evaluate() + self.__used_offset.get_value().evaluate()
         return Time(0)
 
     def _output_function(self, state: SourceState) -> List[Entity]:
@@ -148,6 +151,8 @@ class Source(DiscreteEventModel):
             self.__time_offset = value
         else:
             self.__time_offset = ExpressionProperty(value)
+        self.__used_offset = self.__time_offset
+
 
     def get_state(self) -> SourceState:
         """Returns the current state"""
@@ -168,7 +173,7 @@ class Source(DiscreteEventModel):
     def init(self):
         self.clear()
         self.state_transition()
-        self.schedule(self.time_offset.get_value().evaluate() + self.get_time())
+        self.__used_offset = ExpressionProperty(Value(0))
 
     def __str__(self):
         return self.get_id()
