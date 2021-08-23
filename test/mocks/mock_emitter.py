@@ -19,6 +19,9 @@ class MockEntity(Entity):
             'type': StringProperty('Mock')
         }
 
+    def __str__(self):
+        return self.get_id()
+
 
 class MockEmitter(EntityEmitter):
     __emitted = 0

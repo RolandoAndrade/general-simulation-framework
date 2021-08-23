@@ -129,7 +129,7 @@ class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
             for model in input_model_values:
                 model.state_transition(input_model_values[model], event_time)
                 input_models.add(model)
-        return cast(Set[DiscreteEventModel], input_models)
+        return cast(Any, input_models)
 
     def _execute_autonomous(
             self, models_already_executed: Set[DiscreteEventModel], event_time: Time

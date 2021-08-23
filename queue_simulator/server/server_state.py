@@ -1,3 +1,4 @@
+from decimal import Decimal
 from typing import Union
 
 from core.entity.properties import NumberProperty
@@ -39,9 +40,18 @@ class ServerState:
         return self._processing_remaining_time
 
     @processing_remaining_time.setter
-    def processing_remaining_time(self, value: Union[NumberProperty, float]):
+    def processing_remaining_time(self, value: Union[NumberProperty, Decimal]):
         """Remaining time to finish the processing"""
         if isinstance(value, NumberProperty):
             self._processing_remaining_time = value
         else:
             self._processing_remaining_time = NumberProperty(value)
+
+    """def __str__(self):
+        return str(dict({
+            ServerState.OUTPUT_BUFFER: str(self.output_buffer),
+            ServerState.INPUT_BUFFER: str(self.input_buffer),
+            ServerState.PROCESS_BUFFER: str(self.process_buffer),
+            ServerState.PROCESSING_REMAINING_TIME: str(self.processing_remaining_time),
+        }))
+    """

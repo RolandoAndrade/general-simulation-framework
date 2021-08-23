@@ -40,3 +40,6 @@ class Label:
             if properties is not None and properties[self.__linked_property] is not None:
                 return properties[self.__linked_property].get_value()
         return 0
+
+    def __str__(self):
+        return str(self.get_value())

@@ -44,6 +44,7 @@ class ScheduledModel:
         return self._time < other._time
 
     def __eq__(self, other: Union[ScheduledModel, BaseModel]):
+
         if isinstance(other, ScheduledModel):
-            return super().__eq__(other) or self._model == other._model
+            return self._model == other._model
         return self._model == other

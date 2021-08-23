@@ -43,7 +43,6 @@ class Server(DiscreteEventModel):
 
     def _internal_state_transition_function(self, state: ServerState) -> ServerState:
         self._isBusy = False
-        state.output_buffer.add(state.process_buffer.empty())
         self._process(state)
         # recalculate the processing time
         state.processing_remaining_time = self.processing_time.get_value().evaluate()
@@ -68,6 +67,7 @@ class Server(DiscreteEventModel):
         return state.processing_remaining_time.get_value()
 
     def _output_function(self, state: ServerState) -> Any:
+        state.output_buffer.add(state.process_buffer.empty())
         return state.output_buffer.empty()
 
     def get_properties(self) -> EntityProperties:

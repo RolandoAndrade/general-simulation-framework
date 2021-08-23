@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC
+from decimal import Decimal
 from random import shuffle, randint
 from typing import List, Optional
 
@@ -26,7 +27,7 @@ class Buffer(Entity, ABC):
 
     def __init__(self,
                  name: str,
-                 capacity: NumberProperty[float] = NumberProperty(float("inf")),
+                 capacity: NumberProperty[float] = NumberProperty(Decimal("inf")),
                  policy: StringProperty = StringProperty(str(BufferPolicy.FIFO))):
         """
         Args:
@@ -120,3 +121,10 @@ class Buffer(Entity, ABC):
     def number_entered(self) -> NumberProperty[int]:
         """Returns true if the buffer is empty"""
         return self.__number_entered
+
+    def __str__(self):
+        return str(dict({
+            BufferProperty.CAPACITY: str(self.capacity),
+            BufferProperty.POLICY: str(self.policy),
+            BufferProperty.NUMBER_ENTERED: str(self.__number_entered)
+        }))

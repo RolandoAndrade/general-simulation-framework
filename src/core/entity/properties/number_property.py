@@ -1,9 +1,12 @@
+from decimal import Decimal
+from typing import Union
+
 from core.entity.core.entity_property import EntityProperty
 from core.entity.core.property_type import PropertyType
 
 
 class NumberProperty(EntityProperty):
-    def __init__(self, value: float):
+    def __init__(self, value: Union[Decimal, int]):
         super().__init__(value, PropertyType.NUMBER)
 
     def __add__(self, other):
@@ -21,6 +24,6 @@ class NumberProperty(EntityProperty):
     def __str__(self):
         return str(self.get_value())
 
-    def get_value(self) -> float:
+    def get_value(self) -> Decimal:
         """Returns the value of the property"""
         return super().get_value()
