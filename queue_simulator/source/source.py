@@ -169,3 +169,6 @@ class Source(DiscreteEventModel):
         self.clear()
         self.state_transition()
         self.schedule(self.time_offset.get_value().evaluate() + self.get_time())
+
+    def __str__(self):
+        return self.get_id()

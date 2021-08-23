@@ -89,3 +89,6 @@ class Server(DiscreteEventModel):
     def get_state(self) -> ServerState:
         """Returns the current state"""
         return super(Server, self).get_state()
+
+    def __str__(self):
+        return self.get_id()

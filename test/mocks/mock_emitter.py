@@ -11,7 +11,7 @@ class MockEntity(Entity):
         Args:
             name (str): Name of the entity
         """
-        super().__init__(name)
+        super().__init__("MockEntity " + str(name))
 
     def get_properties(self) -> EntityProperties:
         """Lists the properties of the entity"""
