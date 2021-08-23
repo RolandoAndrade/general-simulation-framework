@@ -15,7 +15,7 @@ class DefaultReport(BaseReport):
             for model in headers:
                 if model in outputs[time]:
                     if isinstance(outputs[time][model], list):
-                        row += outputs[time][model]
+                        row += [[str(i) for i in outputs[time][model]]]
                     else:
                         row += [outputs[time][model]]
                 else:
