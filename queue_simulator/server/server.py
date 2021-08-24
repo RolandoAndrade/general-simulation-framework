@@ -1,8 +1,9 @@
 from typing import Any, List, Union, Dict
 
 from core.entity.core import Entity, EntityProperties
-from core.entity.properties import ExpressionProperty
+from core.entity.properties import ExpressionProperty, NumberProperty
 from core.expresions.expression import Expression
+from core.mathematics.values.value import Value
 from core.types import Time
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from models.models import DiscreteEventModel
@@ -21,13 +22,14 @@ class Server(DiscreteEventModel):
 
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem,
                  name: str,
-                 processing_time: Union[ExpressionProperty, Expression] = None):
+                 processing_time: Union[ExpressionProperty, Expression] = Value(1),
+                 initial_capacity: NumberProperty = NumberProperty(1)):
         super().__init__(dynamic_system,
                          name,
                          ServerState(
                              InputBuffer(name),
                              OutputBuffer(name),
-                             ProcessBuffer(name)
+                             ProcessBuffer(name, capacity=initial_capacity)
                          )
                          )
         self.processing_time = processing_time
@@ -36,7 +38,7 @@ class Server(DiscreteEventModel):
     def _process(self, state: ServerState):
         for i in range(state.input_buffer.current_number_of_entities):
             if not state.process_buffer.is_full:
-                state.process_buffer.add([state.input_buffer.pop()])
+                state.process_buffer.add([state.input_buffer.pop()], [self.get_time()])
                 self._isBusy = True
             else:
                 break
