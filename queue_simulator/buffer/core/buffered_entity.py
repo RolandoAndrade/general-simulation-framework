@@ -13,14 +13,14 @@ class BufferedEntity(Entity):
     _entity: Entity
     """Queued entity."""
 
-    remaining_time: Time
+    _remaining_time: Time
     """Remaining time in queue."""
 
     def __init__(self, entity: Entity, remaining_time: Time):
         super().__init__("Buffered Entity " + str(BufferedEntity._serial))
         BufferedEntity._serial += 1
         self._entity = entity
-        self.remaining_time = remaining_time
+        self._remaining_time = remaining_time
 
     def get_properties(self) -> EntityProperties:
         pass
@@ -28,3 +28,16 @@ class BufferedEntity(Entity):
     @property
     def entity(self) -> Entity:
         return self._entity
+
+    @property
+    def remaining_time(self) -> Time:
+        return self._remaining_time
+
+    def decrease_time(self, time: Time) -> Time:
+        self._remaining_time = max(self.remaining_time - time, Time(0))
+
+    def __lt__(self, other: BufferedEntity):
+        return self.remaining_time < other.remaining_time
+
+    def __str__(self):
+        return self.get_id() + " " + str(self.remaining_time)

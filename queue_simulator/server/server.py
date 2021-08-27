@@ -17,7 +17,7 @@ class Server(DiscreteEventModel):
     _processingTime: ExpressionProperty
     """Processing time of the server"""
 
-    _isBusy: bool
+    _is_busy: bool
     """Processing time of the server"""
 
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem,
@@ -33,43 +33,40 @@ class Server(DiscreteEventModel):
                          )
                          )
         self.processing_time = processing_time
-        self._isBusy = False
+        self._is_busy = False
 
     def _process(self, state: ServerState):
         for i in range(state.input_buffer.current_number_of_entities):
             if not state.process_buffer.is_full:
-                state.process_buffer.add([state.input_buffer.pop()], [self.get_time()])
-                self._isBusy = True
+                time_to_be_scheduled = self.get_time()
+                state.process_buffer.add([state.input_buffer.pop()], [time_to_be_scheduled])
+                self.schedule(time_to_be_scheduled)
+                self._is_busy = True
             else:
                 break
 
     def _internal_state_transition_function(self, state: ServerState) -> ServerState:
-        self._isBusy = False
+        self._is_busy = False
         self._process(state)
-        # recalculate the processing time
-        state.processing_remaining_time = self.processing_time.get_value().evaluate()
-        if self._isBusy:
-            self.schedule(self.get_time())
         return state
 
     def _external_state_transition_function(self, state: ServerState,
                                             inputs: Dict[str, List[Entity]],
-                                            event_time: float) -> ServerState:
+                                            event_time: Time) -> ServerState:
         r_inputs = []
         for i in inputs:
             r_inputs += inputs[i]
         state.input_buffer.add(r_inputs)
-        if not self._isBusy and len(r_inputs) > 0:
-            state.processing_remaining_time = self.processing_time.get_value().evaluate()
-            self.schedule(self.get_time())
+        if len(r_inputs) > 0:
+            state.process_buffer.decrease_time(event_time)
             self._process(state)
         return state
 
     def _time_advance_function(self, state: ServerState) -> Time:
-        return state.processing_remaining_time.get_value()
+        return self.processing_time.get_value().evaluate()
 
     def _output_function(self, state: ServerState) -> Any:
-        state.output_buffer.add(state.process_buffer.empty())
+        state.output_buffer.add(state.process_buffer.get_processed())
         return state.output_buffer.empty()
 
     def get_properties(self) -> EntityProperties:

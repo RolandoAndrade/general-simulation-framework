@@ -35,8 +35,7 @@ class Scheduler:
         """
         if time > 0:
             sm = ScheduledModel(model, time)
-            if sm not in self._future_event_list:
-                heapq.heappush(self._future_event_list, sm)
+            heapq.heappush(self._future_event_list, sm)
 
     @debug("Undo unschedule")
     def unschedule(self, model: DiscreteEventModel):

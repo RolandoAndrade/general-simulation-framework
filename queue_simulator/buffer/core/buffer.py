@@ -41,7 +41,7 @@ class Buffer(Entity, ABC):
         self.policy = policy
         self.__number_entered = NumberProperty(0)
 
-    def add(self, entities: List[Entity]) -> int:
+    def add(self, entities: List[Entity], *args, **kwargs) -> int:
         """Adds an element to the buffer and returns the number of elements that
         cannot be added because the buffer capacity
 
