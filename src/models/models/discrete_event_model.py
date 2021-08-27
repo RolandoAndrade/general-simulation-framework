@@ -12,7 +12,6 @@ from models.core.base_model import BaseModel, ModelState
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
-from models.core.path import Path
 
 
 class DiscreteEventModel(BaseModel):
@@ -42,6 +41,13 @@ class DiscreteEventModel(BaseModel):
         """
         cast(DiscreteEventDynamicSystem, self.get_dynamic_system()).schedule(self, time)
 
+    @debug("Unschedule model")
+    def unschedule(self):
+        """Unscheduled an autonomous event
+        """
+        cast(DiscreteEventDynamicSystem, self.get_dynamic_system()).unschedule(self)
+
+    @debug("Adding path")
     def add(self, model: DiscreteEventModel,
             weight: ExpressionProperty = ExpressionProperty(Value(1)),
             name: str = None) -> DiscreteEventModel:
@@ -54,21 +60,13 @@ class DiscreteEventModel(BaseModel):
         """
         return cast(DiscreteEventModel, super().add(model, weight, name))
 
-    def add_path(self, path: Path) -> DiscreteEventModel:
-        """Adds a path for the current model in the dynamic system and returns the model added.
-
-        Args:
-            path (Path): Connection to a model.
-        """
-        return cast(DiscreteEventModel, super().add_path(path))
-
     @debug("Getting time")
     def get_time(self) -> Time:
         """Gets the time of the next autonomous event."""
         try:
             return self._time_advance_function(self.get_state())
         except AttributeError:
-            return 0
+            return Time(0)
 
     def get_output(self) -> Any:
         """Gets the output of the model."""
@@ -90,7 +88,7 @@ class DiscreteEventModel(BaseModel):
         if inputs is None:
             # is an autonomous event
             new_state = self._internal_state_transition_function(self.get_state())
-        elif event_time is self.get_time():
+        elif event_time == self.get_time() or event_time == 0:
             # is an confluent event
             new_state = self._confluent_state_transition_function(self.get_state(), inputs)
         else:
@@ -118,7 +116,7 @@ class DiscreteEventModel(BaseModel):
         """
         new_state = self._internal_state_transition_function(state)
         return self._external_state_transition_function(
-            new_state, inputs, 0
+            new_state, inputs, Time(0)
         )  # 0 because is equal to (e = ta(s)) ½ ta(s)
 
     @abstractmethod

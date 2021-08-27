@@ -14,7 +14,10 @@ class DefaultReport(BaseReport):
             row = [time]
             for model in headers:
                 if model in outputs[time]:
-                    row += [outputs[time][model]]
+                    if isinstance(outputs[time][model], list):
+                        row += [[str(i) for i in outputs[time][model]]]
+                    else:
+                        row += [outputs[time][model]]
                 else:
                     row += ["-"]
             x.add_row(row)

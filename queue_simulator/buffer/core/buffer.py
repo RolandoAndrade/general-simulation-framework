@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC
+from decimal import Decimal
 from random import shuffle, randint
 from typing import List, Optional
 
@@ -26,7 +27,7 @@ class Buffer(Entity, ABC):
 
     def __init__(self,
                  name: str,
-                 capacity: NumberProperty[float] = NumberProperty(float("inf")),
+                 capacity: NumberProperty[float] = NumberProperty(Decimal("inf")),
                  policy: StringProperty = StringProperty(str(BufferPolicy.FIFO))):
         """
         Args:
@@ -40,7 +41,7 @@ class Buffer(Entity, ABC):
         self.policy = policy
         self.__number_entered = NumberProperty(0)
 
-    def add(self, entities: List[Entity]) -> int:
+    def add(self, entities: List[Entity], *args, **kwargs) -> int:
         """Adds an element to the buffer and returns the number of elements that
         cannot be added because the buffer capacity
 
@@ -48,7 +49,7 @@ class Buffer(Entity, ABC):
             entities: Entities to be added.
         """
         quantity = len(entities)
-        r_quantity = int(min(self.remaining_capacity, quantity))
+        r_quantity = int(min(self.remaining_capacity.get_value(), quantity))
         self.__number_entered += r_quantity
         for i in range(r_quantity):
             self._content.append(entities[i])
@@ -120,3 +121,10 @@ class Buffer(Entity, ABC):
     def number_entered(self) -> NumberProperty[int]:
         """Returns true if the buffer is empty"""
         return self.__number_entered
+
+    def __str__(self):
+        return str(dict({
+            BufferProperty.CAPACITY: str(self.capacity),
+            BufferProperty.POLICY: str(self.policy),
+            BufferProperty.NUMBER_ENTERED: str(self.__number_entered)
+        }))

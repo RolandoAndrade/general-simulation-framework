@@ -3,7 +3,6 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Any, Set, TYPE_CHECKING, cast
 
-
 from core.debug.domain.debug import debug
 from core.entity.core.entity import Entity
 from core.entity.properties.expression_property import ExpressionProperty
@@ -28,9 +27,6 @@ class BaseModel(Entity):
     __current_state: ModelState
     """Current state of the model"""
 
-    __output_models: Set[Path]
-    """Output models of the model"""
-
     @debug("Initialized Model", True)
     def __init__(self, dynamic_system: BaseDynamicSystem, name: str = None,
                  state: ModelState = None):
@@ -48,7 +44,6 @@ class BaseModel(Entity):
         else:
             super().__init__(name)
         self.set_up_state(state)
-        self.__output_models = set()
         # Set dynamic system
         self.__current_dynamic_system = dynamic_system
         self.__current_dynamic_system.add(self)
@@ -73,40 +68,20 @@ class BaseModel(Entity):
     def add(self, model: BaseModel,
             weight: ExpressionProperty = ExpressionProperty(Value(1)),
             name: str = None):
-        """Adds a model as an input for the current model in the dynamic system and returns the model added.
+        """Current model will be the input for the given model.
         
         Args:
             model (BaseModel): Output model to be added.
             weight (ExpressionProperty): Weight of the path.
             name (str): Name of the path.
         """
-        return self.add_path(Path(model, weight, name))
+        return self.__current_dynamic_system.link(Path(self, model, weight, name))
 
-    @debug("Adding path")
-    def add_path(self, path: Path):
-        """Adds a path for the current model in the dynamic system and returns the model added.
-
-        Args:
-            path (Path): Connection to a model.
-        """
-        self.__current_dynamic_system.add(path.get_model())
-        self.__output_models.add(path)
-        return path.get_model()
-
-    @debug("Removing output")
-    def remove(self, model: BaseModel):
-        """Removes an specified output
-
-        Args:
-            model (BaseModel): Model to be removed.
-        """
-        if model in self.__output_models:
-            self.__output_models.remove(cast(Any, model))
-
-    @debug("Getting output models")
-    def get_output_models(self) -> Set[Path]:
-        """Returns the output models of the current model"""
-        return self.__output_models
+    @debug("Removing")
+    def remove(self):
+        """Removes the model from the dynamic system"""
+        self.__current_dynamic_system.remove(self)
+        Entity._saved_names.remove(self.get_id())
 
     @debug("Retrieving dynamic system")
     def get_dynamic_system(self) -> BaseDynamicSystem:

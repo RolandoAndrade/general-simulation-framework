@@ -1,16 +1,13 @@
 from __future__ import annotations
 from abc import ABC
-from random import random
 from typing import TYPE_CHECKING, Dict, Set, cast, Any
 
 from core.debug.domain.debug import debug
 
-from dynamic_system.core.base_dynamic_sytem import (
-    BaseDynamicSystem,
-    DynamicSystemOutput,
-)
+from dynamic_system.core.base_dynamic_sytem import BaseDynamicSystem
 from dynamic_system.future_event_list.scheduler import Scheduler
 from models.core.path import Path
+import numpy as np
 
 if TYPE_CHECKING:
     from models.models.discrete_event_model import (
@@ -18,15 +15,20 @@ if TYPE_CHECKING:
         ModelInput,
     )
 
-    DynamicSystemModels = Dict[str, DiscreteEventModel]
+    DynamicSystemModels = Set[DiscreteEventModel]
+    DynamicSystemPaths = Dict[DiscreteEventModel, Set[Path]]
+    DynamicSystemOutput = Dict[DiscreteEventModel, Any]
     from core.types import DynamicSystemInput, Time
 
 
-class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
+class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
     """Dynamic system for discrete-event models"""
 
     _models: DynamicSystemModels
-    """Models of the dynamic system"""
+    """Models of the dynamic system."""
+
+    _paths: DynamicSystemPaths
+    """Paths of the dynamic system. Dict[Origin, Set[Output]]"""
 
     _outputs: DynamicSystemOutput
     """Output of the models"""
@@ -39,7 +41,7 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
         Args:
             scheduler (Scheduler): Future event list manager
         """
-        super().__init__()
+        BaseDynamicSystem.__init__(self)
         self._outputs = {}
         self._scheduler = scheduler
 
@@ -52,6 +54,24 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
             time (Time): Time to execute event
         """
         self._scheduler.schedule(model, time)
+
+    @debug("Scheduling model")
+    def unschedule(self, model: DiscreteEventModel):
+        """Undo a scheduled event
+
+        Args:
+            model (DiscreteEventModel): Model with an autonomous event scheduled
+        """
+        self._scheduler.unschedule(model)
+
+    def remove(self, model: DiscreteEventModel):
+        """Removes a model of the dynamic system.
+
+        Args:
+            model (DiscreteEventModel): Model to be removed.
+        """
+        super(DiscreteEventDynamicSystem, self).remove(model)
+        self.unschedule(model)
 
     @debug("Retrieving next models")
     def get_next_models(self) -> Set[DiscreteEventModel]:
@@ -72,7 +92,7 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
         self._outputs = {}
         for model in models:
             output = model.get_output()
-            self._outputs[model.get_id()] = output
+            self._outputs[model] = output
         return self._outputs
 
     @debug("Executing state transition")
@@ -87,113 +107,12 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
                 identifier of the model.
             event_time (Time): Time of the event.
         """
-        # subtract time
         self._scheduler.update_time(event_time)
 
-        input_models = self._execute_external(input_models_values, event_time)
-
-        autonomous_models = self._execute_autonomous(event_time, input_models)
-
-    def _execute_autonomous(
-            self, event_time: Time, input_models: Set[DiscreteEventModel]
-    ) -> Set[DiscreteEventModel]:
-        """Executes autonomous transition for the given input and external
-        events of the affected models.
-
-        Args:
-            event_time (Time): Time of the event.
-            input_models: Models that its state was changed by the external
-                transition.
-        """
-        all_autonomous_models = set()
-        # there are models expecting an autonomous event
-        if self.get_time_of_next_events() == 0:
-            # get the models that will execute an autonomous event
-            all_autonomous_models = self._scheduler.pop_next_models()
-
-            # remove models that executed an external event
-            autonomous_models: Set[DiscreteEventModel] = all_autonomous_models.difference(input_models)
-
-            affected_models, affected_models_inputs = self._get_affected_models_inputs(
-                all_autonomous_models, input_models
-            )
-
-            # remove from autonomous models, models that will execute a confluent transition
-            confluent_models = autonomous_models.intersection(affected_models)
-            autonomous_models = autonomous_models.difference(affected_models)
-            external_models = affected_models.difference(confluent_models)
-
-            # execute autonomous event
-            for model in autonomous_models:
-                model.state_transition(None, event_time)
-
-            # execute confluent event
-            for model in confluent_models:
-                model.state_transition(affected_models_inputs[model.get_id()], model.get_time())
-
-            # execute external event
-            for model in external_models:
-                model.state_transition(affected_models_inputs[model.get_id()], event_time)
-
-        return all_autonomous_models
-
-    def _select_outputs_from_multiple_outputs(self, outputs: Set[Path]) -> Set[DiscreteEventModel]:
-        """Returns outputs given its weights. Weight 1 ignores any other
-        weights. Weights represent percentage of propagation
-
-        Args:
-            outputs: Set of output paths for a model.
-        """
-        ones = [path.get_model() for path in outputs if path.get_weight() == 1]
-        if len(ones) > 0:
-            return cast(Any, ones)
-        probability = random()
-        a_probability = 0
-        outs = list(outputs)
-        outs.sort()
-        for o in outs:
-            if probability <= o.get_weight() + a_probability:
-                return cast(Set[DiscreteEventModel], {o.get_model()})
-            a_probability += o.get_weight()
-        return set()
-
-    def _get_affected_models_inputs(
-            self,
-            all_autonomous_models: Set[DiscreteEventModel],
-            input_models: Set[DiscreteEventModel],
-    ) -> (Set[DiscreteEventModel], Dict[str, ModelInput]):
-        """Gets models that will change by the output computed
-
-        Args:
-            all_autonomous_models: Models that its outputs were computed.
-            input_models: Models that its state was changed by the external
-                transition.
-        """
-        affected_models_inputs: Dict[str, ModelInput] = {}
-        affected_models = set()
-        for model in all_autonomous_models:
-            # get all output models
-            outputs = model.get_output_models().difference(input_models)
-
-            # extract relevant outputs by weight
-            outputs = self._select_outputs_from_multiple_outputs(outputs)
-
-            for out in outputs:
-                # adds affected model to confluent models
-                affected_models.add(out)
-
-                # checks if the model exist
-                if out.get_id() in affected_models_inputs:
-                    # adds an input to an existing affected model
-                    affected_models_inputs[out.get_id()][model.get_id()] = self._outputs[
-                        model.get_id()
-                    ]
-                else:
-                    # create a new input map for the affected model
-                    affected_models_inputs[out.get_id()] = {
-                        model.get_id(): self._outputs[model.get_id()]
-                    }
-        return affected_models, affected_models_inputs
+        # execute external / confluent transition
+        models_already_executed = self._execute_external(input_models_values, event_time)
+        # execute autonomous / external by internal output / confluent transition
+        autonomous_models = self._execute_autonomous(models_already_executed, event_time)
 
     def _execute_external(
             self, input_model_values: DynamicSystemInput, event_time: Time
@@ -208,6 +127,89 @@ class DiscreteEventDynamicSystem(BaseDynamicSystem, ABC):
         input_models = set()
         if input_model_values is not None:
             for model in input_model_values:
-                self._models[model].state_transition(input_model_values[model], event_time)
-                input_models.add(self._models[model])
-        return input_models
+                model.state_transition(input_model_values[model], event_time)
+                input_models.add(model)
+        return cast(Any, input_models)
+
+    def _execute_autonomous(
+            self, models_already_executed: Set[DiscreteEventModel], event_time: Time
+    ) -> Set[DiscreteEventModel]:
+        """Executes autonomous transition for the given input and external
+        events of the affected models.
+
+        Args:
+            event_time (Time): Time of the event.
+            models_already_executed: Models that its state was changed by the external
+                transition and must be ignored.
+        """
+        all_autonomous_models = set()
+
+        # there are models expecting an autonomous event
+        if self.get_time_of_next_events() <= 0:
+            # get the models that will execute an autonomous event
+            all_autonomous_models = self._scheduler.pop_next_models()
+
+            # ignore models that executed an external event
+            autonomous_models = all_autonomous_models.difference(models_already_executed)
+
+            # get models that were affected by an output
+            affected_models, inputs_of_affected_models = self._get_affected_models_and_its_inputs()
+
+            # models that were affected and will execute an autonomous event.
+            confluent_models = autonomous_models.intersection(affected_models)
+
+            # models that will execute only and autonomous event
+            autonomous_models = autonomous_models.difference(affected_models)
+
+            # models that were affected but will not execute an autonomous events.
+            external_models = affected_models.difference(confluent_models)
+
+            for model in confluent_models:
+                # execute confluent state transition
+                model.state_transition(inputs_of_affected_models[model])
+
+            for model in autonomous_models:
+                # execute autonomous state transition
+                model.state_transition()
+
+            for model in external_models:
+                # execute external state transition
+                model.state_transition(inputs_of_affected_models[model], event_time)
+
+        return all_autonomous_models
+
+    def _get_affected_models_and_its_inputs(self) -> (Set[DiscreteEventModel], Dict[DiscreteEventModel, ModelInput]):
+        """Gets models that were affected by an output"""
+        affected_models = set()
+        insert_input: Dict[DiscreteEventModel, ModelInput] = {}
+        for emitter_model in self._outputs:
+            emitter_model: DiscreteEventModel = emitter_model
+            # get the correct paths
+            paths = self._get_effective_paths(emitter_model)
+            for path in paths:
+                affected_model: DiscreteEventModel = cast(Any, path.get_destination_model())
+                affected_models.add(affected_model)
+                if affected_model in insert_input:
+                    insert_input[affected_model][emitter_model.get_id()] = self._outputs[emitter_model]
+                else:
+                    insert_input[affected_model] = {
+                        emitter_model.get_id(): self._outputs[emitter_model]
+                    }
+        return affected_models, insert_input
+
+    def _get_effective_paths(self, emitter_model: DiscreteEventModel) -> Set[Path]:
+        """Gets the correct paths for an output"""
+        if emitter_model in self._paths:
+            # check for full probability paths.
+            ones = [path for path in self._paths[emitter_model] if path.get_weight() == 1]
+            if len(ones) > 0:
+                return set(ones)
+            # there are not multiple paths, so it has to select one.
+            weights = []
+            effective_path = []
+            for path in self._paths[emitter_model]:
+                weights.append(path.get_weight())
+                effective_path.append(path)
+            choice = np.random.choice(len(weights), p=weights)
+            return {effective_path[choice]}
+        return set()

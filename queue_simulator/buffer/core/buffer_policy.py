@@ -6,3 +6,4 @@ class BufferPolicy(enum.Enum):
     LIFO = "LIFO"
     RANDOM = "RANDOM"
     ROUND_ROBIN = "ROUND_ROBIN"
+    PARALLEL = "PARALLEL"

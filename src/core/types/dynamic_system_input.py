@@ -1,5 +1,6 @@
 from typing import Dict
 
 from core.types.model_input import ModelInput
+from models.core import BaseModel
 
-DynamicSystemInput = Dict[str, ModelInput]
+DynamicSystemInput = Dict[BaseModel, ModelInput]
