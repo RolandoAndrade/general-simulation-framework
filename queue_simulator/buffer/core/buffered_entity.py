@@ -40,4 +40,4 @@ class BufferedEntity(Entity):
         return self.remaining_time < other.remaining_time
 
     def __str__(self):
-        return self.get_id() + " " + str(self.remaining_time)
+        return "BufferedEntity" + str(dict({'ID': self.get_id(), 'remaining_time': str(self.remaining_time)}))
