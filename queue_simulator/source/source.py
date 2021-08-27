@@ -63,7 +63,7 @@ class Source(DiscreteEventModel):
         elif self.entities_per_arrival.get_value() is None:
             raise AttributeError("Entities per arrival cannot be None")
         elif self.entity_emitter.get_value() is None:
-            raise AttributeError("Entity emitter cannot be None")
+            raise AttributeError("Entity entities cannot be None")
 
     def _internal_state_transition_function(self, state: SourceState) -> SourceState:
         """Creates an entity

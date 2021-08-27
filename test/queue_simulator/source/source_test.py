@@ -35,13 +35,13 @@ class TestSource(unittest.TestCase):
         self.assertEqual(1, self.source.entities_per_arrival.get_value().evaluate())
 
     def test_entity_emitter(self):
-        """Should set and get entity emitter"""
+        """Should set and get entity entities"""
         e = MockEmitter()
         self.source.entity_emitter = e
         self.assertEqual(e, self.source.entity_emitter.get_value())
 
     def test_internal_state_transition_function(self):
-        """Should set and get entity emitter"""
+        """Should set and get entity entities"""
         self.source.entities_per_arrival = Value(5)
         self.source.inter_arrival_time = Value(1)
         self.source.state_transition()
