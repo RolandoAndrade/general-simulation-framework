@@ -36,7 +36,7 @@ class Source(DiscreteEventModel):
 
     def __init__(self,
                  dynamic_system: DiscreteEventDynamicSystem,
-                 name: str,
+                 name: str = None,
                  entity_emitter: Union[EntityEmitter, Property[EntityEmitter]] = None,
                  inter_arrival_time: Union[Expression, ExpressionProperty] = ExponentialDistribution(0.25),
                  entities_per_arrival: Union[Expression, ExpressionProperty] = Value(1),
@@ -50,7 +50,8 @@ class Source(DiscreteEventModel):
             entity_emitter (EntityEmitter): Emitter of entities.
             inter_arrival_time (ExpressionProperty): InterArrival time of the entities.
         """
-        super().__init__(dynamic_system, name, SourceState(OutputBuffer(name)))
+        super().__init__(dynamic_system, name)
+        self.set_up_state(SourceState(OutputBuffer(self.get_id())))
         self.inter_arrival_time = inter_arrival_time
         self.entity_emitter = entity_emitter
         self.entities_per_arrival = entities_per_arrival
