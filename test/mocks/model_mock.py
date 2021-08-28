@@ -19,7 +19,7 @@ class ModelMock(DiscreteEventModel):
         pass
 
     def _output_function(self, state: ModelState) -> Any:
-        pass
+        return 1
 
     def get_properties(self) -> EntityProperties:
         pass
