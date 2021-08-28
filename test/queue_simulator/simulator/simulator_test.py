@@ -1,3 +1,4 @@
+import threading
 import unittest
 
 from core.entity.core import Entity
@@ -55,8 +56,10 @@ class SimulatorTest(unittest.TestCase):
         label_sink_in = Label(sink.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
 
         experiment = DiscreteEventExperiment(self.dynamic_system)
+
         experiment.simulation_control.start(stop_time=Time(5))
         experiment.simulation_control.wait()
+        experiment.save()
 
         print("Generated: " + str(label_source_out))
         print("Entered to server: " + str(label_server_in))
@@ -98,6 +101,9 @@ class SimulatorTest(unittest.TestCase):
         label_sink_in = Label(sink.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
 
         experiment = DiscreteEventExperiment(self.dynamic_system)
+
+        experiment.save()
+
         experiment.simulation_control.start(stop_time=Time(10))
         experiment.simulation_control.wait()
 
@@ -111,7 +117,6 @@ class SimulatorTest(unittest.TestCase):
         self.assertEqual("20", str(label_server_in))
         self.assertEqual("16", str(label_server_out))
         self.assertEqual("16", str(label_server_out))
-
 
 if __name__ == '__main__':
     unittest.main()

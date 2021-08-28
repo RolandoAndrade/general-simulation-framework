@@ -63,6 +63,7 @@ class BaseExperiment(ABC):
         return self.__report
 
     def save(self):
+        self.__control.stop()
         return self.__recovery_strategy.save(self)
 
     def load(self, data: Any):

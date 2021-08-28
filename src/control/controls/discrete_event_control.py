@@ -74,4 +74,5 @@ class DiscreteEventControl(ThreadControl):
     def stop(self):
         """Stops the simulation"""
         self._is_paused = True
-        self._time = 0
+        self._time = Time(0)
+        self._thread = None

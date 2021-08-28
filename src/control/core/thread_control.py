@@ -21,7 +21,7 @@ class ThreadControl(BaseControl, ABC):
 
     def __init__(self, simulator: BaseSimulator):
         BaseControl.__init__(self, simulator)
-        _thread = Thread(target=self._execute)
+        self._thread = Thread(target=self._execute)
 
     def _start_thread(self, frequency: Time = 0, wait_time: Time = 0, stop_time: Time = 0):
         self._thread = Thread(target=self._execute, args=(frequency, wait_time, stop_time,))
