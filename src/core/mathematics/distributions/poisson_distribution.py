@@ -33,3 +33,6 @@ class PoissonDistribution(RandomDistribution):
     def evaluate(self) -> int:
         """Evaluates the expression"""
         return self.generate()
+
+    def __str__(self):
+        return super().__str__() + ".Poisson(" + str(self.__mean) + ")"

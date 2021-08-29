@@ -19,3 +19,6 @@ class Emitter(Entity, EntityEmitter):
     def generate(self) -> Entity:
         """Generates an entity"""
         return GeneratedEntity(self.get_id(), self._properties)
+
+    def __str__(self):
+        return self.get_id()

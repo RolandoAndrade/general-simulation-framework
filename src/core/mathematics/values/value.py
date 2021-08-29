@@ -15,3 +15,6 @@ class Value(Expression, Generic[T]):
 
     def evaluate(self) -> T:
         return self.value
+
+    def __str__(self):
+        return str(self.evaluate())

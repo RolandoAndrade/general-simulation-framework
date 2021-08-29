@@ -7,7 +7,6 @@ from loguru import logger
 from experiments.experiment_builders import DiscreteEventExperiment
 from queue_simulator.shared.dynamic_systems import SimulationDynamicSystem
 from queue_simulator.shared.nodes import NodeType, NodeBuilder
-import jsonpickle
 
 sio = socketio.Server(cors_allowed_origins='*')
 app = socketio.WSGIApp(sio, static_files={

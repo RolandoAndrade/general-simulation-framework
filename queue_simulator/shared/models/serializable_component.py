@@ -14,7 +14,7 @@ class SerializableComponent(ABC, Entity):
             NodeProperty("Name", self.get_id(), PropertyType.STRING, "Generic").serialize()
         ]
         for i in properties:
-            e.append(NodeProperty(i, str(properties[i]), str(properties[i].get_type()),
+            e.append(NodeProperty(i, str(properties[i].get_value()), str(properties[i].get_type()),
                                   properties[i].get_category()).serialize())
         return e
 

@@ -21,3 +21,6 @@ class RandomDistribution(Expression):
             size (int): Size of the list
         """
         raise NotImplementedError
+
+    def __str__(self):
+        return "Random"

@@ -46,3 +46,7 @@ class TriangularDistribution(RandomDistribution):
     def evaluate(self) -> Decimal:
         """Evaluates the expression"""
         return self.generate()
+
+    def __str__(self):
+        return super().__str__() + ".Triangular(" + str(self.__minimum) + ", " + \
+               str(self.__mode) + ", " + str(self.__maximum) + ")"

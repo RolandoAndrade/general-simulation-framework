@@ -36,3 +36,6 @@ class ExponentialDistribution(RandomDistribution):
     def evaluate(self) -> Decimal:
         """Evaluates the expression"""
         return self.generate()
+
+    def __str__(self):
+        return super().__str__() + ".Exponential(" + str(self.__mean)+")"
