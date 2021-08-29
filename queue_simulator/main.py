@@ -2,11 +2,12 @@ from typing import List, Dict
 
 import eventlet
 import socketio
-from loguru import logger
 
+from loguru import logger
 from experiments.experiment_builders import DiscreteEventExperiment
-from queue_simulator.core.dynamic_systems import SimulationDynamicSystem
-from queue_simulator.core.nodes import NodeType, NodeBuilder
+from queue_simulator.shared.dynamic_systems import SimulationDynamicSystem
+from queue_simulator.shared.nodes import NodeType, NodeBuilder
+import jsonpickle
 
 sio = socketio.Server(cors_allowed_origins='*')
 app = socketio.WSGIApp(sio, static_files={
@@ -32,7 +33,7 @@ def create_node(sid, data: Dict[str, NodeType]):
     with sio.session(sid) as session:
         ds = session['experiment'].dynamic_system
         created_node = NodeBuilder.create_node(node, ds)
-    return created_node
+    return created_node.serialize()
 
 @sio.event
 def disconnect(sid):

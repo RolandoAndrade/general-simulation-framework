@@ -1,5 +1,5 @@
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from queue_simulator.core.nodes.node_types import NodeType
+from queue_simulator.shared.nodes.node_types import NodeType
 from queue_simulator.source import Source
 
 expected_nodes = {

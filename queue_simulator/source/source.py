@@ -11,12 +11,13 @@ from core.types.model_input import ModelInput
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from models.models import DiscreteEventModel
 from queue_simulator.buffer.buffers import OutputBuffer
+from queue_simulator.shared.models import SerializableComponent
 
 from queue_simulator.source import SourceProperty, SourceState
 
 
 # https://simulemos.cl/books/simio/page/source
-class Source(DiscreteEventModel):
+class Source(DiscreteEventModel, SerializableComponent):
     """Source of entities"""
 
     __inter_arrival_time: Optional[ExpressionProperty]

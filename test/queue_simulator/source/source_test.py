@@ -63,6 +63,11 @@ class TestSource(unittest.TestCase):
         actual_keys = set(self.source.get_properties().keys())
         self.assertEqual(expect_keys, actual_keys)
 
+    def test_serialization(self):
+        """Should have the expected properties"""
+        properties = self.source.serialize()
+        print(properties)
+
 
 if __name__ == '__main__':
     unittest.main()
