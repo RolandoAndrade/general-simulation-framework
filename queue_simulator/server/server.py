@@ -9,9 +9,10 @@ from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from models.models import DiscreteEventModel
 from queue_simulator.buffer.buffers import InputBuffer, OutputBuffer, ProcessBuffer
 from queue_simulator.server.server_state import ServerState
+from queue_simulator.shared.models import SerializableComponent
 
 
-class Server(DiscreteEventModel):
+class Server(DiscreteEventModel, SerializableComponent):
     """Server of processes"""
 
     _processingTime: ExpressionProperty
@@ -28,9 +29,9 @@ class Server(DiscreteEventModel):
         super().__init__(dynamic_system,
                          name,
                          ServerState(
-                             InputBuffer(name),
-                             OutputBuffer(name),
-                             ProcessBuffer(name, capacity=initial_capacity)
+                             InputBuffer(name, entity_manager=entity_manager),
+                             OutputBuffer(name, entity_manager=entity_manager),
+                             ProcessBuffer(name, capacity=initial_capacity, entity_manager=entity_manager)
                          ),
                          entity_manager=entity_manager
                          )

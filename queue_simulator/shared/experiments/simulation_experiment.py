@@ -16,4 +16,4 @@ class SimulationExperiment(DiscreteEventExperiment):
         self._name_generator = NameGenerator()
 
     def add_node(self, node_type: NodeType):
-        return NodeBuilder.create_node(node_type, self.dynamic_system, self._name_generator.get_name(cast(Any, node_type)))
+        return NodeBuilder.create_node(node_type, self.dynamic_system, self._name_generator)

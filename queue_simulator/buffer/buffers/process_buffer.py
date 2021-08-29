@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import List
 
 import heapq
-from core.entity.core import Entity
+from core.entity.core import Entity, EntityManager
 from core.entity.properties import NumberProperty, StringProperty
 from core.types import Time
 from queue_simulator.buffer.core import Buffer, BufferPolicy, BufferedEntity
@@ -15,14 +15,15 @@ class ProcessBuffer(Buffer):
     _content: List[BufferedEntity]
 
     def __init__(self, name: str,
-                 capacity: NumberProperty = NumberProperty(float("inf"))
+                 capacity: NumberProperty = NumberProperty(float("inf")),
+                 entity_manager: EntityManager = None
                  ):
         """
         Args:
             name (str): Name of the buffer.
             capacity (NumberProperty): Capacity of the buffer.
         """
-        super().__init__(name + ".ProcessBuffer", capacity, StringProperty(str(BufferPolicy.PARALLEL)))
+        super().__init__(name + ".ProcessBuffer", capacity, StringProperty(str(BufferPolicy.PARALLEL)), entity_manager)
 
     def process(self):
         entities = self.get_content()

@@ -5,7 +5,7 @@ from decimal import Decimal
 from random import shuffle, randint
 from typing import List, Optional
 
-from core.entity.core import Entity, EntityProperties
+from core.entity.core import Entity, EntityProperties, EntityManager
 from core.entity.properties import NumberProperty, StringProperty
 from queue_simulator.buffer.core import BufferPolicy, BufferProperty
 
@@ -28,14 +28,15 @@ class Buffer(Entity, ABC):
     def __init__(self,
                  name: str,
                  capacity: NumberProperty[float] = NumberProperty(Decimal("inf")),
-                 policy: StringProperty = StringProperty(str(BufferPolicy.FIFO))):
+                 policy: StringProperty = StringProperty(str(BufferPolicy.FIFO)),
+                 entity_manager: EntityManager = None):
         """
         Args:
             name (str): Name of the buffer.
             capacity (NumberProperty): Capacity of the buffer.
             policy (StringProperty): Policy of the buffer.
         """
-        super().__init__(name)
+        super().__init__(name, entity_manager)
         self.capacity = capacity
         self._content = []
         self.policy = policy

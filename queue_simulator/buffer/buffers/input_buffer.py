@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from core.entity.core import EntityManager
 from core.entity.properties import NumberProperty, StringProperty
 from queue_simulator.buffer.core.buffer import Buffer
 from queue_simulator.buffer.core.buffer_policy import BufferPolicy
@@ -10,7 +11,8 @@ class InputBuffer(Buffer):
 
     def __init__(self, name: str,
                  capacity: NumberProperty = NumberProperty(float("inf")),
-                 policy: StringProperty = StringProperty(str(BufferPolicy.FIFO))
+                 policy: StringProperty = StringProperty(str(BufferPolicy.FIFO)),
+                 entity_manager: EntityManager = None
                  ):
         """
         Args:
@@ -18,4 +20,4 @@ class InputBuffer(Buffer):
             capacity (NumberProperty): Capacity of the buffer.
             policy (StringProperty): Policy of the buffer.
         """
-        super().__init__(name + ".InputBuffer", capacity, policy)
+        super().__init__(name + ".InputBuffer", capacity, policy, entity_manager)

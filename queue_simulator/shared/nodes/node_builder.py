@@ -1,5 +1,5 @@
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from queue_simulator.entities import Emitter
+from queue_simulator.entities import Emitter, NameGenerator
 from queue_simulator.server.server import Server
 from queue_simulator.shared.nodes.node_types import NodeType
 from queue_simulator.sink.sink import Sink
@@ -15,5 +15,6 @@ expected_nodes = {
 
 class NodeBuilder:
     @staticmethod
-    def create_node(node_type: NodeType, dynamic_system: DiscreteEventDynamicSystem, name: str):
-        return expected_nodes[node_type](dynamic_system, name)
+    def create_node(node_type: NodeType, dynamic_system: DiscreteEventDynamicSystem, entity_manager: NameGenerator):
+        return expected_nodes[node_type](dynamic_system,
+                                         entity_manager.get_name(node_type), entity_manager=entity_manager)
