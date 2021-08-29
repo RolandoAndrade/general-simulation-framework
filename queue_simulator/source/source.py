@@ -15,6 +15,8 @@ from queue_simulator.shared.models import SerializableComponent
 
 from queue_simulator.source import SourceProperty, SourceState
 
+from core.entity.core import EntityManager
+
 
 # https://simulemos.cl/books/simio/page/source
 class Source(DiscreteEventModel, SerializableComponent):
@@ -43,7 +45,8 @@ class Source(DiscreteEventModel, SerializableComponent):
                  entity_emitter: Union[EntityEmitter, Property[EntityEmitter]] = None,
                  inter_arrival_time: Union[Expression, ExpressionProperty] = ExponentialDistribution(0.25),
                  entities_per_arrival: Union[Expression, ExpressionProperty] = Value(1),
-                 time_offset: Union[Expression, ExpressionProperty] = Value(0)
+                 time_offset: Union[Expression, ExpressionProperty] = Value(0),
+                 entity_manager: EntityManager = None
                  ):
         """
         Args:
@@ -53,7 +56,7 @@ class Source(DiscreteEventModel, SerializableComponent):
             entity_emitter (EntityEmitter): Emitter of entities.
             inter_arrival_time (ExpressionProperty): InterArrival time of the entities.
         """
-        super().__init__(dynamic_system, name)
+        super().__init__(dynamic_system, name, entity_manager=entity_manager)
         self.set_up_state(SourceState(OutputBuffer(self.get_id())))
         self.inter_arrival_time = inter_arrival_time
         self.entity_emitter = entity_emitter

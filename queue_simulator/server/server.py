@@ -1,6 +1,6 @@
 from typing import Any, List, Union, Dict
 
-from core.entity.core import Entity, EntityProperties
+from core.entity.core import Entity, EntityProperties, EntityManager
 from core.entity.properties import ExpressionProperty, NumberProperty
 from core.expresions.expression import Expression
 from core.mathematics.values.value import Value
@@ -23,14 +23,16 @@ class Server(DiscreteEventModel):
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem,
                  name: str,
                  processing_time: Union[ExpressionProperty, Expression] = Value(1),
-                 initial_capacity: NumberProperty = NumberProperty(1)):
+                 initial_capacity: NumberProperty = NumberProperty(1),
+                 entity_manager: EntityManager = None):
         super().__init__(dynamic_system,
                          name,
                          ServerState(
                              InputBuffer(name),
                              OutputBuffer(name),
                              ProcessBuffer(name, capacity=initial_capacity)
-                         )
+                         ),
+                         entity_manager=entity_manager
                          )
         self.processing_time = processing_time
         self._is_busy = False

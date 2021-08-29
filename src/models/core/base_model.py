@@ -4,12 +4,14 @@ from abc import abstractmethod
 from typing import Any, Set, TYPE_CHECKING, cast
 
 from core.debug.domain.debug import debug
+
 from core.entity.core.entity import Entity
 from core.entity.properties.expression_property import ExpressionProperty
 from core.mathematics.values.value import Value
 from models.core.path import Path
 
 if TYPE_CHECKING:
+    from core.entity.core import EntityManager
     from dynamic_system.core.base_dynamic_sytem import BaseDynamicSystem
 
 ModelState = Any
@@ -29,20 +31,21 @@ class BaseModel(Entity):
 
     @debug("Initialized Model", True)
     def __init__(self, dynamic_system: BaseDynamicSystem, name: str = None,
-                 state: ModelState = None):
+                 state: ModelState = None, entity_manager: EntityManager = None):
         """
         Args:
             dynamic_system (BaseDynamicSystem): Dynamic system of the
                 model.
             name (str): Name of the model.
             state (ModelState): Initial state of the model.
+            entity_manager (EntityManager): Delegated entity manager.
         """
         # Init the model
         if name is None:
-            super().__init__("model" + str(BaseModel._serial_id))
+            super().__init__("model" + str(BaseModel._serial_id), entity_manager)
             BaseModel._serial_id = BaseModel._serial_id + 1
         else:
-            super().__init__(name)
+            super().__init__(name, entity_manager)
         self.set_up_state(state)
         # Set dynamic system
         self.__current_dynamic_system = dynamic_system
@@ -81,7 +84,7 @@ class BaseModel(Entity):
     def remove(self):
         """Removes the model from the dynamic system"""
         self.__current_dynamic_system.remove(self)
-        Entity._saved_names.remove(self.get_id())
+        self._entity_manager.remove(self.get_id())
 
     @debug("Retrieving dynamic system")
     def get_dynamic_system(self) -> BaseDynamicSystem:

@@ -4,6 +4,7 @@ from core.entity.core import Entity
 from core.entity.properties import ExpressionProperty
 from core.mathematics.values.value import Value
 from dynamic_system.core import BaseDynamicSystem
+from dynamic_system.future_event_list import Scheduler
 from models.core import Path
 from test.mocks.base_model_mock import BaseModelMock
 from test.mocks.dynamic_system_mock import DynamicSystemMock
@@ -15,7 +16,7 @@ class BaseDynamicSystemTest(unittest.TestCase):
 
     def setUp(self) -> None:
         """Sets up tests"""
-        self.dynamic_system = DynamicSystemMock()
+        self.dynamic_system = DynamicSystemMock(Scheduler())
 
     def tearDown(self) -> None:
         """Remove changes of the tests."""

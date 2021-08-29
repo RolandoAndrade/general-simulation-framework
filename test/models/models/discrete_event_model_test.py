@@ -1,8 +1,9 @@
 import unittest
 from decimal import Decimal
 
-from core.entity.core import Entity
+from core.entity.core import Entity, static_entity_manager
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
+from dynamic_system.future_event_list import Scheduler
 from models.models import DiscreteEventModel
 from test.mocks.dynamic_system_mock import DynamicSystemMock
 from test.mocks.model_mock import ModelMock
@@ -15,12 +16,12 @@ class DiscreteEventModelTest(unittest.TestCase):
 
     def setUp(self) -> None:
         """Sets up tests"""
-        self.dynamic_system = DynamicSystemMock()
+        self.dynamic_system = DynamicSystemMock(Scheduler())
         self.model = ModelMock(self.dynamic_system, "model")
 
     def tearDown(self) -> None:
         """Remove changes of the tests."""
-        Entity._saved_names = set()
+        static_entity_manager._saved_names = set()
 
     def test_schedule(self):
         """Should schedule an event."""

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Any, cast
+from typing import Any, cast, TYPE_CHECKING
 
 from core.debug.domain.debug import debug
 from core.entity.properties.expression_property import ExpressionProperty
@@ -13,6 +13,9 @@ from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
 
+if TYPE_CHECKING:
+    from core.entity.core import EntityManager
+
 
 class DiscreteEventModel(BaseModel):
     """DiscreteEventModel with an state"""
@@ -22,6 +25,7 @@ class DiscreteEventModel(BaseModel):
             dynamic_system: DiscreteEventDynamicSystem,
             name: str = None,
             state: ModelState = None,
+            entity_manager: EntityManager = None
     ):
         """
         Args:
@@ -29,8 +33,9 @@ class DiscreteEventModel(BaseModel):
                 model.
             name (str): Name of the model.
             state (ModelState): Initial state of the model.
+            entity_manager (EntityManager): Delegated entity manager.
         """
-        super().__init__(dynamic_system, name, state)
+        super().__init__(dynamic_system, name, state, entity_manager)
 
     @debug("Scheduling model")
     def schedule(self, time: Time):

@@ -1,6 +1,6 @@
 import unittest
 
-from core.entity.core import Entity
+from core.entity.core import Entity, static_entity_manager
 from core.entity.properties import ExpressionProperty
 from core.mathematics.values.value import Value
 from dynamic_system.core import BaseDynamicSystem
@@ -26,7 +26,7 @@ class PathTest(unittest.TestCase):
 
     def tearDown(self) -> None:
         """Remove changes of the tests."""
-        Entity._saved_names = set()
+        static_entity_manager._saved_names = set()
 
     def test_get_source_model(self):
         """Should return the source model"""

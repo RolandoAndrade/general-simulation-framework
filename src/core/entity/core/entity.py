@@ -15,12 +15,15 @@ class Entity:
     _entity_manager: EntityManager
     """Manager of the names of entities."""
 
-    def __init__(self, name: str, entity_manager: EntityManager = static_entity_manager):
+    def __init__(self, name: str, entity_manager: EntityManager = None):
         """
         Args:
             name (str): Identifier of the entity.
             entity_manager (EntityManager): Delegated entity manager.
         """
+        if not entity_manager:
+            entity_manager = static_entity_manager
+        self._id = None
         self._entity_manager = entity_manager
         self.set_id(name)
 

@@ -21,6 +21,10 @@ class EntityManager:
             self._saved_names.remove(old_name)
         self._saved_names.add(new_name)
 
+    def remove(self, name: str):
+        """Replaces the name with a new name."""
+        self._saved_names.remove(name)
+
 
 static_entity_manager = EntityManager()
 """Static entity manager."""

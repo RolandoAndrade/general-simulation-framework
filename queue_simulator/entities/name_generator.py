@@ -1,7 +1,8 @@
+from core.entity.core import EntityManager
 from queue_simulator.entities.available_entities import AvailableEntities
 
 
-class NameGenerator:
+class NameGenerator(EntityManager):
     _source_serial: int
     _server_serial: int
     _sink_serial: int
@@ -10,6 +11,7 @@ class NameGenerator:
     _emitter_serial: int
 
     def __init__(self):
+        super().__init__()
         self._source_serial = 0
         self._server_serial = 0
         self._sink_serial = 0

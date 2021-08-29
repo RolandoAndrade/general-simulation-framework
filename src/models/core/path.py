@@ -8,6 +8,7 @@ from core.entity.properties.expression_property import ExpressionProperty
 
 if TYPE_CHECKING:
     from models.core.base_model import BaseModel
+    from core.entity.core import EntityManager
 
 
 class Path(Entity):
@@ -24,7 +25,8 @@ class Path(Entity):
     _weight: ExpressionProperty
     """Weight of the path"""
 
-    def __init__(self, from_model: BaseModel, to_model: BaseModel, weight: ExpressionProperty, name: str = None):
+    def __init__(self, from_model: BaseModel, to_model: BaseModel, weight: ExpressionProperty,
+                 name: str = None, entity_manager: EntityManager = None):
         """
         Args:
             from_model (BaseModel): Source model of the path.
@@ -33,10 +35,10 @@ class Path(Entity):
             name (str): Name of the path.
         """
         if name is None:
-            super().__init__("path" + str(Path._serial_id))
+            super().__init__("path" + str(Path._serial_id), entity_manager)
             Path._serial_id = Path._serial_id + 1
         else:
-            super().__init__(name)
+            super().__init__(name, entity_manager)
         self._from = from_model
         self._to = to_model
         self._weight = weight
