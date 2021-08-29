@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import Set
 
+from core.entity.core import EntityManager, static_entity_manager
 from core.entity.core.entity_property import EntityProperties
 
 
@@ -12,14 +12,16 @@ class Entity:
     _id: str
     """Identification of the entity."""
 
-    _saved_names: Set[str] = {"DYNAMIC_SYSTEM_CALL"}
-    """Static list of entities saved."""
+    _entity_manager: EntityManager
+    """Manager of the names of entities."""
 
-    def __init__(self, name: str):
+    def __init__(self, name: str, entity_manager: EntityManager = static_entity_manager):
         """
         Args:
             name (str): Identifier of the entity.
+            entity_manager (EntityManager): Delegated entity manager.
         """
+        self._entity_manager = entity_manager
         self.set_id(name)
 
     def set_id(self, name: str):
@@ -28,21 +30,11 @@ class Entity:
         Args:
             name (str): Identifier of the entity.
         """
-        if name in Entity._saved_names:
+        if self._entity_manager.name_already_exists(name):
             raise NameError("Name already taken by another entity")
         else:
+            self._entity_manager.replace_name(name, self.get_id())
             self._id = name
-            self._replace_name(name)
-
-    def _replace_name(self, new_name: str):
-        """Replaces the name of the entity
-
-        Args:
-            new_name (str): Identifier of the entity.
-        """
-        if self.get_id() in Entity._saved_names:
-            Entity._saved_names.remove(self.get_id())
-        Entity._saved_names.add(new_name)
 
     def get_id(self) -> str:
         """Gets the identifier of the entity."""

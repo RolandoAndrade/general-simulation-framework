@@ -53,9 +53,6 @@ class Source(DiscreteEventModel, SerializableComponent):
             entity_emitter (EntityEmitter): Emitter of entities.
             inter_arrival_time (ExpressionProperty): InterArrival time of the entities.
         """
-        if name is None:
-            name = "Source" + str(self.__serial)
-            Source.__serial = Source.__serial + 1
         super().__init__(dynamic_system, name)
         self.set_up_state(SourceState(OutputBuffer(self.get_id())))
         self.inter_arrival_time = inter_arrival_time
