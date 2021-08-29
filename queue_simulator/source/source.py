@@ -34,6 +34,8 @@ class Source(DiscreteEventModel):
     __entity_emitter: Optional[Property[EntityEmitter]]
     """Emitter of entities"""
 
+    __serial: int = 0
+
     def __init__(self,
                  dynamic_system: DiscreteEventDynamicSystem,
                  name: str = None,
@@ -50,6 +52,9 @@ class Source(DiscreteEventModel):
             entity_emitter (EntityEmitter): Emitter of entities.
             inter_arrival_time (ExpressionProperty): InterArrival time of the entities.
         """
+        if name is None:
+            name = "Source" + str(self.__serial)
+            Source.__serial = Source.__serial + 1
         super().__init__(dynamic_system, name)
         self.set_up_state(SourceState(OutputBuffer(self.get_id())))
         self.inter_arrival_time = inter_arrival_time

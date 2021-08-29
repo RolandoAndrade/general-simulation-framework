@@ -2,11 +2,11 @@ from typing import List, Dict
 
 import eventlet
 import socketio
+from loguru import logger
 
-from dynamic_system.future_event_list import Scheduler
 from experiments.experiment_builders import DiscreteEventExperiment
-from queue_simulator.source import Source
-from test.mocks.dynamic_system_mock import DynamicSystemMock
+from queue_simulator.core.dynamic_systems import SimulationDynamicSystem
+from queue_simulator.core.nodes import NodeType, NodeBuilder
 
 sio = socketio.Server(cors_allowed_origins='*')
 app = socketio.WSGIApp(sio, static_files={
@@ -18,20 +18,21 @@ serial = 0
 
 @sio.event
 def connect(sid, environ):
-    print('connect ', sid)
-    session: Dict[str, List]
+    logger.info("Client connected: {sid}", sid=sid)
+    session: Dict[str, DiscreteEventExperiment]
     with sio.session(sid) as session:
-        session['experiment'] = []
+        session['experiment'] = DiscreteEventExperiment(SimulationDynamicSystem())
 
 
 @sio.event
-def CREATE_NODE(sid, data):
-    print('message ', sid, data)
-    session: Dict[str, List]
+def create_node(sid, data: Dict[str, NodeType]):
+    node = data['node']
+    logger.info("Create node: {node}, sid: {sid}", node=node, sid=sid)
+    session: Dict[str, DiscreteEventExperiment]
     with sio.session(sid) as session:
-        session['experiment'].append(data)
-        print(session)
-
+        ds = session['experiment'].dynamic_system
+        created_node = NodeBuilder.create_node(node, ds)
+    return created_node
 
 @sio.event
 def disconnect(sid):
