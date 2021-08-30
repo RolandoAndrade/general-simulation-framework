@@ -9,3 +9,6 @@ class SinkState:
 
     def __init__(self, input_buffer: InputBuffer):
         self.input_buffer = input_buffer
+
+    def rename(self, new_name: str):
+        self.input_buffer.set_id(new_name)

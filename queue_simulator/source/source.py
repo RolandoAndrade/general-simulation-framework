@@ -161,7 +161,6 @@ class Source(DiscreteEventModel, SerializableComponent):
             self.__time_offset = ExpressionProperty(value)
         self.__used_offset = self.__time_offset
 
-
     def get_state(self) -> SourceState:
         """Returns the current state"""
         return super(Source, self).get_state()
@@ -185,3 +184,10 @@ class Source(DiscreteEventModel, SerializableComponent):
 
     def __str__(self):
         return self.get_id()
+
+    def set_id(self, name: str):
+        super(Source, self).set_id(name)
+        try:
+            self.get_state().rename(name)
+        except AttributeError:
+            pass

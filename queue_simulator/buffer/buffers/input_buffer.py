@@ -20,4 +20,7 @@ class InputBuffer(Buffer):
             capacity (NumberProperty): Capacity of the buffer.
             policy (StringProperty): Policy of the buffer.
         """
-        super().__init__(name + ".InputBuffer", capacity, policy, entity_manager)
+        super().__init__(name, capacity, policy, entity_manager)
+
+    def set_id(self, name: str):
+        super(InputBuffer, self).set_id(name + ".InputBuffer")

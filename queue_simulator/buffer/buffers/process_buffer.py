@@ -23,7 +23,7 @@ class ProcessBuffer(Buffer):
             name (str): Name of the buffer.
             capacity (NumberProperty): Capacity of the buffer.
         """
-        super().__init__(name + ".ProcessBuffer", capacity, StringProperty(str(BufferPolicy.PARALLEL)), entity_manager)
+        super().__init__(name, capacity, StringProperty(str(BufferPolicy.PARALLEL)), entity_manager)
 
     def process(self):
         entities = self.get_content()
@@ -61,3 +61,6 @@ class ProcessBuffer(Buffer):
         """Gets the time of the next event"""
         for entity in self._content:
             entity.decrease_time(time)
+
+    def set_id(self, name: str):
+        super(ProcessBuffer, self).set_id(name + ".ProcessBuffer")

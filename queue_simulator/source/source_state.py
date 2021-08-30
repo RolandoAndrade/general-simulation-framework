@@ -9,3 +9,6 @@ class SourceState:
 
     def __init__(self, output_buffer: OutputBuffer):
         self.output_buffer = output_buffer
+
+    def rename(self, new_name: str):
+        self.output_buffer.set_id(new_name)

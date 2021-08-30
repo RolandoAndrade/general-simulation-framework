@@ -76,7 +76,6 @@ class SimulatorTest(unittest.TestCase):
         server.initial_capacity = NumberProperty(1000)
 
         sink = self.experiment.add_node(NodeType.SINK)
-        print(self.experiment._name_generator._saved_names)
         sink.set_id("Sink")
 
         source.add(server)

@@ -107,3 +107,10 @@ class Server(DiscreteEventModel, SerializableComponent):
 
     def __str__(self):
         return self.get_id()
+
+    def set_id(self, name: str):
+        super(Server, self).set_id(name)
+        try:
+            self.get_state().rename(name)
+        except AttributeError:
+            pass

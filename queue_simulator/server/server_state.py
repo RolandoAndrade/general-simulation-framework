@@ -47,11 +47,7 @@ class ServerState:
         else:
             self._processing_remaining_time = NumberProperty(value)
 
-    """def __str__(self):
-        return str(dict({
-            ServerState.OUTPUT_BUFFER: str(self.output_buffer),
-            ServerState.INPUT_BUFFER: str(self.input_buffer),
-            ServerState.PROCESS_BUFFER: str(self.process_buffer),
-            ServerState.PROCESSING_REMAINING_TIME: str(self.processing_remaining_time),
-        }))
-    """
+    def rename(self, new_name: str):
+        self.output_buffer.set_id(new_name)
+        self.input_buffer.set_id(new_name)
+        self.process_buffer.set_id(new_name)
