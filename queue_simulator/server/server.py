@@ -15,11 +15,14 @@ from queue_simulator.shared.models import SerializableComponent
 class Server(DiscreteEventModel, SerializableComponent):
     """Server of processes"""
 
-    _processingTime: ExpressionProperty
-    """Processing time of the server"""
+    _processing_time: ExpressionProperty
+    """Processing time of the server."""
+
+    _initial_capacity: NumberProperty
+    """Initial capacity of the process buffer."""
 
     _is_busy: bool
-    """Processing time of the server"""
+    """Processing time of the server."""
 
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem,
                  name: str,
@@ -35,6 +38,7 @@ class Server(DiscreteEventModel, SerializableComponent):
                          ),
                          entity_manager=entity_manager
                          )
+        self.initial_capacity = initial_capacity
         self.processing_time = processing_time
         self._is_busy = False
 
@@ -79,14 +83,23 @@ class Server(DiscreteEventModel, SerializableComponent):
 
     @property
     def processing_time(self):
-        return self._processingTime
+        return self._processing_time
 
     @processing_time.setter
     def processing_time(self, value: Union[ExpressionProperty, Expression]):
         if isinstance(value, ExpressionProperty):
-            self._processingTime = value
+            self._processing_time = value
         else:
-            self._processingTime = ExpressionProperty(value)
+            self._processing_time = ExpressionProperty(value)
+
+    @property
+    def initial_capacity(self):
+        return self._processing_time
+
+    @initial_capacity.setter
+    def initial_capacity(self, value: NumberProperty):
+        self._initial_capacity = value
+        self.get_state().process_buffer.capacity = value
 
     def get_state(self) -> ServerState:
         """Returns the current state"""

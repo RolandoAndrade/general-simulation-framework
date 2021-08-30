@@ -39,7 +39,8 @@ class Sink(DiscreteEventModel,SerializableComponent):
         }
 
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem, name: str, entity_manager: EntityManager = None):
-        super(Sink, self).__init__(dynamic_system, name, SinkState(InputBuffer(name, entity_manager=entity_manager)))
+        super(Sink, self).__init__(dynamic_system, name,
+                                   SinkState(InputBuffer(name, entity_manager=entity_manager)), entity_manager)
 
     def __str__(self):
         return self.get_id()

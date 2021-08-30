@@ -1,4 +1,4 @@
-from core.entity.core import Entity, EntityProperties
+from core.entity.core import Entity, EntityProperties, EntityManager
 
 
 class GeneratedEntity(Entity):
@@ -7,9 +7,9 @@ class GeneratedEntity(Entity):
     _properties: EntityProperties
     """Properties of the entity."""
 
-    def __init__(self, name: str, properties: EntityProperties):
+    def __init__(self, name: str, properties: EntityProperties, entity_manager: EntityManager = None):
         """Creates a generated entity"""
-        super().__init__(name)
+        super().__init__(name, entity_manager)
         self._properties = properties
 
     def get_properties(self) -> EntityProperties:

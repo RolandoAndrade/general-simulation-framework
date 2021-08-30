@@ -1,4 +1,5 @@
 from core.entity.core import Entity, EntityEmitter, EntityProperties
+from queue_simulator.entities import NameGenerator, AvailableEntities
 from queue_simulator.entities.generated_entity import GeneratedEntity
 
 
@@ -8,8 +9,10 @@ class Emitter(Entity, EntityEmitter):
     _properties: EntityProperties
     """Properties of the entities to be generated."""
 
-    def __init__(self, name: str):
-        super().__init__(name)
+    _entity_manager: NameGenerator
+
+    def __init__(self, name: str, entity_manager: NameGenerator = None):
+        super().__init__(name, entity_manager)
         self._properties = {}
 
     def get_properties(self) -> EntityProperties:
@@ -18,7 +21,8 @@ class Emitter(Entity, EntityEmitter):
 
     def generate(self) -> Entity:
         """Generates an entity"""
-        return GeneratedEntity(self.get_id(), self._properties)
+        return GeneratedEntity(self._entity_manager.get_name(AvailableEntities.ENTITY),
+                               self._properties, self._entity_manager)
 
     def __str__(self):
         return self.get_id()
