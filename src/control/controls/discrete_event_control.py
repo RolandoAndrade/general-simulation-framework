@@ -70,6 +70,8 @@ class DiscreteEventControl(ThreadControl):
             wait_time (Time): Delay execution for a given number of seconds.
         """
         self._is_paused = False
+        if self._time > stop_time:
+            self._time = Time(0)
         self._simulator.compute_next_state(start_input)
         self._start_thread(frequency, wait_time, stop_time)
 

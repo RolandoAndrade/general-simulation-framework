@@ -1,9 +1,10 @@
 from core.entity.core import Entity, EntityEmitter, EntityProperties
 from queue_simulator.entities import NameGenerator, AvailableEntities
 from queue_simulator.entities.generated_entity import GeneratedEntity
+from queue_simulator.shared.models import SerializableComponent
 
 
-class Emitter(Entity, EntityEmitter):
+class Emitter(SerializableComponent, EntityEmitter):
     """Entity entities for a queue network system"""
 
     _properties: EntityProperties
