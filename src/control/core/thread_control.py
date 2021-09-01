@@ -7,6 +7,7 @@ from control.core.base_control import BaseControl
 
 from typing import TYPE_CHECKING
 
+from core.events import EventBus
 from core.types import Time
 
 if TYPE_CHECKING:
@@ -19,8 +20,8 @@ class ThreadControl(BaseControl, ABC):
     _thread: Thread
     """Thread of the simulation"""
 
-    def __init__(self, simulator: BaseSimulator):
-        BaseControl.__init__(self, simulator)
+    def __init__(self, simulator: BaseSimulator, event_bus: EventBus = None):
+        BaseControl.__init__(self, simulator, event_bus)
         self._thread = Thread(target=self._execute)
 
     def _start_thread(self, frequency: Time = 0, wait_time: Time = 0, stop_time: Time = 0):

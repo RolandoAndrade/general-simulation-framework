@@ -4,6 +4,7 @@ from time import sleep
 from typing import TYPE_CHECKING, Dict
 from control.core.thread_control import ThreadControl
 from core.debug.domain.debug import debug
+from core.events import EventBus, DomainEvents
 from core.types import Time
 from models.models.discrete_event_model import ModelInput
 
@@ -22,13 +23,13 @@ class DiscreteEventControl(ThreadControl):
     _time: Time
     """Current time of the simulation"""
 
-    def __init__(self, simulator: DiscreteEventSimulationEngine):
+    def __init__(self, simulator: DiscreteEventSimulationEngine, event_bus: EventBus = None):
         """
         Args:
             simulator (DiscreteEventSimulationEngine): Simulation engine to be
                 executed.
         """
-        ThreadControl.__init__(self, simulator)
+        ThreadControl.__init__(self, simulator, event_bus)
         self._time = Time(0)
         self._is_paused = False
 
@@ -46,6 +47,13 @@ class DiscreteEventControl(ThreadControl):
             sleep(wait_time)
             if 0 < stop_time <= self._time:
                 self._is_paused = True
+            self._event_bus.emit(DomainEvents.SIMULATION_STATUS, {
+                'time': self._time,
+                'isPaused': self._is_paused,
+                'frequency': frequency,
+                'stopTime': stop_time
+            })
+        self._event_bus.emit(DomainEvents.SIMULATION_FINISHED)
 
     @debug("Simulation starts")
     def start(self,
@@ -68,11 +76,13 @@ class DiscreteEventControl(ThreadControl):
     @debug("Simulation paused")
     def pause(self):
         """Pauses the simulation"""
+        self._event_bus.emit(DomainEvents.SIMULATION_PAUSED)
         self._is_paused = True
 
     @debug("Simulation ended")
     def stop(self):
         """Stops the simulation"""
+        self._event_bus.emit(DomainEvents.SIMULATION_STOPPED)
         self._is_paused = True
         self._time = Time(0)
         self._thread = None
