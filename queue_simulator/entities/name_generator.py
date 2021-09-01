@@ -2,7 +2,6 @@ from typing import Union
 
 from core.entity.core import EntityManager
 from queue_simulator.entities.available_entities import AvailableEntities
-from queue_simulator.shared.nodes.node_types import NodeType
 
 
 class NameGenerator(EntityManager):
@@ -46,7 +45,7 @@ class NameGenerator(EntityManager):
         self._emitter_serial += 1
         return self._emitter_serial
 
-    def get_name(self, entity: Union[AvailableEntities, NodeType]):
+    def get_name(self, entity: AvailableEntities):
         name_selector = {
             AvailableEntities.SOURCE: self.next_source,
             AvailableEntities.SERVER: self.next_server,

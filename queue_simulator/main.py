@@ -4,10 +4,10 @@ import eventlet
 import socketio
 
 from loguru import logger
-from experiments.experiment_builders import DiscreteEventExperiment
-from queue_simulator.shared.dynamic_systems import SimulationDynamicSystem
+
+from queue_simulator.shared.experiments import SimulationSocketExperiment
 from queue_simulator.shared.experiments.simulation_experiment import SimulationExperiment
-from queue_simulator.shared.nodes import NodeType, NodeBuilder
+from queue_simulator.shared.nodes import NodeType
 
 sio = socketio.Server(cors_allowed_origins='*')
 app = socketio.WSGIApp(sio, static_files={
@@ -22,7 +22,7 @@ def connect(sid, environ):
     logger.info("Client connected: {sid}", sid=sid)
     session: Dict[str, SimulationExperiment]
     with sio.session(sid) as session:
-        session['experiment'] = SimulationExperiment()
+        session['experiment'] = SimulationSocketExperiment(sio, sid)
 
 
 @sio.event

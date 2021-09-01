@@ -3,23 +3,35 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Dict, Any, Set
 
+from core.events import EventBus, DomainEvents
+
 DynamicSystemOutput = Dict[str, Any]
 ReportResult = Any
 Time = float
 
 
 class BaseReport:
-    _outputs: Dict[Time, DynamicSystemOutput]
-    _headers: Set[str]
+    """Base report generator"""
 
-    def __init__(self):
+    _outputs: Dict[Time, DynamicSystemOutput]
+    """Saved outputs"""
+
+    _headers: Set[str]
+    """Headers for the report table"""
+
+    _event_bus: EventBus
+    """Headers for the report table"""
+
+    def __init__(self, event_bus: EventBus = None):
         self._outputs = {}
         self._headers = set()
+        self._event_bus = event_bus
 
     def add_output(self, output: DynamicSystemOutput, time: Time):
         for key in output:
             self._headers.add(key)
         self._outputs[time] = output
+        self._event_bus.emit(DomainEvents.OUTPUT_SAVED, output)
 
     def generate_report(self) -> ReportResult:
         return self._get_results(self._headers, self._outputs)
