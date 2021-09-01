@@ -34,6 +34,18 @@ def create_node(sid, data: Dict[str, NodeType]):
         created_node = session['experiment'].add_node(node)
     return created_node.serialize()
 
+
+@sio.event
+def create_path(sid, data: Dict[str, str]):
+    from_node = data['from']
+    to_node = data['to']
+    logger.info("Create path from {from_node} to {to_node}, sid: {sid}", from_node=from_node, to_node=to_node, sid=sid)
+    session: Dict[str, SimulationExperiment]
+    with sio.session(sid) as session:
+        created_path = session['experiment'].add_path(from_node, to_node)
+    return created_path.serialize()
+
+
 @sio.event
 def disconnect(sid):
     print('disconnect ', sid)

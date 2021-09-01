@@ -1,7 +1,11 @@
 from control.controls.discrete_event_control import DiscreteEventControl
+from core.entity.properties import ExpressionProperty
 from core.events import EventBus
+from core.mathematics.values.value import Value
 from experiments.experiment_builders import DiscreteEventExperiment
+from models.core import Path
 from queue_simulator.entities import NameGenerator
+from queue_simulator.route.route import Route
 from queue_simulator.shared.dynamic_systems import SimulationDynamicSystem
 from queue_simulator.shared.nodes import NodeBuilder, NodeType
 from reports.report_generators.default_report import DefaultReport
@@ -28,6 +32,13 @@ class SimulationExperiment(DiscreteEventExperiment):
 
     def add_node(self, node_type: NodeType):
         return NodeBuilder.create_node(node_type, self.dynamic_system, self._name_generator)
+
+    def add_path(self, from_node: str, to_node: str):
+        from_model = self.dynamic_system.get_model(from_node)
+        to_model = self.dynamic_system.get_model(to_node)
+        created_path = Route(from_model, to_model, self._name_generator)
+        self.dynamic_system.link(created_path)
+        return created_path
 
     @property
     def event_bus(self):

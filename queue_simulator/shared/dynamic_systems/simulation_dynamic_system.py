@@ -8,3 +8,9 @@ class SimulationDynamicSystem(DiscreteEventDynamicSystem):
         if scheduler is None:
             scheduler = Scheduler()
         DiscreteEventDynamicSystem.__init__(self, scheduler)
+
+    def get_model(self, name: str):
+        for model in self._models:
+            if model.get_id() == name:
+                return model
+        raise LookupError("Model not found")
