@@ -1,5 +1,4 @@
 import unittest
-from decimal import getcontext
 
 from core.config import FLOATING_POINT_DIGITS
 from core.entity.properties import Property, NumberProperty
@@ -29,7 +28,7 @@ class SimulatorTest(unittest.TestCase):
         source = self.experiment.add_node(NodeType.SOURCE)
         source.set_id("Source")
         source.entity_emitter = Property(emitter)
-        source.inter_arrival_time = Value(1)
+        source.inter_arrival_time = Value(Time(1))
         source.entities_per_arrival = Value(1)
         source.time_offset = Value(0)
 
@@ -179,7 +178,7 @@ class SimulatorTest(unittest.TestCase):
 
         self.experiment.save()
 
-        self.experiment.simulation_control.start(stop_time=Time(10))
+        self.experiment.simulation_control.start(stop_time=Time(simulation_time_minutes))
         self.experiment.simulation_control.wait()
 
         print("Generated: " + str(label_source_out))

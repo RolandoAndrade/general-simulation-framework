@@ -54,7 +54,7 @@ class DiscreteEventSimulationEngine(BaseSimulator):
             time (Time): Time of the event.
         """
         if (
-            time - self._last_event_time == self.get_time_of_next_event()
+            time - self._last_event_time - self.get_time_of_next_event() == 0
         ):  # Time to change the output
             out = self.compute_output()
             if out:

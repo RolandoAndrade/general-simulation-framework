@@ -23,7 +23,7 @@ class ExponentialDistribution(RandomDistribution):
 
     def generate(self) -> Decimal:
         """Generates a value following the distribution"""
-        return Decimal(np.random.exponential(self.__mean))
+        return Decimal(str(np.random.exponential(self.__mean))[:FLOATING_POINT_DIGITS])
 
     def generate_list(self, size: int) -> np.ndarray:
         """Generates a ndarray of values following the distribution

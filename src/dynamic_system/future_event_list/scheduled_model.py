@@ -37,7 +37,7 @@ class ScheduledModel:
         Args:
             time (int): Time variation.
         """
-        self._time = round((self._time - time).max(Time(0)), FLOATING_POINT_DIGITS)
+        self._time = (self._time - time).max(Time(0))
         return self._time
 
     def __lt__(self, other: ScheduledModel):
