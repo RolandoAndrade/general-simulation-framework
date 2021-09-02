@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
+from core.events import EventBus
 from reports.core.base_report import BaseReport
 from simulation.core.base_simulator import BaseSimulator
 from core.types import Time
@@ -26,14 +27,15 @@ class DiscreteEventSimulationEngine(BaseSimulator):
     """Indicates if the output was already computed for the current iteration."""
 
     def __init__(
-        self, dynamic_system: DiscreteEventDynamicSystem, base_generator: BaseReport
+        self, dynamic_system: DiscreteEventDynamicSystem, base_generator: BaseReport,
+            event_bus: EventBus = None
     ):
         """
         Args:
             dynamic_system (DiscreteEventDynamicSystem): Dynamic system to be simulated.
             base_generator (BaseReport): Report generator for saving the outputs.
         """
-        super().__init__(dynamic_system, base_generator)
+        super().__init__(dynamic_system, base_generator, event_bus)
         self._dynamic_system = dynamic_system
         self._last_event_time = Time(0)
         self._is_output_up_to_update = False

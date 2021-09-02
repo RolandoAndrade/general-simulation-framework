@@ -23,7 +23,7 @@ class BaseControl:
     """Boolean that indicates if the simulation is paused"""
 
     _event_bus: EventBus
-    """Boolean that indicates if the simulation is paused"""
+    """Event bus of the module."""
 
     @debug("Control initialized", True)
     def __init__(self, simulator: BaseSimulator, event_bus: EventBus = None):

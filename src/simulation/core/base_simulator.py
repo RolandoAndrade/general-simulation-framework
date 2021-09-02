@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from abc import abstractmethod
 
-
+from core.events import EventBus, static_event_bus
 from dynamic_system.core.base_dynamic_sytem import BaseDynamicSystem
 from reports.core.base_report import BaseReport
 
@@ -22,16 +22,21 @@ class BaseSimulator:
 
     _report_generator: BaseReport
     """Current report generator where engine saves the outputs."""
+    
+    _event_bus: EventBus
+    """Event bus of the module."""
 
-    def __init__(self, dynamic_system: BaseDynamicSystem, base_generator: BaseReport):
+    def __init__(self, dynamic_system: BaseDynamicSystem, base_generator: BaseReport, event_bus: EventBus = None):
         """
         Args:
-            dynamic_system (BaseDynamicSystem):
-            base_generator (BaseReport):
+            dynamic_system (BaseDynamicSystem): Dynamic system to be simulated.
+            base_generator (BaseReport): Current report generator where engine saves the outputs.
+            event_bus (EventBus): Event bus for domain events.
         """
         self._dynamic_system = dynamic_system
         self._is_output_up_to_update = False
         self._report_generator = base_generator
+        self._event_bus = event_bus or static_event_bus
 
     @abstractmethod
     def compute_next_state(self, *args, **kwargs):

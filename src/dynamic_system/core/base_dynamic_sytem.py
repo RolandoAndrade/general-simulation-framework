@@ -8,6 +8,8 @@ from typing import Any, TYPE_CHECKING, Dict, Set
 
 from graphviz import Digraph
 
+from core.events import EventBus, static_event_bus
+
 if TYPE_CHECKING:
     from models.core import Path, BaseModel
 
@@ -25,11 +27,16 @@ class BaseDynamicSystem:
     _paths: DynamicSystemPaths
     """Paths of the dynamic system. Dict[Origin, Set[Output]]"""
 
+    _event_bus: EventBus
+    """Event bus of the module."""
+
     @debug("Started the dynamic system", after=True)
-    def __init__(self):
+    def __init__(self, event_bus: EventBus = None):
         """Creates a dynamic system"""
+
         self._models = set()
         self._paths = {}
+        self._event_bus = event_bus or static_event_bus
 
     @debug("Adding model to the dynamic system")
     def add(self, model: BaseModel):

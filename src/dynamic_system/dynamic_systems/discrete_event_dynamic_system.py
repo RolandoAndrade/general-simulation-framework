@@ -3,6 +3,7 @@ from abc import ABC
 from typing import TYPE_CHECKING, Dict, Set, cast, Any
 
 from core.debug.domain.debug import debug
+from core.events import EventBus
 
 from dynamic_system.core.base_dynamic_sytem import BaseDynamicSystem
 from dynamic_system.future_event_list.scheduler import Scheduler
@@ -36,14 +37,15 @@ class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
     _scheduler: Scheduler
     """Scheduler of events"""
 
-    def __init__(self, scheduler: Scheduler = Scheduler()):
+    def __init__(self, scheduler: Scheduler = None, event_bus: EventBus = None):
         """
         Args:
             scheduler (Scheduler): Future event list manager
+            event_bus (EventBus): Event bus for domain events.
         """
-        BaseDynamicSystem.__init__(self)
+        BaseDynamicSystem.__init__(self, event_bus)
         self._outputs = {}
-        self._scheduler = scheduler
+        self._scheduler = scheduler or Scheduler()
 
     @debug("Scheduling model")
     def schedule(self, model: DiscreteEventModel, time: Time):
