@@ -20,3 +20,6 @@ class GeneratedEntity(Entity):
     def get_properties(self) -> EntityProperties:
         """Lists the properties of the entity"""
         return self._properties
+
+    def __str__(self):
+        return self.get_id()

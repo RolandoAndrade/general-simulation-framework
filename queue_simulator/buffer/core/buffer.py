@@ -125,6 +125,11 @@ class Buffer(Entity, ABC):
         """Returns true if the buffer is empty"""
         return self.__number_entered
 
+    @number_entered.setter
+    def number_entered(self, value):
+        """Sets the number entered"""
+        self.__number_entered = value
+
     def __str__(self):
         return str(
             dict(

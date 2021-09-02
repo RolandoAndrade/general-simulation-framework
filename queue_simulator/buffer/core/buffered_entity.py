@@ -33,7 +33,7 @@ class BufferedEntity(Entity):
     def remaining_time(self) -> Time:
         return self._remaining_time
 
-    def decrease_time(self, time: Time) -> Time:
+    def decrease_time(self, time: Time):
         self._remaining_time = max(self.remaining_time - time, Time(0))
 
     def __lt__(self, other: BufferedEntity):
