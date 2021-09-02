@@ -8,16 +8,21 @@ from models.models import DiscreteEventModel
 
 
 class Cell(DiscreteEventModel):
-    def __init__(self, alive: bool, dynamic_system: DiscreteEventDynamicSystem, i: int, j: int):
-        super().__init__(dynamic_system, name="(" + str(i) + "," + str(j) + ")", state=alive)
+    def __init__(
+        self, alive: bool, dynamic_system: DiscreteEventDynamicSystem, i: int, j: int
+    ):
+        super().__init__(
+            dynamic_system, name="(" + str(i) + "," + str(j) + ")", state=alive
+        )
         self.schedule(self.get_time())
 
     def _internal_state_transition_function(self, state: bool) -> bool:
         self.schedule(self.get_time())
         return state
 
-    def _external_state_transition_function(self, state: bool, inputs: Dict[str, bool],
-                                            event_time: Time) -> bool:
+    def _external_state_transition_function(
+        self, state: bool, inputs: Dict[str, bool], event_time: Time
+    ) -> bool:
         values = inputs.values()
         count = 0
         for v in values:
@@ -34,9 +39,7 @@ class Cell(DiscreteEventModel):
         return state
 
     def get_properties(self) -> EntityProperties:
-        return {
-
-        }
+        return {}
 
     def __str__(self):
         if self.get_state():

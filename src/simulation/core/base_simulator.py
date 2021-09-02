@@ -23,9 +23,7 @@ class BaseSimulator:
     _report_generator: BaseReport
     """Current report generator where engine saves the outputs."""
 
-    def __init__(
-        self, dynamic_system: BaseDynamicSystem, base_generator: BaseReport
-    ):
+    def __init__(self, dynamic_system: BaseDynamicSystem, base_generator: BaseReport):
         """
         Args:
             dynamic_system (BaseDynamicSystem):

@@ -23,7 +23,9 @@ class DiscreteEventControl(ThreadControl):
     _time: Time
     """Current time of the simulation"""
 
-    def __init__(self, simulator: DiscreteEventSimulationEngine, event_bus: EventBus = None):
+    def __init__(
+        self, simulator: DiscreteEventSimulationEngine, event_bus: EventBus = None
+    ):
         """
         Args:
             simulator (DiscreteEventSimulationEngine): Simulation engine to be
@@ -47,20 +49,25 @@ class DiscreteEventControl(ThreadControl):
             sleep(wait_time)
             if 0 < stop_time <= self._time:
                 self._is_paused = True
-            self._event_bus.emit(DomainEvents.SIMULATION_STATUS, {
-                'time': self._time,
-                'isPaused': self._is_paused,
-                'frequency': frequency,
-                'stopTime': stop_time
-            })
+            self._event_bus.emit(
+                DomainEvents.SIMULATION_STATUS,
+                {
+                    "time": self._time,
+                    "isPaused": self._is_paused,
+                    "frequency": frequency,
+                    "stopTime": stop_time,
+                },
+            )
         self._event_bus.emit(DomainEvents.SIMULATION_FINISHED)
 
     @debug("Simulation starts")
-    def start(self,
-              start_input: Dict[str, ModelInput] = None,
-              frequency: Time = 0,
-              stop_time: Time = 0,
-              wait_time: Time = 0):
+    def start(
+        self,
+        start_input: Dict[str, ModelInput] = None,
+        frequency: Time = 0,
+        stop_time: Time = 0,
+        wait_time: Time = 0,
+    ):
         """Starts the simulation
 
         Args:

@@ -31,7 +31,9 @@ class SimulationExperiment(DiscreteEventExperiment):
         self._event_bus = eb
 
     def add_node(self, node_type: NodeType):
-        return NodeBuilder.create_node(node_type, self.dynamic_system, self._name_generator)
+        return NodeBuilder.create_node(
+            node_type, self.dynamic_system, self._name_generator
+        )
 
     def add_path(self, from_node: str, to_node: str):
         from_model = self.dynamic_system.get_model(from_node)

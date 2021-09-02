@@ -25,11 +25,13 @@ class Buffer(Entity, ABC):
     __number_entered: NumberProperty[int]
     """Number of entities that entered into the buffer"""
 
-    def __init__(self,
-                 name: str,
-                 capacity: NumberProperty[float] = NumberProperty(Decimal("inf")),
-                 policy: StringProperty = StringProperty(str(BufferPolicy.FIFO)),
-                 entity_manager: EntityManager = None):
+    def __init__(
+        self,
+        name: str,
+        capacity: NumberProperty[float] = NumberProperty(Decimal("inf")),
+        policy: StringProperty = StringProperty(str(BufferPolicy.FIFO)),
+        entity_manager: EntityManager = None,
+    ):
         """
         Args:
             name (str): Name of the buffer.
@@ -93,7 +95,7 @@ class Buffer(Entity, ABC):
         return {
             BufferProperty.CAPACITY: self.capacity,
             BufferProperty.POLICY: self.policy,
-            BufferProperty.NUMBER_ENTERED: self.number_entered
+            BufferProperty.NUMBER_ENTERED: self.number_entered,
         }
 
     @property
@@ -124,8 +126,12 @@ class Buffer(Entity, ABC):
         return self.__number_entered
 
     def __str__(self):
-        return str(dict({
-            BufferProperty.CAPACITY: str(self.capacity),
-            BufferProperty.POLICY: str(self.policy),
-            BufferProperty.NUMBER_ENTERED: str(self.__number_entered)
-        }))
+        return str(
+            dict(
+                {
+                    BufferProperty.CAPACITY: str(self.capacity),
+                    BufferProperty.POLICY: str(self.policy),
+                    BufferProperty.NUMBER_ENTERED: str(self.__number_entered),
+                }
+            )
+        )

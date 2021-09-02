@@ -4,7 +4,7 @@ from typing import Generic, TypeVar
 
 from core.expresions.expression import Expression
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 class Value(Expression, Generic[T]):

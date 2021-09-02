@@ -97,7 +97,7 @@ class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
 
     @debug("Executing state transition")
     def state_transition(
-            self, input_models_values: DynamicSystemInput = None, event_time: Time = 0
+        self, input_models_values: DynamicSystemInput = None, event_time: Time = 0
     ):
         """Executes the state transition of the models. If an input is given,
         the models defined as its inputs will be ignored.
@@ -110,12 +110,16 @@ class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
         self._scheduler.update_time(event_time)
 
         # execute external / confluent transition
-        models_already_executed = self._execute_external(input_models_values, event_time)
+        models_already_executed = self._execute_external(
+            input_models_values, event_time
+        )
         # execute autonomous / external by internal output / confluent transition
-        autonomous_models = self._execute_autonomous(models_already_executed, event_time)
+        autonomous_models = self._execute_autonomous(
+            models_already_executed, event_time
+        )
 
     def _execute_external(
-            self, input_model_values: DynamicSystemInput, event_time: Time
+        self, input_model_values: DynamicSystemInput, event_time: Time
     ) -> Set[DiscreteEventModel]:
         """Executes external transition for the given input.
 
@@ -132,7 +136,7 @@ class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
         return cast(Any, input_models)
 
     def _execute_autonomous(
-            self, models_already_executed: Set[DiscreteEventModel], event_time: Time
+        self, models_already_executed: Set[DiscreteEventModel], event_time: Time
     ) -> Set[DiscreteEventModel]:
         """Executes autonomous transition for the given input and external
         events of the affected models.
@@ -150,10 +154,15 @@ class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
             all_autonomous_models = self._scheduler.pop_next_models()
 
             # ignore models that executed an external event
-            autonomous_models = all_autonomous_models.difference(models_already_executed)
+            autonomous_models = all_autonomous_models.difference(
+                models_already_executed
+            )
 
             # get models that were affected by an output
-            affected_models, inputs_of_affected_models = self._get_affected_models_and_its_inputs()
+            (
+                affected_models,
+                inputs_of_affected_models,
+            ) = self._get_affected_models_and_its_inputs()
 
             # models that were affected and will execute an autonomous event.
             confluent_models = autonomous_models.intersection(affected_models)
@@ -178,7 +187,9 @@ class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
 
         return all_autonomous_models
 
-    def _get_affected_models_and_its_inputs(self) -> (Set[DiscreteEventModel], Dict[DiscreteEventModel, ModelInput]):
+    def _get_affected_models_and_its_inputs(
+        self,
+    ) -> (Set[DiscreteEventModel], Dict[DiscreteEventModel, ModelInput]):
         """Gets models that were affected by an output"""
         affected_models = set()
         insert_input: Dict[DiscreteEventModel, ModelInput] = {}
@@ -187,10 +198,14 @@ class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
             # get the correct paths
             paths = self._get_effective_paths(emitter_model)
             for path in paths:
-                affected_model: DiscreteEventModel = cast(Any, path.get_destination_model())
+                affected_model: DiscreteEventModel = cast(
+                    Any, path.get_destination_model()
+                )
                 affected_models.add(affected_model)
                 if affected_model in insert_input:
-                    insert_input[affected_model][emitter_model.get_id()] = self._outputs[emitter_model]
+                    insert_input[affected_model][
+                        emitter_model.get_id()
+                    ] = self._outputs[emitter_model]
                 else:
                     insert_input[affected_model] = {
                         emitter_model.get_id(): self._outputs[emitter_model]
@@ -201,7 +216,9 @@ class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
         """Gets the correct paths for an output"""
         if emitter_model in self._paths:
             # check for full probability paths.
-            ones = [path for path in self._paths[emitter_model] if path.get_weight() == 1]
+            ones = [
+                path for path in self._paths[emitter_model] if path.get_weight() == 1
+            ]
             if len(ones) > 0:
                 return set(ones)
             # there are not multiple paths, so it has to select one.

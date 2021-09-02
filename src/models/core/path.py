@@ -13,6 +13,7 @@ if TYPE_CHECKING:
 
 class Path(Entity):
     """Connection between models."""
+
     _serial_id = 0
     """Serial of the path"""
 
@@ -25,8 +26,14 @@ class Path(Entity):
     _weight: ExpressionProperty
     """Weight of the path"""
 
-    def __init__(self, from_model: BaseModel, to_model: BaseModel, weight: ExpressionProperty,
-                 name: str = None, entity_manager: EntityManager = None):
+    def __init__(
+        self,
+        from_model: BaseModel,
+        to_model: BaseModel,
+        weight: ExpressionProperty,
+        name: str = None,
+        entity_manager: EntityManager = None,
+    ):
         """
         Args:
             from_model (BaseModel): Source model of the path.
@@ -57,9 +64,7 @@ class Path(Entity):
 
     def get_properties(self) -> EntityProperties:
         """Lists the properties of the entity"""
-        return {
-            "Weight": self._weight
-        }
+        return {"Weight": self._weight}
 
     def set_weight(self, weight: ExpressionProperty):
         """Sets the weight of the path

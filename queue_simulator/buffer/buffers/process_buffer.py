@@ -14,21 +14,27 @@ class ProcessBuffer(Buffer):
 
     _content: List[BufferedEntity]
 
-    def __init__(self, name: str,
-                 capacity: NumberProperty = NumberProperty(float("inf")),
-                 entity_manager: EntityManager = None
-                 ):
+    def __init__(
+        self,
+        name: str,
+        capacity: NumberProperty = NumberProperty(float("inf")),
+        entity_manager: EntityManager = None,
+    ):
         """
         Args:
             name (str): Name of the buffer.
             capacity (NumberProperty): Capacity of the buffer.
         """
-        super().__init__(name, capacity, StringProperty(str(BufferPolicy.PARALLEL)), entity_manager)
+        super().__init__(
+            name, capacity, StringProperty(str(BufferPolicy.PARALLEL)), entity_manager
+        )
 
     def process(self):
         entities = self.get_content()
 
-    def add(self, entities: List[Entity], times: List[Time] = None, *args, **kwargs) -> int:
+    def add(
+        self, entities: List[Entity], times: List[Time] = None, *args, **kwargs
+    ) -> int:
         """Adds an element to the buffer and returns the number of elements that
         cannot be added because the buffer capacity
 

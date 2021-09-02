@@ -25,10 +25,12 @@ class ServerState:
     _processing_remaining_time: NumberProperty
     """Remaining time to finish the processing"""
 
-    def __init__(self,
-                 input_buffer: InputBuffer,
-                 output_buffer: OutputBuffer,
-                 process_buffer: ProcessBuffer):
+    def __init__(
+        self,
+        input_buffer: InputBuffer,
+        output_buffer: OutputBuffer,
+        process_buffer: ProcessBuffer,
+    ):
         self.output_buffer = output_buffer
         self.input_buffer = input_buffer
         self.process_buffer = process_buffer

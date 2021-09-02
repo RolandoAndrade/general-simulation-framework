@@ -26,7 +26,7 @@ class DiscreteEventSimulationEngine(BaseSimulator):
     """Indicates if the output was already computed for the current iteration."""
 
     def __init__(
-            self, dynamic_system: DiscreteEventDynamicSystem, base_generator: BaseReport
+        self, dynamic_system: DiscreteEventDynamicSystem, base_generator: BaseReport
     ):
         """
         Args:
@@ -42,7 +42,9 @@ class DiscreteEventSimulationEngine(BaseSimulator):
         """Get time of the next event"""
         return self._dynamic_system.get_time_of_next_events()
 
-    def compute_next_state(self, inputs: DynamicSystemInput = None, time: Time = Time(0)):
+    def compute_next_state(
+        self, inputs: DynamicSystemInput = None, time: Time = Time(0)
+    ):
         """Compute the next state of the dynamic system
 
         Args:
@@ -50,7 +52,7 @@ class DiscreteEventSimulationEngine(BaseSimulator):
             time (Time): Time of the event.
         """
         if (
-                time - self._last_event_time == self.get_time_of_next_event()
+            time - self._last_event_time == self.get_time_of_next_event()
         ):  # Time to change the output
             out = self.compute_output()
             if out:

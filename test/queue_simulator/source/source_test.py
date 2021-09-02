@@ -3,7 +3,9 @@ import unittest
 from core.entity.core import Entity
 from core.entity.properties.property import Property
 from core.mathematics.values.value import Value
-from dynamic_system.dynamic_systems.discrete_event_dynamic_system import DiscreteEventDynamicSystem
+from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
+    DiscreteEventDynamicSystem,
+)
 from dynamic_system.future_event_list import Scheduler
 from queue_simulator.source.source import Source
 from test.mocks.mock_emitter import MockEmitter
@@ -16,9 +18,9 @@ class TestSource(unittest.TestCase):
     def setUp(self) -> None:
         """Sets up the source"""
         self.dynamic_system = DiscreteEventDynamicSystem(Scheduler())
-        self.source = Source(self.dynamic_system,
-                             name="Source1",
-                             entity_emitter=Property(MockEmitter()))
+        self.source = Source(
+            self.dynamic_system, name="Source1", entity_emitter=Property(MockEmitter())
+        )
 
     def tearDown(self) -> None:
         """Reset names"""
@@ -45,7 +47,9 @@ class TestSource(unittest.TestCase):
         self.source.entities_per_arrival = Value(5)
         self.source.inter_arrival_time = Value(1)
         self.source.state_transition()
-        self.assertEqual(5, self.source.get_state().output_buffer.current_number_of_entities)
+        self.assertEqual(
+            5, self.source.get_state().output_buffer.current_number_of_entities
+        )
 
     def test_get_time(self):
         """Should get the time"""
@@ -56,10 +60,15 @@ class TestSource(unittest.TestCase):
         """Should set and get time offset"""
         self.source.time_offset = Value(5)
         self.assertEqual(5, self.source.time_offset.get_value().evaluate())
-        
+
     def test_get_properties(self):
         """Should have the expected properties"""
-        expect_keys = {'Entities Per Arrival', 'Time Offset', 'Interarrival Time', 'Entity Type'}
+        expect_keys = {
+            "Entities Per Arrival",
+            "Time Offset",
+            "Interarrival Time",
+            "Entity Type",
+        }
         actual_keys = set(self.source.get_properties().keys())
         self.assertEqual(expect_keys, actual_keys)
 
@@ -69,5 +78,5 @@ class TestSource(unittest.TestCase):
         print(properties)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

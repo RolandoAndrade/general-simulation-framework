@@ -5,12 +5,15 @@ from core.mathematics.values.value import Value
 from core.types import Time
 from queue_simulator.buffer.core import BufferProperty
 from queue_simulator.label.label import Label
-from queue_simulator.shared.experiments.simulation_experiment import SimulationExperiment
+from queue_simulator.shared.experiments.simulation_experiment import (
+    SimulationExperiment,
+)
 from queue_simulator.shared.nodes import NodeType
 
 
 class SimulatorTest(unittest.TestCase):
     """Base dynamic system tests"""
+
     experiment: SimulationExperiment
 
     def setUp(self) -> None:
@@ -39,10 +42,21 @@ class SimulatorTest(unittest.TestCase):
 
         source.init()
 
-        label_source_out = Label(source.get_state().output_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
-        label_server_in = Label(server.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
-        label_server_out = Label(server.get_state().output_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
-        label_sink_in = Label(sink.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
+        label_source_out = Label(
+            source.get_state().output_buffer.get_properties,
+            BufferProperty.NUMBER_ENTERED,
+        )
+        label_server_in = Label(
+            server.get_state().input_buffer.get_properties,
+            BufferProperty.NUMBER_ENTERED,
+        )
+        label_server_out = Label(
+            server.get_state().output_buffer.get_properties,
+            BufferProperty.NUMBER_ENTERED,
+        )
+        label_sink_in = Label(
+            sink.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED
+        )
 
         self.experiment.simulation_control.start(stop_time=Time(5))
         self.experiment.simulation_control.wait()
@@ -83,10 +97,21 @@ class SimulatorTest(unittest.TestCase):
 
         source.init()
 
-        label_source_out = Label(source.get_state().output_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
-        label_server_in = Label(server.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
-        label_server_out = Label(server.get_state().output_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
-        label_sink_in = Label(sink.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED)
+        label_source_out = Label(
+            source.get_state().output_buffer.get_properties,
+            BufferProperty.NUMBER_ENTERED,
+        )
+        label_server_in = Label(
+            server.get_state().input_buffer.get_properties,
+            BufferProperty.NUMBER_ENTERED,
+        )
+        label_server_out = Label(
+            server.get_state().output_buffer.get_properties,
+            BufferProperty.NUMBER_ENTERED,
+        )
+        label_sink_in = Label(
+            sink.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED
+        )
 
         self.experiment.save()
 
@@ -105,5 +130,5 @@ class SimulatorTest(unittest.TestCase):
         self.assertEqual("16", str(label_server_out))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

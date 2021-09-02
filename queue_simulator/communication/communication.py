@@ -21,7 +21,7 @@ socket.bind(Publishport)
 print("Sending on topic:" + topicfilter, flush=True)
 
 if __name__ == "__main__":
-    while (True):
+    while True:
         # Create a random number
         msg = {"num": random.randint(0, 10)}
         # Send this string

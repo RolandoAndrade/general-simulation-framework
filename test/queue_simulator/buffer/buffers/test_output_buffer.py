@@ -42,7 +42,7 @@ class TestOutputBuffer(unittest.TestCase):
 
         # RSM
         self.buffer.policy = BufferPolicy.RANDOM
-        ex = ['4', '2', '3', '5', '1']
+        ex = ["4", "2", "3", "5", "1"]
         re = [entity.get_id() for entity in self.buffer.get_content()]
         self.assertEqual(ex, re, "Error 2")
 
@@ -52,24 +52,24 @@ class TestOutputBuffer(unittest.TestCase):
         # ["1", "2", "3", "4", "5"]
         # FIFO
         re = self.buffer.pop()
-        self.assertEqual('1', re.get_id(), 'Error 0')
+        self.assertEqual("1", re.get_id(), "Error 0")
 
         # LIFO
         self.buffer.policy = BufferPolicy.LIFO
         re = self.buffer.pop()
-        self.assertEqual('5', re.get_id(), 'Error 1')
+        self.assertEqual("5", re.get_id(), "Error 1")
 
         # RSM
         self.buffer.policy = BufferPolicy.RANDOM
         re = self.buffer.pop()
-        self.assertEqual('2', re.get_id(), 'Error 2')
+        self.assertEqual("2", re.get_id(), "Error 2")
 
     def test_properties(self):
         """Should retrieve the properties of the buffer"""
         self.buffer.add(MockEmitter(), 3)
         self.buffer.pop()
         properties = self.buffer.get_properties()
-        self.assertEqual(float('inf'), properties.get(BufferProperty.CAPACITY))
+        self.assertEqual(float("inf"), properties.get(BufferProperty.CAPACITY))
         self.assertEqual(BufferPolicy.FIFO, properties.get(BufferProperty.POLICY))
         self.assertEqual(3, properties.get(BufferProperty.NUMBER_ENTERED))
 
@@ -81,5 +81,5 @@ class TestOutputBuffer(unittest.TestCase):
         self.assertEqual(5, re)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

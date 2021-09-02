@@ -7,7 +7,12 @@ class GeneratedEntity(Entity):
     _properties: EntityProperties
     """Properties of the entity."""
 
-    def __init__(self, name: str, properties: EntityProperties, entity_manager: EntityManager = None):
+    def __init__(
+        self,
+        name: str,
+        properties: EntityProperties,
+        entity_manager: EntityManager = None,
+    ):
         """Creates a generated entity"""
         super().__init__(name, entity_manager)
         self._properties = properties

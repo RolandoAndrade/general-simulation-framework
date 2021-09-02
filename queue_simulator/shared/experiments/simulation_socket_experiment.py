@@ -1,7 +1,9 @@
 from socketio import Server
 
 from core.events import EventBus, DomainEvents
-from queue_simulator.shared.experiments.simulation_experiment import SimulationExperiment
+from queue_simulator.shared.experiments.simulation_experiment import (
+    SimulationExperiment,
+)
 
 
 class SimulationSocketExperiment(SimulationExperiment):

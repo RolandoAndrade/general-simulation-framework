@@ -11,6 +11,7 @@ from test.mocks.model_mock import ModelMock
 
 class DiscreteEventModelTest(unittest.TestCase):
     """Discrete event model tests"""
+
     dynamic_system: DiscreteEventDynamicSystem
     model: DiscreteEventModel
 
@@ -43,7 +44,7 @@ class DiscreteEventModelTest(unittest.TestCase):
         self.model.set_up_state(0)
         self.model._time_advance_function = lambda s: 10
         self.model._external_state_transition_function = lambda s, i, t: 1
-        self.model._internal_state_transition_function = lambda s:  s + 2
+        self.model._internal_state_transition_function = lambda s: s + 2
         self.model.state_transition(event_time=Decimal(0))
         self.assertEqual(2, self.model.get_state())
 
@@ -52,7 +53,7 @@ class DiscreteEventModelTest(unittest.TestCase):
         self.model.set_up_state(0)
         self.model._time_advance_function = lambda s: 10
         self.model._external_state_transition_function = lambda s, i, t: s + i
-        self.model._internal_state_transition_function = lambda s:  s + 2
+        self.model._internal_state_transition_function = lambda s: s + 2
         self.model.state_transition(inputs=19, event_time=Decimal(2))
         self.assertEqual(19, self.model.get_state())
 
@@ -61,9 +62,10 @@ class DiscreteEventModelTest(unittest.TestCase):
         self.model.set_up_state(0)
         self.model._time_advance_function = lambda s: 10
         self.model._external_state_transition_function = lambda s, i, t: s + i
-        self.model._internal_state_transition_function = lambda s:  s + 2
+        self.model._internal_state_transition_function = lambda s: s + 2
         self.model.state_transition(inputs=19, event_time=Decimal(0))
         self.assertEqual(21, self.model.get_state())
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

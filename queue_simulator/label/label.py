@@ -7,13 +7,18 @@ from core.entity.core import EntityProperty, EntityProperties
 
 class Label:
     """Label that indicates the value of a property"""
+
     __properties_source: Callable[[], EntityProperties]
     """Source where the property should be retrieved."""
 
     __linked_property: str
     """Property to be observed"""
 
-    def __init__(self, properties_source: Callable[[], EntityProperties], linked_property: str = None):
+    def __init__(
+        self,
+        properties_source: Callable[[], EntityProperties],
+        linked_property: str = None,
+    ):
         """
         Args:
             properties_source (EntityProperties): Source where the property
@@ -22,7 +27,11 @@ class Label:
         """
         self.link(properties_source, linked_property)
 
-    def link(self, properties_source: Callable[[], EntityProperties], linked_property: str = None):
+    def link(
+        self,
+        properties_source: Callable[[], EntityProperties],
+        linked_property: str = None,
+    ):
         """Links the label to a property.
 
         Args:
@@ -37,7 +46,10 @@ class Label:
         """Gets the value of the property."""
         if self.__properties_source is not None:
             properties = self.__properties_source()
-            if properties is not None and properties[self.__linked_property] is not None:
+            if (
+                properties is not None
+                and properties[self.__linked_property] is not None
+            ):
                 return properties[self.__linked_property].get_value()
         return 0
 

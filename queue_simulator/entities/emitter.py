@@ -22,8 +22,11 @@ class Emitter(SerializableComponent, EntityEmitter):
 
     def generate(self) -> Entity:
         """Generates an entity"""
-        return GeneratedEntity(self._entity_manager.get_name(AvailableEntities.ENTITY),
-                               self._properties, self._entity_manager)
+        return GeneratedEntity(
+            self._entity_manager.get_name(AvailableEntities.ENTITY),
+            self._properties,
+            self._entity_manager,
+        )
 
     def __str__(self):
         return self.get_id()

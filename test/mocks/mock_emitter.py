@@ -5,7 +5,6 @@ from core.entity.properties.string_property import StringProperty
 
 
 class MockEntity(Entity):
-
     def __init__(self, name: str):
         """
         Args:
@@ -15,9 +14,7 @@ class MockEntity(Entity):
 
     def get_properties(self) -> EntityProperties:
         """Lists the properties of the entity"""
-        return {
-            'type': StringProperty('Mock')
-        }
+        return {"type": StringProperty("Mock")}
 
     def __str__(self):
         return self.get_id()

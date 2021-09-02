@@ -82,8 +82,8 @@ class Scheduler:
         s = set()
         time = self.get_time_of_next_event()
         while (
-                len(self._future_event_list) > 0
-                and self._future_event_list[0].get_time() == time
+            len(self._future_event_list) > 0
+            and self._future_event_list[0].get_time() == time
         ):
             s.add(heapq.heappop(self._future_event_list).get_model())
         return cast(Set[Any], s)

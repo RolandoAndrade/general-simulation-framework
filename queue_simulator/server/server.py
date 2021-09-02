@@ -24,20 +24,26 @@ class Server(DiscreteEventModel, SerializableComponent):
     _is_busy: bool
     """Processing time of the server."""
 
-    def __init__(self, dynamic_system: DiscreteEventDynamicSystem,
-                 name: str,
-                 processing_time: Union[ExpressionProperty, Expression] = Value(1),
-                 initial_capacity: NumberProperty = NumberProperty(1),
-                 entity_manager: EntityManager = None):
-        super().__init__(dynamic_system,
-                         name,
-                         ServerState(
-                             InputBuffer(name, entity_manager=entity_manager),
-                             OutputBuffer(name, entity_manager=entity_manager),
-                             ProcessBuffer(name, capacity=initial_capacity, entity_manager=entity_manager)
-                         ),
-                         entity_manager=entity_manager
-                         )
+    def __init__(
+        self,
+        dynamic_system: DiscreteEventDynamicSystem,
+        name: str,
+        processing_time: Union[ExpressionProperty, Expression] = Value(1),
+        initial_capacity: NumberProperty = NumberProperty(1),
+        entity_manager: EntityManager = None,
+    ):
+        super().__init__(
+            dynamic_system,
+            name,
+            ServerState(
+                InputBuffer(name, entity_manager=entity_manager),
+                OutputBuffer(name, entity_manager=entity_manager),
+                ProcessBuffer(
+                    name, capacity=initial_capacity, entity_manager=entity_manager
+                ),
+            ),
+            entity_manager=entity_manager,
+        )
         self.initial_capacity = initial_capacity
         self.processing_time = processing_time
         self._is_busy = False
@@ -46,7 +52,9 @@ class Server(DiscreteEventModel, SerializableComponent):
         for i in range(state.input_buffer.current_number_of_entities):
             if not state.process_buffer.is_full:
                 time_to_be_scheduled = self.get_time()
-                state.process_buffer.add([state.input_buffer.pop()], [time_to_be_scheduled])
+                state.process_buffer.add(
+                    [state.input_buffer.pop()], [time_to_be_scheduled]
+                )
                 self.schedule(time_to_be_scheduled)
                 self._is_busy = True
             else:
@@ -57,9 +65,9 @@ class Server(DiscreteEventModel, SerializableComponent):
         self._process(state)
         return state
 
-    def _external_state_transition_function(self, state: ServerState,
-                                            inputs: Dict[str, List[Entity]],
-                                            event_time: Time) -> ServerState:
+    def _external_state_transition_function(
+        self, state: ServerState, inputs: Dict[str, List[Entity]], event_time: Time
+    ) -> ServerState:
         r_inputs = []
         for i in inputs:
             r_inputs += inputs[i]
@@ -77,9 +85,7 @@ class Server(DiscreteEventModel, SerializableComponent):
         return state.output_buffer.empty()
 
     def get_properties(self) -> EntityProperties:
-        return {
-
-        }
+        return {}
 
     @property
     def processing_time(self):

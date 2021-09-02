@@ -10,12 +10,13 @@ expected_types = {
     "NUMBER": float,
     "EXPRESSION": Expression,
     "ANY": Any,
-    "EVENT": Any
+    "EVENT": Any,
 }
 
 
 class PropertyType:
     """Type of a property"""
+
     STRING = "STRING"
     BOOLEAN = "BOOLEAN"
     EXPRESSION = "EXPRESSION"
@@ -28,4 +29,6 @@ class PropertyType:
         """Validates if the value type equals to the expected type"""
         if property_type == PropertyType.ANY:
             return True
-        return type(value) == expected_types.get(property_type) or isinstance(value, expected_types.get(property_type))
+        return type(value) == expected_types.get(property_type) or isinstance(
+            value, expected_types.get(property_type)
+        )

@@ -10,11 +10,13 @@ class SimulationController:
     @staticmethod
     @sio.event
     def start_simulation(sid, data):
-        stop_time = data['stopTime']
+        stop_time = data["stopTime"]
         logger.info("Start simulation, sid: {sid}", sid=sid)
         session: Dict[str, SimulationExperiment]
         with sio.session(sid) as session:
-            created_path = session['experiment'].simulation_control.start(stop_time=stop_time)
+            created_path = session["experiment"].simulation_control.start(
+                stop_time=stop_time
+            )
         return created_path.serialize()
 
     @staticmethod
@@ -23,7 +25,7 @@ class SimulationController:
         logger.info("Start simulation, sid: {sid}", sid=sid)
         session: Dict[str, SimulationExperiment]
         with sio.session(sid) as session:
-            created_path = session['experiment'].simulation_control.stop()
+            created_path = session["experiment"].simulation_control.stop()
         return created_path.serialize()
 
     @staticmethod
@@ -32,5 +34,5 @@ class SimulationController:
         logger.info("Start simulation, sid: {sid}", sid=sid)
         session: Dict[str, SimulationExperiment]
         with sio.session(sid) as session:
-            created_path = session['experiment'].simulation_control.pause()
+            created_path = session["experiment"].simulation_control.pause()
         return created_path.serialize()

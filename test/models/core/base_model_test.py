@@ -10,6 +10,7 @@ from test.mocks.dynamic_system_mock import DynamicSystemMock
 
 class BaseModelTest(unittest.TestCase):
     """Base model tests"""
+
     dynamic_system: BaseDynamicSystem
     model: BaseModel
 
@@ -37,15 +38,9 @@ class BaseModelTest(unittest.TestCase):
 
     def test_set_state(self):
         """Test the state of the model"""
-        self.model.set_up_state({
-            "x": 1,
-            "y": 0
-        })
+        self.model.set_up_state({"x": 1, "y": 0})
         saved_state = self.model.get_state()
-        self.assertDictEqual({
-            "x": 1,
-            "y": 0
-        }, saved_state)
+        self.assertDictEqual({"x": 1, "y": 0}, saved_state)
 
     def test_add_another_model(self):
         """Test the state of the model"""

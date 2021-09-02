@@ -30,8 +30,13 @@ class BaseModel(Entity):
     """Current state of the model"""
 
     @debug("Initialized Model", True)
-    def __init__(self, dynamic_system: BaseDynamicSystem, name: str = None,
-                 state: ModelState = None, entity_manager: EntityManager = None):
+    def __init__(
+        self,
+        dynamic_system: BaseDynamicSystem,
+        name: str = None,
+        state: ModelState = None,
+        entity_manager: EntityManager = None,
+    ):
         """
         Args:
             dynamic_system (BaseDynamicSystem): Dynamic system of the
@@ -68,11 +73,14 @@ class BaseModel(Entity):
         return self.__current_state
 
     @debug("Adding output")
-    def add(self, model: BaseModel,
-            weight: ExpressionProperty = ExpressionProperty(Value(1)),
-            name: str = None):
+    def add(
+        self,
+        model: BaseModel,
+        weight: ExpressionProperty = ExpressionProperty(Value(1)),
+        name: str = None,
+    ):
         """Current model will be the input for the given model.
-        
+
         Args:
             model (BaseModel): Output model to be added.
             weight (ExpressionProperty): Weight of the path.

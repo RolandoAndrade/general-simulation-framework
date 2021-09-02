@@ -18,9 +18,7 @@ class MockEntity(Entity):
 
     def get_properties(self) -> EntityProperties:
         """Lists the properties of the entity"""
-        return {
-            'type': self.__type
-        }
+        return {"type": self.__type}
 
 
 class EntityByTypeEmitter(EntityEmitter):

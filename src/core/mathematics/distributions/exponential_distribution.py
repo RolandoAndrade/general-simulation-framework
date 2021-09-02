@@ -38,4 +38,4 @@ class ExponentialDistribution(RandomDistribution):
         return self.generate()
 
     def __str__(self):
-        return super().__str__() + ".Exponential(" + str(self.__mean)+")"
+        return super().__str__() + ".Exponential(" + str(self.__mean) + ")"

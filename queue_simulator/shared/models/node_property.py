@@ -13,8 +13,8 @@ class NodeProperty:
 
     def serialize(self) -> Dict[str, Any]:
         return {
-            'propertyName': self.property_name,
-            'propertyValue': self.property_value,
-            'propertyType': self.property_type,
-            'propertyCategory': self.property_category
+            "propertyName": self.property_name,
+            "propertyValue": self.property_value,
+            "propertyType": self.property_type,
+            "propertyCategory": self.property_category,
         }

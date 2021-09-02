@@ -21,11 +21,11 @@ class DiscreteEventModel(BaseModel):
     """DiscreteEventModel with an state"""
 
     def __init__(
-            self,
-            dynamic_system: DiscreteEventDynamicSystem,
-            name: str = None,
-            state: ModelState = None,
-            entity_manager: EntityManager = None
+        self,
+        dynamic_system: DiscreteEventDynamicSystem,
+        name: str = None,
+        state: ModelState = None,
+        entity_manager: EntityManager = None,
     ):
         """
         Args:
@@ -48,14 +48,16 @@ class DiscreteEventModel(BaseModel):
 
     @debug("Unschedule model")
     def unschedule(self):
-        """Unscheduled an autonomous event
-        """
+        """Unscheduled an autonomous event"""
         cast(DiscreteEventDynamicSystem, self.get_dynamic_system()).unschedule(self)
 
     @debug("Adding path")
-    def add(self, model: DiscreteEventModel,
-            weight: ExpressionProperty = ExpressionProperty(Value(1)),
-            name: str = None) -> DiscreteEventModel:
+    def add(
+        self,
+        model: DiscreteEventModel,
+        weight: ExpressionProperty = ExpressionProperty(Value(1)),
+        name: str = None,
+    ) -> DiscreteEventModel:
         """Adds a model as an input for the current model in the dynamic system and returns the model added.
 
         Args:
@@ -95,7 +97,9 @@ class DiscreteEventModel(BaseModel):
             new_state = self._internal_state_transition_function(self.get_state())
         elif event_time == self.get_time() or event_time == 0:
             # is an confluent event
-            new_state = self._confluent_state_transition_function(self.get_state(), inputs)
+            new_state = self._confluent_state_transition_function(
+                self.get_state(), inputs
+            )
         else:
             # time is between autonomous events, so it is an external event
             new_state = self._external_state_transition_function(
@@ -104,7 +108,7 @@ class DiscreteEventModel(BaseModel):
         self.set_up_state(new_state)
 
     def _confluent_state_transition_function(
-            self, state: ModelState, inputs: ModelInput
+        self, state: ModelState, inputs: ModelInput
     ) -> ModelState:
         """
         .. math:: \delta_con(s,x)
@@ -142,7 +146,7 @@ class DiscreteEventModel(BaseModel):
 
     @abstractmethod
     def _external_state_transition_function(
-            self, state: ModelState, inputs: ModelInput, event_time: Time
+        self, state: ModelState, inputs: ModelInput, event_time: Time
     ) -> ModelState:
         """
         .. math:: \delta_ext((s,e), x)

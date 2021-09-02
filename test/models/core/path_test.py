@@ -11,6 +11,7 @@ from test.mocks.dynamic_system_mock import DynamicSystemMock
 
 class PathTest(unittest.TestCase):
     """Path tests"""
+
     dynamic_system: BaseDynamicSystem
 
     model_1: BaseModel
@@ -47,7 +48,7 @@ class PathTest(unittest.TestCase):
 
     def test_get_properties(self):
         """Should return the properties of the path."""
-        self.assertEqual(1, self.path.get_properties()['Weight'].get_value().evaluate())
+        self.assertEqual(1, self.path.get_properties()["Weight"].get_value().evaluate())
 
     def test_get_equality(self):
         """Should check equality by path and by models"""
@@ -59,5 +60,5 @@ class PathTest(unittest.TestCase):
         self.assertFalse(self.path != self.model_2)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

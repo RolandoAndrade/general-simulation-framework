@@ -1,3 +1,3 @@
 import socketio
 
-sio = socketio.Server(cors_allowed_origins='*')
+sio = socketio.Server(cors_allowed_origins="*")

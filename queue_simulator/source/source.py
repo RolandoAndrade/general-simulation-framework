@@ -39,15 +39,18 @@ class Source(DiscreteEventModel, SerializableComponent):
 
     __serial: int = 0
 
-    def __init__(self,
-                 dynamic_system: DiscreteEventDynamicSystem,
-                 name: str,
-                 entity_emitter: Union[EntityEmitter, Property[EntityEmitter]] = None,
-                 inter_arrival_time: Union[Expression, ExpressionProperty] = ExponentialDistribution(0.25),
-                 entities_per_arrival: Union[Expression, ExpressionProperty] = Value(1),
-                 time_offset: Union[Expression, ExpressionProperty] = Value(0),
-                 entity_manager: EntityManager = None
-                 ):
+    def __init__(
+        self,
+        dynamic_system: DiscreteEventDynamicSystem,
+        name: str,
+        entity_emitter: Union[EntityEmitter, Property[EntityEmitter]] = None,
+        inter_arrival_time: Union[
+            Expression, ExpressionProperty
+        ] = ExponentialDistribution(0.25),
+        entities_per_arrival: Union[Expression, ExpressionProperty] = Value(1),
+        time_offset: Union[Expression, ExpressionProperty] = Value(0),
+        entity_manager: EntityManager = None,
+    ):
         """
         Args:
             dynamic_system (DiscreteEventDynamicSystem): Dynamic system of the
@@ -56,9 +59,12 @@ class Source(DiscreteEventModel, SerializableComponent):
             entity_emitter (EntityEmitter): Emitter of entities.
             inter_arrival_time (ExpressionProperty): InterArrival time of the entities.
         """
-        super().__init__(dynamic_system, name,
-                         SourceState(OutputBuffer(name, entity_manager=entity_manager)),
-                         entity_manager=entity_manager)
+        super().__init__(
+            dynamic_system,
+            name,
+            SourceState(OutputBuffer(name, entity_manager=entity_manager)),
+            entity_manager=entity_manager,
+        )
         self.inter_arrival_time = inter_arrival_time
         self.entity_emitter = entity_emitter
         self.entities_per_arrival = entities_per_arrival
@@ -86,8 +92,9 @@ class Source(DiscreteEventModel, SerializableComponent):
         self.schedule(self.get_time())
         return state
 
-    def _external_state_transition_function(self, state: SourceState, inputs: ModelInput,
-                                            event_time: float) -> SourceState:
+    def _external_state_transition_function(
+        self, state: SourceState, inputs: ModelInput, event_time: float
+    ) -> SourceState:
         """Returns the current state
         Args:
             state (SourceState): Current state of the model.
@@ -102,7 +109,10 @@ class Source(DiscreteEventModel, SerializableComponent):
             state (SourceState): Current state of the model.
         """
         if self.inter_arrival_time is not None:
-            return self.inter_arrival_time.get_value().evaluate() + self.__used_offset.get_value().evaluate()
+            return (
+                self.inter_arrival_time.get_value().evaluate()
+                + self.__used_offset.get_value().evaluate()
+            )
         return Time(0)
 
     def _output_function(self, state: SourceState) -> List[Entity]:
@@ -170,7 +180,7 @@ class Source(DiscreteEventModel, SerializableComponent):
             SourceProperty.ENTITY_TYPE: self.entity_emitter,
             SourceProperty.INTER_ARRIVAL_TIME: self.inter_arrival_time,
             SourceProperty.TIME_OFFSET: self.time_offset,
-            SourceProperty.ENTITIES_PER_ARRIVAL: self.entities_per_arrival
+            SourceProperty.ENTITIES_PER_ARRIVAL: self.entities_per_arrival,
         }
 
     def clear(self):

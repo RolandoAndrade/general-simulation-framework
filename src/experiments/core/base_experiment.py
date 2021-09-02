@@ -30,12 +30,14 @@ class BaseExperiment(ABC):
     __recovery_strategy: RecoveryStrategy
     """Strategy for persistence of the experiment"""
 
-    def __init__(self,
-                 dynamic_system: BaseDynamicSystem,
-                 simulator: BaseSimulator,
-                 control: BaseControl,
-                 report: BaseReport,
-                 recovery_strategy: RecoveryStrategy):
+    def __init__(
+        self,
+        dynamic_system: BaseDynamicSystem,
+        simulator: BaseSimulator,
+        control: BaseControl,
+        report: BaseReport,
+        recovery_strategy: RecoveryStrategy,
+    ):
         self.__dynamic_system = dynamic_system
         self.__simulator = simulator
         self.__control = control

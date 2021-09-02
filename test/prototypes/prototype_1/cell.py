@@ -13,8 +13,9 @@ class Cell(DiscreteEventModel):
     def _internal_state_transition_function(self, state: bool) -> bool:
         return state
 
-    def _external_state_transition_function(self, state: bool, inputs: ModelInput,
-                                            event_time: Time) -> bool:
+    def _external_state_transition_function(
+        self, state: bool, inputs: ModelInput, event_time: Time
+    ) -> bool:
         next_state: bool = list(inputs.values())[0]
         return next_state
 
@@ -25,6 +26,4 @@ class Cell(DiscreteEventModel):
         return state
 
     def get_properties(self) -> EntityProperties:
-        return {
-
-        }
+        return {}

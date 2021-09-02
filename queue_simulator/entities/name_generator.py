@@ -52,6 +52,6 @@ class NameGenerator(EntityManager):
             AvailableEntities.SINK: self.next_sink,
             AvailableEntities.PATH: self.next_path,
             AvailableEntities.ENTITY_EMITTER: self.next_emitter,
-            AvailableEntities.ENTITY: self.next_entity
+            AvailableEntities.ENTITY: self.next_entity,
         }
         return entity.capitalize() + str(name_selector[entity]())

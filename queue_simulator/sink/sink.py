@@ -12,14 +12,15 @@ from queue_simulator.shared.models import SerializableComponent
 from queue_simulator.sink.sink_state import SinkState
 
 
-class Sink(DiscreteEventModel,SerializableComponent):
+class Sink(DiscreteEventModel, SerializableComponent):
     """Sink of entities"""
 
     def _internal_state_transition_function(self, state: SinkState) -> SinkState:
         return state
 
-    def _external_state_transition_function(self, state: SinkState, inputs: ModelInput,
-                                            event_time: Time) -> SinkState:
+    def _external_state_transition_function(
+        self, state: SinkState, inputs: ModelInput, event_time: Time
+    ) -> SinkState:
         r_inputs = []
         for i in inputs:
             r_inputs += inputs[i]
@@ -34,13 +35,20 @@ class Sink(DiscreteEventModel,SerializableComponent):
         return state.input_buffer.empty()
 
     def get_properties(self) -> EntityProperties:
-        return {
+        return {}
 
-        }
-
-    def __init__(self, dynamic_system: DiscreteEventDynamicSystem, name: str, entity_manager: EntityManager = None):
-        super(Sink, self).__init__(dynamic_system, name,
-                                   SinkState(InputBuffer(name, entity_manager=entity_manager)), entity_manager)
+    def __init__(
+        self,
+        dynamic_system: DiscreteEventDynamicSystem,
+        name: str,
+        entity_manager: EntityManager = None,
+    ):
+        super(Sink, self).__init__(
+            dynamic_system,
+            name,
+            SinkState(InputBuffer(name, entity_manager=entity_manager)),
+            entity_manager,
+        )
 
     def __str__(self):
         return self.get_id()

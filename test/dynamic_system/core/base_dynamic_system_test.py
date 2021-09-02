@@ -12,6 +12,7 @@ from test.mocks.dynamic_system_mock import DynamicSystemMock
 
 class BaseDynamicSystemTest(unittest.TestCase):
     """Base dynamic system tests"""
+
     dynamic_system: BaseDynamicSystem
 
     def setUp(self) -> None:
@@ -101,5 +102,5 @@ class BaseDynamicSystemTest(unittest.TestCase):
         self.dynamic_system.show()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -15,6 +15,7 @@ import numpy as np
 
 class DiscreteEventDynamicSystemTest(unittest.TestCase):
     """Base dynamic system tests"""
+
     dynamic_system: DiscreteEventDynamicSystem
 
     def setUp(self) -> None:
@@ -46,9 +47,7 @@ class DiscreteEventDynamicSystemTest(unittest.TestCase):
         m1 = ModelMock(self.dynamic_system)
         self.dynamic_system.schedule(m1, Decimal(10))
         m1.get_output = lambda: 5
-        self.assertDictEqual({
-            m1: 5
-        }, self.dynamic_system.get_output())
+        self.assertDictEqual({m1: 5}, self.dynamic_system.get_output())
 
     def test_get_effective_paths_ones(self):
         """Should get the valid paths for each output"""
@@ -132,19 +131,16 @@ class DiscreteEventDynamicSystemTest(unittest.TestCase):
 
         self.dynamic_system.get_output()
 
-        affected_models, inputs = self.dynamic_system._get_affected_models_and_its_inputs()
+        (
+            affected_models,
+            inputs,
+        ) = self.dynamic_system._get_affected_models_and_its_inputs()
 
         self.assertEqual({m2, m3}, affected_models)
-        self.assertDictEqual({
-            m2: {
-                m1.get_id(): 5
-            },
-            m3: {
-                m1.get_id(): 5,
-                m2.get_id(): 15
-            }
-        }, inputs)
+        self.assertDictEqual(
+            {m2: {m1.get_id(): 5}, m3: {m1.get_id(): 5, m2.get_id(): 15}}, inputs
+        )
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

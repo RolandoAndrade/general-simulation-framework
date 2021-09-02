@@ -104,7 +104,7 @@ class BaseDynamicSystem:
         """
         raise NotImplementedError
 
-    def show(self, file_name: str = 'dynamic_system'):
+    def show(self, file_name: str = "dynamic_system"):
         """Shows a graph of the dynamic system"""
         dg = Digraph()
         for model in self._models:

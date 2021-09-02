@@ -14,10 +14,10 @@ class ServerTask(threading.Thread):
     def run(self):
         context = zmq.Context()
         frontend = context.socket(zmq.ROUTER)
-        frontend.bind('tcp://*:5570')
+        frontend.bind("tcp://*:5570")
 
         backend = context.socket(zmq.DEALER)
-        backend.bind('inproc://backend')
+        backend.bind("inproc://backend")
 
         workers = []
         for i in range(5):

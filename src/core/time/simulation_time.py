@@ -22,7 +22,7 @@ unit_conversion = {
     TimeUnit.DAY: 1000 * 60 * 60 * 24,
     TimeUnit.WEEK: 1000 * 60 * 60 * 24 * 7,
     TimeUnit.MONTH: 1000 * 60 * 60 * 24 * 30,
-    TimeUnit.YEAR: 1000 * 60 * 60 * 24 * 365
+    TimeUnit.YEAR: 1000 * 60 * 60 * 24 * 365,
 }
 
 
@@ -64,7 +64,9 @@ class SimulationTime:
 
     def __validate_units(self, other: SimulationTime):
         if self.__unit != other.__unit:
-            raise Exception("Units do not equal: " + str(self.__unit) + " != " + str(other.__unit))
+            raise Exception(
+                "Units do not equal: " + str(self.__unit) + " != " + str(other.__unit)
+            )
 
     def __add__(self, other: SimulationTime) -> SimulationTime:
         self.__validate_units(other)
