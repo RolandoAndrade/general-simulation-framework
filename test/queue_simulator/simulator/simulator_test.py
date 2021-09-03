@@ -1,4 +1,5 @@
 import unittest
+from typing import List
 
 from core.config import FLOATING_POINT_DIGITS
 from core.entity.properties import Property, NumberProperty
@@ -191,6 +192,62 @@ class SimulatorTest(unittest.TestCase):
         print(474)
         print(472)
         print(471)
+
+    def test_simulation_server_double_delay(self):
+        """Server process entities slowly than arrivals"""
+        labels: List[List[Label]] = []
+        for i in range(3):
+            emitter = self.experiment.add_node(NodeType.ENTITY_EMITTER)
+            source = self.experiment.add_node(NodeType.SOURCE)
+            source.entity_emitter = Property(emitter)
+            source.inter_arrival_time = Value(1)
+            source.entities_per_arrival = Value(2)
+            source.time_offset = Value(0)
+
+            server = self.experiment.add_node(NodeType.SERVER)
+            server.processing_time = Value(2)
+            server.initial_capacity = NumberProperty(1000)
+
+            sink = self.experiment.add_node(NodeType.SINK)
+
+            source.add(server)
+            server.add(sink)
+
+            source.init()
+
+            label_source_out = Label(
+                source.get_state().output_buffer.get_properties,
+                BufferProperty.NUMBER_ENTERED,
+            )
+            label_server_in = Label(
+                server.get_state().input_buffer.get_properties,
+                BufferProperty.NUMBER_ENTERED,
+            )
+            label_server_out = Label(
+                server.get_state().output_buffer.get_properties,
+                BufferProperty.NUMBER_ENTERED,
+            )
+            label_sink_in = Label(
+                sink.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED
+            )
+
+            labels.append([label_source_out, label_server_in, label_server_out, label_sink_in])
+
+
+        self.experiment.simulation_control.start(stop_time=Time(10))
+        self.experiment.simulation_control.wait()
+
+        for label_list in labels:
+            print("Generated: " + str(label_list[0]))
+            print("Entered to server: " + str(label_list[1]))
+            print("Processed by server: " + str(label_list[2]))
+            print("Entered to sink: " + str(label_list[3]))
+            self.assertEqual("22", str(label_list[0]))
+            self.assertEqual("20", str(label_list[1]))
+            self.assertEqual("16", str(label_list[2]))
+            self.assertEqual("16", str(label_list[3]))
+
+        print(self.experiment.simulation_report.generate_report())
 
 
 if __name__ == "__main__":
