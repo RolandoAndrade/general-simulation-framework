@@ -13,4 +13,10 @@ class SimulationDynamicSystem(DiscreteEventDynamicSystem):
         for model in self._models:
             if model.get_id() == name:
                 return model
-        raise LookupError("Model not found")
+        return None
+
+    def get_path(self, name: str):
+        for path in self._paths:
+            if path.get_id() == name:
+                return path
+        return None

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass
 from typing import Any, Dict
 
@@ -18,3 +20,8 @@ class NodeProperty:
             "propertyType": self.property_type,
             "propertyCategory": self.property_category,
         }
+
+    @staticmethod
+    def deserialize(properties: Dict[str, Any]) -> NodeProperty:
+        return NodeProperty(properties["propertyName"], properties["propertyValue"], properties["propertyType"],
+                            properties["propertyCategory"])

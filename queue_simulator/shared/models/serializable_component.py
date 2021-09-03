@@ -24,3 +24,19 @@ class SerializableComponent(ABC, Entity):
                 ).serialize()
             )
         return e
+
+    def _value_string_property(self, value: str):
+        return value
+
+    def _value_expression(self, value: str):
+        return value
+
+    def set_serialized_property(self, serialized_property: NodeProperty):
+        edited_property = self.get_properties()[serialized_property.property_name]
+        effect = {
+            PropertyType.STRING: self._value_string_property,
+            PropertyType.EXPRESSION: self._value_expression
+        }
+        method = effect[serialized_property.property_type]
+        value = serialized_property.property_value
+        edited_property.set_value(method(value))

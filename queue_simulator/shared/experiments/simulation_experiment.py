@@ -1,12 +1,12 @@
+from typing import Set
+
 from control.controls.discrete_event_control import DiscreteEventControl
-from core.entity.properties import ExpressionProperty
 from core.events import EventBus
-from core.mathematics.values.value import Value
 from experiments.experiment_builders import DiscreteEventExperiment
-from models.core import Path
-from queue_simulator.entities import NameGenerator
+from queue_simulator.entities import NameGenerator, Emitter
 from queue_simulator.route.route import Route
 from queue_simulator.shared.dynamic_systems import SimulationDynamicSystem
+from queue_simulator.shared.models.node_property import NodeProperty
 from queue_simulator.shared.nodes import NodeBuilder, NodeType
 from reports.report_generators.default_report import DefaultReport
 from simulation.simulation_engines import DiscreteEventSimulationEngine
@@ -18,6 +18,8 @@ class SimulationExperiment(DiscreteEventExperiment):
     _name_generator: NameGenerator
 
     dynamic_system: SimulationDynamicSystem
+
+    _emitters: Set[Emitter]
 
     def __init__(self):
         eb = EventBus()
@@ -31,9 +33,12 @@ class SimulationExperiment(DiscreteEventExperiment):
         self._event_bus = eb
 
     def add_node(self, node_type: NodeType):
-        return NodeBuilder.create_node(
+        node = NodeBuilder.create_node(
             node_type, self.dynamic_system, self._name_generator
         )
+        if node_type == NodeType.ENTITY_EMITTER:
+            self._emitters.add(node)
+        return node
 
     def add_path(self, from_node: str, to_node: str):
         from_model = self.dynamic_system.get_model(from_node)
@@ -41,6 +46,43 @@ class SimulationExperiment(DiscreteEventExperiment):
         created_path = Route(from_model, to_model, self._name_generator)
         self.dynamic_system.link(created_path)
         return created_path
+
+    def _get_emitter(self, name: str):
+        for emitter in self._emitters:
+            if emitter.get_id() == name:
+                return emitter
+        return None
+
+    def _remove_model(self, component: str) -> bool:
+        model = self.dynamic_system.get_model(component)
+        if model is not None:
+            model.remove()
+            return True
+        return False
+
+    def _remove_path(self, component: str) -> bool:
+        path = self.dynamic_system.get_path(component)
+        if path is not None:
+            self.dynamic_system.unlink(path)
+            return True
+        return False
+
+    def _remove_emitter(self, component: str) -> bool:
+        emitter = self._get_emitter(component)
+        if emitter is not None:
+            self._emitters.remove(emitter)
+            return True
+        return False
+
+    def remove_component(self, component: str):
+        return self._remove_model(component) or self._remove_path(component) or self._remove_emitter(component)
+
+    def edit_property(self, component: str, new_property: NodeProperty):
+        node = self.dynamic_system.get_model(component) or self.dynamic_system.get_path(component) or \
+               self._get_emitter(component)
+        if node is not None:
+            node.set_serialized_property(new_property)
+        return node
 
     @property
     def event_bus(self):
