@@ -16,7 +16,8 @@ class SimulationDynamicSystem(DiscreteEventDynamicSystem):
         return None
 
     def get_path(self, name: str):
-        for path in self._paths:
-            if path.get_id() == name:
-                return path
+        for model_paths in self._paths:
+            for path in self._paths[model_paths]:
+                if path.get_id() == name:
+                    return path
         return None

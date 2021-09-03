@@ -31,6 +31,7 @@ class SimulationExperiment(DiscreteEventExperiment):
 
         self._name_generator = NameGenerator()
         self._event_bus = eb
+        self._emitters = set()
 
     def add_node(self, node_type: NodeType):
         node = NodeBuilder.create_node(

@@ -47,7 +47,7 @@ class BuilderController:
         session: Dict[str, SimulationExperiment]
         with sio.session(sid) as session:
             removed = session["experiment"].remove_component(component)
-        return removed.serialize()
+        return removed
 
     @staticmethod
     @sio.event
