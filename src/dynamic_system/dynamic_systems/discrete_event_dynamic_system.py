@@ -133,7 +133,7 @@ class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
         input_models = set()
         if input_model_values is not None:
             for model in input_model_values:
-                model.state_transition(input_model_values[model], event_time)
+                model.state_transition({model: input_model_values[model]}, event_time)
                 input_models.add(model)
         return cast(Any, input_models)
 
