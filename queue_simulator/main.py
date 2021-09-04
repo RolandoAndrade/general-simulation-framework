@@ -5,6 +5,7 @@ import socketio
 
 from loguru import logger
 
+from core.events import DomainEvents
 from queue_simulator.shared.experiments import SimulationSocketExperiment
 from queue_simulator.socket_server.controllers import (
     BuilderController,
@@ -33,4 +34,5 @@ def disconnect(sid):
 controllers = [BuilderController(), SimulationController()]
 
 if __name__ == "__main__":
+    eventlet.monkey_patch()
     eventlet.wsgi.server(eventlet.listen(("localhost", 4000)), app)

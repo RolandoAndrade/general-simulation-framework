@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from time import sleep
 from typing import TYPE_CHECKING, Dict
+
+from control.core import SimulationStats
 from control.core.thread_control import ThreadControl
 from core.debug.domain.debug import debug
 from core.events import EventBus, DomainEvents
@@ -47,16 +49,11 @@ class DiscreteEventControl(ThreadControl):
             self._time = self._time + self._simulator.get_time_of_next_event()
             self._simulator.compute_next_state(time=self._time)
             sleep(wait_time)
-            if 0 < stop_time <= self._time:
+            if 0 <= stop_time <= self._time:
                 self._is_paused = True
             self._event_bus.emit(
                 DomainEvents.SIMULATION_STATUS,
-                {
-                    "time": self._time,
-                    "isPaused": self._is_paused,
-                    "frequency": frequency,
-                    "stopTime": stop_time,
-                },
+                SimulationStats(self._time, stop_time, frequency, self._is_paused)
             )
         self._event_bus.emit(DomainEvents.SIMULATION_FINISHED)
 

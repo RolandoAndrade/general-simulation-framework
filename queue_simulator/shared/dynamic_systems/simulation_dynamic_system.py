@@ -21,3 +21,11 @@ class SimulationDynamicSystem(DiscreteEventDynamicSystem):
                 if path.get_id() == name:
                     return path
         return None
+
+    def init(self):
+        for model in self._models:
+            try:
+                model.init()
+            except:
+                continue
+

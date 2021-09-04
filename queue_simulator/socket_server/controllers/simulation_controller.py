@@ -14,10 +14,10 @@ class SimulationController:
         logger.info("Start simulation, sid: {sid}", sid=sid)
         session: Dict[str, SimulationExperiment]
         with sio.session(sid) as session:
-            created_path = session["experiment"].simulation_control.start(
+            session["experiment"].simulation_control.start(
                 stop_time=stop_time
             )
-        return created_path.serialize()
+        return True
 
     @staticmethod
     @sio.event
