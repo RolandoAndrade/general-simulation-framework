@@ -37,8 +37,7 @@ class DiscreteEventSimulationEngine(BaseSimulator):
         """
         super().__init__(dynamic_system, base_generator, event_bus)
         self._dynamic_system = dynamic_system
-        self._last_event_time = Time(0)
-        self._is_output_up_to_update = False
+        self.init()
 
     def get_time_of_next_event(self) -> Time:
         """Get time of the next event"""
@@ -71,3 +70,7 @@ class DiscreteEventSimulationEngine(BaseSimulator):
             self._is_output_up_to_update = True
             return self._dynamic_system.get_output()
         return None
+
+    def init(self):
+        super(DiscreteEventSimulationEngine, self).init()
+        self._last_event_time = Time(0)

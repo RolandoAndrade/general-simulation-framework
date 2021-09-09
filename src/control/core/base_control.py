@@ -82,3 +82,6 @@ class BaseControl:
             timeout (Time): Time to wait.
         """
         raise NotImplementedError
+
+    def init(self):
+        self._is_paused = True

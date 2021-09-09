@@ -75,7 +75,7 @@ class DiscreteEventControl(ThreadControl):
         """
         self._is_paused = False
         if self._time > stop_time:
-            self._time = Time(0)
+            self.init()
         self._simulator.compute_next_state(start_input)
         self._start_thread(frequency, wait_time, stop_time)
 
@@ -92,3 +92,7 @@ class DiscreteEventControl(ThreadControl):
         self._is_paused = True
         self._time = Time(0)
         self._thread = None
+
+    def init(self):
+        self._time = Time(0)
+        self._simulator.init()

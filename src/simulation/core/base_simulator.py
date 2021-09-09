@@ -54,3 +54,6 @@ class BaseSimulator:
         yet
         """
         raise NotImplementedError
+
+    def init(self):
+        self._is_output_up_to_update = False
