@@ -33,7 +33,3 @@ class SimulationSocketExperiment(SimulationExperiment):
 
     def on_simulation_finished(self):
         self._sio.emit(DomainEvents.SIMULATION_FINISHED, to=self._sid)
-
-    def start_simulation(self, stop_time: Time):
-        self.dynamic_system.init()
-        self.simulation_control.start(stop_time=stop_time)

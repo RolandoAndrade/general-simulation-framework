@@ -33,7 +33,7 @@ class Scheduler:
             model (DiscreteEventModel): DiscreteEventModel with an autonomous event scheduled
             time (Time): Time to execute an autonomous event
         """
-        if time > 0:
+        if time >= 0:
             sm = ScheduledModel(model, time)
             heapq.heappush(self._future_event_list, sm)
 
@@ -52,7 +52,7 @@ class Scheduler:
         """Gets the time of the next event"""
         if len(self._future_event_list) > 0:
             return self._future_event_list[0].get_time()
-        return Decimal(0)
+        return Time(-1)
 
     @debug("Updating time")
     def update_time(self, delta_time: Time):

@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Dict, Any, Set
 
-from core.events import EventBus, DomainEvents
+from core.events import EventBus, DomainEvents, static_event_bus
 
 DynamicSystemOutput = Dict[str, Any]
 ReportResult = Any
@@ -25,7 +25,7 @@ class BaseReport:
     def __init__(self, event_bus: EventBus = None):
         self._outputs = {}
         self._headers = set()
-        self._event_bus = event_bus
+        self._event_bus = event_bus or static_event_bus
 
     def add_output(self, output: DynamicSystemOutput, time: Time):
         for key in output:

@@ -23,6 +23,7 @@ class SimulationDynamicSystem(DiscreteEventDynamicSystem):
         return None
 
     def init(self):
+
         for model in self._models:
             try:
                 model.init()

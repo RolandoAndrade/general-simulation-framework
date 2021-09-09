@@ -2,6 +2,7 @@ from typing import Set
 
 from control.controls.discrete_event_control import DiscreteEventControl
 from core.events import EventBus
+from core.types import Time
 from experiments.experiment_builders import DiscreteEventExperiment
 from queue_simulator.entities import NameGenerator, Emitter
 from queue_simulator.route.route import Route
@@ -88,3 +89,7 @@ class SimulationExperiment(DiscreteEventExperiment):
     @property
     def event_bus(self):
         return self._event_bus
+
+    def start_simulation(self, stop_time: Time):
+        self.dynamic_system.init()
+        self.simulation_control.start(stop_time=stop_time)

@@ -11,6 +11,7 @@ from core.types.model_input import ModelInput
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from models.models import DiscreteEventModel
 from queue_simulator.buffer.buffers import OutputBuffer
+from queue_simulator.entities import Emitter
 from queue_simulator.shared.models import SerializableComponent
 
 from queue_simulator.source import SourceProperty, SourceState
@@ -66,7 +67,7 @@ class Source(DiscreteEventModel, SerializableComponent):
             entity_manager=entity_manager,
         )
         self.inter_arrival_time = inter_arrival_time
-        self.entity_emitter = entity_emitter
+        self.entity_emitter = entity_emitter or Emitter("EntityEmitter" + name, entity_manager)
         self.entities_per_arrival = entities_per_arrival
         self.time_offset = time_offset
 
