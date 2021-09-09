@@ -21,10 +21,8 @@ class Entity:
             name (str): Identifier of the entity.
             entity_manager (EntityManager): Delegated entity manager.
         """
-        if not entity_manager:
-            entity_manager = static_entity_manager
         self._id = None
-        self._entity_manager = entity_manager
+        self._entity_manager = entity_manager or static_entity_manager
         self.set_id(name)
 
     def set_id(self, name: str):

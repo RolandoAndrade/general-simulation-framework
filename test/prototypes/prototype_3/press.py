@@ -11,8 +11,11 @@ from models.models import DiscreteEventModel
 class Press(DiscreteEventModel):
     def _internal_state_transition_function(self, state: ModelState) -> ModelState:
         state["p"] = max(state["p"] - 1, 0)
-        state["s"] = 1 * min(state["p"], 1)
-        self.schedule(Time(state["s"]))
+        if state["p"] < 1:
+            state["s"] = Time(-1)
+        else:
+            state["s"] = 1
+        self.schedule(self.get_time())
         return state
 
     def _external_state_transition_function(self, state: ModelState, inputs: ModelInput,

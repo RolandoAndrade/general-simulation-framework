@@ -190,8 +190,8 @@ class Source(DiscreteEventModel, SerializableComponent):
 
     def init(self):
         self.clear()
-        self.state_transition()
-        self.__used_offset = ExpressionProperty(Value(0))
+        self.schedule(0)
+        self.__used_offset = self.__time_offset
 
     def __str__(self):
         return self.get_id()

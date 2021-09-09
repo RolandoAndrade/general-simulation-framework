@@ -1,6 +1,7 @@
 import unittest
 from random import seed
 
+from core.entity.core import Entity, static_entity_manager
 from core.entity.properties.number_property import NumberProperty
 from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
 from queue_simulator.buffer.core.buffer_policy import BufferPolicy
@@ -15,21 +16,24 @@ class TestOutputBuffer(unittest.TestCase):
         self.buffer = OutputBuffer("Source")
         seed(42)
 
+    def tearDown(self) -> None:
+        static_entity_manager._saved_names = set()
+
     def test_name(self):
         """Name should be <name>.OutputBuffer"""
         self.assertEqual("Source.OutputBuffer", self.buffer.get_id(), "Error")
 
     def test_add_entity(self):
         """Should add entities to buffer"""
-        self.buffer.add(MockEmitter())
+        self.buffer.add([MockEmitter()])
         self.assertEqual(1, self.buffer.current_number_of_entities, "Error 0")
-        self.buffer.add(MockEmitter(), 3)
+        self.buffer.add([MockEmitter(), MockEmitter(), MockEmitter()])
         self.assertEqual(4, self.buffer.current_number_of_entities, "Error 1")
 
     def test_get_content(self):
         """Should retrieve the content"""
         # FIFO
-        self.buffer.add(MockEmitter(), 5)
+        self.buffer.add([MockEmitter()], 5)
         ex = ["1", "2", "3", "4", "5"]
         re = [entity.get_id() for entity in self.buffer.get_content()]
         self.assertEqual(ex, re, "Error 0")

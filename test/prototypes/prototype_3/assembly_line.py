@@ -34,7 +34,7 @@ class AssemblyLine(DiscreteEventDynamicSystem):
                 self.state_transition(r_input, self.get_time_of_next_events())
             print("--")
             print(self._scheduler)
-            if self.get_time_of_next_events() == 0:
+            if self.get_time_of_next_events() == -1:
                 break
             i = i + self.get_time_of_next_events()
         return i
