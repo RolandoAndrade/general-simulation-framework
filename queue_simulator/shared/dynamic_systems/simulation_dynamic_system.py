@@ -29,3 +29,6 @@ class SimulationDynamicSystem(DiscreteEventDynamicSystem):
                 model.init()
             except:
                 continue
+
+    def create_report(self):
+        pass
