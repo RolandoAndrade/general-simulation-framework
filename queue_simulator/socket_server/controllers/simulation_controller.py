@@ -14,9 +14,7 @@ class SimulationController:
         logger.info("Start simulation, sid: {sid}", sid=sid)
         session: Dict[str, SimulationExperiment]
         with sio.session(sid) as session:
-            session["experiment"].start_simulation(
-                stop_time=stop_time
-            )
+            session["experiment"].start_simulation(stop_time=stop_time)
         return True
 
     @staticmethod

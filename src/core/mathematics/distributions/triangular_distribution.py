@@ -33,7 +33,11 @@ class TriangularDistribution(RandomDistribution):
 
     def generate(self) -> Decimal:
         """Generates a value following the distribution"""
-        return Decimal(str(np.random.triangular(self.__minimum, self.__mode, self.__maximum))[:FLOATING_POINT_DIGITS])
+        return Decimal(
+            str(np.random.triangular(self.__minimum, self.__mode, self.__maximum))[
+                :FLOATING_POINT_DIGITS
+            ]
+        )
 
     def generate_list(self, size: int) -> np.ndarray:
         """Generates a ndarray of values following the distribution

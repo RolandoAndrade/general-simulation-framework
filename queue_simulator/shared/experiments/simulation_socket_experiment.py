@@ -24,12 +24,16 @@ class SimulationSocketExperiment(SimulationExperiment):
 
     def on_simulation_status(self, data: SimulationStats):
         logger.info("Simulation status changed {data}, {sid}", data=data, sid=self._sid)
-        self._sio.emit(DomainEvents.SIMULATION_STATUS, {
-            'time': float(data.time),
-            'stopTime': float(data.stop_time),
-            'frequency': float(data.frequency),
-            'isPaused': data.is_paused
-        }, self._sid)
+        self._sio.emit(
+            DomainEvents.SIMULATION_STATUS,
+            {
+                "time": float(data.time),
+                "stopTime": float(data.stop_time),
+                "frequency": float(data.frequency),
+                "isPaused": data.is_paused,
+            },
+            self._sid,
+        )
 
     def on_simulation_finished(self):
         self._sio.emit(DomainEvents.SIMULATION_FINISHED, to=self._sid)

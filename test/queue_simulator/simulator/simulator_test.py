@@ -3,7 +3,10 @@ from typing import List
 
 from core.config import FLOATING_POINT_DIGITS
 from core.entity.properties import Property, NumberProperty
-from core.mathematics.distributions import ExponentialDistribution, TriangularDistribution
+from core.mathematics.distributions import (
+    ExponentialDistribution,
+    TriangularDistribution,
+)
 from core.mathematics.values.value import Value
 from core.types import Time
 from queue_simulator.buffer.core import BufferProperty
@@ -179,7 +182,9 @@ class SimulatorTest(unittest.TestCase):
 
         self.experiment.save()
 
-        self.experiment.simulation_control.start(stop_time=Time(simulation_time_minutes))
+        self.experiment.simulation_control.start(
+            stop_time=Time(simulation_time_minutes)
+        )
         self.experiment.simulation_control.wait()
 
         print("Generated: " + str(label_source_out))
@@ -228,11 +233,13 @@ class SimulatorTest(unittest.TestCase):
                 BufferProperty.NUMBER_ENTERED,
             )
             label_sink_in = Label(
-                sink.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED
+                sink.get_state().input_buffer.get_properties,
+                BufferProperty.NUMBER_ENTERED,
             )
 
-            labels.append([label_source_out, label_server_in, label_server_out, label_sink_in])
-
+            labels.append(
+                [label_source_out, label_server_in, label_server_out, label_sink_in]
+            )
 
         self.experiment.simulation_control.start(stop_time=Time(10))
         self.experiment.simulation_control.wait()

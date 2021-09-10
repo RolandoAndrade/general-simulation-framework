@@ -67,7 +67,9 @@ class Source(DiscreteEventModel, SerializableComponent):
             entity_manager=entity_manager,
         )
         self.inter_arrival_time = inter_arrival_time
-        self.entity_emitter = entity_emitter or Emitter("EntityEmitter" + name, entity_manager)
+        self.entity_emitter = entity_emitter or Emitter(
+            "EntityEmitter" + name, entity_manager
+        )
         self.entities_per_arrival = entities_per_arrival
         self.time_offset = time_offset
 

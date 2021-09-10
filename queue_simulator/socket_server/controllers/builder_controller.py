@@ -38,7 +38,7 @@ class BuilderController:
     @staticmethod
     @sio.event
     def remove_component(sid, data: Dict[str, str]):
-        component = data['component']
+        component = data["component"]
         logger.info(
             "Remove component {component}, sid: {sid}",
             component=component,
@@ -52,8 +52,8 @@ class BuilderController:
     @staticmethod
     @sio.event
     def edit_property(sid, data: Dict[str, Any]):
-        component = data['component']
-        new_property = NodeProperty.deserialize(data['property'])
+        component = data["component"]
+        new_property = NodeProperty.deserialize(data["property"])
         session: Dict[str, SimulationExperiment]
         with sio.session(sid) as session:
             created_path = session["experiment"].edit_property(component, new_property)

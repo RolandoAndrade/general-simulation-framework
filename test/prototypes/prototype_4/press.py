@@ -18,8 +18,9 @@ class Press(DiscreteEventModel):
         self.schedule(self.get_time())
         return state
 
-    def _external_state_transition_function(self, state: ModelState, inputs: ModelInput,
-                                            event_time: Time) -> ModelState:
+    def _external_state_transition_function(
+        self, state: ModelState, inputs: ModelInput, event_time: Time
+    ) -> ModelState:
         values = inputs.values()
         state["s"] = state["s"] - event_time
         for part in values:
@@ -43,10 +44,7 @@ class Press(DiscreteEventModel):
         pass
 
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem, name: str):
-        super().__init__(dynamic_system, state={
-            "p": 0,
-            "s": 0
-        }, name=name)
+        super().__init__(dynamic_system, state={"p": 0, "s": 0}, name=name)
 
     def __str__(self):
         return self.get_id()

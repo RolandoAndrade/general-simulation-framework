@@ -35,7 +35,7 @@ class SerializableComponent(ABC, Entity):
         edited_property = self.get_properties()[serialized_property.property_name]
         effect = {
             PropertyType.STRING: self._value_string_property,
-            PropertyType.EXPRESSION: self._value_expression
+            PropertyType.EXPRESSION: self._value_expression,
         }
         method = effect[serialized_property.property_type]
         value = serialized_property.property_value

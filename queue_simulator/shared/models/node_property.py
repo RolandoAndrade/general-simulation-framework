@@ -23,5 +23,9 @@ class NodeProperty:
 
     @staticmethod
     def deserialize(properties: Dict[str, Any]) -> NodeProperty:
-        return NodeProperty(properties["propertyName"], properties["propertyValue"], properties["propertyType"],
-                            properties["propertyCategory"])
+        return NodeProperty(
+            properties["propertyName"],
+            properties["propertyValue"],
+            properties["propertyType"],
+            properties["propertyCategory"],
+        )

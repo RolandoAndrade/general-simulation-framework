@@ -9,7 +9,6 @@ from models.models import DiscreteEventModel
 
 
 class Generator(DiscreteEventModel):
-
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem, pieces: List[int]):
         super().__init__(dynamic_system, name="Generator", state=pieces)
         self.schedule(Time(0))
@@ -19,8 +18,9 @@ class Generator(DiscreteEventModel):
         self.schedule(self.get_time())
         return state
 
-    def _external_state_transition_function(self, state: ModelState, inputs: ModelInput,
-                                            event_time: Time) -> ModelState:
+    def _external_state_transition_function(
+        self, state: ModelState, inputs: ModelInput, event_time: Time
+    ) -> ModelState:
         return state
 
     def _time_advance_function(self, state: List[int]) -> Time:
@@ -30,8 +30,7 @@ class Generator(DiscreteEventModel):
         return state[0]
 
     def get_properties(self) -> EntityProperties:
-        return {
-        }
+        return {}
 
     def __str__(self):
         return self.get_id()

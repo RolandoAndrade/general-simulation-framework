@@ -20,5 +20,3 @@ class AssemblyLine(DiscreteEventDynamicSystem):
         self.generator.add(self.press)
         self.press.add(self.drill)
         print(self._scheduler)
-
-

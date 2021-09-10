@@ -29,4 +29,3 @@ class SimulationDynamicSystem(DiscreteEventDynamicSystem):
                 model.init()
             except:
                 continue
-

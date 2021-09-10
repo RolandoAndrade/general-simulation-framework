@@ -22,11 +22,16 @@ class BaseSimulator:
 
     _report_generator: BaseReport
     """Current report generator where engine saves the outputs."""
-    
+
     _event_bus: EventBus
     """Event bus of the module."""
 
-    def __init__(self, dynamic_system: BaseDynamicSystem, base_generator: BaseReport, event_bus: EventBus = None):
+    def __init__(
+        self,
+        dynamic_system: BaseDynamicSystem,
+        base_generator: BaseReport,
+        event_bus: EventBus = None,
+    ):
         """
         Args:
             dynamic_system (BaseDynamicSystem): Dynamic system to be simulated.

@@ -38,5 +38,3 @@ class AssemblyLine(DiscreteEventDynamicSystem):
                 break
             i = i + self.get_time_of_next_events()
         return i
-
-

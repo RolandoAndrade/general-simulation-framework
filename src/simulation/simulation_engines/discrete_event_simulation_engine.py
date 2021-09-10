@@ -27,8 +27,10 @@ class DiscreteEventSimulationEngine(BaseSimulator):
     """Indicates if the output was already computed for the current iteration."""
 
     def __init__(
-        self, dynamic_system: DiscreteEventDynamicSystem, base_generator: BaseReport,
-            event_bus: EventBus = None
+        self,
+        dynamic_system: DiscreteEventDynamicSystem,
+        base_generator: BaseReport,
+        event_bus: EventBus = None,
     ):
         """
         Args:

@@ -77,11 +77,18 @@ class SimulationExperiment(DiscreteEventExperiment):
         return False
 
     def remove_component(self, component: str):
-        return self._remove_model(component) or self._remove_path(component) or self._remove_emitter(component)
+        return (
+            self._remove_model(component)
+            or self._remove_path(component)
+            or self._remove_emitter(component)
+        )
 
     def edit_property(self, component: str, new_property: NodeProperty):
-        node = self.dynamic_system.get_model(component) or self.dynamic_system.get_path(component) or \
-               self._get_emitter(component)
+        node = (
+            self.dynamic_system.get_model(component)
+            or self.dynamic_system.get_path(component)
+            or self._get_emitter(component)
+        )
         if node is not None:
             node.set_serialized_property(new_property)
         return node

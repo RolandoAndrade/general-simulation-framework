@@ -53,7 +53,7 @@ class DiscreteEventControl(ThreadControl):
                 self._is_paused = True
             self._event_bus.emit(
                 DomainEvents.SIMULATION_STATUS,
-                SimulationStats(self._time, stop_time, frequency, self._is_paused)
+                SimulationStats(self._time, stop_time, frequency, self._is_paused),
             )
         self._event_bus.emit(DomainEvents.SIMULATION_FINISHED)
 

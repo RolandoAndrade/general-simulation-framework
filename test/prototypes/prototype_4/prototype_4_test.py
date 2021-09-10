@@ -15,5 +15,5 @@ class Prototype4Test(unittest.TestCase):
         print(experiment.simulation_report.generate_report())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
