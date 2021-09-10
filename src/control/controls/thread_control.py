@@ -15,7 +15,7 @@ class ThreadControlStrategy(SimulationStrategy):
     _thread: Thread
     """Thread of the simulation"""
 
-    def stop_simulation(self, *args, **kwargs):
+    def stop_simulation(self):
         self._thread = None
 
     def start_simulation(self, target: Callable, frequency: Time = 0, wait_time: Time = 0, stop_time: Time = 0):

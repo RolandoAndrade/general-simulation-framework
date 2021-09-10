@@ -24,7 +24,7 @@ class BaseControl:
     """Boolean that indicates if the simulation is paused"""
 
     _simulation_strategy: SimulationStrategy
-    """Boolean that indicates if the simulation is paused"""
+    """Strategy for infrastructure details."""
 
     _event_bus: EventBus
     """Event bus of the module."""
