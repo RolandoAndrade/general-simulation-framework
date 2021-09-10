@@ -1,5 +1,6 @@
 from typing import Set
 
+from control.controls import ThreadControlStrategy
 from control.controls.discrete_event_control import DiscreteEventControl
 from core.events import EventBus
 from core.types import Time
@@ -27,7 +28,7 @@ class SimulationExperiment(DiscreteEventExperiment):
         dynamic_system = SimulationDynamicSystem()
         report = DefaultReport(eb)
         simulator = DiscreteEventSimulationEngine(dynamic_system, report)
-        control = DiscreteEventControl(simulator, eb)
+        control = DiscreteEventControl(simulator, ThreadControlStrategy(), eb)
         super().__init__(dynamic_system, simulator, control, report)
 
         self._name_generator = NameGenerator()

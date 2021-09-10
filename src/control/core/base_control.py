@@ -4,6 +4,7 @@ from abc import abstractmethod
 
 from typing import TYPE_CHECKING, Dict
 
+from control.core import SimulationStrategy
 from core.debug.domain.debug import debug
 from core.events import EventBus, static_event_bus
 from core.types import Time
@@ -22,17 +23,21 @@ class BaseControl:
     _is_paused: bool
     """Boolean that indicates if the simulation is paused"""
 
+    _simulation_strategy: SimulationStrategy
+    """Boolean that indicates if the simulation is paused"""
+
     _event_bus: EventBus
     """Event bus of the module."""
 
     @debug("Control initialized", True)
-    def __init__(self, simulator: BaseSimulator, event_bus: EventBus = None):
+    def __init__(self, simulator: BaseSimulator, simulation_strategy: SimulationStrategy, event_bus: EventBus = None):
         """
         Args:
             simulator (BaseSimulator): Simulation engine to be executed.
         """
         self._simulator = simulator
         self._is_paused = True
+        self._simulation_strategy = simulation_strategy
         self._event_bus = event_bus or static_event_bus
 
     @abstractmethod

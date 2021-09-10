@@ -3,8 +3,7 @@ from __future__ import annotations
 from time import sleep
 from typing import TYPE_CHECKING, Dict
 
-from control.core import SimulationStats
-from control.core.thread_control import ThreadControl
+from control.core import SimulationStats, BaseControl, SimulationStrategy
 from core.debug.domain.debug import debug
 from core.events import EventBus, DomainEvents
 from core.types import Time
@@ -16,8 +15,8 @@ if TYPE_CHECKING:
     )
 
 
-class DiscreteEventControl(ThreadControl):
-    """Control that executes the discrete-event simulation in a new thread"""
+class DiscreteEventControl(BaseControl):
+    """Control that executes the discrete-event simulation"""
 
     _simulator: DiscreteEventSimulationEngine
     """Overrides simulator type"""
@@ -26,14 +25,14 @@ class DiscreteEventControl(ThreadControl):
     """Current time of the simulation"""
 
     def __init__(
-        self, simulator: DiscreteEventSimulationEngine, event_bus: EventBus = None
+        self, simulator: DiscreteEventSimulationEngine, simulation_strategy: SimulationStrategy, event_bus: EventBus = None
     ):
         """
         Args:
             simulator (DiscreteEventSimulationEngine): Simulation engine to be
                 executed.
         """
-        ThreadControl.__init__(self, simulator, event_bus)
+        BaseControl.__init__(self, simulator, simulation_strategy, event_bus)
         self._time = Time(0)
         self._is_paused = False
 
@@ -77,7 +76,7 @@ class DiscreteEventControl(ThreadControl):
         if self._time > stop_time:
             self.init()
         self._simulator.compute_next_state(start_input)
-        self._start_thread(frequency, wait_time, stop_time)
+        self._simulation_strategy.start_simulation(self._execute, frequency, wait_time, stop_time)
 
     @debug("Simulation paused")
     def pause(self):
@@ -91,8 +90,11 @@ class DiscreteEventControl(ThreadControl):
         self._event_bus.emit(DomainEvents.SIMULATION_STOPPED)
         self._is_paused = True
         self._time = Time(0)
-        self._thread = None
+        self._simulation_strategy.stop_simulation()
 
     def init(self):
         self._time = Time(0)
         self._simulator.init()
+
+    def wait(self, timeout: Time = None):
+        self._simulation_strategy.wait_simulation(timeout)
