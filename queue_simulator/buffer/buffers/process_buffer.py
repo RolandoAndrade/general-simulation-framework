@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from decimal import Decimal
 from typing import List
 
 import heapq
@@ -7,6 +8,7 @@ from core.entity.core import Entity, EntityManager
 from core.entity.properties import NumberProperty, StringProperty
 from core.types import Time
 from queue_simulator.buffer.core import Buffer, BufferPolicy, BufferedEntity
+from queue_simulator.shared.stats import DataSource, ItemStats, Stat
 
 
 class ProcessBuffer(Buffer):
@@ -17,7 +19,7 @@ class ProcessBuffer(Buffer):
     def __init__(
         self,
         name: str,
-        capacity: NumberProperty = NumberProperty(float("inf")),
+        capacity: NumberProperty = NumberProperty(Decimal("inf")),
         entity_manager: EntityManager = None,
     ):
         """
@@ -28,6 +30,7 @@ class ProcessBuffer(Buffer):
         super().__init__(
             name, capacity, StringProperty(str(BufferPolicy.PARALLEL)), entity_manager
         )
+        self.__processing_time_history = []
 
     def process(self):
         entities = self.get_content()
@@ -55,6 +58,7 @@ class ProcessBuffer(Buffer):
         """Gets the content of the buffer and empties the buffer"""
         s = []
         time = self.get_time_of_next_entity()
+        self.__processing_time_history.append(time)
         while len(self._content) > 0 and self._content[0].remaining_time == time:
             s.append(heapq.heappop(self._content).entity)
         self.decrease_time(time)
@@ -73,3 +77,13 @@ class ProcessBuffer(Buffer):
 
     def set_id(self, name: str):
         super(ProcessBuffer, self).set_id(name + ".ProcessBuffer")
+
+    def get_datasource(self) -> DataSource:
+        ds = super(ProcessBuffer, self).get_datasource()
+        ds.item_stats.add(ItemStats("ProcessingTime", {
+            Stat("Maximum", max(self.__processing_time_history)),
+            Stat("Minimum", min(self.__processing_time_history)),
+            Stat("Average", sum(self.__processing_time_history)/max(1, len(self.__processing_time_history))),
+            Stat("Total", sum(self.__processing_time_history))
+        }))
+        return ds

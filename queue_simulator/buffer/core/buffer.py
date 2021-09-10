@@ -8,9 +8,10 @@ from typing import List, Optional
 from core.entity.core import Entity, EntityProperties, EntityManager
 from core.entity.properties import NumberProperty, StringProperty
 from queue_simulator.buffer.core import BufferPolicy, BufferProperty
+from queue_simulator.shared.stats import StatSource, DataSource, ItemStats, Stat
 
 
-class Buffer(Entity, ABC):
+class Buffer(Entity, StatSource, ABC):
     """Buffer of entities"""
 
     _content: List[Entity]
@@ -24,6 +25,9 @@ class Buffer(Entity, ABC):
 
     __number_entered: NumberProperty[int]
     """Number of entities that entered into the buffer"""
+
+    __in_station_history: List[int]
+    """Number of entities in station history."""
 
     def __init__(
         self,
@@ -43,6 +47,7 @@ class Buffer(Entity, ABC):
         self._content = []
         self.policy = policy
         self.__number_entered = NumberProperty(0)
+        self.__in_station_history = []
 
     def add(self, entities: List[Entity], *args, **kwargs) -> int:
         """Adds an element to the buffer and returns the number of elements that
@@ -56,6 +61,7 @@ class Buffer(Entity, ABC):
         self.__number_entered += r_quantity
         for i in range(r_quantity):
             self._content.append(entities[i])
+        self.__in_station_history.append(len(self._content))
         return quantity - r_quantity
 
     def get_content(self) -> List[Entity]:
@@ -140,3 +146,16 @@ class Buffer(Entity, ABC):
                 }
             )
         )
+
+    def get_datasource(self) -> DataSource:
+        return DataSource(self.get_id(), {
+            ItemStats("Entered", {
+                Stat("Total", self.number_entered.get_value())
+            }),
+            ItemStats("NumberInStation", {
+                Stat("Maximum", Decimal(max(self.__in_station_history))),
+                Stat("Minimum", Decimal(min(self.__in_station_history))),
+                Stat("Average", Decimal(sum(self.__in_station_history)/max(1, len(self.__in_station_history)))),
+                Stat("Total", self.number_entered.get_value())
+            })
+        })

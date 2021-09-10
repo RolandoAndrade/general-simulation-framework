@@ -13,6 +13,7 @@ from models.models import DiscreteEventModel
 from queue_simulator.buffer.buffers import OutputBuffer
 from queue_simulator.entities import Emitter
 from queue_simulator.shared.models import SerializableComponent
+from queue_simulator.shared.stats import Statistical, ComponentStats, DataSource, ItemStats
 
 from queue_simulator.source import SourceProperty, SourceState
 
@@ -20,7 +21,7 @@ from core.entity.core import EntityManager
 
 
 # https://simulemos.cl/books/simio/page/source
-class Source(DiscreteEventModel, SerializableComponent):
+class Source(DiscreteEventModel, SerializableComponent, Statistical):
     """Source of entities"""
 
     __inter_arrival_time: Optional[ExpressionProperty]
@@ -204,3 +205,10 @@ class Source(DiscreteEventModel, SerializableComponent):
             self.get_state().rename(name)
         except AttributeError:
             pass
+
+    def get_stats(self) -> ComponentStats:
+        return ComponentStats("Source", self.get_id(), {
+            DataSource("InputBuffer", {
+                ItemStats()
+            })
+        })
