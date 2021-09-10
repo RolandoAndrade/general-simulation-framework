@@ -37,7 +37,7 @@ class DiscreteEventControl(ThreadControl):
         self._time = Time(0)
         self._is_paused = False
 
-    def _execute(self, frequency: Time = 0, wait_time: Time = 0, stop_time: Time = 0):
+    def _execute(self, frequency: Time, wait_time: Time, stop_time: Time):
         """Executes the simulation loop number of seconds.
 
         Args:
@@ -46,7 +46,7 @@ class DiscreteEventControl(ThreadControl):
             stop_time (Time): Duration of the simulation.
         """
         while not self._is_paused:
-            self._time = self._time + self._simulator.get_time_of_next_event()
+            self._time = self._time + min(self._simulator.get_time_of_next_event(), frequency)
             self._simulator.compute_next_state(time=self._time)
             sleep(wait_time)
             if 0 <= stop_time <= self._time:
@@ -61,7 +61,7 @@ class DiscreteEventControl(ThreadControl):
     def start(
         self,
         start_input: Dict[str, ModelInput] = None,
-        frequency: Time = 0,
+        frequency: Time = Time(1000),
         stop_time: Time = 0,
         wait_time: Time = 0,
     ):

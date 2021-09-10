@@ -36,7 +36,7 @@ class BaseControl:
         self._event_bus = event_bus or static_event_bus
 
     @abstractmethod
-    def _execute(self, frequency: Time = 0, wait_time: Time = 0, stop_time: Time = 0):
+    def _execute(self, frequency: Time, wait_time: Time, stop_time: Time):
         """Executes the simulation loop number of seconds.
 
         Args:
