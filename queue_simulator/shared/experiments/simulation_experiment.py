@@ -97,6 +97,6 @@ class SimulationExperiment(DiscreteEventExperiment):
     def event_bus(self):
         return self._event_bus
 
-    def start_simulation(self, stop_time: Time):
+    def start_simulation(self, stop_time: Time, step: Time = None, wait_time: Time = None):
         self.dynamic_system.init()
         self.simulation_control.start(stop_time=stop_time)
