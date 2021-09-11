@@ -208,7 +208,5 @@ class Source(DiscreteEventModel, SerializableComponent, Statistical):
 
     def get_stats(self) -> ComponentStats:
         return ComponentStats("Source", self.get_id(), {
-            DataSource("InputBuffer", {
-                ItemStats()
-            })
+            self.get_state().output_buffer.get_datasource()
         })

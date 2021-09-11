@@ -148,14 +148,15 @@ class Buffer(Entity, StatSource, ABC):
         )
 
     def get_datasource(self) -> DataSource:
+        v = self.__in_station_history + [0]
         return DataSource(self.get_id(), {
             ItemStats("Entered", {
                 Stat("Total", self.number_entered.get_value())
             }),
             ItemStats("NumberInStation", {
-                Stat("Maximum", Decimal(max(self.__in_station_history))),
-                Stat("Minimum", Decimal(min(self.__in_station_history))),
-                Stat("Average", Decimal(sum(self.__in_station_history)/max(1, len(self.__in_station_history)))),
+                Stat("Maximum", Decimal(max(v))),
+                Stat("Minimum", Decimal(min(v))),
+                Stat("Average", Decimal(sum(v)/max(1, len(v)))),
                 Stat("Total", self.number_entered.get_value())
             })
         })

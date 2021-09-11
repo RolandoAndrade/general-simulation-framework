@@ -1,6 +1,6 @@
 import unittest
 
-from core.entity.core import Entity
+from core.entity.core import Entity, static_entity_manager
 from core.entity.properties.property import Property
 from core.mathematics.values.value import Value
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
@@ -24,7 +24,7 @@ class TestSource(unittest.TestCase):
 
     def tearDown(self) -> None:
         """Reset names"""
-        Entity._saved_names = set()
+        static_entity_manager._saved_names = set()
 
     def test_interarrival_time(self):
         """Should set and get interarrival time"""
@@ -76,6 +76,11 @@ class TestSource(unittest.TestCase):
         """Should have the expected properties"""
         properties = self.source.serialize()
         print(properties)
+
+    def test_get_stats(self):
+        """Should return the stats"""
+        stats = self.source.get_stats()
+        print(stats.serialize())
 
 
 if __name__ == "__main__":
