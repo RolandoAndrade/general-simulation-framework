@@ -26,7 +26,7 @@ class Buffer(Entity, StatSource, ABC):
     __number_entered: NumberProperty[int]
     """Number of entities that entered into the buffer"""
 
-    __in_station_history: List[int]
+    _in_station_history: List[int]
     """Number of entities in station history."""
 
     def __init__(
@@ -47,7 +47,7 @@ class Buffer(Entity, StatSource, ABC):
         self._content = []
         self.policy = policy
         self.__number_entered = NumberProperty(0)
-        self.__in_station_history = []
+        self._in_station_history = []
 
     def add(self, entities: List[Entity], *args, **kwargs) -> int:
         """Adds an element to the buffer and returns the number of elements that
@@ -61,7 +61,7 @@ class Buffer(Entity, StatSource, ABC):
         self.__number_entered += r_quantity
         for i in range(r_quantity):
             self._content.append(entities[i])
-        self.__in_station_history.append(len(self._content))
+        self._in_station_history.append(len(self._content))
         return quantity - r_quantity
 
     def get_content(self) -> List[Entity]:
@@ -148,15 +148,14 @@ class Buffer(Entity, StatSource, ABC):
         )
 
     def get_datasource(self) -> DataSource:
-        v = self.__in_station_history + [0]
         return DataSource(self.get_id(), {
             ItemStats("Entered", {
                 Stat("Total", self.number_entered.get_value())
             }),
             ItemStats("NumberInStation", {
-                Stat("Maximum", Decimal(max(v))),
-                Stat("Minimum", Decimal(min(v))),
-                Stat("Average", Decimal(sum(v)/max(1, len(v)))),
+                Stat("Maximum", Decimal(max(self._in_station_history))),
+                Stat("Minimum", Decimal(min(self._in_station_history))),
+                Stat("Average", Decimal(sum(self._in_station_history)/max(1, len(self._in_station_history)))),
                 Stat("Total", self.number_entered.get_value())
             })
         })

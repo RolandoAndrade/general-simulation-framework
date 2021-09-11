@@ -136,6 +136,7 @@ class SimulatorTest(unittest.TestCase):
         self.assertEqual("16", str(label_server_out))
 
         print(source.get_stats().serialize())
+        print(server.get_stats().serialize())
 
     def test_simulation_random(self):
         """Server process entities slowly than arrivals"""

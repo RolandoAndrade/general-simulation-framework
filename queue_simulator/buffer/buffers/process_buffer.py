@@ -48,10 +48,14 @@ class ProcessBuffer(Buffer):
         if times is None:
             times = map(lambda: Time(1), entities)
         for entity, time in zip(entities, times):
-            heapq.heappush(self._content, BufferedEntity(entity, time))
+            if not self.is_full:
+                heapq.heappush(self._content, BufferedEntity(entity, time))
+            else:
+                break
         quantity = len(entities)
         r_quantity = int(min(self.remaining_capacity.get_value(), quantity))
         self.number_entered += r_quantity
+        self._in_station_history.append(len(self._content))
         return quantity - r_quantity
 
     def get_processed(self) -> List[Entity]:

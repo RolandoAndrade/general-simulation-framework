@@ -10,9 +10,10 @@ from models.models import DiscreteEventModel
 from queue_simulator.buffer.buffers import InputBuffer, OutputBuffer, ProcessBuffer
 from queue_simulator.server.server_state import ServerState
 from queue_simulator.shared.models import SerializableComponent
+from queue_simulator.shared.stats import Statistical, ComponentStats
 
 
-class Server(DiscreteEventModel, SerializableComponent):
+class Server(DiscreteEventModel, SerializableComponent, Statistical):
     """Server of processes"""
 
     _processing_time: ExpressionProperty
@@ -120,3 +121,10 @@ class Server(DiscreteEventModel, SerializableComponent):
             self.get_state().rename(name)
         except AttributeError:
             pass
+
+    def get_stats(self) -> ComponentStats:
+        return ComponentStats("Server", self.get_id(), {
+            self.get_state().input_buffer.get_datasource(),
+            self.get_state().process_buffer.get_datasource(),
+            self.get_state().output_buffer.get_datasource(),
+        })
