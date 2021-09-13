@@ -75,9 +75,8 @@ class DiscreteEventControl(BaseControl):
             wait_time (Time): Delay execution for a given number of seconds.
         """
         self._is_paused = False
-        if self._time > stop_time:
-            self.init()
-        self._simulator.compute_next_state(start_input)
+        if self._time == 0:
+            self._simulator.compute_next_state(start_input)
         self._simulation_strategy.start_simulation(self._execute, frequency, wait_time, stop_time)
 
     @debug("Simulation paused")
@@ -91,8 +90,8 @@ class DiscreteEventControl(BaseControl):
         """Stops the simulation"""
         self._event_bus.emit(DomainEvents.SIMULATION_STOPPED)
         self._is_paused = True
-        self._time = Time(0)
         self._simulation_strategy.stop_simulation()
+        self.init()
 
     def init(self):
         self._time = Time(0)
