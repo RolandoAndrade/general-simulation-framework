@@ -3,6 +3,7 @@ from typing import List, Any, Dict
 
 from core.entity.core import Entity
 from core.entity.core.property_type import PropertyType
+from core.expresions import UserExpression
 from queue_simulator.shared.models.node_property import NodeProperty
 
 
@@ -29,14 +30,17 @@ class SerializableComponent(ABC, Entity):
         return value
 
     def _value_expression(self, value: str):
-        return value
+        return UserExpression(eval(value))
 
     def set_serialized_property(self, serialized_property: NodeProperty):
-        edited_property = self.get_properties()[serialized_property.property_name]
-        effect = {
-            PropertyType.STRING: self._value_string_property,
-            PropertyType.EXPRESSION: self._value_expression,
-        }
-        method = effect[serialized_property.property_type]
-        value = serialized_property.property_value
-        edited_property.set_value(method(value))
+        if serialized_property.property_name == 'Name':
+            self.set_id(serialized_property.property_value)
+        else:
+            edited_property = self.get_properties()[serialized_property.property_name]
+            effect = {
+                PropertyType.STRING: self._value_string_property,
+                PropertyType.EXPRESSION: self._value_expression,
+            }
+            method = effect[serialized_property.property_type]
+            value = serialized_property.property_value
+            edited_property.set_value(method(value))
