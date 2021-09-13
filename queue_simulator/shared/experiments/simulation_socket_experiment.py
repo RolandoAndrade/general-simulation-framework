@@ -46,3 +46,20 @@ class SimulationSocketExperiment(SimulationExperiment):
     def on_simulation_stopped(self):
         logger.info("Simulation stopped, {sid}", sid=self._sid)
         self._sio.emit(DomainEvents.SIMULATION_STOPPED, to=self._sid)
+
+    def save(self):
+        self.simulation_control.stop()
+        ax_sid = self._sid
+        ax_sio = self._sio
+        self._sid = None
+        self._sio = None
+        data = super().save()
+        self._sid = ax_sid
+        self._sio = ax_sio
+        return data
+
+    def load(self, data: str):
+        recovered = super().load(data)
+        recovered._sid = self._sid
+        recovered._sio = self._sio
+        return recovered

@@ -58,3 +58,27 @@ class BuilderController:
         with sio.session(sid) as session:
             created_path = session["experiment"].edit_property(component, new_property)
         return created_path.serialize()
+
+    @staticmethod
+    @sio.event
+    def save_experiment(sid, data):
+        logger.info(
+            "Saving experiment, sid:{sid}",
+            sid=sid
+        )
+        session: Dict[str, SimulationExperiment]
+        with sio.session(sid) as session:
+            saved_data = session["experiment"].save()
+        return {
+            'data': saved_data
+        }
+
+    @staticmethod
+    @sio.event
+    def load_experiment(sid, data: Dict[str, Any]):
+        experiment = data["experiment"]
+        session: Dict[str, SimulationExperiment]
+        with sio.session(sid) as session:
+            recovered = session["experiment"].load(experiment)
+            session["experiment"] = recovered
+        return True
