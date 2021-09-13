@@ -45,16 +45,18 @@ class DiscreteEventControl(BaseControl):
             stop_time (Time): Duration of the simulation.
         """
         while not self._is_paused:
-            self._time = self._time + min(self._simulator.get_time_of_next_event(), frequency)
+            self._time = min(self._time + min(self._simulator.get_time_of_next_event(), frequency), stop_time)
             self._simulator.compute_next_state(time=self._time)
             sleep(wait_time)
             if 0 <= stop_time <= self._time:
                 self._is_paused = True
-            self._event_bus.emit(
-                DomainEvents.SIMULATION_STATUS,
-                SimulationStats(self._time, stop_time, frequency, self._is_paused),
-            )
-        self._event_bus.emit(DomainEvents.SIMULATION_FINISHED)
+                self._event_bus.emit(DomainEvents.SIMULATION_FINISHED)
+                self.init()
+            else:
+                self._event_bus.emit(
+                    DomainEvents.SIMULATION_STATUS,
+                    SimulationStats(self._time, stop_time, frequency, self._is_paused),
+                )
 
     @debug("Simulation starts")
     def start(

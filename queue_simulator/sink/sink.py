@@ -29,7 +29,7 @@ class Sink(DiscreteEventModel, SerializableComponent):
         return state
 
     def _time_advance_function(self, state: SinkState) -> Time:
-        return Time(1)
+        return Time(0)
 
     def _output_function(self, state: SinkState) -> Any:
         return state.input_buffer.empty()

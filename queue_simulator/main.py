@@ -1,7 +1,9 @@
 from typing import List, Dict
 
+
 import eventlet
 import socketio
+from flask import Flask
 
 from loguru import logger
 
@@ -13,9 +15,8 @@ from queue_simulator.socket_server.controllers import (
 )
 from queue_simulator.socket_server.socket_server import sio
 
-app = socketio.WSGIApp(
-    sio, static_files={"/": {"content_type": "text/html", "filename": "index.html"}}
-)
+app = Flask(__name__)
+app.wsgi_app = socketio.WSGIApp(sio, app.wsgi_app)
 
 
 @sio.event
@@ -34,5 +35,10 @@ def disconnect(sid):
 controllers = [BuilderController(), SimulationController()]
 
 if __name__ == "__main__":
-    eventlet.monkey_patch()
-    eventlet.wsgi.server(eventlet.listen(("localhost", 4000)), app)
+    """eventlet.monkey_patch(os=True,
+                          select=True,
+                          socket=True,
+                          thread=False,
+                          time=True)
+    eventlet.wsgi.server(eventlet.listen(("localhost", 4000)), app)"""
+    app.run(port=4000)

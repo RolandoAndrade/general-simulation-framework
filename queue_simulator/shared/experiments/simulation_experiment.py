@@ -100,4 +100,4 @@ class SimulationExperiment(DiscreteEventExperiment):
 
     def start_simulation(self, stop_time: Time, step: Time = None, wait_time: Time = None):
         self.dynamic_system.init()
-        self.simulation_control.start(stop_time=stop_time)
+        self.simulation_control.start(None, step or Time(1000), stop_time, wait_time or Time(0))

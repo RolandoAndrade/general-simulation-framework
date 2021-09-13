@@ -36,4 +36,13 @@ class SimulationSocketExperiment(SimulationExperiment):
         )
 
     def on_simulation_finished(self):
+        logger.info("Simulation finished, {sid}", sid=self._sid)
         self._sio.emit(DomainEvents.SIMULATION_FINISHED, to=self._sid)
+
+    def on_simulation_paused(self):
+        logger.info("Simulation paused, {sid}", sid=self._sid)
+        self._sio.emit(DomainEvents.SIMULATION_PAUSED, to=self._sid)
+
+    def on_simulation_stopped(self):
+        logger.info("Simulation stopped, {sid}", sid=self._sid)
+        self._sio.emit(DomainEvents.SIMULATION_STOPPED, to=self._sid)

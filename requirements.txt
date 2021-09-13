@@ -57,3 +57,5 @@ python-socketio==5.4.0
 numpy~=1.21.1
 graphviz~=0.17
 pyzmq~=22.2.1
+eventlet~=0.31.1
+Flask~=2.0.1
