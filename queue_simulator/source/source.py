@@ -93,6 +93,7 @@ class Source(DiscreteEventModel, SerializableComponent, Statistical):
         for i in range(self.entities_per_arrival.get_value().evaluate()):
             entities.append(self.entity_emitter.get_value().generate())
         state.output_buffer.add(entities)
+        self.__used_offset = ExpressionProperty(Value(0))
         self.schedule(self.get_time())
         return state
 
@@ -115,9 +116,8 @@ class Source(DiscreteEventModel, SerializableComponent, Statistical):
         if self.inter_arrival_time is not None:
             return (
                 self.inter_arrival_time.get_value().evaluate()
-                + self.__used_offset.get_value().evaluate()
             )
-        return Time(0)
+        return Time(-1)
 
     def _output_function(self, state: SourceState) -> List[Entity]:
         """Return the entities created.
@@ -132,11 +132,11 @@ class Source(DiscreteEventModel, SerializableComponent, Statistical):
 
     @inter_arrival_time.setter
     def inter_arrival_time(self, value: Union[Expression, ExpressionProperty]):
-        self.clear()
         if isinstance(value, ExpressionProperty):
             self.__inter_arrival_time = value
         else:
             self.__inter_arrival_time = ExpressionProperty(value)
+        self.clear()
 
     @property
     def entity_emitter(self):
@@ -144,11 +144,11 @@ class Source(DiscreteEventModel, SerializableComponent, Statistical):
 
     @entity_emitter.setter
     def entity_emitter(self, value: Union[EntityEmitter, Property[EntityEmitter]]):
-        self.clear()
         if isinstance(value, Property):
             self.__entity_emitter = value
         else:
             self.__entity_emitter = Property(value)
+        self.clear()
 
     @property
     def entities_per_arrival(self):
@@ -156,11 +156,11 @@ class Source(DiscreteEventModel, SerializableComponent, Statistical):
 
     @entities_per_arrival.setter
     def entities_per_arrival(self, value: Expression):
-        self.clear()
         if isinstance(value, ExpressionProperty):
             self.__entities_per_arrival = value
         else:
             self.__entities_per_arrival = ExpressionProperty(value)
+        self.clear()
 
     @property
     def time_offset(self):
@@ -168,12 +168,12 @@ class Source(DiscreteEventModel, SerializableComponent, Statistical):
 
     @time_offset.setter
     def time_offset(self, value: Expression):
-        self.clear()
         if isinstance(value, ExpressionProperty):
             self.__time_offset = value
         else:
             self.__time_offset = ExpressionProperty(value)
         self.__used_offset = self.__time_offset
+        self.clear()
 
     def get_state(self) -> SourceState:
         """Returns the current state"""
@@ -190,11 +190,13 @@ class Source(DiscreteEventModel, SerializableComponent, Statistical):
     def clear(self):
         self.get_state().output_buffer.empty()
         self.unschedule()
+        try:
+            self.schedule(self.time_offset.get_value().evaluate())
+        except AttributeError:
+            self.schedule(Time(0))
 
     def init(self):
-        self.clear()
-        self.schedule(0)
-        self.__used_offset = self.__time_offset
+        pass
 
     def __str__(self):
         return self.get_id()
