@@ -124,7 +124,7 @@ class Buffer(Entity, StatSource, ABC):
     @property
     def is_full(self):
         """Returns true if the buffer is empty"""
-        return self.remaining_capacity == 0
+        return self.remaining_capacity.get_value() == 0
 
     @property
     def number_entered(self) -> NumberProperty[int]:
