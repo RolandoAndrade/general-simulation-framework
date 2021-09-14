@@ -8,6 +8,7 @@ from core.types import Time
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from models.models import DiscreteEventModel
 from queue_simulator.buffer.buffers import InputBuffer, OutputBuffer, ProcessBuffer
+from queue_simulator.server import ServerProperty
 from queue_simulator.server.server_state import ServerState
 from queue_simulator.shared.models import SerializableComponent
 from queue_simulator.shared.stats import Statistical, ComponentStats
@@ -86,7 +87,10 @@ class Server(DiscreteEventModel, SerializableComponent, Statistical):
         return state.output_buffer.empty()
 
     def get_properties(self) -> EntityProperties:
-        return {}
+        return {
+            ServerProperty.INITIAL_CAPACITY: self.initial_capacity,
+            ServerProperty.PROCESSING_TIME: self.processing_time
+        }
 
     @property
     def processing_time(self):

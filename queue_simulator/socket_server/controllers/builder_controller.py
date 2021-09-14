@@ -76,6 +76,10 @@ class BuilderController:
     @staticmethod
     @sio.event
     def load_experiment(sid, data: Dict[str, Any]):
+        logger.info(
+            "Load experiment, sid:{sid}",
+            sid=sid
+        )
         experiment = data["experiment"]
         session: Dict[str, SimulationExperiment]
         with sio.session(sid) as session:
