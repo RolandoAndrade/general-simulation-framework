@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Set
+from typing import List
 
 from queue_simulator.shared.stats.stat import Stat
 
@@ -7,7 +7,7 @@ from queue_simulator.shared.stats.stat import Stat
 @dataclass
 class ItemStats:
     name: str
-    stats: Set[Stat]
+    stats: List[Stat]
 
     def serialize(self):
         s = []

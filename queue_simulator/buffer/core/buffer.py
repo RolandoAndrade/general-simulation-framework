@@ -30,11 +30,11 @@ class Buffer(Entity, StatSource, ABC):
     """Number of entities in station history."""
 
     def __init__(
-        self,
-        name: str,
-        capacity: NumberProperty[float] = NumberProperty(Decimal("inf")),
-        policy: StringProperty = StringProperty(str(BufferPolicy.FIFO)),
-        entity_manager: EntityManager = None,
+            self,
+            name: str,
+            capacity: NumberProperty[float] = NumberProperty(Decimal("inf")),
+            policy: StringProperty = StringProperty(str(BufferPolicy.FIFO)),
+            entity_manager: EntityManager = None,
     ):
         """
         Args:
@@ -148,14 +148,14 @@ class Buffer(Entity, StatSource, ABC):
         )
 
     def get_datasource(self) -> DataSource:
-        return DataSource(self.get_id(), {
-            ItemStats("Entered", {
+        return DataSource(self.get_id(), [
+            ItemStats("Entered", [
                 Stat("Total", self.number_entered.get_value())
-            }),
-            ItemStats("NumberInStation", {
+            ]),
+            ItemStats("NumberInStation", [
                 Stat("Maximum", Decimal(max(self._in_station_history))),
                 Stat("Minimum", Decimal(min(self._in_station_history))),
-                Stat("Average", Decimal(sum(self._in_station_history)/max(1, len(self._in_station_history)))),
+                Stat("Average", Decimal(sum(self._in_station_history) / max(1, len(self._in_station_history)))),
                 Stat("Total", self.number_entered.get_value())
-            })
-        })
+            ])
+        ])

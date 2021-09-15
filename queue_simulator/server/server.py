@@ -127,8 +127,8 @@ class Server(DiscreteEventModel, SerializableComponent, Statistical):
             pass
 
     def get_stats(self) -> ComponentStats:
-        return ComponentStats("Server", self.get_id(), {
+        return ComponentStats("Server", self.get_id(), [
             self.get_state().input_buffer.get_datasource(),
             self.get_state().process_buffer.get_datasource(),
             self.get_state().output_buffer.get_datasource(),
-        })
+        ])
