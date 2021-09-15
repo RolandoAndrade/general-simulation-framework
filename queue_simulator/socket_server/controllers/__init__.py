@@ -1,2 +1,3 @@
 from .builder_controller import BuilderController
 from .simulation_controller import SimulationController
+from .reports_controller import ReportsController

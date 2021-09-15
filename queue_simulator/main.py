@@ -11,7 +11,7 @@ from core.events import DomainEvents
 from queue_simulator.shared.experiments import SimulationSocketExperiment
 from queue_simulator.socket_server.controllers import (
     BuilderController,
-    SimulationController,
+    SimulationController, ReportsController,
 )
 from queue_simulator.socket_server.socket_server import sio
 
@@ -32,13 +32,7 @@ def disconnect(sid):
     print("disconnect ", sid)
 
 
-controllers = [BuilderController(), SimulationController()]
+controllers = [BuilderController(), SimulationController(), ReportsController()]
 
 if __name__ == "__main__":
-    """eventlet.monkey_patch(os=True,
-                          select=True,
-                          socket=True,
-                          thread=False,
-                          time=True)
-    eventlet.wsgi.server(eventlet.listen(("localhost", 4000)), app)"""
     app.run(port=4000)
