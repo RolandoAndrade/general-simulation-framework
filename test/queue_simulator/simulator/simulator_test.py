@@ -80,9 +80,6 @@ class SimulatorTest(unittest.TestCase):
         self.assertEqual("4", str(label_server_out))
         self.assertEqual("4", str(label_server_out))
 
-        print(source.get_stats().serialize())
-        print(server.get_stats().serialize())
-
     def test_simulation_server_delay(self):
         """Server process entities slowly than arrivals"""
         emitter = self.experiment.add_node(NodeType.ENTITY_EMITTER)

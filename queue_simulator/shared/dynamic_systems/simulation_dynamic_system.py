@@ -1,8 +1,18 @@
+from __future__ import annotations
+
+from typing import List, Union, Set
+
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from dynamic_system.future_event_list import Scheduler
+from queue_simulator.server import Server
+from queue_simulator.shared.stats import ComponentStats
+from queue_simulator.sink.sink import Sink
+from queue_simulator.source import Source
 
 
 class SimulationDynamicSystem(DiscreteEventDynamicSystem):
+    _models: Set[Union[Server, Source, Sink]]
+
     def __init__(self, scheduler=None):
         """Constructs the dynamic system"""
         if scheduler is None:
@@ -30,5 +40,8 @@ class SimulationDynamicSystem(DiscreteEventDynamicSystem):
             except:
                 continue
 
-    def create_report(self):
-        pass
+    def get_stats(self) -> List[ComponentStats]:
+        s = []
+        for model in self._models:
+            s.append(model.get_stats())
+        return s
