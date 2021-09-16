@@ -4,9 +4,8 @@ from core.entity.core import static_entity_manager
 from core.mathematics.values.value import Value
 from core.types import Time
 from experiments.experiment_builders import DiscreteEventExperiment
-from queue_simulator.entities import NameGenerator
-from queue_simulator.source import Source
-from test.prototypes.prototype_4.assembly_line import AssemblyLine
+from queue_simulator.queue_components.entities import NameGenerator
+from queue_simulator.queue_components.source import Source
 from test.prototypes.prototype_6.simulator_dynamic_system import SimulatorDynamicSystem
 
 

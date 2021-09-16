@@ -1,11 +1,11 @@
 import unittest
 from random import seed
 
-from core.entity.core import Entity, static_entity_manager
+from core.entity.core import static_entity_manager
 from core.entity.properties.number_property import NumberProperty
-from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
-from queue_simulator.buffer.core.buffer_policy import BufferPolicy
-from queue_simulator.buffer.core.buffer_property import BufferProperty
+from queue_simulator.queue_components.buffer.buffers import OutputBuffer
+from queue_simulator.queue_components.buffer.core.buffer_policy import BufferPolicy
+from queue_simulator.queue_components.buffer.core.buffer_property import BufferProperty
 from test.mocks.mock_emitter import MockEmitter
 
 

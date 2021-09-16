@@ -1,13 +1,13 @@
 import unittest
 
-from core.entity.core import Entity, static_entity_manager
+from core.entity.core import static_entity_manager
 from core.entity.properties.property import Property
 from core.mathematics.values.value import Value
 from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
     DiscreteEventDynamicSystem,
 )
 from dynamic_system.future_event_list import Scheduler
-from queue_simulator.source.source import Source
+from queue_simulator.queue_components.source import Source
 from test.mocks.mock_emitter import MockEmitter
 
 

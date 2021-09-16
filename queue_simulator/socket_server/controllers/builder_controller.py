@@ -2,9 +2,9 @@ from typing import Dict, Any
 
 from loguru import logger
 
-from queue_simulator.shared.experiments import SimulationExperiment
-from queue_simulator.shared.models.node_property import NodeProperty
-from queue_simulator.shared.nodes import NodeType
+from queue_simulator.queue_components.experiments import SimulationExperiment
+from queue_simulator.queue_components.shared.models.node_property import NodeProperty
+from queue_simulator.queue_components.shared.nodes import NodeType
 from queue_simulator.socket_server.socket_server import sio
 
 

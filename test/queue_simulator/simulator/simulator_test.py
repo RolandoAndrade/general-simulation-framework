@@ -1,7 +1,6 @@
 import unittest
 from typing import List
 
-from core.config import FLOATING_POINT_DIGITS
 from core.entity.properties import Property, NumberProperty
 from core.mathematics.distributions import (
     ExponentialDistribution,
@@ -9,12 +8,12 @@ from core.mathematics.distributions import (
 )
 from core.mathematics.values.value import Value
 from core.types import Time
-from queue_simulator.buffer.core import BufferProperty
-from queue_simulator.label.label import Label
-from queue_simulator.shared.experiments.simulation_experiment import (
+from queue_simulator.queue_components.buffer.core import BufferProperty
+from queue_simulator.queue_components.label.label import Label
+from queue_simulator.queue_components.experiments import (
     SimulationExperiment,
 )
-from queue_simulator.shared.nodes import NodeType
+from queue_simulator.queue_components.shared.nodes import NodeType
 
 
 class SimulatorTest(unittest.TestCase):

@@ -1,14 +1,11 @@
-from typing import List, Dict
+from typing import Dict
 
-
-import eventlet
 import socketio
 from flask import Flask
 
 from loguru import logger
 
-from core.events import DomainEvents
-from queue_simulator.shared.experiments import SimulationSocketExperiment
+from queue_simulator.queue_components.experiments import SimulationSocketExperiment
 from queue_simulator.socket_server.controllers import (
     BuilderController,
     SimulationController, ReportsController,

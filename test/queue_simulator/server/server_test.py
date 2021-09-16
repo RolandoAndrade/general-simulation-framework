@@ -6,8 +6,8 @@ from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from experiments.experiment_builders.discrete_event_experiment import (
     DiscreteEventExperiment,
 )
-from queue_simulator.server.server import Server
-from queue_simulator.source import Source
+from queue_simulator.queue_components.server import Server
+from queue_simulator.queue_components.source import Source
 from test.mocks.mock_emitter import MockEmitter
 
 
