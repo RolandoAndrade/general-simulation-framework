@@ -61,3 +61,6 @@ class ExpressionManager:
 
     def get_available_expressions(self):
         return self._available_expressions
+
+
+static_expression_manager = ExpressionManager()
