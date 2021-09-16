@@ -67,6 +67,7 @@ class SimulationExperiment(DiscreteEventExperiment):
     def _remove_model(self, component: str) -> bool:
         model = self.dynamic_system.get_model(component)
         if model is not None:
+            self._expression_manager.remove_expression(model.get_id())
             model.remove()
             return True
         return False
@@ -81,6 +82,7 @@ class SimulationExperiment(DiscreteEventExperiment):
     def _remove_emitter(self, component: str) -> bool:
         emitter = self._get_emitter(component)
         if emitter is not None:
+            self._expression_manager.remove_expression(emitter.get_id())
             self._emitters.remove(emitter)
             return True
         return False
@@ -93,13 +95,17 @@ class SimulationExperiment(DiscreteEventExperiment):
         )
 
     def edit_property(self, component: str, new_property: NodeProperty):
+        with_expression = self.dynamic_system.get_model(component) or self._get_emitter(component)
         node = (
             self.dynamic_system.get_model(component)
             or self.dynamic_system.get_path(component)
             or self._get_emitter(component)
         )
         if node is not None:
+            self._expression_manager.remove_expression(node.get_id())
             node.set_serialized_property(new_property)
+            if with_expression is not None:
+                self._expression_manager.add_expression(node.get_id(), node.get_expressions())
         return node
 
     @property

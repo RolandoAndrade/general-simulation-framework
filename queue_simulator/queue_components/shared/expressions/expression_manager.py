@@ -68,7 +68,7 @@ class ExpressionManager:
         self._available_expressions[value] = options
 
     def remove_expression(self, value: str):
-        self._available_expressions.pop(value)
+        self._available_expressions.pop(value, True)
 
     def get_available_expressions(self):
         return self._available_expressions
