@@ -61,6 +61,15 @@ class BuilderController:
 
     @staticmethod
     @sio.event
+    def get_expressions(sid, data: Dict[str, Any]):
+        logger.info("Getting available expressions, sid:{sid}", sid=sid)
+        session: Dict[str, SimulationExperiment]
+        with sio.session(sid) as session:
+            expressions = session["experiment"].get_expressions()
+        return expressions
+
+    @staticmethod
+    @sio.event
     def save_experiment(sid, data):
         logger.info("Saving experiment, sid:{sid}", sid=sid)
         session: Dict[str, SimulationExperiment]
