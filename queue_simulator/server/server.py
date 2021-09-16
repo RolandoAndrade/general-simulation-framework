@@ -10,11 +10,11 @@ from models.models import DiscreteEventModel
 from queue_simulator.buffer.buffers import InputBuffer, OutputBuffer, ProcessBuffer
 from queue_simulator.server import ServerProperty
 from queue_simulator.server.server_state import ServerState
-from queue_simulator.shared.models import SerializableComponent
+from queue_simulator.shared.models import SimulatorComponent
 from queue_simulator.shared.stats import Statistical, ComponentStats
 
 
-class Server(DiscreteEventModel, SerializableComponent, Statistical):
+class Server(DiscreteEventModel, SimulatorComponent, Statistical):
     """Server of processes"""
 
     _processing_time: ExpressionProperty

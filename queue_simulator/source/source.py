@@ -1,4 +1,4 @@
-from typing import List, Optional, Union
+from typing import List, Optional, Union, Dict, Any
 
 from core.entity.core import EntityEmitter, EntityProperties, Entity
 from core.entity.properties import ExpressionProperty, Property
@@ -12,7 +12,7 @@ from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from models.models import DiscreteEventModel
 from queue_simulator.buffer.buffers import OutputBuffer
 from queue_simulator.entities import Emitter
-from queue_simulator.shared.models import SerializableComponent
+from queue_simulator.shared.models import SimulatorComponent
 from queue_simulator.shared.stats import Statistical, ComponentStats, DataSource, ItemStats
 
 from queue_simulator.source import SourceProperty, SourceState
@@ -21,7 +21,7 @@ from core.entity.core import EntityManager
 
 
 # https://simulemos.cl/books/simio/page/source
-class Source(DiscreteEventModel, SerializableComponent, Statistical):
+class Source(DiscreteEventModel, SimulatorComponent, Statistical):
     """Source of entities"""
 
     __inter_arrival_time: Optional[ExpressionProperty]
@@ -42,16 +42,16 @@ class Source(DiscreteEventModel, SerializableComponent, Statistical):
     __serial: int = 0
 
     def __init__(
-        self,
-        dynamic_system: DiscreteEventDynamicSystem,
-        name: str,
-        entity_emitter: Union[EntityEmitter, Property[EntityEmitter]] = None,
-        inter_arrival_time: Union[
-            Expression, ExpressionProperty
-        ] = ExponentialDistribution(0.25),
-        entities_per_arrival: Union[Expression, ExpressionProperty] = Value(1),
-        time_offset: Union[Expression, ExpressionProperty] = Value(0),
-        entity_manager: EntityManager = None,
+            self,
+            dynamic_system: DiscreteEventDynamicSystem,
+            name: str,
+            entity_emitter: Union[EntityEmitter, Property[EntityEmitter]] = None,
+            inter_arrival_time: Union[
+                Expression, ExpressionProperty
+            ] = ExponentialDistribution(0.25),
+            entities_per_arrival: Union[Expression, ExpressionProperty] = Value(1),
+            time_offset: Union[Expression, ExpressionProperty] = Value(0),
+            entity_manager: EntityManager = None,
     ):
         """
         Args:
@@ -98,7 +98,7 @@ class Source(DiscreteEventModel, SerializableComponent, Statistical):
         return state
 
     def _external_state_transition_function(
-        self, state: SourceState, inputs: ModelInput, event_time: float
+            self, state: SourceState, inputs: ModelInput, event_time: float
     ) -> SourceState:
         """Returns the current state
         Args:
@@ -212,3 +212,6 @@ class Source(DiscreteEventModel, SerializableComponent, Statistical):
         return ComponentStats("Source", self.get_id(), [
             self.get_state().output_buffer.get_datasource()
         ])
+
+    def get_expressions(self) -> Dict[str, Any]:
+        return self.get_state().get_state_expressions()

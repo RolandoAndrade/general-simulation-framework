@@ -1,3 +1,6 @@
+from __future__ import annotations
+from typing import Dict, Any
+
 from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
 
 
@@ -12,3 +15,15 @@ class SourceState:
 
     def rename(self, new_name: str):
         self.output_buffer.set_id(new_name)
+
+    def get_state_expressions(self) -> Dict[str, Any]:
+        expressions = {}
+        props = self.output_buffer.get_properties()
+        for prop in props:
+            expressions[prop] = {
+                "value": self.output_buffer.get_id() + "." + prop,
+                "call": props[prop].get_value
+            }
+        return {
+            "OutputBuffer": expressions
+        }

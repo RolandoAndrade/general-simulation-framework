@@ -8,12 +8,12 @@ from core.types.model_input import ModelInput
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from models.models import DiscreteEventModel
 from queue_simulator.buffer.buffers import InputBuffer
-from queue_simulator.shared.models import SerializableComponent
+from queue_simulator.shared.models import SimulatorComponent
 from queue_simulator.shared.stats import Statistical, ComponentStats
 from queue_simulator.sink.sink_state import SinkState
 
 
-class Sink(DiscreteEventModel, SerializableComponent, Statistical):
+class Sink(DiscreteEventModel, SimulatorComponent, Statistical):
     """Sink of entities"""
 
     def _internal_state_transition_function(self, state: SinkState) -> SinkState:

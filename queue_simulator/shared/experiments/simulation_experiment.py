@@ -10,6 +10,7 @@ from experiments.experiment_builders import DiscreteEventExperiment
 from queue_simulator.entities import NameGenerator, Emitter
 from queue_simulator.route.route import Route
 from queue_simulator.shared.dynamic_systems import SimulationDynamicSystem
+from queue_simulator.shared.expressions import ExpressionManager
 from queue_simulator.shared.models.node_property import NodeProperty
 from queue_simulator.shared.nodes import NodeBuilder, NodeType
 from queue_simulator.shared.stats import ComponentStats
@@ -26,6 +27,8 @@ class SimulationExperiment(DiscreteEventExperiment):
 
     _emitters: Set[Emitter]
 
+    _expression_manager: ExpressionManager
+
     def __init__(self):
         eb = EventBus()
         dynamic_system = SimulationDynamicSystem()
@@ -37,6 +40,7 @@ class SimulationExperiment(DiscreteEventExperiment):
         self._name_generator = NameGenerator()
         self._event_bus = eb
         self._emitters = set()
+        self._expression_manager = ExpressionManager()
 
     def add_node(self, node_type: NodeType):
         node = NodeBuilder.create_node(
@@ -44,6 +48,7 @@ class SimulationExperiment(DiscreteEventExperiment):
         )
         if node_type == NodeType.ENTITY_EMITTER:
             self._emitters.add(node)
+        self._expression_manager.add_expression(node.get_id(), node.get_expressions())
         return node
 
     def add_path(self, from_node: str, to_node: str):

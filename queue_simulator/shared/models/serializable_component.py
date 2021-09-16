@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from typing import List, Any, Dict
 
 from core.entity.core import Entity
@@ -7,7 +7,7 @@ from core.expresions import UserExpression
 from queue_simulator.shared.models.node_property import NodeProperty
 
 
-class SerializableComponent(ABC, Entity):
+class SimulatorComponent(ABC, Entity):
     def serialize(self) -> List[Dict[str, Any]]:
         properties = self.get_properties()
         e = [
@@ -44,3 +44,7 @@ class SerializableComponent(ABC, Entity):
             method = effect[serialized_property.property_type]
             value = serialized_property.property_value
             edited_property.set_value(method(value))
+
+    @abstractmethod
+    def get_expressions(self) -> Dict[str, Any]:
+        raise NotImplementedError

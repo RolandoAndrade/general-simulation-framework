@@ -2,10 +2,10 @@ from core.entity.properties import ExpressionProperty
 from core.mathematics.values.value import Value
 from models.core import Path, BaseModel
 from queue_simulator.entities import NameGenerator, AvailableEntities
-from queue_simulator.shared.models import SerializableComponent
+from queue_simulator.shared.models import SimulatorComponent
 
 
-class Route(Path, SerializableComponent):
+class Route(Path, SimulatorComponent):
     def __init__(
         self, from_model: BaseModel, to_model: BaseModel, entity_manager: NameGenerator
     ):

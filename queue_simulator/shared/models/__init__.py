@@ -1,1 +1,1 @@
-from .serializable_component import SerializableComponent
+from .serializable_component import SimulatorComponent
