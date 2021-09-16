@@ -134,7 +134,6 @@ class Source(DiscreteEventModel, SimulatorComponent, Statistical):
             self.__inter_arrival_time = value
         else:
             self.__inter_arrival_time = ExpressionProperty(value)
-        self.clear()
 
     @property
     def entity_emitter(self):
@@ -146,7 +145,6 @@ class Source(DiscreteEventModel, SimulatorComponent, Statistical):
             self.__entity_emitter = value
         else:
             self.__entity_emitter = Property(value)
-        self.clear()
 
     @property
     def entities_per_arrival(self):
@@ -158,7 +156,6 @@ class Source(DiscreteEventModel, SimulatorComponent, Statistical):
             self.__entities_per_arrival = value
         else:
             self.__entities_per_arrival = ExpressionProperty(value)
-        self.clear()
 
     @property
     def time_offset(self):
@@ -171,7 +168,6 @@ class Source(DiscreteEventModel, SimulatorComponent, Statistical):
         else:
             self.__time_offset = ExpressionProperty(value)
         self.__used_offset = self.__time_offset
-        self.clear()
 
     def get_state(self) -> SourceState:
         """Returns the current state"""
@@ -186,15 +182,12 @@ class Source(DiscreteEventModel, SimulatorComponent, Statistical):
         }
 
     def clear(self):
-        self.get_state().output_buffer.empty()
+        self.get_state().output_buffer.reset()
         self.unschedule()
         try:
             self.schedule(self.time_offset.get_value().evaluate())
         except AttributeError:
             self.schedule(Time(0))
-
-    def init(self):
-        pass
 
     def __str__(self):
         return self.get_id()

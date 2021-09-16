@@ -63,6 +63,7 @@ class Prototype6Test(unittest.TestCase):
         self.source.inter_arrival_time = self.vectors[test]['inter_arrival_time']
         self.source.entities_per_arrival = self.vectors[test]['entities_per_arrival']
         self.source.time_offset = self.vectors[test]['time_offset']
+        self.source.clear()
         self.experiment.simulation_control.start(stop_time=time)
         self.experiment.simulation_control.wait()
         self.assertEqual(self.vectors[test]['expected'],
@@ -74,6 +75,7 @@ class Prototype6Test(unittest.TestCase):
         self.source.inter_arrival_time = self.vectors[test]['inter_arrival_time']
         self.source.entities_per_arrival = self.vectors[test]['entities_per_arrival']
         self.source.time_offset = self.vectors[test]['time_offset']
+        self.source.clear()
         self.experiment.simulation_control.start(stop_time=time)
         self.experiment.simulation_control.wait()
         self.assertEqual(self.vectors[test]['expected'],
@@ -85,6 +87,7 @@ class Prototype6Test(unittest.TestCase):
         self.source.inter_arrival_time = self.vectors[test]['inter_arrival_time']
         self.source.entities_per_arrival = self.vectors[test]['entities_per_arrival']
         self.source.time_offset = self.vectors[test]['time_offset']
+        self.source.clear()
         self.experiment.simulation_control.start(stop_time=time)
         self.experiment.simulation_control.wait()
         self.assertEqual(self.vectors[test]['expected'],
@@ -96,6 +99,7 @@ class Prototype6Test(unittest.TestCase):
         self.source.inter_arrival_time = self.vectors[test]['inter_arrival_time']
         self.source.entities_per_arrival = self.vectors[test]['entities_per_arrival']
         self.source.time_offset = self.vectors[test]['time_offset']
+        self.source.clear()
         self.experiment.simulation_control.start(stop_time=time)
         self.experiment.simulation_control.wait()
         self.assertEqual(self.vectors[test]['expected'],
@@ -107,6 +111,7 @@ class Prototype6Test(unittest.TestCase):
         self.source.inter_arrival_time = self.vectors[test]['inter_arrival_time']
         self.source.entities_per_arrival = self.vectors[test]['entities_per_arrival']
         self.source.time_offset = self.vectors[test]['time_offset']
+        self.source.clear()
         self.experiment.simulation_control.start(stop_time=time)
         self.experiment.simulation_control.wait()
         self.assertEqual(self.vectors[test]['expected'],

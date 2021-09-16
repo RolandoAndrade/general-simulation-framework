@@ -141,5 +141,11 @@ class Server(DiscreteEventModel, SimulatorComponent, Statistical):
             ],
         )
 
+    def clear(self):
+        self.get_state().output_buffer.reset()
+        self.get_state().input_buffer.reset()
+        self.get_state().process_buffer.reset()
+        self.unschedule()
+
     def get_expressions(self) -> Dict[str, Any]:
         return self.get_state().get_state_expressions()

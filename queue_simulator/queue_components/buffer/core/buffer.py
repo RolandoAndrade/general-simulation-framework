@@ -152,6 +152,11 @@ class Buffer(Entity, StatSource, ABC):
             )
         )
 
+    def reset(self):
+        self.empty()
+        self.__number_entered.set_value(0)
+        self._in_station_history.clear()
+
     def get_datasource(self) -> DataSource:
         return DataSource(
             self.get_id(),

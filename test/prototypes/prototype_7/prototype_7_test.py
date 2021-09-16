@@ -80,6 +80,7 @@ class Prototype6Test(unittest.TestCase):
         self.source.time_offset = self.vectors[test]['time_offset']
         self.server.processing_time = self.vectors[test]['processing_time']
         self.server.initial_capacity = self.vectors[test]['initial_capacity']
+        self.source.clear()
         self.experiment.simulation_control.start(stop_time=time)
         self.experiment.simulation_control.wait()
         self.assertEqual(self.vectors[test]['expected'],
@@ -93,6 +94,7 @@ class Prototype6Test(unittest.TestCase):
         self.source.time_offset = self.vectors[test]['time_offset']
         self.server.processing_time = self.vectors[test]['processing_time']
         self.server.initial_capacity = self.vectors[test]['initial_capacity']
+        self.source.clear()
         self.experiment.simulation_control.start(stop_time=time)
         self.experiment.simulation_control.wait()
         self.assertEqual(self.vectors[test]['expected'],
@@ -105,6 +107,7 @@ class Prototype6Test(unittest.TestCase):
         self.source.entities_per_arrival = self.vectors[test]['entities_per_arrival']
         self.server.processing_time = self.vectors[test]['processing_time']
         self.server.initial_capacity = self.vectors[test]['initial_capacity']
+        self.source.clear()
         self.experiment.simulation_control.start(stop_time=time)
         self.experiment.simulation_control.wait()
         print(self.server.get_state().output_buffer.number_entered.get_value())
@@ -116,6 +119,7 @@ class Prototype6Test(unittest.TestCase):
         self.source.entities_per_arrival = self.vectors[test]['entities_per_arrival']
         self.server.processing_time = self.vectors[test]['processing_time']
         self.server.initial_capacity = self.vectors[test]['initial_capacity']
+        self.source.clear()
         self.experiment.simulation_control.start(stop_time=time)
         self.experiment.simulation_control.wait()
         print(self.server.get_state().output_buffer.number_entered.get_value())
@@ -127,6 +131,7 @@ class Prototype6Test(unittest.TestCase):
         self.source.entities_per_arrival = self.vectors[test]['entities_per_arrival']
         self.server.processing_time = self.vectors[test]['processing_time']
         self.server.initial_capacity = self.vectors[test]['initial_capacity']
+        self.source.clear()
         self.experiment.simulation_control.start(stop_time=time)
         self.experiment.simulation_control.wait()
         print(self.server.get_state().output_buffer.number_entered.get_value())

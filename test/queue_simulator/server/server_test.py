@@ -34,8 +34,6 @@ class ServerTest(unittest.TestCase):
         self.source.inter_arrival_time = inter_arrival_time
         self.source.entities_per_arrival = entities_per_arrival
 
-        self.source.init()
-
         processing_time = ExpressionProperty(Value(2))
         self.server.processing_time = processing_time
         self.server.get_state().process_buffer.capacity = NumberProperty(1)

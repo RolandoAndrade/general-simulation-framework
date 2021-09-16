@@ -33,12 +33,8 @@ class SimulationDynamicSystem(DiscreteEventDynamicSystem):
         return None
 
     def init(self):
-
         for model in self._models:
-            try:
-                model.init()
-            except:
-                continue
+            model.clear()
 
     def get_stats(self) -> List[ComponentStats]:
         s = []

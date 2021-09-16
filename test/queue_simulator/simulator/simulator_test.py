@@ -45,8 +45,6 @@ class SimulatorTest(unittest.TestCase):
         source.add(server)
         server.add(sink)
 
-        source.init()
-
         label_source_out = Label(
             source.get_state().output_buffer.get_properties,
             BufferProperty.NUMBER_ENTERED,
@@ -63,7 +61,7 @@ class SimulatorTest(unittest.TestCase):
             sink.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED
         )
 
-        self.experiment.simulation_control.start(stop_time=Time(5))
+        self.experiment.start_simulation(stop_time=Time(5))
         self.experiment.simulation_control.wait()
         self.experiment.save()
 
@@ -100,8 +98,6 @@ class SimulatorTest(unittest.TestCase):
         source.add(server)
         server.add(sink)
 
-        source.init()
-
         label_source_out = Label(
             source.get_state().output_buffer.get_properties,
             BufferProperty.NUMBER_ENTERED,
@@ -120,7 +116,7 @@ class SimulatorTest(unittest.TestCase):
 
         self.experiment.save()
 
-        self.experiment.simulation_control.start(stop_time=Time(10))
+        self.experiment.start_simulation(stop_time=Time(10))
         self.experiment.simulation_control.wait()
 
         print("Generated: " + str(label_source_out))
@@ -164,8 +160,6 @@ class SimulatorTest(unittest.TestCase):
         source.add(server)
         server.add(sink)
 
-        source.init()
-
         label_source_out = Label(
             source.get_state().output_buffer.get_properties,
             BufferProperty.NUMBER_ENTERED,
@@ -184,7 +178,7 @@ class SimulatorTest(unittest.TestCase):
 
         self.experiment.save()
 
-        self.experiment.simulation_control.start(
+        self.experiment.start_simulation(
             stop_time=Time(simulation_time_minutes)
         )
         self.experiment.simulation_control.wait()
@@ -220,8 +214,6 @@ class SimulatorTest(unittest.TestCase):
             source.add(server)
             server.add(sink)
 
-            source.init()
-
             label_source_out = Label(
                 source.get_state().output_buffer.get_properties,
                 BufferProperty.NUMBER_ENTERED,
@@ -243,7 +235,7 @@ class SimulatorTest(unittest.TestCase):
                 [label_source_out, label_server_in, label_server_out, label_sink_in]
             )
 
-        self.experiment.simulation_control.start(stop_time=Time(10))
+        self.experiment.start_simulation(stop_time=Time(10))
         self.experiment.simulation_control.wait()
 
         for label_list in labels:
