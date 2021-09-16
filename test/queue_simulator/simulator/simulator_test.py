@@ -24,6 +24,7 @@ class SimulatorTest(unittest.TestCase):
     def setUp(self) -> None:
         """Sets up tests"""
         self.experiment = SimulationExperiment()
+        self.expression_manager = self.experiment._expression_manager
 
     def test_basic_simulation(self):
         """1 source, 1 server, 1 arrival/second every second during 5 seconds"""
@@ -42,24 +43,13 @@ class SimulatorTest(unittest.TestCase):
         sink = self.experiment.add_node(NodeType.SINK)
         sink.set_id("Sink")
 
-        source.add(server)
-        server.add(sink)
+        self.experiment.add_path(source.get_id(), server.get_id())
+        self.experiment.add_path(server.get_id(), sink.get_id())
 
-        label_source_out = Label(
-            source.get_state().output_buffer.get_properties,
-            BufferProperty.NUMBER_ENTERED,
-        )
-        label_server_in = Label(
-            server.get_state().input_buffer.get_properties,
-            BufferProperty.NUMBER_ENTERED,
-        )
-        label_server_out = Label(
-            server.get_state().output_buffer.get_properties,
-            BufferProperty.NUMBER_ENTERED,
-        )
-        label_sink_in = Label(
-            sink.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED
-        )
+        label_source_out = Label("Source1.OutputBuffer.NumberEntered", self.expression_manager)
+        label_server_in = Label("Server1.InputBuffer.NumberEntered", self.expression_manager)
+        label_server_out = Label("Server1.OutputBuffer.NumberEntered", self.expression_manager)
+        label_sink_in = Label("Sink1.InputBuffer.NumberEntered", self.expression_manager)
 
         self.experiment.start_simulation(stop_time=Time(5))
         self.experiment.simulation_control.wait()
@@ -69,8 +59,6 @@ class SimulatorTest(unittest.TestCase):
         print("Entered to server: " + str(label_server_in))
         print("Processed by server: " + str(label_server_out))
         print("Entered to sink: " + str(label_sink_in))
-
-        print(self.experiment.simulation_report.generate_report())
 
         self.assertEqual("6", str(label_source_out))
         self.assertEqual("5", str(label_server_in))
@@ -98,21 +86,10 @@ class SimulatorTest(unittest.TestCase):
         source.add(server)
         server.add(sink)
 
-        label_source_out = Label(
-            source.get_state().output_buffer.get_properties,
-            BufferProperty.NUMBER_ENTERED,
-        )
-        label_server_in = Label(
-            server.get_state().input_buffer.get_properties,
-            BufferProperty.NUMBER_ENTERED,
-        )
-        label_server_out = Label(
-            server.get_state().output_buffer.get_properties,
-            BufferProperty.NUMBER_ENTERED,
-        )
-        label_sink_in = Label(
-            sink.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED
-        )
+        label_source_out = Label("Source1.OutputBuffer.NumberEntered", self.expression_manager)
+        label_server_in = Label("Server1.InputBuffer.NumberEntered", self.expression_manager)
+        label_server_out = Label("Server1.OutputBuffer.NumberEntered", self.expression_manager)
+        label_sink_in = Label("Sink1.InputBuffer.NumberEntered", self.expression_manager)
 
         self.experiment.save()
 
@@ -123,15 +100,11 @@ class SimulatorTest(unittest.TestCase):
         print("Entered to server: " + str(label_server_in))
         print("Processed by server: " + str(label_server_out))
         print("Entered to sink: " + str(label_sink_in))
-        print(self.experiment.simulation_report.generate_report())
 
         self.assertEqual("22", str(label_source_out))
         self.assertEqual("20", str(label_server_in))
         self.assertEqual("16", str(label_server_out))
         self.assertEqual("16", str(label_server_out))
-
-        print(source.get_stats().serialize())
-        print(server.get_stats().serialize())
 
     def test_simulation_random(self):
         """Server process entities slowly than arrivals"""
@@ -160,21 +133,10 @@ class SimulatorTest(unittest.TestCase):
         source.add(server)
         server.add(sink)
 
-        label_source_out = Label(
-            source.get_state().output_buffer.get_properties,
-            BufferProperty.NUMBER_ENTERED,
-        )
-        label_server_in = Label(
-            server.get_state().input_buffer.get_properties,
-            BufferProperty.NUMBER_ENTERED,
-        )
-        label_server_out = Label(
-            server.get_state().output_buffer.get_properties,
-            BufferProperty.NUMBER_ENTERED,
-        )
-        label_sink_in = Label(
-            sink.get_state().input_buffer.get_properties, BufferProperty.NUMBER_ENTERED
-        )
+        label_source_out = Label("Source1.OutputBuffer.NumberEntered", self.expression_manager)
+        label_server_in = Label("Server1.InputBuffer.NumberEntered", self.expression_manager)
+        label_server_out = Label("Server1.OutputBuffer.NumberEntered", self.expression_manager)
+        label_sink_in = Label("Sink1.InputBuffer.NumberEntered", self.expression_manager)
 
         self.experiment.save()
 
@@ -187,7 +149,6 @@ class SimulatorTest(unittest.TestCase):
         print("Entered to server: " + str(label_server_in))
         print("Processed by server: " + str(label_server_out))
         print("Entered to sink: " + str(label_sink_in))
-        print(self.experiment.simulation_report.generate_report())
 
         print(474)
         print(474)
@@ -214,22 +175,10 @@ class SimulatorTest(unittest.TestCase):
             source.add(server)
             server.add(sink)
 
-            label_source_out = Label(
-                source.get_state().output_buffer.get_properties,
-                BufferProperty.NUMBER_ENTERED,
-            )
-            label_server_in = Label(
-                server.get_state().input_buffer.get_properties,
-                BufferProperty.NUMBER_ENTERED,
-            )
-            label_server_out = Label(
-                server.get_state().output_buffer.get_properties,
-                BufferProperty.NUMBER_ENTERED,
-            )
-            label_sink_in = Label(
-                sink.get_state().input_buffer.get_properties,
-                BufferProperty.NUMBER_ENTERED,
-            )
+            label_source_out = Label("Source1.OutputBuffer.NumberEntered", self.expression_manager)
+            label_server_in = Label("Server1.InputBuffer.NumberEntered", self.expression_manager)
+            label_server_out = Label("Server1.OutputBuffer.NumberEntered", self.expression_manager)
+            label_sink_in = Label("Sink1.InputBuffer.NumberEntered", self.expression_manager)
 
             labels.append(
                 [label_source_out, label_server_in, label_server_out, label_sink_in]
@@ -247,8 +196,6 @@ class SimulatorTest(unittest.TestCase):
             self.assertEqual("20", str(label_list[1]))
             self.assertEqual("16", str(label_list[2]))
             self.assertEqual("16", str(label_list[3]))
-
-        print(self.experiment.simulation_report.generate_report())
 
 
 if __name__ == "__main__":

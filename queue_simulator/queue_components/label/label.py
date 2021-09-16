@@ -2,55 +2,34 @@ from __future__ import annotations
 
 from typing import Any, Callable
 
-from core.entity.core import EntityProperty, EntityProperties
+from queue_simulator.queue_components.shared.expressions import ExpressionManager, static_expression_manager
 
 
 class Label:
     """Label that indicates the value of a property"""
 
-    __properties_source: Callable[[], EntityProperties]
-    """Source where the property should be retrieved."""
+    __expression: str
+    """Expression to be observed"""
 
-    __linked_property: str
-    """Property to be observed"""
+    __expression_manager: ExpressionManager
+    """Expression manager to get the value of the expression."""
 
     def __init__(
-        self,
-        properties_source: Callable[[], EntityProperties],
-        linked_property: str = None,
+            self,
+            expression: str,
+            expression_manager: ExpressionManager = None
     ):
         """
         Args:
-            properties_source (EntityProperties): Source where the property
-                should be retrieved.
-            linked_property (str): Property to be linked.
+            expression (Callable): Expression to be observed by the label.
         """
-        self.link(properties_source, linked_property)
-
-    def link(
-        self,
-        properties_source: Callable[[], EntityProperties],
-        linked_property: str = None,
-    ):
-        """Links the label to a property.
-
-        Args:
-            properties_source (EntityProperties): Source where the property
-                should be retrieved.
-            linked_property (str): Property to be linked.
-        """
-        self.__linked_property = linked_property
-        self.__properties_source = properties_source
+        self.__expression = expression
+        self.__expression_manager = expression_manager or static_expression_manager
 
     def get_value(self) -> Any:
         """Gets the value of the property."""
-        if self.__properties_source is not None:
-            properties = self.__properties_source()
-            if (
-                properties is not None
-                and properties[self.__linked_property] is not None
-            ):
-                return properties[self.__linked_property].get_value()
+        if self.__expression is not None:
+            return self.__expression_manager.get_expression(self.__expression)
         return 0
 
     def __str__(self):
