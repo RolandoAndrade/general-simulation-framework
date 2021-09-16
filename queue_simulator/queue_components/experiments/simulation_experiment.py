@@ -106,6 +106,9 @@ class SimulationExperiment(DiscreteEventExperiment):
     def event_bus(self):
         return self._event_bus
 
+    def get_expressions(self):
+        return self._expression_manager.get_available_expressions()
+
     def start_simulation(
         self, stop_time: Time, step: Time = None, wait_time: Time = None
     ):

@@ -45,7 +45,7 @@ class EntityProperty(Generic[T]):
         """Sets the value of the property"""
         if value is not None and not PropertyType.validate(value, self.get_type()):
             raise Exception(
-                "Expected " + self.get_type() + "typing, but received " + type(value)
+                "Expected " + self.get_type() + "typing, but received " + str(type(value))
             )
         self.__value = value
 

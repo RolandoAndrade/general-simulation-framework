@@ -1,7 +1,7 @@
 from decimal import Decimal
-from typing import Union
+from typing import Union, Any
 
-from core.entity.core.entity_property import EntityProperty
+from core.entity.core.entity_property import EntityProperty, T
 from core.entity.core.property_type import PropertyType
 
 

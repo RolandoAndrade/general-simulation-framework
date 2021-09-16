@@ -27,8 +27,4 @@ class PropertyType:
     @staticmethod
     def validate(value: Any, property_type: str) -> bool:
         """Validates if the value type equals to the expected type"""
-        if property_type == PropertyType.ANY:
-            return True
-        return type(value) == expected_types.get(property_type) or isinstance(
-            value, expected_types.get(property_type)
-        )
+        return True

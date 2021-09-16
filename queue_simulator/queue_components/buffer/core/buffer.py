@@ -63,7 +63,7 @@ class Buffer(Entity, StatSource, ABC):
         """
         quantity = len(entities)
         r_quantity = int(min(self.remaining_capacity.get_value(), quantity))
-        self.__number_entered += r_quantity
+        self.__number_entered.set_value(self.__number_entered.get_value() + r_quantity)
         for i in range(r_quantity):
             self._content.append(entities[i])
         self._in_station_history.append(len(self._content))
