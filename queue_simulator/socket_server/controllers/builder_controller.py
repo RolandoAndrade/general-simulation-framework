@@ -1,5 +1,7 @@
+import json
 from typing import Dict, Any
 
+import jsonpickle
 from loguru import logger
 
 from queue_simulator.queue_components.experiments import SimulationExperiment
@@ -66,7 +68,9 @@ class BuilderController:
         session: Dict[str, SimulationExperiment]
         with sio.session(sid) as session:
             expressions = session["experiment"].get_expressions()
-        return expressions
+        return {
+            'data': jsonpickle.dumps(expressions)
+        }
 
     @staticmethod
     @sio.event
