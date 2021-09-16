@@ -11,7 +11,4 @@ class Stat:
         return hash(str(self))
 
     def serialize(self):
-        return {
-            'name': self.name,
-            'value': str(self.value)
-        }
+        return {"name": self.name, "value": str(self.value)}

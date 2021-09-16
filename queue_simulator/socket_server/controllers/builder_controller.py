@@ -62,24 +62,16 @@ class BuilderController:
     @staticmethod
     @sio.event
     def save_experiment(sid, data):
-        logger.info(
-            "Saving experiment, sid:{sid}",
-            sid=sid
-        )
+        logger.info("Saving experiment, sid:{sid}", sid=sid)
         session: Dict[str, SimulationExperiment]
         with sio.session(sid) as session:
             saved_data = session["experiment"].save()
-        return {
-            'data': saved_data
-        }
+        return {"data": saved_data}
 
     @staticmethod
     @sio.event
     def load_experiment(sid, data: Dict[str, Any]):
-        logger.info(
-            "Load experiment, sid:{sid}",
-            sid=sid
-        )
+        logger.info("Load experiment, sid:{sid}", sid=sid)
         experiment = data["experiment"]
         session: Dict[str, SimulationExperiment]
         with sio.session(sid) as session:

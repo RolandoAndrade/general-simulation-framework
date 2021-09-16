@@ -1,5 +1,7 @@
 from core.entity.core import EntityManager
-from queue_simulator.queue_components.entities.available_entities import AvailableEntities
+from queue_simulator.queue_components.entities.available_entities import (
+    AvailableEntities,
+)
 
 
 class NameGenerator(EntityManager):

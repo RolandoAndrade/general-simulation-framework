@@ -7,7 +7,11 @@ import heapq
 from core.entity.core import Entity, EntityManager
 from core.entity.properties import NumberProperty, StringProperty
 from core.types import Time
-from queue_simulator.queue_components.buffer.core import Buffer, BufferPolicy, BufferedEntity
+from queue_simulator.queue_components.buffer.core import (
+    Buffer,
+    BufferPolicy,
+    BufferedEntity,
+)
 from queue_simulator.queue_components.shared.stats import DataSource, ItemStats, Stat
 
 
@@ -84,10 +88,19 @@ class ProcessBuffer(Buffer):
 
     def get_datasource(self) -> DataSource:
         ds = super(ProcessBuffer, self).get_datasource()
-        ds.item_stats.append(ItemStats("ProcessingTime", [
-            Stat("Maximum", max(self.__processing_time_history)),
-            Stat("Minimum", min(self.__processing_time_history)),
-            Stat("Average", sum(self.__processing_time_history)/max(1, len(self.__processing_time_history))),
-            Stat("Total", sum(self.__processing_time_history))
-        ]))
+        ds.item_stats.append(
+            ItemStats(
+                "ProcessingTime",
+                [
+                    Stat("Maximum", max(self.__processing_time_history)),
+                    Stat("Minimum", min(self.__processing_time_history)),
+                    Stat(
+                        "Average",
+                        sum(self.__processing_time_history)
+                        / max(1, len(self.__processing_time_history)),
+                    ),
+                    Stat("Total", sum(self.__processing_time_history)),
+                ],
+            )
+        )
         return ds

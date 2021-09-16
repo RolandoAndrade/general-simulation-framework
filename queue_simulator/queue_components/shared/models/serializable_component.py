@@ -33,7 +33,7 @@ class SimulatorComponent(ABC, Entity):
         return UserExpression(eval(value))
 
     def set_serialized_property(self, serialized_property: NodeProperty):
-        if serialized_property.property_name == 'Name':
+        if serialized_property.property_name == "Name":
             self.set_id(serialized_property.property_value)
         else:
             edited_property = self.get_properties()[serialized_property.property_name]

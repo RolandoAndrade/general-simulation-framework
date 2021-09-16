@@ -22,8 +22,6 @@ class SourceState:
         for prop in props:
             expressions[prop] = {
                 "value": self.output_buffer.get_id() + "." + prop,
-                "call": props[prop].get_value
+                "call": props[prop].get_value,
             }
-        return {
-            "OutputBuffer": expressions
-        }
+        return {"OutputBuffer": expressions}

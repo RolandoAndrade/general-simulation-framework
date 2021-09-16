@@ -13,10 +13,7 @@ class DataSource:
         s = []
         for stat in self.item_stats:
             s.append(stat.serialize())
-        return {
-            'name': self.name,
-            'itemStats': s
-        }
+        return {"name": self.name, "itemStats": s}
 
     def __hash__(self):
         return hash(str(self))

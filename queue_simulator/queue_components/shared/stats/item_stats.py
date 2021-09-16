@@ -13,10 +13,7 @@ class ItemStats:
         s = []
         for stat in self.stats:
             s.append(stat.serialize())
-        return {
-            'name': self.name,
-            'stats': s
-        }
+        return {"name": self.name, "stats": s}
 
     def __hash__(self):
         return hash(str(self))

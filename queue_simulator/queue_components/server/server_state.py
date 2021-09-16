@@ -61,7 +61,7 @@ class ServerState:
         for prop in props:
             expressions[prop] = {
                 "value": buffer.get_id() + "." + prop,
-                "call": props[prop].get_value
+                "call": props[prop].get_value,
             }
         return expressions
 
@@ -69,5 +69,5 @@ class ServerState:
         return {
             "InputBuffer": self._get_expressions_of(self.input_buffer),
             "ProcessBuffer": self._get_expressions_of(self.process_buffer),
-            "OutputBuffer": self._get_expressions_of(self.output_buffer)
+            "OutputBuffer": self._get_expressions_of(self.output_buffer),
         }

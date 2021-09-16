@@ -43,6 +43,6 @@ class Emitter(SimulatorComponent, EntityEmitter):
         return {
             "GeneratedEntities": {
                 "value": self.get_id() + "." + str(self._generated),
-                "call": self._generated.get_value
+                "call": self._generated.get_value,
             }
         }

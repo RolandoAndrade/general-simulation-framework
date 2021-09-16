@@ -42,16 +42,16 @@ class Source(DiscreteEventModel, SimulatorComponent, Statistical):
     __serial: int = 0
 
     def __init__(
-            self,
-            dynamic_system: DiscreteEventDynamicSystem,
-            name: str,
-            entity_emitter: Union[EntityEmitter, Property[EntityEmitter]] = None,
-            inter_arrival_time: Union[
-                Expression, ExpressionProperty
-            ] = ExponentialDistribution(0.25),
-            entities_per_arrival: Union[Expression, ExpressionProperty] = Value(1),
-            time_offset: Union[Expression, ExpressionProperty] = Value(0),
-            entity_manager: EntityManager = None,
+        self,
+        dynamic_system: DiscreteEventDynamicSystem,
+        name: str,
+        entity_emitter: Union[EntityEmitter, Property[EntityEmitter]] = None,
+        inter_arrival_time: Union[
+            Expression, ExpressionProperty
+        ] = ExponentialDistribution(0.25),
+        entities_per_arrival: Union[Expression, ExpressionProperty] = Value(1),
+        time_offset: Union[Expression, ExpressionProperty] = Value(0),
+        entity_manager: EntityManager = None,
     ):
         """
         Args:
@@ -98,7 +98,7 @@ class Source(DiscreteEventModel, SimulatorComponent, Statistical):
         return state
 
     def _external_state_transition_function(
-            self, state: SourceState, inputs: ModelInput, event_time: float
+        self, state: SourceState, inputs: ModelInput, event_time: float
     ) -> SourceState:
         """Returns the current state
         Args:
@@ -114,9 +114,7 @@ class Source(DiscreteEventModel, SimulatorComponent, Statistical):
             state (SourceState): Current state of the model.
         """
         if self.inter_arrival_time is not None:
-            return (
-                self.inter_arrival_time.get_value().evaluate()
-            )
+            return self.inter_arrival_time.get_value().evaluate()
         return Time(-1)
 
     def _output_function(self, state: SourceState) -> List[Entity]:
@@ -209,9 +207,9 @@ class Source(DiscreteEventModel, SimulatorComponent, Statistical):
             pass
 
     def get_stats(self) -> ComponentStats:
-        return ComponentStats("Source", self.get_id(), [
-            self.get_state().output_buffer.get_datasource()
-        ])
+        return ComponentStats(
+            "Source", self.get_id(), [self.get_state().output_buffer.get_datasource()]
+        )
 
     def get_expressions(self) -> Dict[str, Any]:
         return self.get_state().get_state_expressions()

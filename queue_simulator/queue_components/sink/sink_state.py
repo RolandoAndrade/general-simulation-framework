@@ -23,8 +23,6 @@ class SinkState:
         for prop in props:
             expressions[prop] = {
                 "value": self.input_buffer.get_id() + "." + prop,
-                "call": props[prop].get_value
+                "call": props[prop].get_value,
             }
-        return {
-            "InputBuffer": expressions
-        }
+        return {"InputBuffer": expressions}

@@ -87,16 +87,16 @@ class SimulationExperiment(DiscreteEventExperiment):
 
     def remove_component(self, component: str):
         return (
-                self._remove_model(component)
-                or self._remove_path(component)
-                or self._remove_emitter(component)
+            self._remove_model(component)
+            or self._remove_path(component)
+            or self._remove_emitter(component)
         )
 
     def edit_property(self, component: str, new_property: NodeProperty):
         node = (
-                self.dynamic_system.get_model(component)
-                or self.dynamic_system.get_path(component)
-                or self._get_emitter(component)
+            self.dynamic_system.get_model(component)
+            or self.dynamic_system.get_path(component)
+            or self._get_emitter(component)
         )
         if node is not None:
             node.set_serialized_property(new_property)
@@ -106,9 +106,13 @@ class SimulationExperiment(DiscreteEventExperiment):
     def event_bus(self):
         return self._event_bus
 
-    def start_simulation(self, stop_time: Time, step: Time = None, wait_time: Time = None):
+    def start_simulation(
+        self, stop_time: Time, step: Time = None, wait_time: Time = None
+    ):
         self.dynamic_system.init()
-        self.simulation_control.start(None, step or Time(1000), stop_time, wait_time or Time(0))
+        self.simulation_control.start(
+            None, step or Time(1000), stop_time, wait_time or Time(0)
+        )
 
     def get_stats(self) -> List[ComponentStats]:
         return self.dynamic_system.get_stats()

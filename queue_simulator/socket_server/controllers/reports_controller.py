@@ -14,4 +14,4 @@ class ReportsController:
         session: Dict[str, SimulationExperiment]
         with sio.session(sid) as session:
             stats = session["experiment"].get_stats()
-        return {'data': [s.serialize() for s in stats]}
+        return {"data": [s.serialize() for s in stats]}

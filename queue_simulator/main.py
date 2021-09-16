@@ -8,7 +8,8 @@ from loguru import logger
 from queue_simulator.queue_components.experiments import SimulationSocketExperiment
 from queue_simulator.socket_server.controllers import (
     BuilderController,
-    SimulationController, ReportsController,
+    SimulationController,
+    ReportsController,
 )
 from queue_simulator.socket_server.socket_server import sio
 

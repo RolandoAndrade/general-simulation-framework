@@ -7,7 +7,11 @@ from core.mathematics.values.value import Value
 from core.types import Time
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from models.models import DiscreteEventModel
-from queue_simulator.queue_components.buffer.buffers import InputBuffer, OutputBuffer, ProcessBuffer
+from queue_simulator.queue_components.buffer.buffers import (
+    InputBuffer,
+    OutputBuffer,
+    ProcessBuffer,
+)
 from queue_simulator.queue_components.server import ServerProperty
 from queue_simulator.queue_components.server.server_state import ServerState
 from queue_simulator.queue_components.shared.models import SimulatorComponent
@@ -27,12 +31,12 @@ class Server(DiscreteEventModel, SimulatorComponent, Statistical):
     """Processing time of the server."""
 
     def __init__(
-            self,
-            dynamic_system: DiscreteEventDynamicSystem,
-            name: str,
-            processing_time: Union[ExpressionProperty, Expression] = Value(1),
-            initial_capacity: NumberProperty = NumberProperty(1),
-            entity_manager: EntityManager = None,
+        self,
+        dynamic_system: DiscreteEventDynamicSystem,
+        name: str,
+        processing_time: Union[ExpressionProperty, Expression] = Value(1),
+        initial_capacity: NumberProperty = NumberProperty(1),
+        entity_manager: EntityManager = None,
     ):
         super().__init__(
             dynamic_system,
@@ -68,7 +72,7 @@ class Server(DiscreteEventModel, SimulatorComponent, Statistical):
         return state
 
     def _external_state_transition_function(
-            self, state: ServerState, inputs: Dict[str, List[Entity]], event_time: Time
+        self, state: ServerState, inputs: Dict[str, List[Entity]], event_time: Time
     ) -> ServerState:
         r_inputs = []
         for i in inputs:
@@ -89,7 +93,7 @@ class Server(DiscreteEventModel, SimulatorComponent, Statistical):
     def get_properties(self) -> EntityProperties:
         return {
             ServerProperty.INITIAL_CAPACITY: self.initial_capacity,
-            ServerProperty.PROCESSING_TIME: self.processing_time
+            ServerProperty.PROCESSING_TIME: self.processing_time,
         }
 
     @property
@@ -127,11 +131,15 @@ class Server(DiscreteEventModel, SimulatorComponent, Statistical):
             pass
 
     def get_stats(self) -> ComponentStats:
-        return ComponentStats("Server", self.get_id(), [
-            self.get_state().input_buffer.get_datasource(),
-            self.get_state().process_buffer.get_datasource(),
-            self.get_state().output_buffer.get_datasource(),
-        ])
+        return ComponentStats(
+            "Server",
+            self.get_id(),
+            [
+                self.get_state().input_buffer.get_datasource(),
+                self.get_state().process_buffer.get_datasource(),
+                self.get_state().output_buffer.get_datasource(),
+            ],
+        )
 
     def get_expressions(self) -> Dict[str, Any]:
         return self.get_state().get_state_expressions()

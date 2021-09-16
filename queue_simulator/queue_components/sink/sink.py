@@ -23,7 +23,7 @@ class Sink(DiscreteEventModel, SimulatorComponent, Statistical):
         return state
 
     def _external_state_transition_function(
-            self, state: SinkState, inputs: ModelInput, event_time: Time
+        self, state: SinkState, inputs: ModelInput, event_time: Time
     ) -> SinkState:
         r_inputs = []
         for i in inputs:
@@ -42,10 +42,10 @@ class Sink(DiscreteEventModel, SimulatorComponent, Statistical):
         return {}
 
     def __init__(
-            self,
-            dynamic_system: DiscreteEventDynamicSystem,
-            name: str,
-            entity_manager: EntityManager = None,
+        self,
+        dynamic_system: DiscreteEventDynamicSystem,
+        name: str,
+        entity_manager: EntityManager = None,
     ):
         super(Sink, self).__init__(
             dynamic_system,
@@ -65,6 +65,6 @@ class Sink(DiscreteEventModel, SimulatorComponent, Statistical):
             pass
 
     def get_stats(self) -> ComponentStats:
-        return ComponentStats("Sink", self.get_id(), [
-            self.get_state().input_buffer.get_datasource()
-        ])
+        return ComponentStats(
+            "Sink", self.get_id(), [self.get_state().input_buffer.get_datasource()]
+        )

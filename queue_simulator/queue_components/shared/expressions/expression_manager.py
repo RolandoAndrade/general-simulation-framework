@@ -3,7 +3,11 @@ from __future__ import annotations
 from typing import Dict, Any, List
 
 from core.expresions import Expression, UserExpression
-from core.mathematics.distributions import ExponentialDistribution, PoissonDistribution, TriangularDistribution
+from core.mathematics.distributions import (
+    ExponentialDistribution,
+    PoissonDistribution,
+    TriangularDistribution,
+)
 
 
 class ExpressionManager:
@@ -11,31 +15,33 @@ class ExpressionManager:
 
     def __init__(self):
         self._available_expressions = {
-            'Random': {
-                'Exponential': {
-                    'value': 'Random.Exponential',
-                    'call': ExponentialDistribution,
-                    'params': ['mean']
+            "Random": {
+                "Exponential": {
+                    "value": "Random.Exponential",
+                    "call": ExponentialDistribution,
+                    "params": ["mean"],
                 },
-                'Poisson': {
-                    'value': 'Random.Poisson',
-                    'call': PoissonDistribution,
-                    'params': ['mean']
+                "Poisson": {
+                    "value": "Random.Poisson",
+                    "call": PoissonDistribution,
+                    "params": ["mean"],
                 },
-                'Triangular': {
-                    'value': 'Random.Triangular',
-                    'call': TriangularDistribution,
-                    'params': ['minimum', 'mode', 'maximum']
+                "Triangular": {
+                    "value": "Random.Triangular",
+                    "call": TriangularDistribution,
+                    "params": ["minimum", "mode", "maximum"],
                 },
             }
         }
 
     @staticmethod
     def _extract_params(value: str) -> List[float]:
-        s = value[value.find("(") + 1:value.find(")")]
-        return [float(param) for param in s.split(',')]
+        s = value[value.find("(") + 1 : value.find(")")]
+        return [float(param) for param in s.split(",")]
 
-    def get_expression(self, value: str, params: List[float] = None, options=None) -> Expression:
+    def get_expression(
+        self, value: str, params: List[float] = None, options=None
+    ) -> Expression:
         try:
             return UserExpression(eval(value))
         except Exception:
@@ -49,12 +55,12 @@ class ExpressionManager:
                 else:
                     params = []
 
-            if "value" in options and isinstance(options['value'], str):
-                if 'call' in options:
-                    return options['call'](*params)
-                if 'expression' in options:
-                    return options['expression'].evaluate()
-            key, _, next_keys = value.partition('.')
+            if "value" in options and isinstance(options["value"], str):
+                if "call" in options:
+                    return options["call"](*params)
+                if "expression" in options:
+                    return options["expression"].evaluate()
+            key, _, next_keys = value.partition(".")
             if key in options:
                 return self.get_expression(next_keys, params, options[key])
 
