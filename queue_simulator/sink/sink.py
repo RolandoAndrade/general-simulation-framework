@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Dict
 
 from core.entity.core import EntityProperties, EntityManager
 from core.types import Time
@@ -15,6 +15,9 @@ from queue_simulator.sink.sink_state import SinkState
 
 class Sink(DiscreteEventModel, SimulatorComponent, Statistical):
     """Sink of entities"""
+
+    def get_expressions(self) -> Dict[str, Any]:
+        return self.get_state().get_state_expressions()
 
     def _internal_state_transition_function(self, state: SinkState) -> SinkState:
         return state

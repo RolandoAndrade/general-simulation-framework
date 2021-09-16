@@ -14,17 +14,17 @@ class ExpressionManager:
             'Random': {
                 'Exponential': {
                     'value': 'Random.Exponential',
-                    'class': ExponentialDistribution,
+                    'call': ExponentialDistribution,
                     'params': ['mean']
                 },
                 'Poisson': {
                     'value': 'Random.Poisson',
-                    'class': PoissonDistribution,
+                    'call': PoissonDistribution,
                     'params': ['mean']
                 },
                 'Triangular': {
                     'value': 'Random.Triangular',
-                    'class': TriangularDistribution,
+                    'call': TriangularDistribution,
                     'params': ['minimum', 'mode', 'maximum']
                 },
             }
@@ -41,12 +41,17 @@ class ExpressionManager:
         except Exception:
             if options is None:
                 options = self._available_expressions
-                params = params or ExpressionManager._extract_params(value)
-                value = value[:value.find("(")]
+                start_params = value.find("(")
+                has_params = start_params != -1
+                if has_params:
+                    params = params or ExpressionManager._extract_params(value)
+                    value = value[:start_params]
+                else:
+                    params = []
 
             if "value" in options and isinstance(options['value'], str):
-                if 'class' in options:
-                    return options['class'](*params)
+                if 'call' in options:
+                    return options['call'](*params)
                 if 'expression' in options:
                     return options['expression'].evaluate()
             key, _, next_keys = value.partition('.')

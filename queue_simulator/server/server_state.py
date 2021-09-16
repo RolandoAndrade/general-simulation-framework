@@ -1,10 +1,11 @@
 from decimal import Decimal
-from typing import Union
+from typing import Union, Dict, Any
 
 from core.entity.properties import NumberProperty
 from queue_simulator.buffer.buffers.input_buffer import InputBuffer
 from queue_simulator.buffer.buffers.output_buffer import OutputBuffer
 from queue_simulator.buffer.buffers.process_buffer import ProcessBuffer
+from queue_simulator.buffer.core import Buffer
 
 
 class ServerState:
@@ -53,3 +54,20 @@ class ServerState:
         self.output_buffer.set_id(new_name)
         self.input_buffer.set_id(new_name)
         self.process_buffer.set_id(new_name)
+
+    def _get_expressions_of(self, buffer: Buffer) -> Dict[str, Any]:
+        expressions = {}
+        props = buffer.get_properties()
+        for prop in props:
+            expressions[prop] = {
+                "value": buffer.get_id() + "." + prop,
+                "call": props[prop].get_value
+            }
+        return expressions
+
+    def get_state_expressions(self) -> Dict[str, Any]:
+        return {
+            "InputBuffer": self._get_expressions_of(self.input_buffer),
+            "ProcessBuffer": self._get_expressions_of(self.process_buffer),
+            "OutputBuffer": self._get_expressions_of(self.output_buffer)
+        }

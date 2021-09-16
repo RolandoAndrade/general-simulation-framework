@@ -27,12 +27,12 @@ class Server(DiscreteEventModel, SimulatorComponent, Statistical):
     """Processing time of the server."""
 
     def __init__(
-        self,
-        dynamic_system: DiscreteEventDynamicSystem,
-        name: str,
-        processing_time: Union[ExpressionProperty, Expression] = Value(1),
-        initial_capacity: NumberProperty = NumberProperty(1),
-        entity_manager: EntityManager = None,
+            self,
+            dynamic_system: DiscreteEventDynamicSystem,
+            name: str,
+            processing_time: Union[ExpressionProperty, Expression] = Value(1),
+            initial_capacity: NumberProperty = NumberProperty(1),
+            entity_manager: EntityManager = None,
     ):
         super().__init__(
             dynamic_system,
@@ -68,7 +68,7 @@ class Server(DiscreteEventModel, SimulatorComponent, Statistical):
         return state
 
     def _external_state_transition_function(
-        self, state: ServerState, inputs: Dict[str, List[Entity]], event_time: Time
+            self, state: ServerState, inputs: Dict[str, List[Entity]], event_time: Time
     ) -> ServerState:
         r_inputs = []
         for i in inputs:
@@ -132,3 +132,6 @@ class Server(DiscreteEventModel, SimulatorComponent, Statistical):
             self.get_state().process_buffer.get_datasource(),
             self.get_state().output_buffer.get_datasource(),
         ])
+
+    def get_expressions(self) -> Dict[str, Any]:
+        return self.get_state().get_state_expressions()
