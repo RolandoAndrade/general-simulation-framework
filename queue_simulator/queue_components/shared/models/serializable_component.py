@@ -4,6 +4,7 @@ from typing import List, Any, Dict
 from core.entity.core import Entity
 from core.entity.core.property_type import PropertyType
 from core.expresions import UserExpression
+from queue_simulator.queue_components.shared.expressions import ExpressionManager
 from queue_simulator.queue_components.shared.models.node_property import NodeProperty
 
 
@@ -26,13 +27,13 @@ class SimulatorComponent(ABC, Entity):
             )
         return e
 
-    def _value_string_property(self, value: str):
+    def _value_string_property(self, value: str, expression_manager: ExpressionManager):
         return value
 
-    def _value_expression(self, value: str):
-        return UserExpression(eval(value))
+    def _value_expression(self, value: str, expression_manager: ExpressionManager):
+        return expression_manager.get_expression(value)
 
-    def set_serialized_property(self, serialized_property: NodeProperty):
+    def set_serialized_property(self, serialized_property: NodeProperty, expression_manager: ExpressionManager):
         if serialized_property.property_name == "Name":
             self.set_id(serialized_property.property_value)
         else:
@@ -43,7 +44,7 @@ class SimulatorComponent(ABC, Entity):
             }
             method = effect[serialized_property.property_type]
             value = serialized_property.property_value
-            edited_property.set_value(method(value))
+            edited_property.set_value(method(value, expression_manager))
 
     @abstractmethod
     def get_expressions(self) -> Dict[str, Any]:

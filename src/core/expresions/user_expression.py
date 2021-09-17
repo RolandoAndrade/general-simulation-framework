@@ -12,3 +12,6 @@ class UserExpression(Expression):
 
     def evaluate(self):
         return self.value
+
+    def __str__(self):
+        return str(self.evaluate())

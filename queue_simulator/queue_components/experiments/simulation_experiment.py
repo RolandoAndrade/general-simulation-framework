@@ -103,7 +103,7 @@ class SimulationExperiment(DiscreteEventExperiment):
         )
         if node is not None:
             self._expression_manager.remove_expression(node.get_id())
-            node.set_serialized_property(new_property)
+            node.set_serialized_property(new_property, self._expression_manager)
             if with_expression is not None:
                 self._expression_manager.add_expression(node.get_id(), node.get_expressions())
         return node
