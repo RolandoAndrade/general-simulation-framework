@@ -43,10 +43,38 @@ class Prototype8Test(unittest.TestCase):
         sink = self.experiment.add_node(NodeType.SINK)
         self.experiment.add_path(source.get_id(), server.get_id())
         self.experiment.add_path(server.get_id(), sink.get_id())
-        self.experiment.edit_property(source.get_id(), NodeProperty(SourceProperty.INTER_ARRIVAL_TIME, self.vectors[test]['inter_arrival_time'], 'EXPRESSION', 'GENERIC'))
-        self.experiment.edit_property(source.get_id(), NodeProperty(SourceProperty.ENTITIES_PER_ARRIVAL, self.vectors[test]['entities_per_arrival'] , 'EXPRESSION', 'GENERIC'))
-        self.experiment.edit_property(server.get_id(), NodeProperty(ServerProperty.PROCESSING_TIME, self.vectors[test]['processing_time'], 'EXPRESSION', 'GENERIC'))
-        self.experiment.edit_property(server.get_id(), NodeProperty(ServerProperty.INITIAL_CAPACITY, self.vectors[test]['initial_capacity'], 'NUMBER', 'GENERIC'))
+        self.experiment.edit_property(source.get_id(), NodeProperty(SourceProperty.INTER_ARRIVAL_TIME,
+                                                                    self.vectors[test]['inter_arrival_time'],
+                                                                    'EXPRESSION', 'GENERIC'))
+        self.experiment.edit_property(source.get_id(), NodeProperty(SourceProperty.ENTITIES_PER_ARRIVAL,
+                                                                    self.vectors[test]['entities_per_arrival'],
+                                                                    'EXPRESSION', 'GENERIC'))
+        self.experiment.edit_property(server.get_id(), NodeProperty(ServerProperty.PROCESSING_TIME,
+                                                                    self.vectors[test]['processing_time'], 'EXPRESSION',
+                                                                    'GENERIC'))
+        self.experiment.edit_property(server.get_id(), NodeProperty(ServerProperty.INITIAL_CAPACITY,
+                                                                    self.vectors[test]['initial_capacity'], 'NUMBER',
+                                                                    'GENERIC'))
+
+        source_label_out = self.experiment.add_label()
+        self.experiment.edit_label(source_label_out.get_id(),
+                                   NodeProperty("Expression", "Source1.OutputBuffer.NumberEntered", 'EXPRESSION',
+                                                'GENERIC'))
+
+        server_label_out = self.experiment.add_label()
+        self.experiment.edit_label(server_label_out.get_id(),
+                                   NodeProperty("Expression", "Server1.OutputBuffer.NumberEntered", 'EXPRESSION',
+                                                'GENERIC'))
+
+        server_label_in = self.experiment.add_label()
+        self.experiment.edit_label(server_label_in.get_id(),
+                                   NodeProperty("Expression", "Server1.InputBuffer.NumberEntered", 'EXPRESSION',
+                                                'GENERIC'))
+
+        sink_label_in = self.experiment.add_label()
+        self.experiment.edit_label(sink_label_in.get_id(),
+                                   NodeProperty("Expression", "Sink1.InputBuffer.NumberEntered", 'EXPRESSION',
+                                                'GENERIC'))
 
         results = []
 
@@ -56,9 +84,9 @@ class Prototype8Test(unittest.TestCase):
             self.experiment.start_simulation(stop_time=time)
             self.experiment.simulation_control.wait()
             results.append(sink.get_state().input_buffer.number_entered.get_value())
+            print([str(source_label_out), str(server_label_in), str(server_label_out), str(sink_label_in)])
 
         print(results)
-        print(self.experiment.simulation_report.generate_report())
 
 
 if __name__ == "__main__":

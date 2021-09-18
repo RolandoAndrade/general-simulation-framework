@@ -16,7 +16,7 @@ class Label:
 
     def __init__(
             self,
-            expression: str,
+            expression: str = None,
             expression_manager: ExpressionManager = None
     ):
         """
@@ -34,3 +34,6 @@ class Label:
 
     def __str__(self):
         return str(self.get_value())
+
+    def set_expression(self, expression: str):
+        self.__expression = expression

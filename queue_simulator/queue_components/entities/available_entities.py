@@ -8,3 +8,4 @@ class AvailableEntities(str, enum.Enum):
     SINK = "SINK"
     PATH = "PATH"
     ENTITY = "ENTITY"
+    LABEL = "LABEL"

@@ -11,6 +11,7 @@ class NameGenerator(EntityManager):
     _path_serial: int
     _entity_serial: int
     _emitter_serial: int
+    _label_serial: int
 
     def __init__(self):
         super().__init__()
@@ -20,6 +21,7 @@ class NameGenerator(EntityManager):
         self._path_serial = 0
         self._entity_serial = 0
         self._emitter_serial = 0
+        self._label_serial = 0
 
     def next_source(self) -> int:
         self._source_serial += 1
@@ -45,6 +47,10 @@ class NameGenerator(EntityManager):
         self._emitter_serial += 1
         return self._emitter_serial
 
+    def _next_label(self) -> int:
+        self._label_serial += 1
+        return self._label_serial
+
     def get_name(self, entity: AvailableEntities):
         name_selector = {
             AvailableEntities.SOURCE: self.next_source,
@@ -53,5 +59,6 @@ class NameGenerator(EntityManager):
             AvailableEntities.PATH: self.next_path,
             AvailableEntities.ENTITY_EMITTER: self.next_emitter,
             AvailableEntities.ENTITY: self.next_entity,
+            AvailableEntities.LABEL: self._next_label
         }
         return entity.capitalize() + str(name_selector[entity]())

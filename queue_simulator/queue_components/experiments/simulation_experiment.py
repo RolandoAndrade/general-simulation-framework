@@ -7,7 +7,9 @@ from control.controls.discrete_event_control import DiscreteEventControl
 from core.events import EventBus
 from core.types import Time
 from experiments.experiment_builders import DiscreteEventExperiment
-from queue_simulator.queue_components.entities import NameGenerator, Emitter
+from queue_simulator.queue_components.entities import NameGenerator, Emitter, AvailableEntities
+from queue_simulator.queue_components.label.graph_label import GraphLabel
+from queue_simulator.queue_components.label.label import Label
 from queue_simulator.queue_components.route.route import Route
 from queue_simulator.queue_components.dynamic_systems import SimulationDynamicSystem
 from queue_simulator.queue_components.shared.expressions import ExpressionManager
@@ -27,6 +29,8 @@ class SimulationExperiment(DiscreteEventExperiment):
 
     _emitters: Set[Emitter]
 
+    _labels: Set[GraphLabel]
+
     _expression_manager: ExpressionManager
 
     def __init__(self):
@@ -40,6 +44,7 @@ class SimulationExperiment(DiscreteEventExperiment):
         self._name_generator = NameGenerator()
         self._event_bus = eb
         self._emitters = set()
+        self._labels = set()
         self._expression_manager = ExpressionManager()
 
     def add_node(self, node_type: NodeType):
@@ -50,6 +55,19 @@ class SimulationExperiment(DiscreteEventExperiment):
             self._emitters.add(node)
         self._expression_manager.add_expression(node.get_id(), node.get_expressions())
         return node
+
+    def add_label(self):
+        label = GraphLabel(self._name_generator.get_name(AvailableEntities.LABEL),
+                           self._name_generator, self._expression_manager)
+        self._labels.add(label)
+        return label
+
+    def edit_label(self, component: str, new_property: NodeProperty):
+        for label in self._labels:
+            if label.get_id() == component:
+                label.set_expression(new_property.property_value)
+                return label
+        return None
 
     def add_path(self, from_node: str, to_node: str):
         from_model = self.dynamic_system.get_model(from_node)
