@@ -109,7 +109,7 @@ class Server(DiscreteEventModel, SimulatorComponent, Statistical):
 
     @property
     def initial_capacity(self):
-        return self._processing_time
+        return self._initial_capacity
 
     @initial_capacity.setter
     def initial_capacity(self, value: NumberProperty):
