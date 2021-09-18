@@ -63,10 +63,12 @@ class SimulationExperiment(DiscreteEventExperiment):
         return label
 
     def edit_label(self, component: str, new_property: NodeProperty):
-        for label in self._labels:
-            if label.get_id() == component:
+        label = self._get_label(component)
+        if label is not None:
+            if new_property.property_name == "Name":
+                label.set_id(new_property.property_name)
+            else:
                 label.set_expression(new_property.property_value)
-                return label
         return None
 
     def add_path(self, from_node: str, to_node: str):
@@ -80,6 +82,12 @@ class SimulationExperiment(DiscreteEventExperiment):
         for emitter in self._emitters:
             if emitter.get_id() == name:
                 return emitter
+        return None
+
+    def _get_label(self, name: str):
+        for label in self._labels:
+            if label.get_id() == name:
+                return label
         return None
 
     def _remove_model(self, component: str) -> bool:
@@ -105,11 +113,19 @@ class SimulationExperiment(DiscreteEventExperiment):
             return True
         return False
 
+    def _remove_label(self, component: str) -> bool:
+        label = self._get_label(component)
+        if label is not None:
+            self._labels.remove(label)
+            return True
+        return False
+
     def remove_component(self, component: str):
         return (
             self._remove_model(component)
             or self._remove_path(component)
             or self._remove_emitter(component)
+            or self._remove_label(component)
         )
 
     def edit_property(self, component: str, new_property: NodeProperty):
@@ -139,7 +155,7 @@ class SimulationExperiment(DiscreteEventExperiment):
     ):
         self.dynamic_system.init()
         self.simulation_control.start(
-            None, step or Time(1000), stop_time, wait_time or Time(0)
+            None, step or Time(1000), stop_time, wait_time or 0
         )
 
     def get_stats(self) -> List[ComponentStats]:
