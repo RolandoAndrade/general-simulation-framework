@@ -48,6 +48,16 @@ class Prototype8Test(unittest.TestCase):
             'weights': ['1', '1'],
             'expected': 48
         },
+        'test_4': {
+            'time': Time(20),
+            'inter_arrival_time': 'Random.Exponential(3)',
+            'entities_per_arrival': 'Random.Poisson(2)',
+            'time_offset': Value(0),
+            'processing_time': 'Random.Triangular(1,5,10)',
+            'initial_capacity': '1000',
+            'weights': ['80', '40'],
+            'expected': 48
+        },
     }
 
     def setUp(self) -> None:
@@ -243,6 +253,105 @@ class Prototype8Test(unittest.TestCase):
 
         self.experiment.edit_property(server2_sink2.get_id(), NodeProperty("Weight",self.vectors[test]['weights'][1],'EXPRESSION', 'GENERIC'))
 
+        source_label_out = self.experiment.add_label()
+        self.experiment.edit_label(source_label_out.get_id(),
+                                   NodeProperty("Expression", "Source1.OutputBuffer.NumberEntered", 'EXPRESSION',
+                                                'GENERIC'))
+
+        server_label_out = self.experiment.add_label()
+        self.experiment.edit_label(server_label_out.get_id(),
+                                   NodeProperty("Expression", "Server1.OutputBuffer.NumberEntered", 'EXPRESSION',
+                                                'GENERIC'))
+
+        server_label_in = self.experiment.add_label()
+        self.experiment.edit_label(server_label_in.get_id(),
+                                   NodeProperty("Expression", "Server1.InputBuffer.NumberEntered", 'EXPRESSION',
+                                                'GENERIC'))
+
+        sink_label_in = self.experiment.add_label()
+        self.experiment.edit_label(sink_label_in.get_id(),
+                                   NodeProperty("Expression", "Sink1.InputBuffer.NumberEntered", 'EXPRESSION',
+                                                'GENERIC'))
+
+        sink2_label_in = self.experiment.add_label()
+        self.experiment.edit_label(sink2_label_in.get_id(),
+                                   NodeProperty("Expression", "Sink2.InputBuffer.NumberEntered", 'EXPRESSION',
+                                                'GENERIC'))
+        results = []
+
+        # self.experiment.dynamic_system.show(test)
+        print(source.serialize(), server.serialize(), server2.serialize())
+
+        for i in range(15):
+            self.experiment.start_simulation(stop_time=time)
+            self.experiment.simulation_control.wait()
+            results.append([sink.get_state().input_buffer.number_entered.get_value(),
+                            sink2.get_state().input_buffer.number_entered.get_value()])
+            print([str(source_label_out), str(server_label_in), str(server_label_out),
+                   str(sink_label_in), str(sink2_label_in)])
+        print(results)
+
+    def test_source_validation_4(self):
+        test = 'test_4'
+        time = self.vectors[test]['time']
+        source = self.experiment.add_node(NodeType.SOURCE)
+        source2 = self.experiment.add_node(NodeType.SOURCE)
+        server = self.experiment.add_node(NodeType.SERVER)
+        server2 = self.experiment.add_node(NodeType.SERVER)
+        sink = self.experiment.add_node(NodeType.SINK)
+        sink2 = self.experiment.add_node(NodeType.SINK)
+
+        source1_server1 = self.experiment.add_path(source.get_id(), server.get_id())
+        server1_sink1 = self.experiment.add_path(server.get_id(), sink.get_id())
+        server1_server1 = self.experiment.add_path(server.get_id(), server.get_id())
+
+        source2_server2 = self.experiment.add_path(source2.get_id(), server2.get_id())
+        server2_sink2 = self.experiment.add_path(server2.get_id(), sink2.get_id())
+        server2_server2 = self.experiment.add_path(server2.get_id(), server2.get_id())
+
+        self.experiment.edit_property(source.get_id(), NodeProperty(SourceProperty.INTER_ARRIVAL_TIME,
+                                                                    self.vectors[test]['inter_arrival_time'],
+                                                                    'EXPRESSION', 'GENERIC'))
+        self.experiment.edit_property(source.get_id(), NodeProperty(SourceProperty.ENTITIES_PER_ARRIVAL,
+                                                                    self.vectors[test]['entities_per_arrival'],
+                                                                    'EXPRESSION', 'GENERIC'))
+
+        self.experiment.edit_property(source2.get_id(), NodeProperty(SourceProperty.INTER_ARRIVAL_TIME,
+                                                                    self.vectors[test]['inter_arrival_time'],
+                                                                    'EXPRESSION', 'GENERIC'))
+        self.experiment.edit_property(source2.get_id(), NodeProperty(SourceProperty.ENTITIES_PER_ARRIVAL,
+                                                                    self.vectors[test]['entities_per_arrival'],
+                                                                    'EXPRESSION', 'GENERIC'))
+
+        self.experiment.edit_property(server.get_id(), NodeProperty(ServerProperty.PROCESSING_TIME,
+                                                                    self.vectors[test]['processing_time'], 'EXPRESSION',
+                                                                    'GENERIC'))
+        self.experiment.edit_property(server.get_id(), NodeProperty(ServerProperty.INITIAL_CAPACITY,
+                                                                    self.vectors[test]['initial_capacity'], 'NUMBER',
+                                                                    'GENERIC'))
+        self.experiment.edit_property(server2.get_id(), NodeProperty(ServerProperty.PROCESSING_TIME,
+                                                                     self.vectors[test]['processing_time'],
+                                                                     'EXPRESSION',
+                                                                     'GENERIC'))
+        self.experiment.edit_property(server2.get_id(), NodeProperty(ServerProperty.INITIAL_CAPACITY,
+                                                                     self.vectors[test]['initial_capacity'], 'NUMBER',
+                                                                     'GENERIC'))
+
+        self.experiment.edit_property(server1_sink1.get_id(), NodeProperty("Weight",
+                                                                           self.vectors[test]['weights'][0],
+                                                                           'EXPRESSION', 'GENERIC'))
+
+        self.experiment.edit_property(server1_server1.get_id(), NodeProperty("Weight",
+                                                                           self.vectors[test]['weights'][1],
+                                                                           'EXPRESSION', 'GENERIC'))
+
+        self.experiment.edit_property(server2_sink2.get_id(), NodeProperty("Weight",
+                                                                           self.vectors[test]['weights'][0],
+                                                                           'EXPRESSION', 'GENERIC'))
+
+        self.experiment.edit_property(server2_server2.get_id(), NodeProperty("Weight",
+                                                                             self.vectors[test]['weights'][1],
+                                                                             'EXPRESSION', 'GENERIC'))
         source_label_out = self.experiment.add_label()
         self.experiment.edit_label(source_label_out.get_id(),
                                    NodeProperty("Expression", "Source1.OutputBuffer.NumberEntered", 'EXPRESSION',
