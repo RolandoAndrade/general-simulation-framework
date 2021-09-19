@@ -58,7 +58,7 @@ class ProcessBuffer(Buffer):
                 break
         quantity = len(entities)
         r_quantity = int(min(self.remaining_capacity.get_value(), quantity))
-        self.number_entered += r_quantity
+        self.number_entered.set_value(self.number_entered.get_value() + r_quantity)
         self._in_station_history.append(len(self._content))
         return quantity - r_quantity
 
@@ -85,6 +85,11 @@ class ProcessBuffer(Buffer):
 
     def set_id(self, name: str):
         super(ProcessBuffer, self).set_id(name + ".ProcessBuffer")
+
+    def reset(self):
+        super(ProcessBuffer, self).reset()
+        self.__processing_time_history = []
+
 
     def get_datasource(self) -> DataSource:
         ds = super(ProcessBuffer, self).get_datasource()

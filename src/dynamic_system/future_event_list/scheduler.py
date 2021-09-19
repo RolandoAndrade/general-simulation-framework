@@ -44,7 +44,7 @@ class Scheduler:
         Args:
             model (DiscreteEventModel): DiscreteEventModel with an autonomous event scheduled.
         """
-        if model in self._future_event_list:
+        while model in self._future_event_list:
             self._future_event_list.remove(model)
 
     @debug("Getting time of next event")

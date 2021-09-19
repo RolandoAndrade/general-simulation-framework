@@ -145,6 +145,7 @@ class Server(DiscreteEventModel, SimulatorComponent, Statistical):
         self.get_state().output_buffer.reset()
         self.get_state().input_buffer.reset()
         self.get_state().process_buffer.reset()
+        self._is_busy = False
         self.unschedule()
 
     def get_expressions(self) -> Dict[str, Any]:
