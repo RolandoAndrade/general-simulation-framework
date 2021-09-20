@@ -50,10 +50,10 @@ class Prototype8Test(unittest.TestCase):
         },
         'test_4': {
             'time': Time(20),
-            'inter_arrival_time': 'Random.Exponential(3)',
-            'entities_per_arrival': 'Random.Poisson(2)',
+            'inter_arrival_time': '1',
+            'entities_per_arrival': '1',
             'time_offset': Value(0),
-            'processing_time': 'Random.Triangular(1,5,10)',
+            'processing_time': '2',
             'initial_capacity': '1000',
             'weights': ['80', '40'],
             'expected': 48
