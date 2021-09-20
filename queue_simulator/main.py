@@ -13,9 +13,16 @@ from queue_simulator.socket_server.controllers import (
 )
 from queue_simulator.socket_server.socket_server import sio
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_url_path='',
+            static_folder='web/static',
+            template_folder='web/templates')
 app.wsgi_app = socketio.WSGIApp(sio, app.wsgi_app)
 
+
+@app.route('/')
+def root():
+    return app.send_static_file('index.html')
 
 @sio.event
 def connect(sid, environ):
