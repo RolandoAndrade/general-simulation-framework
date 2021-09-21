@@ -1,3 +1,4 @@
+from decimal import Decimal
 from typing import Dict, Any
 
 from loguru import logger
@@ -11,7 +12,7 @@ class SimulationController:
     @sio.event
     def start_simulation(sid, data: Dict[str, Any]):
         stop_time = data.get("stopTime", None)
-        step = data.get("stopTime", None)
+        step = data.get("step", None)
         wait_time = data.get("waitTime", None)
         init = data.get("init", True)
         logger.info("Start simulation, sid: {sid}", sid=sid)
@@ -22,9 +23,22 @@ class SimulationController:
 
     @staticmethod
     @sio.event
+    def fast_forward(sid, data: Dict[str, Any]):
+        stop_time = data.get("stopTime", None)
+        step = data.get("step", 100000000000)
+        wait_time = data.get("waitTime", None)
+        init = data.get("init", True)
+        logger.info("Fast forward simulation, sid: {sid}", sid=sid)
+        session: Dict[str, SimulationExperiment]
+        with sio.session(sid) as session:
+            session["experiment"].start_simulation(stop_time, step, wait_time, init)
+        return True
+
+    @staticmethod
+    @sio.event
     def next_step(sid, data: Dict[str, Any]):
         stop_time = data.get("stopTime", None)
-        step = data.get("stopTime", None)
+        step = data.get("step", None)
         init = data.get("init", True)
         logger.info("Next step simulation, sid: {sid}", sid=sid)
         session: Dict[str, SimulationExperiment]
