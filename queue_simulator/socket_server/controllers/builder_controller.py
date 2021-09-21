@@ -23,6 +23,26 @@ class BuilderController:
 
     @staticmethod
     @sio.event
+    def create_label(sid, data: Dict[str, NodeType]):
+        node = data["node"]
+        logger.info("Create label: {node}, sid: {sid}", node=node, sid=sid)
+        session: Dict[str, SimulationExperiment]
+        with sio.session(sid) as session:
+            created_node = session["experiment"].add_label()
+        return created_node.serialize()
+
+    @staticmethod
+    @sio.event
+    def edit_label(sid, data: Dict[str, Any]):
+        component = data["component"]
+        new_property = NodeProperty.deserialize(data["property"])
+        session: Dict[str, SimulationExperiment]
+        with sio.session(sid) as session:
+            created_path = session["experiment"].edit_label(component, new_property)
+        return created_path.serialize()
+
+    @staticmethod
+    @sio.event
     def create_path(sid, data: Dict[str, str]):
         from_node = data["from"]
         to_node = data["to"]

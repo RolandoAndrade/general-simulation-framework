@@ -69,7 +69,7 @@ class SimulationExperiment(DiscreteEventExperiment):
                 label.set_id(new_property.property_name)
             else:
                 label.set_expression(new_property.property_value)
-        return None
+        return label
 
     def add_path(self, from_node: str, to_node: str):
         from_model = self.dynamic_system.get_model(from_node)
