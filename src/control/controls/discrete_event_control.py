@@ -45,8 +45,8 @@ class DiscreteEventControl(BaseControl):
             stop_time (Time): Duration of the simulation.
         """
         while not self._is_paused:
-            self._time = min(self._time + min(self._simulator.get_time_of_next_event(), frequency), stop_time)
-            self._simulator.compute_next_state(time=self._time)
+            next_time = min(self._time + min(self._simulator.get_time_of_next_event(), frequency), stop_time)
+            self.next_step(next_time)
             sleep(wait_time)
             if 0 <= stop_time <= self._time:
                 self._is_paused = True
@@ -57,6 +57,14 @@ class DiscreteEventControl(BaseControl):
                     DomainEvents.SIMULATION_STATUS,
                     SimulationStats(self._time, stop_time, frequency, self._is_paused),
                 )
+
+    def next_step(self, time: Time = None):
+        """Executes the next step
+        """
+        time = time or (self._time + self._simulator.get_time_of_next_event())
+        self._time = time
+        self._simulator.compute_next_state(time=self._time)
+        return time
 
     @debug("Simulation starts")
     def start(
@@ -99,3 +107,7 @@ class DiscreteEventControl(BaseControl):
 
     def wait(self, timeout: Time = None):
         self._simulation_strategy.wait_simulation(timeout)
+
+    @property
+    def time(self):
+        return self._time

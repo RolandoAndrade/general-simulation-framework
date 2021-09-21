@@ -13,10 +13,23 @@ class SimulationController:
         stop_time = data.get("stopTime", None)
         step = data.get("stopTime", None)
         wait_time = data.get("waitTime", None)
+        init = data.get("init", True)
         logger.info("Start simulation, sid: {sid}", sid=sid)
         session: Dict[str, SimulationExperiment]
         with sio.session(sid) as session:
-            session["experiment"].start_simulation(stop_time, step, wait_time)
+            session["experiment"].start_simulation(stop_time, step, wait_time, init)
+        return True
+
+    @staticmethod
+    @sio.event
+    def next_step(sid, data: Dict[str, Any]):
+        stop_time = data.get("stopTime", None)
+        step = data.get("stopTime", None)
+        init = data.get("init", True)
+        logger.info("Next step simulation, sid: {sid}", sid=sid)
+        session: Dict[str, SimulationExperiment]
+        with sio.session(sid) as session:
+            session["experiment"].next_step(stop_time, step, init)
         return True
 
     @staticmethod

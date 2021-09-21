@@ -4,12 +4,12 @@ from typing import Set, List
 
 from control.controls import ThreadControlStrategy
 from control.controls.discrete_event_control import DiscreteEventControl
-from core.events import EventBus
+from control.core import SimulationStats
+from core.events import EventBus, DomainEvents
 from core.types import Time
 from experiments.experiment_builders import DiscreteEventExperiment
 from queue_simulator.queue_components.entities import NameGenerator, Emitter, AvailableEntities
 from queue_simulator.queue_components.label.graph_label import GraphLabel
-from queue_simulator.queue_components.label.label import Label
 from queue_simulator.queue_components.route.route import Route
 from queue_simulator.queue_components.dynamic_systems import SimulationDynamicSystem
 from queue_simulator.queue_components.shared.expressions import ExpressionManager
@@ -26,6 +26,8 @@ class SimulationExperiment(DiscreteEventExperiment):
     _name_generator: NameGenerator
 
     dynamic_system: SimulationDynamicSystem
+    simulation_control: DiscreteEventControl
+    simulator: DiscreteEventSimulationEngine
 
     _emitters: Set[Emitter]
 
@@ -122,18 +124,18 @@ class SimulationExperiment(DiscreteEventExperiment):
 
     def remove_component(self, component: str):
         return (
-            self._remove_model(component)
-            or self._remove_path(component)
-            or self._remove_emitter(component)
-            or self._remove_label(component)
+                self._remove_model(component)
+                or self._remove_path(component)
+                or self._remove_emitter(component)
+                or self._remove_label(component)
         )
 
     def edit_property(self, component: str, new_property: NodeProperty):
         with_expression = self.dynamic_system.get_model(component) or self._get_emitter(component)
         node = (
-            self.dynamic_system.get_model(component)
-            or self.dynamic_system.get_path(component)
-            or self._get_emitter(component)
+                self.dynamic_system.get_model(component)
+                or self.dynamic_system.get_path(component)
+                or self._get_emitter(component)
         )
         if node is not None:
             last_id = node.get_id()
@@ -151,12 +153,29 @@ class SimulationExperiment(DiscreteEventExperiment):
         return self._expression_manager.get_available_expressions()
 
     def start_simulation(
-        self, stop_time: Time, step: Time = None, wait_time: Time = None
+            self, stop_time: Time, step: Time = None, wait_time: Time = None, init: bool = True
     ):
-        self.dynamic_system.init()
+        if init:
+            self.dynamic_system.init()
+        if step is not None:
+            step = Time(step)
         self.simulation_control.start(
             None, step or Time(1000), stop_time, wait_time or 0
         )
+
+    def next_step(
+            self, stop_time: Time = None, step: Time = None,
+            init: bool = True
+    ):
+        if init:
+            self.dynamic_system.init()
+        if 0 <= self.simulation_control.time + self.simulator.get_time_of_next_event() <= stop_time:
+            time = self.simulation_control.next_step()
+            self.event_bus.emit(DomainEvents.SIMULATION_STATUS,
+                                SimulationStats(time, stop_time, step, True),)
+            if time >= stop_time:
+                self.simulation_control.stop()
+                self.event_bus.emit(DomainEvents.SIMULATION_FINISHED)
 
     def get_stats(self) -> List[ComponentStats]:
         return self.dynamic_system.get_stats()
