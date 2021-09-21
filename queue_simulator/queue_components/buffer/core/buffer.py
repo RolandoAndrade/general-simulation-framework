@@ -28,7 +28,7 @@ class Buffer(Entity, StatSource, ABC):
     policy: StringProperty
     """Policy of the buffer"""
 
-    __number_entered: NumberProperty[int]
+    _number_entered: NumberProperty[int]
     """Number of entities that entered into the buffer"""
 
     _in_station_history: List[int]
@@ -51,7 +51,7 @@ class Buffer(Entity, StatSource, ABC):
         self.capacity = capacity
         self._content = []
         self.policy = policy
-        self.__number_entered = NumberProperty(0)
+        self._number_entered = NumberProperty(0)
         self._in_station_history = []
 
     def add(self, entities: List[Entity], *args, **kwargs) -> int:
@@ -63,7 +63,7 @@ class Buffer(Entity, StatSource, ABC):
         """
         quantity = len(entities)
         r_quantity = int(min(self.remaining_capacity.get_value(), quantity))
-        self.__number_entered.set_value(self.__number_entered.get_value() + r_quantity)
+        self._number_entered.set_value(self._number_entered.get_value() + r_quantity)
         for i in range(r_quantity):
             self._content.append(entities[i])
         self._in_station_history.append(len(self._content))
@@ -134,12 +134,12 @@ class Buffer(Entity, StatSource, ABC):
     @property
     def number_entered(self) -> NumberProperty[int]:
         """Returns true if the buffer is empty"""
-        return self.__number_entered
+        return self._number_entered
 
     @number_entered.setter
     def number_entered(self, value):
         """Sets the number entered"""
-        self.__number_entered = value
+        self._number_entered = value
 
     def __str__(self):
         return str(
@@ -147,14 +147,14 @@ class Buffer(Entity, StatSource, ABC):
                 {
                     BufferProperty.CAPACITY: str(self.capacity),
                     BufferProperty.POLICY: str(self.policy),
-                    BufferProperty.NUMBER_ENTERED: str(self.__number_entered),
+                    BufferProperty.NUMBER_ENTERED: str(self._number_entered),
                 }
             )
         )
 
     def reset(self):
         self.empty()
-        self.__number_entered.set_value(0)
+        self._number_entered.set_value(0)
         self._in_station_history.clear()
 
     def get_datasource(self) -> DataSource:
