@@ -1,1 +1,2 @@
+from .unit_expression import UnitExpression
 from .expression_manager import ExpressionManager, static_expression_manager

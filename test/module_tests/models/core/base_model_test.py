@@ -1,11 +1,11 @@
 import unittest
 
-from core.entity.core import Entity, static_entity_manager
+from core.entity.core import static_entity_manager
 from dynamic_system.core import BaseDynamicSystem
 from dynamic_system.future_event_list import Scheduler
 from models.core import BaseModel
-from test.mocks.base_model_mock import BaseModelMock
-from test.mocks.dynamic_system_mock import DynamicSystemMock
+from test.module_tests.mocks.base_model_mock import BaseModelMock
+from test.module_tests.mocks.dynamic_system_mock import DynamicSystemMock
 
 
 class BaseModelTest(unittest.TestCase):

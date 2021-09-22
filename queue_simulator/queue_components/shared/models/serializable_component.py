@@ -6,7 +6,7 @@ from core.entity.core.property_type import PropertyType
 from core.entity.properties import NumberProperty
 from core.expresions import UserExpression
 from queue_simulator.queue_components.shared.expressions import ExpressionManager
-from queue_simulator.queue_components.shared.models import UnitExpressionProperty
+from queue_simulator.queue_components.shared.models import TimeUnitExpressionProperty
 from queue_simulator.queue_components.shared.models.node_property import NodeProperty
 
 
@@ -21,7 +21,7 @@ class SimulatorComponent(ABC, Entity):
         for i in properties:
             unit = None
             p = properties[i]
-            if isinstance(p, UnitExpressionProperty):
+            if isinstance(p, TimeUnitExpressionProperty):
                 unit = p.get_unit()
             e.append(
                 NodeProperty(
@@ -56,7 +56,7 @@ class SimulatorComponent(ABC, Entity):
             method = effect[serialized_property.property_type]
             value = serialized_property.property_value
             new_property = method(value, expression_manager)
-            if serialized_property.property_unit is not None and isinstance(edited_property, UnitExpressionProperty):
+            if serialized_property.property_unit is not None and isinstance(edited_property, TimeUnitExpressionProperty):
                 edited_property.set_unit(serialized_property.property_unit)
             edited_property.set_value(new_property)
 

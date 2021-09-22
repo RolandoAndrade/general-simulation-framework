@@ -12,7 +12,7 @@ from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from models.models import DiscreteEventModel
 from queue_simulator.queue_components.buffer.buffers import OutputBuffer
 from queue_simulator.queue_components.entities import Emitter
-from queue_simulator.queue_components.shared.models import SimulatorComponent, UnitExpressionProperty
+from queue_simulator.queue_components.shared.models import SimulatorComponent, TimeUnitExpressionProperty
 from queue_simulator.queue_components.shared.stats import Statistical, ComponentStats
 
 from queue_simulator.queue_components.source import SourceProperty, SourceState
@@ -24,13 +24,13 @@ from core.entity.core import EntityManager
 class Source(DiscreteEventModel, SimulatorComponent, Statistical):
     """Source of entities"""
 
-    __inter_arrival_time: Optional[UnitExpressionProperty]
+    __inter_arrival_time: Optional[TimeUnitExpressionProperty]
     """InterArrival time of the entities"""
 
     __entities_per_arrival: Optional[ExpressionProperty]
     """Entities created per arrival"""
 
-    __time_offset: Optional[UnitExpressionProperty]
+    __time_offset: Optional[TimeUnitExpressionProperty]
     """Time until the first transition"""
 
     __used_offset: Optional[ExpressionProperty]
@@ -47,10 +47,10 @@ class Source(DiscreteEventModel, SimulatorComponent, Statistical):
         name: str,
         entity_emitter: Union[EntityEmitter, Property[EntityEmitter]] = None,
         inter_arrival_time: Union[
-            Expression, UnitExpressionProperty
+            Expression, TimeUnitExpressionProperty
         ] = ExponentialDistribution(0.25),
         entities_per_arrival: Union[Expression, ExpressionProperty] = Value(1),
-        time_offset: Union[Expression, UnitExpressionProperty] = Value(0),
+        time_offset: Union[Expression, TimeUnitExpressionProperty] = Value(0),
         entity_manager: EntityManager = None,
     ):
         """
@@ -129,11 +129,11 @@ class Source(DiscreteEventModel, SimulatorComponent, Statistical):
         return self.__inter_arrival_time
 
     @inter_arrival_time.setter
-    def inter_arrival_time(self, value: Union[Expression, UnitExpressionProperty]):
-        if isinstance(value, UnitExpressionProperty):
+    def inter_arrival_time(self, value: Union[Expression, TimeUnitExpressionProperty]):
+        if isinstance(value, TimeUnitExpressionProperty):
             self.__inter_arrival_time = value
         else:
-            self.__inter_arrival_time = UnitExpressionProperty(value, "Minutes")
+            self.__inter_arrival_time = TimeUnitExpressionProperty(value, "Seconds")
 
     @property
     def entity_emitter(self):
@@ -163,10 +163,10 @@ class Source(DiscreteEventModel, SimulatorComponent, Statistical):
 
     @time_offset.setter
     def time_offset(self, value: Expression):
-        if isinstance(value, UnitExpressionProperty):
+        if isinstance(value, TimeUnitExpressionProperty):
             self.__time_offset = value
         else:
-            self.__time_offset = UnitExpressionProperty(value, "Minutes")
+            self.__time_offset = TimeUnitExpressionProperty(value, "Seconds")
         self.__used_offset = self.__time_offset
 
     def get_state(self) -> SourceState:

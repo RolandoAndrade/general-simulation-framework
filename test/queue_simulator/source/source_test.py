@@ -8,7 +8,7 @@ from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
 )
 from dynamic_system.future_event_list import Scheduler
 from queue_simulator.queue_components.source import Source
-from test.mocks.mock_emitter import MockEmitter
+from test.module_tests.mocks import MockEmitter
 
 
 class TestSource(unittest.TestCase):

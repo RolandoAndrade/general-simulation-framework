@@ -6,7 +6,7 @@ from core.entity.properties.number_property import NumberProperty
 from queue_simulator.queue_components.buffer.buffers import OutputBuffer
 from queue_simulator.queue_components.buffer.core.buffer_policy import BufferPolicy
 from queue_simulator.queue_components.buffer.core.buffer_property import BufferProperty
-from test.mocks.mock_emitter import MockEmitter
+from test.module_tests.mocks import MockEmitter
 
 
 class TestOutputBuffer(unittest.TestCase):

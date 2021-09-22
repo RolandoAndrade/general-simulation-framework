@@ -8,7 +8,7 @@ from experiments.experiment_builders.discrete_event_experiment import (
 )
 from queue_simulator.queue_components.server import Server
 from queue_simulator.queue_components.source import Source
-from test.mocks.mock_emitter import MockEmitter
+from test.module_tests.mocks import MockEmitter
 
 
 class ServerTest(unittest.TestCase):
