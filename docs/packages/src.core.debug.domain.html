@@ -136,6 +136,26 @@
    Submodules
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.core.debug.domain.debug">
+   src.core.debug.domain.debug module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.core.debug.domain.logger">
+   src.core.debug.domain.logger module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.core.debug.domain.summary_table">
+   src.core.debug.domain.summary_table module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.core.debug.domain">
+   Module contents
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -147,12 +167,83 @@
         
               <div>
                 
-  <div class="section" id="module-src.core.debug.domain">
-<span id="src-core-debug-domain-package"></span><h1>src.core.debug.domain package<a class="headerlink" href="#module-src.core.debug.domain" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="src-core-debug-domain-package">
+<h1>src.core.debug.domain package<a class="headerlink" href="#src-core-debug-domain-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
 </div>
+<div class="section" id="module-src.core.debug.domain.debug">
+<span id="src-core-debug-domain-debug-module"></span><h2>src.core.debug.domain.debug module<a class="headerlink" href="#module-src.core.debug.domain.debug" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="src.core.debug.domain.debug.debug">
+<code class="sig-prename descclassname"><span class="pre">src.core.debug.domain.debug.</span></code><code class="sig-name descname"><span class="pre">debug</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">after</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.core.debug.domain.debug.debug" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-src.core.debug.domain.logger">
+<span id="src-core-debug-domain-logger-module"></span><h2>src.core.debug.domain.logger module<a class="headerlink" href="#module-src.core.debug.domain.logger" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-src.core.debug.domain.summary_table">
+<span id="src-core-debug-domain-summary-table-module"></span><h2>src.core.debug.domain.summary_table module<a class="headerlink" href="#module-src.core.debug.domain.summary_table" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="src.core.debug.domain.summary_table.SummaryTable">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.core.debug.domain.summary_table.</span></code><code class="sig-name descname"><span class="pre">SummaryTable</span></code><a class="headerlink" href="#src.core.debug.domain.summary_table.SummaryTable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt id="src.core.debug.domain.summary_table.SummaryTable.add_row">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">add_row</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="src.core.debug.domain.summary_table.html#src.core.debug.domain.summary_table.SummaryTable" title="src.core.debug.domain.summary_table.SummaryTable"><span class="pre">src.core.debug.domain.summary_table.SummaryTable</span></a><a class="headerlink" href="#src.core.debug.domain.summary_table.SummaryTable.add_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a row to the table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>row</strong> – Row to be added.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.core.debug.domain.summary_table.SummaryTable.build">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">build</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#src.core.debug.domain.summary_table.SummaryTable.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the table in string format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.core.debug.domain.summary_table.SummaryTable.set_alignment">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">set_alignment</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">align</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="src.core.debug.domain.summary_table.html#src.core.debug.domain.summary_table.SummaryTable" title="src.core.debug.domain.summary_table.SummaryTable"><span class="pre">src.core.debug.domain.summary_table.SummaryTable</span></a><a class="headerlink" href="#src.core.debug.domain.summary_table.SummaryTable.set_alignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the alignment of the columns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>align</strong> – Alignment of each column.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.core.debug.domain.summary_table.SummaryTable.set_labels">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">set_labels</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="src.core.debug.domain.summary_table.html#src.core.debug.domain.summary_table.SummaryTable" title="src.core.debug.domain.summary_table.SummaryTable"><span class="pre">src.core.debug.domain.summary_table.SummaryTable</span></a><a class="headerlink" href="#src.core.debug.domain.summary_table.SummaryTable.set_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the labels of the table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>labels</strong> – Fields of the table.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.core.debug.domain.summary_table.SummaryTable.set_title">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">set_title</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="src.core.debug.domain.summary_table.html#src.core.debug.domain.summary_table.SummaryTable" title="src.core.debug.domain.summary_table.SummaryTable"><span class="pre">src.core.debug.domain.summary_table.SummaryTable</span></a><a class="headerlink" href="#src.core.debug.domain.summary_table.SummaryTable.set_title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the title of the table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>title</strong> (<em>str</em>) – Title of the table.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.core.debug.domain">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.core.debug.domain" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

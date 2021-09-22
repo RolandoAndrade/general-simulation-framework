@@ -1,16 +1,29 @@
 src.core.debug.infrastructure package
 =====================================
 
-.. automodule:: src.core.debug.infrastructure
+Submodules
+----------
+
+src.core.debug.infrastructure.providers module
+----------------------------------------------
+
+.. automodule:: src.core.debug.infrastructure.providers
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+src.core.debug.infrastructure.table module
+------------------------------------------
 
-.. toctree::
-   :maxdepth: 4
+.. automodule:: src.core.debug.infrastructure.table
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-   src.core.debug.infrastructure.providers
-   src.core.debug.infrastructure.table
+Module contents
+---------------
+
+.. automodule:: src.core.debug.infrastructure
+   :members:
+   :undoc-members:
+   :show-inheritance:

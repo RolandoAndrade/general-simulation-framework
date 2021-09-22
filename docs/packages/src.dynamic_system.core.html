@@ -136,6 +136,16 @@
    Submodules
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.dynamic_system.core.base_dynamic_sytem">
+   src.dynamic_system.core.base_dynamic_sytem module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.dynamic_system.core">
+   Module contents
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -147,12 +157,93 @@
         
               <div>
                 
-  <div class="section" id="module-src.dynamic_system.core">
-<span id="src-dynamic-system-core-package"></span><h1>src.dynamic_system.core package<a class="headerlink" href="#module-src.dynamic_system.core" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="src-dynamic-system-core-package">
+<h1>src.dynamic_system.core package<a class="headerlink" href="#src-dynamic-system-core-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
 </div>
+<div class="section" id="module-src.dynamic_system.core.base_dynamic_sytem">
+<span id="src-dynamic-system-core-base-dynamic-sytem-module"></span><h2>src.dynamic_system.core.base_dynamic_sytem module<a class="headerlink" href="#module-src.dynamic_system.core.base_dynamic_sytem" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.dynamic_system.core.base_dynamic_sytem.</span></code><code class="sig-name descname"><span class="pre">BaseDynamicSystem</span></code><a class="headerlink" href="#src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Abstract dynamic system</p>
+<dl class="py method">
+<dt id="src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.add">
+<code class="sig-name descname"><span class="pre">add</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a model to the dynamic system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model</strong> (<a class="reference internal" href="src.models.core.base_model.html#src.models.core.base_model.BaseModel" title="src.models.core.base_model.BaseModel"><em>BaseModel</em></a>) – Model to be added.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.get_output">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">get_output</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">DynamicSystemOutput</span><a class="headerlink" href="#src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.get_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the output of the dynamic system.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.link">
+<code class="sig-name descname"><span class="pre">link</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.link" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a path between two nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference internal" href="src.models.core.path.html#src.models.core.path.Path" title="src.models.core.path.Path"><em>Path</em></a>) – Path to be appended.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.remove">
+<code class="sig-name descname"><span class="pre">remove</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a model of the dynamic system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>model</strong> (<a class="reference internal" href="src.models.core.base_model.html#src.models.core.base_model.BaseModel" title="src.models.core.base_model.BaseModel"><em>BaseModel</em></a>) – Model to be removed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.show">
+<code class="sig-name descname"><span class="pre">show</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'dynamic_system'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Shows a graph of the dynamic system</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.state_transition">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">state_transition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">DynamicSystemOutput</span><a class="headerlink" href="#src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.state_transition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the state transition of the dynamic system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*args</strong> – </p></li>
+<li><p><strong>**kwargs</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.unlink">
+<code class="sig-name descname"><span class="pre">unlink</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.unlink" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a path between two nodes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> (<a class="reference internal" href="src.models.core.path.html#src.models.core.path.Path" title="src.models.core.path.Path"><em>Path</em></a>) – Path to be deleted.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.dynamic_system.core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.dynamic_system.core" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

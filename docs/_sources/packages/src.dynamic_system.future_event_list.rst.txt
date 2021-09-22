@@ -1,16 +1,29 @@
 src.dynamic\_system.future\_event\_list package
 ===============================================
 
-.. automodule:: src.dynamic_system.future_event_list
+Submodules
+----------
+
+src.dynamic\_system.future\_event\_list.scheduled\_model module
+---------------------------------------------------------------
+
+.. automodule:: src.dynamic_system.future_event_list.scheduled_model
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+src.dynamic\_system.future\_event\_list.scheduler module
+--------------------------------------------------------
 
-.. toctree::
-   :maxdepth: 4
+.. automodule:: src.dynamic_system.future_event_list.scheduler
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-   src.dynamic_system.future_event_list.scheduled_model
-   src.dynamic_system.future_event_list.scheduler
+Module contents
+---------------
+
+.. automodule:: src.dynamic_system.future_event_list
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -32,6 +32,7 @@
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -136,6 +137,16 @@
    Submodules
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.models.models.discrete_event_model">
+   src.models.models.discrete_event_model module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.models.models">
+   Module contents
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -147,12 +158,178 @@
         
               <div>
                 
-  <div class="section" id="module-src.models.models">
-<span id="src-models-models-package"></span><h1>src.models.models package<a class="headerlink" href="#module-src.models.models" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="src-models-models-package">
+<h1>src.models.models package<a class="headerlink" href="#src-models-models-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
 </div>
+<div class="section" id="module-src.models.models.discrete_event_model">
+<span id="src-models-models-discrete-event-model-module"></span><h2>src.models.models.discrete_event_model module<a class="headerlink" href="#module-src.models.models.discrete_event_model" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="src.models.models.discrete_event_model.DiscreteEventModel">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.models.models.discrete_event_model.</span></code><code class="sig-name descname"><span class="pre">DiscreteEventModel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dynamic_system</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DiscreteEventDynamicSystem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ModelState</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_manager</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">EntityManager</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">models.core.base_model.BaseModel</span></code></p>
+<p>DiscreteEventModel with an state</p>
+<dl class="py method">
+<dt id="src.models.models.discrete_event_model.DiscreteEventModel._confluent_state_transition_function">
+<code class="sig-name descname"><span class="pre">_confluent_state_transition_function</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel._confluent_state_transition_function" title="Permalink to this definition">¶</a></dt>
+<dd><div class="math notranslate nohighlight">
+\[\delta_{con}(s,x)\]</div>
+<p>Implements the confluent state transition function delta. The
+confluent state transition executes an external transition function at
+the time of an autonomous event.</p>
+<div class="math notranslate nohighlight">
+\[\delta_{con} \; : \; S \; x \; X \longrightarrow S\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>ModelState</em>) – Current state of the model.</p></li>
+<li><p><strong>inputs</strong> (<em>ModelInput</em>) – Input trajectory x.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.models.discrete_event_model.DiscreteEventModel._external_state_transition_function">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">_external_state_transition_function</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel._external_state_transition_function" title="Permalink to this definition">¶</a></dt>
+<dd><div class="math notranslate nohighlight">
+\[\delta_{ext}((s,e), x)\]</div>
+<p>Implements the external state transition function delta. The external
+state transition function computes the next state of the model from its
+current total state (s,e) Q at time of an input and the input itself.</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\delta_{ext} \; : \; Q \; x \; X \longrightarrow S\]</div>
+</div></blockquote>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>state</strong> (<em>ModelState</em>) – Current state of the model.</p></li>
+<li><p><strong>inputs</strong> (<em>ModelInput</em>) – Input trajectory x.</p></li>
+<li><p><strong>event_time</strong> (<em>float</em>) – Time of event e.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.models.discrete_event_model.DiscreteEventModel._internal_state_transition_function">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">_internal_state_transition_function</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel._internal_state_transition_function" title="Permalink to this definition">¶</a></dt>
+<dd><div class="math notranslate nohighlight">
+\[\delta_{int}(s)\]</div>
+<p>Implements the internal state transition function delta. The internal
+state transition function takes the system from its state at the time of
+the autonomous event to a subsequent state.</p>
+<div class="math notranslate nohighlight">
+\[\delta_{int} \; : \; S \longrightarrow S\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>ModelState</em>) – Current state of the model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.models.discrete_event_model.DiscreteEventModel._output_function">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">_output_function</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel._output_function" title="Permalink to this definition">¶</a></dt>
+<dd><div class="math notranslate nohighlight">
+\[\lambda \; (s)\]</div>
+<p>Implements the output function lambda. The output function describes
+how the state of the system appears to an observer when e=ta(s).</p>
+<div class="math notranslate nohighlight">
+\[\lambda \; : \; S \; \longrightarrow Y\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>ModelState</em>) – current state s of the model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.models.discrete_event_model.DiscreteEventModel._time_advance_function">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">_time_advance_function</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">decimal.Decimal</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel._time_advance_function" title="Permalink to this definition">¶</a></dt>
+<dd><div class="math notranslate nohighlight">
+\[ta(s)\]</div>
+<p>Implement the model’s time advance function ta. The time advance
+function schedules output from the model and autonomous changes in its
+state.</p>
+<div class="math notranslate nohighlight">
+\[ta \; : \; S \longrightarrow R_{0^\infty}\]</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>ModelState</em>) – Current state of the system.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.models.discrete_event_model.DiscreteEventModel.add">
+<code class="sig-name descname"><span class="pre">add</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a model as an input for the current model in the dynamic system and returns the model added.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<a class="reference internal" href="src.models.core.base_model.html#src.models.core.base_model.BaseModel" title="src.models.core.base_model.BaseModel"><em>BaseModel</em></a>) – Output model to be added.</p></li>
+<li><p><strong>weight</strong> (<a class="reference internal" href="src.core.entity.properties.expression_property.html#src.core.entity.properties.expression_property.ExpressionProperty" title="src.core.entity.properties.expression_property.ExpressionProperty"><em>ExpressionProperty</em></a>) – Weight of the path.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the path.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.models.discrete_event_model.DiscreteEventModel.get_output">
+<code class="sig-name descname"><span class="pre">get_output</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel.get_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the output of the model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.models.discrete_event_model.DiscreteEventModel.get_time">
+<code class="sig-name descname"><span class="pre">get_time</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel.get_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the time of the next autonomous event.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.models.discrete_event_model.DiscreteEventModel.schedule">
+<code class="sig-name descname"><span class="pre">schedule</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel.schedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Schedules an autonomous event</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>float</em>) – Time when the event will be executed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.models.discrete_event_model.DiscreteEventModel.state_transition">
+<code class="sig-name descname"><span class="pre">state_transition</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel.state_transition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the state transition using the state given by the state
+transition function. If there are not inputs is an internal transition,
+otherwise it is an external transition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>inputs</strong> (<em>ModelInput</em>) – Input trajectory x. If it is None, the state
+transition is autonomous</p></li>
+<li><p><strong>event_time</strong> (<em>Time</em>) – Time of the event. If there are inputs and the
+time is ta(s), it is an confluent transition.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.models.discrete_event_model.DiscreteEventModel.unschedule">
+<code class="sig-name descname"><span class="pre">unschedule</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel.unschedule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unscheduled an autonomous event</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.models.models">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.models.models" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

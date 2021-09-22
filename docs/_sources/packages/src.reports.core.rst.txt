@@ -1,15 +1,21 @@
 src.reports.core package
 ========================
 
-.. automodule:: src.reports.core
+Submodules
+----------
+
+src.reports.core.base\_report module
+------------------------------------
+
+.. automodule:: src.reports.core.base_report
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+Module contents
+---------------
 
-.. toctree::
-   :maxdepth: 4
-
-   src.reports.core.base_report
+.. automodule:: src.reports.core
+   :members:
+   :undoc-members:
+   :show-inheritance:

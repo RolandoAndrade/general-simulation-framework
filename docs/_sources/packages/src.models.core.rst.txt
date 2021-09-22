@@ -1,16 +1,29 @@
 src.models.core package
 =======================
 
-.. automodule:: src.models.core
+Submodules
+----------
+
+src.models.core.base\_model module
+----------------------------------
+
+.. automodule:: src.models.core.base_model
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+src.models.core.path module
+---------------------------
 
-.. toctree::
-   :maxdepth: 4
+.. automodule:: src.models.core.path
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-   src.models.core.base_model
-   src.models.core.path
+Module contents
+---------------
+
+.. automodule:: src.models.core
+   :members:
+   :undoc-members:
+   :show-inheritance:

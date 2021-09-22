@@ -1,17 +1,37 @@
 src.core.debug.domain package
 =============================
 
-.. automodule:: src.core.debug.domain
+Submodules
+----------
+
+src.core.debug.domain.debug module
+----------------------------------
+
+.. automodule:: src.core.debug.domain.debug
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+src.core.debug.domain.logger module
+-----------------------------------
 
-.. toctree::
-   :maxdepth: 4
+.. automodule:: src.core.debug.domain.logger
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-   src.core.debug.domain.debug
-   src.core.debug.domain.logger
-   src.core.debug.domain.summary_table
+src.core.debug.domain.summary\_table module
+-------------------------------------------
+
+.. automodule:: src.core.debug.domain.summary_table
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: src.core.debug.domain
+   :members:
+   :undoc-members:
+   :show-inheritance:

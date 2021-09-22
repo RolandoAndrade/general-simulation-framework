@@ -111,13 +111,13 @@ class DiscreteEventModel(BaseModel):
         self, state: ModelState, inputs: ModelInput
     ) -> ModelState:
         """
-        .. math:: \delta_con(s,x)
+        .. math:: \delta_{con}(s,x)
 
         Implements the confluent state transition function delta. The
         confluent state transition executes an external transition function at
         the time of an autonomous event.
 
-        .. math:: \delta_con \; : \; S \; x \; X \longrightarrow S
+        .. math:: \delta_{con} \; : \; S \; x \; X \longrightarrow S
 
         Args:
             state (ModelState): Current state of the model.
@@ -131,13 +131,13 @@ class DiscreteEventModel(BaseModel):
     @abstractmethod
     def _internal_state_transition_function(self, state: ModelState) -> ModelState:
         """
-        .. math:: \delta_int(s)
+        .. math:: \delta_{int}(s)
 
         Implements the internal state transition function delta. The internal
         state transition function takes the system from its state at the time of
         the autonomous event to a subsequent state.
 
-        .. math:: \delta_int \; : \; S \longrightarrow S
+        .. math:: \delta_{int} \; : \; S \longrightarrow S
 
         Args:
             state (ModelState): Current state of the model.
@@ -149,13 +149,13 @@ class DiscreteEventModel(BaseModel):
         self, state: ModelState, inputs: ModelInput, event_time: Time
     ) -> ModelState:
         """
-        .. math:: \delta_ext((s,e), x)
+        .. math:: \delta_{ext}((s,e), x)
 
         Implements the external state transition function delta. The external
         state transition function computes the next state of the model from its
         current total state (s,e) Q at time of an input and the input itself.
 
-            .. math:: \delta_ext \; : \; Q \; x \; X \longrightarrow S
+            .. math:: \delta_{ext} \; : \; Q \; x \; X \longrightarrow S
 
         Args:
             state (ModelState): Current state of the model.
@@ -166,7 +166,7 @@ class DiscreteEventModel(BaseModel):
 
     @abstractmethod
     def _time_advance_function(self, state: ModelState) -> Time:
-        """ta(s)
+        """.. math:: ta(s)
 
         Implement the model’s time advance function ta. The time advance
         function schedules output from the model and autonomous changes in its

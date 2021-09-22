@@ -1,16 +1,29 @@
 src.core.events package
 =======================
 
-.. automodule:: src.core.events
+Submodules
+----------
+
+src.core.events.domain\_events module
+-------------------------------------
+
+.. automodule:: src.core.events.domain_events
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+src.core.events.event\_bus module
+---------------------------------
 
-.. toctree::
-   :maxdepth: 4
+.. automodule:: src.core.events.event_bus
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-   src.core.events.domain_events
-   src.core.events.event_bus
+Module contents
+---------------
+
+.. automodule:: src.core.events
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -136,6 +136,26 @@
    Submodules
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.control.core.base_control">
+   src.control.core.base_control module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.control.core.simulation_stats">
+   src.control.core.simulation_stats module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.control.core.simulation_strategy">
+   src.control.core.simulation_strategy module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.control.core">
+   Module contents
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -147,12 +167,139 @@
         
               <div>
                 
-  <div class="section" id="module-src.control.core">
-<span id="src-control-core-package"></span><h1>src.control.core package<a class="headerlink" href="#module-src.control.core" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="src-control-core-package">
+<h1>src.control.core package<a class="headerlink" href="#src-control-core-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
 </div>
+<div class="section" id="module-src.control.core.base_control">
+<span id="src-control-core-base-control-module"></span><h2>src.control.core.base_control module<a class="headerlink" href="#module-src.control.core.base_control" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="src.control.core.base_control.BaseControl">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.control.core.base_control.</span></code><code class="sig-name descname"><span class="pre">BaseControl</span></code><a class="headerlink" href="#src.control.core.base_control.BaseControl" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Simulation control</p>
+<dl class="py method">
+<dt id="src.control.core.base_control.BaseControl._execute">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">_execute</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.control.core.base_control.BaseControl._execute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the simulation loop number of seconds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>frequency</strong> (<em>Time</em>) – Frequency of the simulation computation.</p></li>
+<li><p><strong>wait_time</strong> (<em>Time</em>) – Delay execution for a given.</p></li>
+<li><p><strong>stop_time</strong> (<em>Time</em>) – Duration of the simulation.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.control.core.base_control.BaseControl.init">
+<code class="sig-name descname"><span class="pre">init</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.control.core.base_control.BaseControl.init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="src.control.core.base_control.BaseControl.pause">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">pause</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.control.core.base_control.BaseControl.pause" title="Permalink to this definition">¶</a></dt>
+<dd><p>Pauses the simulation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.control.core.base_control.BaseControl.start">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">start</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">start_input</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">ModelInput</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Time</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Time</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Time</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.control.core.base_control.BaseControl.start" title="Permalink to this definition">¶</a></dt>
+<dd><p>Starts the simulation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>start_input</strong> – Input of the dynamic system.</p></li>
+<li><p><strong>frequency</strong> (<em>Time</em>) – Frequency of the simulation computation.</p></li>
+<li><p><strong>stop_time</strong> (<em>Time</em>) – Time of the simulation</p></li>
+<li><p><strong>wait_time</strong> (<em>Time</em>) – Delay execution for a given number of seconds.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.control.core.base_control.BaseControl.stop">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">stop</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.control.core.base_control.BaseControl.stop" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops the simulation</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.control.core.base_control.BaseControl.wait">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">wait</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">decimal.Decimal</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.control.core.base_control.BaseControl.wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>Waits the simulation end</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>timeout</strong> (<em>Time</em>) – Time to wait.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.control.core.simulation_stats">
+<span id="src-control-core-simulation-stats-module"></span><h2>src.control.core.simulation_stats module<a class="headerlink" href="#module-src.control.core.simulation_stats" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="src.control.core.simulation_stats.SimulationStats">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.control.core.simulation_stats.</span></code><code class="sig-name descname"><span class="pre">SimulationStats</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_paused</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.control.core.simulation_stats.SimulationStats" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py attribute">
+<dt id="src.control.core.simulation_stats.SimulationStats.frequency">
+<code class="sig-name descname"><span class="pre">frequency</span></code><em class="property"><span class="pre">:</span> <span class="pre">decimal.Decimal</span></em><a class="headerlink" href="#src.control.core.simulation_stats.SimulationStats.frequency" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="src.control.core.simulation_stats.SimulationStats.is_paused">
+<code class="sig-name descname"><span class="pre">is_paused</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#src.control.core.simulation_stats.SimulationStats.is_paused" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="src.control.core.simulation_stats.SimulationStats.stop_time">
+<code class="sig-name descname"><span class="pre">stop_time</span></code><em class="property"><span class="pre">:</span> <span class="pre">decimal.Decimal</span></em><a class="headerlink" href="#src.control.core.simulation_stats.SimulationStats.stop_time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="src.control.core.simulation_stats.SimulationStats.time">
+<code class="sig-name descname"><span class="pre">time</span></code><em class="property"><span class="pre">:</span> <span class="pre">decimal.Decimal</span></em><a class="headerlink" href="#src.control.core.simulation_stats.SimulationStats.time" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.control.core.simulation_strategy">
+<span id="src-control-core-simulation-strategy-module"></span><h2>src.control.core.simulation_strategy module<a class="headerlink" href="#module-src.control.core.simulation_strategy" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="src.control.core.simulation_strategy.SimulationStrategy">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.control.core.simulation_strategy.</span></code><code class="sig-name descname"><span class="pre">SimulationStrategy</span></code><a class="headerlink" href="#src.control.core.simulation_strategy.SimulationStrategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
+<p>Defines a simulation strategy.</p>
+<dl class="py method">
+<dt id="src.control.core.simulation_strategy.SimulationStrategy.start_simulation">
+<code class="sig-name descname"><span class="pre">start_simulation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.control.core.simulation_strategy.SimulationStrategy.start_simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Start the simulation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.control.core.simulation_strategy.SimulationStrategy.stop_simulation">
+<code class="sig-name descname"><span class="pre">stop_simulation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.control.core.simulation_strategy.SimulationStrategy.stop_simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Stops the simulation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.control.core.simulation_strategy.SimulationStrategy.wait_simulation">
+<code class="sig-name descname"><span class="pre">wait_simulation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.control.core.simulation_strategy.SimulationStrategy.wait_simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Waits the simulation.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.control.core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.control.core" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

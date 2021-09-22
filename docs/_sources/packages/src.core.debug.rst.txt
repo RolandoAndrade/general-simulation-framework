@@ -1,11 +1,6 @@
 src.core.debug package
 ======================
 
-.. automodule:: src.core.debug
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Subpackages
 -----------
 
@@ -14,3 +9,11 @@ Subpackages
 
    src.core.debug.domain
    src.core.debug.infrastructure
+
+Module contents
+---------------
+
+.. automodule:: src.core.debug
+   :members:
+   :undoc-members:
+   :show-inheritance:

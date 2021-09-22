@@ -1,11 +1,6 @@
 src package
 ===========
 
-.. automodule:: src
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 Subpackages
 -----------
 
@@ -19,3 +14,11 @@ Subpackages
    src.models
    src.reports
    src.simulation
+
+Module contents
+---------------
+
+.. automodule:: src
+   :members:
+   :undoc-members:
+   :show-inheritance:

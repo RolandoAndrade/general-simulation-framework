@@ -1,15 +1,21 @@
 src.simulation.simulation\_engines package
 ==========================================
 
-.. automodule:: src.simulation.simulation_engines
+Submodules
+----------
+
+src.simulation.simulation\_engines.discrete\_event\_simulation\_engine module
+-----------------------------------------------------------------------------
+
+.. automodule:: src.simulation.simulation_engines.discrete_event_simulation_engine
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+Module contents
+---------------
 
-.. toctree::
-   :maxdepth: 4
-
-   src.simulation.simulation_engines.discrete_event_simulation_engine
+.. automodule:: src.simulation.simulation_engines
+   :members:
+   :undoc-members:
+   :show-inheritance:

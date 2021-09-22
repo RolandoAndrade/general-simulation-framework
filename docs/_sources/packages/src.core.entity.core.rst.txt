@@ -1,19 +1,53 @@
 src.core.entity.core package
 ============================
 
-.. automodule:: src.core.entity.core
+Submodules
+----------
+
+src.core.entity.core.entity module
+----------------------------------
+
+.. automodule:: src.core.entity.core.entity
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+src.core.entity.core.entity\_emitter module
+-------------------------------------------
 
-.. toctree::
-   :maxdepth: 4
+.. automodule:: src.core.entity.core.entity_emitter
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-   src.core.entity.core.entity
-   src.core.entity.core.entity_emitter
-   src.core.entity.core.entity_manager
-   src.core.entity.core.entity_property
-   src.core.entity.core.property_type
+src.core.entity.core.entity\_manager module
+-------------------------------------------
+
+.. automodule:: src.core.entity.core.entity_manager
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.core.entity.core.entity\_property module
+--------------------------------------------
+
+.. automodule:: src.core.entity.core.entity_property
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+src.core.entity.core.property\_type module
+------------------------------------------
+
+.. automodule:: src.core.entity.core.property_type
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: src.core.entity.core
+   :members:
+   :undoc-members:
+   :show-inheritance:

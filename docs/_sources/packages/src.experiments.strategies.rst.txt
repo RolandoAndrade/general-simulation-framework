@@ -1,15 +1,21 @@
 src.experiments.strategies package
 ==================================
 
-.. automodule:: src.experiments.strategies
+Submodules
+----------
+
+src.experiments.strategies.pickle\_recovery module
+--------------------------------------------------
+
+.. automodule:: src.experiments.strategies.pickle_recovery
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+Module contents
+---------------
 
-.. toctree::
-   :maxdepth: 4
-
-   src.experiments.strategies.pickle_recovery
+.. automodule:: src.experiments.strategies
+   :members:
+   :undoc-members:
+   :show-inheritance:

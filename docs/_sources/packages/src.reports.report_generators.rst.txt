@@ -1,15 +1,21 @@
 src.reports.report\_generators package
 ======================================
 
-.. automodule:: src.reports.report_generators
+Submodules
+----------
+
+src.reports.report\_generators.default\_report module
+-----------------------------------------------------
+
+.. automodule:: src.reports.report_generators.default_report
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+Module contents
+---------------
 
-.. toctree::
-   :maxdepth: 4
-
-   src.reports.report_generators.default_report
+.. automodule:: src.reports.report_generators
+   :members:
+   :undoc-members:
+   :show-inheritance:

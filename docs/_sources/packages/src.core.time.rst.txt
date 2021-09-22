@@ -1,15 +1,21 @@
 src.core.time package
 =====================
 
-.. automodule:: src.core.time
+Submodules
+----------
+
+src.core.time.simulation\_time module
+-------------------------------------
+
+.. automodule:: src.core.time.simulation_time
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+Module contents
+---------------
 
-.. toctree::
-   :maxdepth: 4
-
-   src.core.time.simulation_time
+.. automodule:: src.core.time
+   :members:
+   :undoc-members:
+   :show-inheritance:

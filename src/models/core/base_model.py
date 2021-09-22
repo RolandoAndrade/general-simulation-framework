@@ -79,10 +79,7 @@ class BaseModel(Entity):
 
     @debug("Setting up the state")
     def set_up_state(self, state: ModelState):
-        """
-        set_up_state(state)
-
-        Sets up the state of the model.
+        """Sets up the state of the model.
 
             Args:
                 state (ModelState): New state of the model.

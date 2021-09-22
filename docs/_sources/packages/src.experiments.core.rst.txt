@@ -1,16 +1,29 @@
 src.experiments.core package
 ============================
 
-.. automodule:: src.experiments.core
+Submodules
+----------
+
+src.experiments.core.base\_experiment module
+--------------------------------------------
+
+.. automodule:: src.experiments.core.base_experiment
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+src.experiments.core.recovery\_strategy module
+----------------------------------------------
 
-.. toctree::
-   :maxdepth: 4
+.. automodule:: src.experiments.core.recovery_strategy
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-   src.experiments.core.base_experiment
-   src.experiments.core.recovery_strategy
+Module contents
+---------------
+
+.. automodule:: src.experiments.core
+   :members:
+   :undoc-members:
+   :show-inheritance:

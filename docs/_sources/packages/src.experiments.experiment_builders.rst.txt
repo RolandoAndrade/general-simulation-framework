@@ -1,15 +1,21 @@
 src.experiments.experiment\_builders package
 ============================================
 
-.. automodule:: src.experiments.experiment_builders
+Submodules
+----------
+
+src.experiments.experiment\_builders.discrete\_event\_experiment module
+-----------------------------------------------------------------------
+
+.. automodule:: src.experiments.experiment_builders.discrete_event_experiment
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+Module contents
+---------------
 
-.. toctree::
-   :maxdepth: 4
-
-   src.experiments.experiment_builders.discrete_event_experiment
+.. automodule:: src.experiments.experiment_builders
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -132,14 +132,45 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#core-module">
-   Core Module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#submodules">
    Submodules
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.models.core.base_model">
+   src.models.core.base_model module
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#base-model">
+     Base Model
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.models.core.path">
+   src.models.core.path module
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#path">
+     Path
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.models.core">
+   Module contents
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#core-module">
+     Core Module
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -152,19 +183,263 @@
         
               <div>
                 
-  <div class="section" id="module-src.models.core">
-<span id="src-models-core-package"></span><h1>src.models.core package<a class="headerlink" href="#module-src.models.core" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="core-module">
-<h2>Core Module<a class="headerlink" href="#core-module" title="Permalink to this headline">¶</a></h2>
-<p>This module includes the abstraction of a Simulation Model and the definition of a Path.</p>
-</div>
+  <div class="section" id="src-models-core-package">
+<h1>src.models.core package<a class="headerlink" href="#src-models-core-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="src.models.core.base_model.html">Base Model</a></li>
-<li class="toctree-l1"><a class="reference internal" href="src.models.core.path.html">Path</a></li>
+</div>
+<div class="section" id="module-src.models.core.base_model">
+<span id="src-models-core-base-model-module"></span><h2>src.models.core.base_model module<a class="headerlink" href="#module-src.models.core.base_model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="base-model">
+<h3>Base Model<a class="headerlink" href="#base-model" title="Permalink to this headline">¶</a></h3>
+<p>This module contains the definition of simulation Models.
+It has an abstract definition BaseModel, that should be extended,
+implementing its abstract methods.</p>
+<p class="rubric">Example</p>
+<p>Creating a model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">models.core</span> <span class="kn">import</span> <span class="n">BaseModel</span>
+
+<span class="k">class</span> <span class="nc">Model</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">state_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_up_state</span><span class="p">(</span><span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt id="src.models.core.base_model.BaseModel">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.models.core.base_model.</span></code><code class="sig-name descname"><span class="pre">BaseModel</span></code><a class="headerlink" href="#src.models.core.base_model.BaseModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">core.entity.core.entity.Entity</span></code></p>
+<p>Base model in a dynamic system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dynamic_system</strong> (<a class="reference internal" href="src.dynamic_system.core.base_dynamic_sytem.html#src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem" title="src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem"><em>BaseDynamicSystem</em></a>) – Dynamic system of the
+model.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the model.</p></li>
+<li><p><strong>state</strong> (<em>ModelState</em>) – Initial state of the model.</p></li>
+<li><p><strong>entity_manager</strong> (<a class="reference internal" href="src.core.entity.core.entity_manager.html#src.core.entity.core.entity_manager.EntityManager" title="src.core.entity.core.entity_manager.EntityManager"><em>EntityManager</em></a>) – Delegated entity manager.</p></li>
 </ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="src.models.core.base_model.BaseModel._serial_id">
+<code class="sig-name descname"><span class="pre">_serial_id</span></code><a class="headerlink" href="#src.models.core.base_model.BaseModel._serial_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serial of the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.models.core.base_model.BaseModel.__current_dynamic_system">
+<code class="sig-name descname"><span class="pre">__current_dynamic_system</span></code><a class="headerlink" href="#src.models.core.base_model.BaseModel.__current_dynamic_system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current dynamic system of the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="src.dynamic_system.core.base_dynamic_sytem.html#src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem" title="src.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem">BaseDynamicSystem</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.models.core.base_model.BaseModel.__current_state">
+<code class="sig-name descname"><span class="pre">__current_state</span></code><a class="headerlink" href="#src.models.core.base_model.BaseModel.__current_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current state of the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>ModelState</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.core.base_model.BaseModel.add">
+<code class="sig-name descname"><span class="pre">add</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.models.core.base_model.BaseModel.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current model will be the input for the given model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<a class="reference internal" href="src.models.core.base_model.html#src.models.core.base_model.BaseModel" title="src.models.core.base_model.BaseModel"><em>BaseModel</em></a>) – Output model to be added.</p></li>
+<li><p><strong>weight</strong> (<a class="reference internal" href="src.core.entity.properties.expression_property.html#src.core.entity.properties.expression_property.ExpressionProperty" title="src.core.entity.properties.expression_property.ExpressionProperty"><em>ExpressionProperty</em></a>) – Weight of the path.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the path.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.core.base_model.BaseModel.get_dynamic_system">
+<code class="sig-name descname"><span class="pre">get_dynamic_system</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.models.core.base_model.BaseModel.get_dynamic_system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the dynamic system where the current model belongs with</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.core.base_model.BaseModel.get_output">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">get_output</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#src.models.core.base_model.BaseModel.get_output" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the output of the model.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.core.base_model.BaseModel.get_state">
+<code class="sig-name descname"><span class="pre">get_state</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.models.core.base_model.BaseModel.get_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the curren state,</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.core.base_model.BaseModel.remove">
+<code class="sig-name descname"><span class="pre">remove</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.models.core.base_model.BaseModel.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes the model from the dynamic system</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.core.base_model.BaseModel.set_up_state">
+<code class="sig-name descname"><span class="pre">set_up_state</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.models.core.base_model.BaseModel.set_up_state" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets up the state of the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>state</strong> (<em>ModelState</em>) – New state of the model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.core.base_model.BaseModel.state_transition">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">state_transition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.core.base_model.BaseModel.state_transition" title="Permalink to this definition">¶</a></dt>
+<dd><p>Executes the state transition function</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-src.models.core.path">
+<span id="src-models-core-path-module"></span><h2>src.models.core.path module<a class="headerlink" href="#module-src.models.core.path" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="path">
+<h3>Path<a class="headerlink" href="#path" title="Permalink to this headline">¶</a></h3>
+<p>This module contains the definition of the Path class.</p>
+<p class="rubric">Example</p>
+<p>Creating a Path:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">core.entity.properties</span> <span class="kn">import</span> <span class="n">ExpressionProperty</span>
+<span class="kn">from</span> <span class="nn">core.mathematics.values</span> <span class="kn">import</span> <span class="n">Value</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">from_model</span><span class="p">,</span> <span class="n">to_model</span><span class="p">,</span> <span class="n">Value</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;path name&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
+<dt id="src.models.core.path.Path">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.models.core.path.</span></code><code class="sig-name descname"><span class="pre">Path</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">from_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ExpressionProperty</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_manager</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">EntityManager</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.core.path.Path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">core.entity.core.entity.Entity</span></code></p>
+<p>Connection between models.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>from_model</strong> (<a class="reference internal" href="src.models.core.base_model.html#src.models.core.base_model.BaseModel" title="src.models.core.base_model.BaseModel"><em>BaseModel</em></a>) – Source model of the path.</p></li>
+<li><p><strong>to_model</strong> (<a class="reference internal" href="src.models.core.base_model.html#src.models.core.base_model.BaseModel" title="src.models.core.base_model.BaseModel"><em>BaseModel</em></a>) – Destination model of the path.</p></li>
+<li><p><strong>weight</strong> (<a class="reference internal" href="src.core.entity.properties.expression_property.html#src.core.entity.properties.expression_property.ExpressionProperty" title="src.core.entity.properties.expression_property.ExpressionProperty"><em>ExpressionProperty</em></a>) – Weight of the connection.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name of the path.</p></li>
+<li><p><strong>entity_manager</strong> (<a class="reference internal" href="src.core.entity.core.entity_manager.html#src.core.entity.core.entity_manager.EntityManager" title="src.core.entity.core.entity_manager.EntityManager"><em>EntityManager</em></a>) – Manager of entities in the system.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="src.models.core.path.Path._serial_id">
+<code class="sig-name descname"><span class="pre">_serial_id</span></code><a class="headerlink" href="#src.models.core.path.Path._serial_id" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serial of the path</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.models.core.path.Path._from">
+<code class="sig-name descname"><span class="pre">_from</span></code><a class="headerlink" href="#src.models.core.path.Path._from" title="Permalink to this definition">¶</a></dt>
+<dd><p>Source model of the path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="src.models.core.base_model.html#src.models.core.base_model.BaseModel" title="src.models.core.base_model.BaseModel">BaseModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.models.core.path.Path._to">
+<code class="sig-name descname"><span class="pre">_to</span></code><a class="headerlink" href="#src.models.core.path.Path._to" title="Permalink to this definition">¶</a></dt>
+<dd><p>Destination model of the path.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="src.models.core.base_model.html#src.models.core.base_model.BaseModel" title="src.models.core.base_model.BaseModel">BaseModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="src.models.core.path.Path._weight">
+<code class="sig-name descname"><span class="pre">_weight</span></code><a class="headerlink" href="#src.models.core.path.Path._weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Weight of the connection.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="src.core.entity.properties.expression_property.html#src.core.entity.properties.expression_property.ExpressionProperty" title="src.core.entity.properties.expression_property.ExpressionProperty">ExpressionProperty</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.core.path.Path.get_destination_model">
+<code class="sig-name descname"><span class="pre">get_destination_model</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">BaseModel</span><a class="headerlink" href="#src.models.core.path.Path.get_destination_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the destination model</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.core.path.Path.get_properties">
+<code class="sig-name descname"><span class="pre">get_properties</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">core.entity.core.entity_property.EntityProperty</span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#src.models.core.path.Path.get_properties" title="Permalink to this definition">¶</a></dt>
+<dd><p>Lists the properties of the entity.</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>{ ‘Weight’: ExpressionProperty }</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.core.path.Path.get_source_model">
+<code class="sig-name descname"><span class="pre">get_source_model</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">BaseModel</span><a class="headerlink" href="#src.models.core.path.Path.get_source_model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the source model</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p>BaseModel: The origin model of the path.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.core.path.Path.get_weight">
+<code class="sig-name descname"><span class="pre">get_weight</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">float</span><a class="headerlink" href="#src.models.core.path.Path.get_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the evaluation of the weight.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.models.core.path.Path.set_weight">
+<code class="sig-name descname"><span class="pre">set_weight</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">core.entity.properties.expression_property.ExpressionProperty</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.core.path.Path.set_weight" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the weight of the path</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>weight</strong> (<a class="reference internal" href="src.core.entity.properties.expression_property.html#src.core.entity.properties.expression_property.ExpressionProperty" title="src.core.entity.properties.expression_property.ExpressionProperty"><em>ExpressionProperty</em></a>) – Weight of the path.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="module-src.models.core">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.models.core" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="core-module">
+<h3>Core Module<a class="headerlink" href="#core-module" title="Permalink to this headline">¶</a></h3>
+<p>This module includes the abstraction of a Simulation Model and the definition of a Path.</p>
 </div>
 </div>
 </div>

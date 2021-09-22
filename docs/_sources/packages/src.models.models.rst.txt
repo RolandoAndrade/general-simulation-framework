@@ -1,15 +1,21 @@
 src.models.models package
 =========================
 
-.. automodule:: src.models.models
+Submodules
+----------
+
+src.models.models.discrete\_event\_model module
+-----------------------------------------------
+
+.. automodule:: src.models.models.discrete_event_model
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+Module contents
+---------------
 
-.. toctree::
-   :maxdepth: 4
-
-   src.models.models.discrete_event_model
+.. automodule:: src.models.models
+   :members:
+   :undoc-members:
+   :show-inheritance:

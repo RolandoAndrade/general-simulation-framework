@@ -136,6 +136,21 @@
    Submodules
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.core.debug.infrastructure.providers">
+   src.core.debug.infrastructure.providers module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.core.debug.infrastructure.table">
+   src.core.debug.infrastructure.table module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#module-src.core.debug.infrastructure">
+   Module contents
+  </a>
+ </li>
 </ul>
 
             </nav>
@@ -147,12 +162,75 @@
         
               <div>
                 
-  <div class="section" id="module-src.core.debug.infrastructure">
-<span id="src-core-debug-infrastructure-package"></span><h1>src.core.debug.infrastructure package<a class="headerlink" href="#module-src.core.debug.infrastructure" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="src-core-debug-infrastructure-package">
+<h1>src.core.debug.infrastructure package<a class="headerlink" href="#src-core-debug-infrastructure-package" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
 </div>
+<div class="section" id="module-src.core.debug.infrastructure.providers">
+<span id="src-core-debug-infrastructure-providers-module"></span><h2>src.core.debug.infrastructure.providers module<a class="headerlink" href="#module-src.core.debug.infrastructure.providers" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-src.core.debug.infrastructure.table">
+<span id="src-core-debug-infrastructure-table-module"></span><h2>src.core.debug.infrastructure.table module<a class="headerlink" href="#module-src.core.debug.infrastructure.table" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="src.core.debug.infrastructure.table.Table">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.core.debug.infrastructure.table.</span></code><code class="sig-name descname"><span class="pre">Table</span></code><a class="headerlink" href="#src.core.debug.infrastructure.table.Table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">core.debug.domain.summary_table.SummaryTable</span></code></p>
+<dl class="py method">
+<dt id="src.core.debug.infrastructure.table.Table.add_row">
+<code class="sig-name descname"><span class="pre">add_row</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">row</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="src.core.debug.infrastructure.table.html#src.core.debug.infrastructure.table.Table" title="src.core.debug.infrastructure.table.Table"><span class="pre">src.core.debug.infrastructure.table.Table</span></a><a class="headerlink" href="#src.core.debug.infrastructure.table.Table.add_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds a row to the table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>row</strong> – Row to be added.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.core.debug.infrastructure.table.Table.build">
+<code class="sig-name descname"><span class="pre">build</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#src.core.debug.infrastructure.table.Table.build" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the table in string format</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.core.debug.infrastructure.table.Table.set_alignment">
+<code class="sig-name descname"><span class="pre">set_alignment</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">align</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">core.debug.domain.summary_table.SummaryTable</span><a class="headerlink" href="#src.core.debug.infrastructure.table.Table.set_alignment" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the alignment of the columns</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>align</strong> – Alignment of each column.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.core.debug.infrastructure.table.Table.set_labels">
+<code class="sig-name descname"><span class="pre">set_labels</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="src.core.debug.infrastructure.table.html#src.core.debug.infrastructure.table.Table" title="src.core.debug.infrastructure.table.Table"><span class="pre">src.core.debug.infrastructure.table.Table</span></a><a class="headerlink" href="#src.core.debug.infrastructure.table.Table.set_labels" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the labels of the table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>labels</strong> – Fields of the table.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="src.core.debug.infrastructure.table.Table.set_title">
+<code class="sig-name descname"><span class="pre">set_title</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="src.core.debug.infrastructure.table.html#src.core.debug.infrastructure.table.Table" title="src.core.debug.infrastructure.table.Table"><span class="pre">src.core.debug.infrastructure.table.Table</span></a><a class="headerlink" href="#src.core.debug.infrastructure.table.Table.set_title" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the title of the table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>title</strong> (<em>str</em>) – Title of the table.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-src.core.debug.infrastructure">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.core.debug.infrastructure" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

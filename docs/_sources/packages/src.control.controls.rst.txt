@@ -1,16 +1,29 @@
 src.control.controls package
 ============================
 
-.. automodule:: src.control.controls
+Submodules
+----------
+
+src.control.controls.discrete\_event\_control module
+----------------------------------------------------
+
+.. automodule:: src.control.controls.discrete_event_control
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+src.control.controls.thread\_control module
+-------------------------------------------
 
-.. toctree::
-   :maxdepth: 4
+.. automodule:: src.control.controls.thread_control
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-   src.control.controls.discrete_event_control
-   src.control.controls.thread_control
+Module contents
+---------------
+
+.. automodule:: src.control.controls
+   :members:
+   :undoc-members:
+   :show-inheritance:

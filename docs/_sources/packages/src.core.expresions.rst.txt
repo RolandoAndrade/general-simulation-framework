@@ -1,16 +1,29 @@
 src.core.expresions package
 ===========================
 
-.. automodule:: src.core.expresions
+Submodules
+----------
+
+src.core.expresions.expression module
+-------------------------------------
+
+.. automodule:: src.core.expresions.expression
    :members:
    :undoc-members:
    :show-inheritance:
 
-Submodules
-----------
+src.core.expresions.user\_expression module
+-------------------------------------------
 
-.. toctree::
-   :maxdepth: 4
+.. automodule:: src.core.expresions.user_expression
+   :members:
+   :undoc-members:
+   :show-inheritance:
 
-   src.core.expresions.expression
-   src.core.expresions.user_expression
+Module contents
+---------------
+
+.. automodule:: src.core.expresions
+   :members:
+   :undoc-members:
+   :show-inheritance:
