@@ -12,4 +12,4 @@ class TimeConversion(UnitConversion):
     }
 
     def convert(self, value: Any, from_unit: str, to_unit: str = "Milliseconds"):
-        return value * self.units[from_unit]
+        return value * TimeConversion.units.get(from_unit, 1)

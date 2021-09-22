@@ -19,3 +19,9 @@ class UnitExpression(Expression):
 
     def set_unit(self, unit: str):
         self._unit = unit
+
+    def set_expression(self, expression: Expression):
+        self._expression = expression
+
+    def __str__(self):
+        return str(self._expression)
