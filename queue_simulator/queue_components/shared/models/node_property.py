@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 from core.entity.core.property_type import PropertyType
 
@@ -12,6 +12,7 @@ class NodeProperty:
     property_value: str
     property_type: str
     property_category: str
+    property_unit: Optional[str]
 
     def serialize(self) -> Dict[str, Any]:
         return {
@@ -19,6 +20,7 @@ class NodeProperty:
             "propertyValue": self.property_value,
             "propertyType": self.property_type,
             "propertyCategory": self.property_category,
+            "unit": self.property_unit
         }
 
     @staticmethod
@@ -28,4 +30,5 @@ class NodeProperty:
             properties["propertyValue"],
             properties["propertyType"],
             properties["propertyCategory"],
+            properties.get("unit", None)
         )
