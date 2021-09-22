@@ -12,7 +12,7 @@ class NodeProperty:
     property_value: str
     property_type: str
     property_category: str
-    property_unit: Optional[str]
+    property_unit: Optional[str] = None
 
     def serialize(self) -> Dict[str, Any]:
         return {
