@@ -1,1 +1,2 @@
+from .unit_expression_property import UnitExpressionProperty
 from .serializable_component import SimulatorComponent

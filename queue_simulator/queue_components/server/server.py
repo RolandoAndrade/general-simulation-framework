@@ -14,14 +14,14 @@ from queue_simulator.queue_components.buffer.buffers import (
 )
 from queue_simulator.queue_components.server import ServerProperty
 from queue_simulator.queue_components.server.server_state import ServerState
-from queue_simulator.queue_components.shared.models import SimulatorComponent
+from queue_simulator.queue_components.shared.models import SimulatorComponent, UnitExpressionProperty
 from queue_simulator.queue_components.shared.stats import Statistical, ComponentStats
 
 
 class Server(DiscreteEventModel, SimulatorComponent, Statistical):
     """Server of processes"""
 
-    _processing_time: ExpressionProperty
+    _processing_time: UnitExpressionProperty
     """Processing time of the server."""
 
     _initial_capacity: NumberProperty
@@ -34,7 +34,7 @@ class Server(DiscreteEventModel, SimulatorComponent, Statistical):
         self,
         dynamic_system: DiscreteEventDynamicSystem,
         name: str,
-        processing_time: Union[ExpressionProperty, Expression] = Value(1),
+        processing_time: Union[UnitExpressionProperty, Expression] = Value(1),
         initial_capacity: NumberProperty = NumberProperty(1),
         entity_manager: EntityManager = None,
     ):
@@ -101,11 +101,11 @@ class Server(DiscreteEventModel, SimulatorComponent, Statistical):
         return self._processing_time
 
     @processing_time.setter
-    def processing_time(self, value: Union[ExpressionProperty, Expression]):
-        if isinstance(value, ExpressionProperty):
+    def processing_time(self, value: Union[UnitExpressionProperty, Expression]):
+        if isinstance(value, UnitExpressionProperty):
             self._processing_time = value
         else:
-            self._processing_time = ExpressionProperty(value)
+            self._processing_time = UnitExpressionProperty(value, "Minutes")
 
     @property
     def initial_capacity(self):
