@@ -136,16 +136,6 @@
    Submodules
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.models.models.discrete_event_model">
-   src.models.models.discrete_event_model module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.models.models">
-   Module contents
-  </a>
- </li>
 </ul>
 
             </nav>
@@ -157,55 +147,12 @@
         
               <div>
                 
-  <div class="section" id="src-models-models-package">
-<h1>src.models.models package<a class="headerlink" href="#src-models-models-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-src.models.models">
+<span id="src-models-models-package"></span><h1>src.models.models package<a class="headerlink" href="#module-src.models.models" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
 </div>
-<div class="section" id="module-src.models.models.discrete_event_model">
-<span id="src-models-models-discrete-event-model-module"></span><h2>src.models.models.discrete_event_model module<a class="headerlink" href="#module-src.models.models.discrete_event_model" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="src.models.models.discrete_event_model.DiscreteEventModel">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.models.models.discrete_event_model.</span></code><code class="sig-name descname"><span class="pre">DiscreteEventModel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dynamic_system</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DiscreteEventDynamicSystem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">state</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">ModelState</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">entity_manager</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">EntityManager</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">models.core.base_model.BaseModel</span></code></p>
-<p>DiscreteEventModel with an state</p>
-<dl class="py method">
-<dt id="src.models.models.discrete_event_model.DiscreteEventModel.add">
-<code class="sig-name descname"><span class="pre">add</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel.add" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="src.models.models.discrete_event_model.DiscreteEventModel.get_output">
-<code class="sig-name descname"><span class="pre">get_output</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel.get_output" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the output of the model.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.models.models.discrete_event_model.DiscreteEventModel.get_time">
-<code class="sig-name descname"><span class="pre">get_time</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel.get_time" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="src.models.models.discrete_event_model.DiscreteEventModel.schedule">
-<code class="sig-name descname"><span class="pre">schedule</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel.schedule" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="src.models.models.discrete_event_model.DiscreteEventModel.state_transition">
-<code class="sig-name descname"><span class="pre">state_transition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel.state_transition" title="Permalink to this definition">¶</a></dt>
-<dd><p>Executes the state transition function</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.models.models.discrete_event_model.DiscreteEventModel.unschedule">
-<code class="sig-name descname"><span class="pre">unschedule</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.models.models.discrete_event_model.DiscreteEventModel.unschedule" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-src.models.models">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.models.models" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

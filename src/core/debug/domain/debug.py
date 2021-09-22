@@ -1,3 +1,5 @@
+import functools
+
 from loguru import logger
 import sys
 
@@ -17,6 +19,7 @@ logger.configure(**config)
 
 def debug(message: str = "", after: bool = False):
     def real_decorator(function):
+        @functools.wraps(real_decorator)
         def wrapper(*args, **kwargs):
             if not after:
                 logger.debug(
@@ -39,7 +42,5 @@ def debug(message: str = "", after: bool = False):
                 + message
             )
             return function(*args, **kwargs)
-
         return wrapper
-
     return real_decorator

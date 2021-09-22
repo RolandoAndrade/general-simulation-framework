@@ -1,6 +1,11 @@
 src.core.builder package
 ========================
 
+.. automodule:: src.core.builder
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -8,11 +13,3 @@ Subpackages
    :maxdepth: 4
 
    src.core.builder.core
-
-Module contents
----------------
-
-.. automodule:: src.core.builder
-   :members:
-   :undoc-members:
-   :show-inheritance:

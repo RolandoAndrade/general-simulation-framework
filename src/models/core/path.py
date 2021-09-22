@@ -1,3 +1,15 @@
+"""Path
+==============
+This module contains the definition of the Path class.
+
+Example:
+    Creating a Path::
+
+        from core.entity.properties import ExpressionProperty
+        from core.mathematics.values import Value
+        path = Path(from_model, to_model, Value(1), 'path name')
+"""
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
@@ -12,35 +24,37 @@ if TYPE_CHECKING:
 
 
 class Path(Entity):
-    """Connection between models."""
+    """Connection between models.
 
+    Args:
+        from_model (BaseModel): Source model of the path.
+        to_model (BaseModel): Destination model of the path.
+        weight (ExpressionProperty): Weight of the connection.
+        name (str): Name of the path.
+        entity_manager (EntityManager): Manager of entities in the system.
+
+    Attributes:
+        Path._serial_id (int): Serial of the path
+        _from (BaseModel): Source model of the path.
+        _to (BaseModel): Destination model of the path.
+        _weight (ExpressionProperty): Weight of the connection.
+    """
     _serial_id = 0
-    """Serial of the path"""
 
     _from: BaseModel
-    """Final model."""
 
     _to: BaseModel
-    """Final model."""
 
     _weight: ExpressionProperty
-    """Weight of the path"""
 
     def __init__(
-        self,
-        from_model: BaseModel,
-        to_model: BaseModel,
-        weight: ExpressionProperty,
-        name: str = None,
-        entity_manager: EntityManager = None,
+            self,
+            from_model: BaseModel,
+            to_model: BaseModel,
+            weight: ExpressionProperty,
+            name: str = None,
+            entity_manager: EntityManager = None,
     ):
-        """
-        Args:
-            from_model (BaseModel): Source model of the path.
-            to_model (BaseModel): Destination model of the path.
-            weight (ExpressionProperty): Weight of the connection.
-            name (str): Name of the path.
-        """
         if name is None:
             super().__init__("path" + str(Path._serial_id), entity_manager)
             Path._serial_id = Path._serial_id + 1
@@ -51,19 +65,29 @@ class Path(Entity):
         self._weight = weight
 
     def get_source_model(self) -> BaseModel:
-        """Return the source model"""
+        """Returns the source model
+
+        Returns
+            BaseModel: The origin model of the path.
+        """
         return self._from
 
     def get_destination_model(self) -> BaseModel:
-        """Return the destination model"""
+        """Returns the destination model
+        """
         return self._to
 
     def get_weight(self) -> float:
-        """Return the evaluation of the weight."""
+        """Return the evaluation of the weight.
+        """
         return self._weight.get_value().evaluate()
 
     def get_properties(self) -> EntityProperties:
-        """Lists the properties of the entity"""
+        """Lists the properties of the entity.
+
+        Returns
+            { 'Weight': ExpressionProperty }
+        """
         return {"Weight": self._weight}
 
     def set_weight(self, weight: ExpressionProperty):

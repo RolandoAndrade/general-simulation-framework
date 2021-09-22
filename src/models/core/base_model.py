@@ -1,3 +1,22 @@
+"""Base Model
+==============
+This module contains the definition of simulation Models.
+It has an abstract definition BaseModel, that should be extended,
+implementing its abstract methods.
+
+Example:
+    Creating a model::
+
+        from models.core import BaseModel
+
+        class Model(BaseModel):
+            def get_output(self) -> int:
+                return self.get_state()
+
+            def state_transition(self, x: int, y: int):
+                self.set_up_state(x + y)
+"""
+
 from __future__ import annotations
 
 from abc import abstractmethod
@@ -18,16 +37,26 @@ ModelState = Any
 
 
 class BaseModel(Entity):
-    """Base model in a dynamic system"""
+    """Base model in a dynamic system
+
+    Args:
+        dynamic_system (BaseDynamicSystem): Dynamic system of the
+            model.
+        name (str): Name of the model.
+        state (ModelState): Initial state of the model.
+        entity_manager (EntityManager): Delegated entity manager.
+
+    Attributes:
+        BaseModel._serial_id (int): Serial of the model.
+        __current_dynamic_system (BaseDynamicSystem): Current dynamic system of the model.
+        __current_state (ModelState): Current state of the model.
+    """
 
     _serial_id = 0
-    """Serial of the model"""
 
     __current_dynamic_system: BaseDynamicSystem
-    """Current dynamic system of the model"""
 
     __current_state: ModelState
-    """Current state of the model"""
 
     @debug("Initialized Model", True)
     def __init__(
@@ -37,14 +66,6 @@ class BaseModel(Entity):
         state: ModelState = None,
         entity_manager: EntityManager = None,
     ):
-        """
-        Args:
-            dynamic_system (BaseDynamicSystem): Dynamic system of the
-                model.
-            name (str): Name of the model.
-            state (ModelState): Initial state of the model.
-            entity_manager (EntityManager): Delegated entity manager.
-        """
         # Init the model
         if name is None:
             super().__init__("model" + str(BaseModel._serial_id), entity_manager)
@@ -58,18 +79,19 @@ class BaseModel(Entity):
 
     @debug("Setting up the state")
     def set_up_state(self, state: ModelState):
-        """s
+        """
+        set_up_state(state)
 
         Sets up the state of the model.
 
-        Args:
-            state (ModelState): New state of the model.
+            Args:
+                state (ModelState): New state of the model.
         """
         self.__current_state = state
 
     @debug("Getting the state")
     def get_state(self) -> ModelState:
-        """Returns the current state"""
+        """Returns the curren state,"""
         return self.__current_state
 
     @debug("Adding output")

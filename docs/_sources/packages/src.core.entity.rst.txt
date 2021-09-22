@@ -1,6 +1,11 @@
 src.core.entity package
 =======================
 
+.. automodule:: src.core.entity
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -9,11 +14,3 @@ Subpackages
 
    src.core.entity.core
    src.core.entity.properties
-
-Module contents
----------------
-
-.. automodule:: src.core.entity
-   :members:
-   :undoc-members:
-   :show-inheritance:

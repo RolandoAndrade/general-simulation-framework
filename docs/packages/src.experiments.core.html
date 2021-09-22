@@ -136,21 +136,6 @@
    Submodules
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.experiments.core.base_experiment">
-   src.experiments.core.base_experiment module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.experiments.core.recovery_strategy">
-   src.experiments.core.recovery_strategy module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.experiments.core">
-   Module contents
-  </a>
- </li>
 </ul>
 
             </nav>
@@ -162,76 +147,12 @@
         
               <div>
                 
-  <div class="section" id="src-experiments-core-package">
-<h1>src.experiments.core package<a class="headerlink" href="#src-experiments-core-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-src.experiments.core">
+<span id="src-experiments-core-package"></span><h1>src.experiments.core package<a class="headerlink" href="#module-src.experiments.core" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
 </div>
-<div class="section" id="module-src.experiments.core.base_experiment">
-<span id="src-experiments-core-base-experiment-module"></span><h2>src.experiments.core.base_experiment module<a class="headerlink" href="#module-src.experiments.core.base_experiment" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="src.experiments.core.base_experiment.BaseExperiment">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.experiments.core.base_experiment.</span></code><code class="sig-name descname"><span class="pre">BaseExperiment</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dynamic_system</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseDynamicSystem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulator</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseSimulator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseControl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">report</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseReport</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recovery_strategy</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">RecoveryStrategy</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.experiments.core.base_experiment.BaseExperiment" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
-<p>Simulation experiment</p>
-<dl class="py method">
-<dt id="src.experiments.core.base_experiment.BaseExperiment.dynamic_system">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">dynamic_system</span></code><a class="headerlink" href="#src.experiments.core.base_experiment.BaseExperiment.dynamic_system" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the dynamic system of the experiment</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.experiments.core.base_experiment.BaseExperiment.load">
-<code class="sig-name descname"><span class="pre">load</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.experiments.core.base_experiment.BaseExperiment.load" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="src.experiments.core.base_experiment.BaseExperiment.save">
-<code class="sig-name descname"><span class="pre">save</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.experiments.core.base_experiment.BaseExperiment.save" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="src.experiments.core.base_experiment.BaseExperiment.simulation_control">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">simulation_control</span></code><a class="headerlink" href="#src.experiments.core.base_experiment.BaseExperiment.simulation_control" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the simulation control of the experiment</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.experiments.core.base_experiment.BaseExperiment.simulation_report">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">simulation_report</span></code><a class="headerlink" href="#src.experiments.core.base_experiment.BaseExperiment.simulation_report" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the simulation report of the experiment</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.experiments.core.base_experiment.BaseExperiment.simulator">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">simulator</span></code><a class="headerlink" href="#src.experiments.core.base_experiment.BaseExperiment.simulator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the simulator of the experiment</p>
-</dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-src.experiments.core.recovery_strategy">
-<span id="src-experiments-core-recovery-strategy-module"></span><h2>src.experiments.core.recovery_strategy module<a class="headerlink" href="#module-src.experiments.core.recovery_strategy" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="src.experiments.core.recovery_strategy.RecoveryStrategy">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.experiments.core.recovery_strategy.</span></code><code class="sig-name descname"><span class="pre">RecoveryStrategy</span></code><a class="headerlink" href="#src.experiments.core.recovery_strategy.RecoveryStrategy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt id="src.experiments.core.recovery_strategy.RecoveryStrategy.load">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">load</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">BaseExperiment</span><a class="headerlink" href="#src.experiments.core.recovery_strategy.RecoveryStrategy.load" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="src.experiments.core.recovery_strategy.RecoveryStrategy.save">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">save</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">experiment</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseExperiment</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.experiments.core.recovery_strategy.RecoveryStrategy.save" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-src.experiments.core">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.experiments.core" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

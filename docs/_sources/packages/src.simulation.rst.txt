@@ -1,6 +1,11 @@
 src.simulation package
 ======================
 
+.. automodule:: src.simulation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -9,11 +14,3 @@ Subpackages
 
    src.simulation.core
    src.simulation.simulation_engines
-
-Module contents
----------------
-
-.. automodule:: src.simulation
-   :members:
-   :undoc-members:
-   :show-inheritance:

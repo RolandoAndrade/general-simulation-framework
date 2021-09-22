@@ -1,6 +1,11 @@
 src.core.mathematics package
 ============================
 
+.. automodule:: src.core.mathematics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -9,11 +14,3 @@ Subpackages
 
    src.core.mathematics.distributions
    src.core.mathematics.values
-
-Module contents
----------------
-
-.. automodule:: src.core.mathematics
-   :members:
-   :undoc-members:
-   :show-inheritance:

@@ -136,16 +136,6 @@
    Submodules
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.simulation.core.base_simulator">
-   src.simulation.core.base_simulator module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.simulation.core">
-   Module contents
-  </a>
- </li>
 </ul>
 
             </nav>
@@ -157,51 +147,12 @@
         
               <div>
                 
-  <div class="section" id="src-simulation-core-package">
-<h1>src.simulation.core package<a class="headerlink" href="#src-simulation-core-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-src.simulation.core">
+<span id="src-simulation-core-package"></span><h1>src.simulation.core package<a class="headerlink" href="#module-src.simulation.core" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
 </div>
-<div class="section" id="module-src.simulation.core.base_simulator">
-<span id="src-simulation-core-base-simulator-module"></span><h2>src.simulation.core.base_simulator module<a class="headerlink" href="#module-src.simulation.core.base_simulator" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="src.simulation.core.base_simulator.BaseSimulator">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.simulation.core.base_simulator.</span></code><code class="sig-name descname"><span class="pre">BaseSimulator</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dynamic_system</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_generator</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">reports.core.base_report.BaseReport</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_bus</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">event_bus.bus.EventBus</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.simulation.core.base_simulator.BaseSimulator" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Abstract simulator engine.</p>
-<p>An simulator engine executes the state transition function of the dynamic
-system, computes the output and reports it.</p>
-<dl class="py method">
-<dt id="src.simulation.core.base_simulator.BaseSimulator.compute_next_state">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">compute_next_state</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.simulation.core.base_simulator.BaseSimulator.compute_next_state" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the next state of the dynamic system.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>*args</strong> – </p></li>
-<li><p><strong>**kwargs</strong> – </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.simulation.core.base_simulator.BaseSimulator.compute_output">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">compute_output</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.simulation.core.base_simulator.BaseSimulator.compute_output" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the output of the dynamic system if it has not computed
-yet</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.simulation.core.base_simulator.BaseSimulator.init">
-<code class="sig-name descname"><span class="pre">init</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.simulation.core.base_simulator.BaseSimulator.init" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-src.simulation.core">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.simulation.core" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

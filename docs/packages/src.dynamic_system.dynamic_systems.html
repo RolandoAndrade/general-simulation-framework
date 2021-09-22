@@ -136,16 +136,6 @@
    Submodules
   </a>
  </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.dynamic_system.dynamic_systems.discrete_event_dynamic_system">
-   src.dynamic_system.dynamic_systems.discrete_event_dynamic_system module
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.dynamic_system.dynamic_systems">
-   Module contents
-  </a>
- </li>
 </ul>
 
             </nav>
@@ -157,74 +147,12 @@
         
               <div>
                 
-  <div class="section" id="src-dynamic-system-dynamic-systems-package">
-<h1>src.dynamic_system.dynamic_systems package<a class="headerlink" href="#src-dynamic-system-dynamic-systems-package" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-src.dynamic_system.dynamic_systems">
+<span id="src-dynamic-system-dynamic-systems-package"></span><h1>src.dynamic_system.dynamic_systems package<a class="headerlink" href="#module-src.dynamic_system.dynamic_systems" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
 </div>
-<div class="section" id="module-src.dynamic_system.dynamic_systems.discrete_event_dynamic_system">
-<span id="src-dynamic-system-dynamic-systems-discrete-event-dynamic-system-module"></span><h2>src.dynamic_system.dynamic_systems.discrete_event_dynamic_system module<a class="headerlink" href="#module-src.dynamic_system.dynamic_systems.discrete_event_dynamic_system" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.</span></code><code class="sig-name descname"><span class="pre">DiscreteEventDynamicSystem</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scheduler</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">dynamic_system.future_event_list.scheduler.Scheduler</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_bus</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">event_bus.bus.EventBus</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem</span></code></p>
-<p>Dynamic system for discrete-event models</p>
-<dl class="py method">
-<dt id="src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem.get_next_models">
-<code class="sig-name descname"><span class="pre">get_next_models</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem.get_next_models" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem.get_output">
-<code class="sig-name descname"><span class="pre">get_output</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem.get_output" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the output of the dynamic system.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem.get_time_of_next_events">
-<code class="sig-name descname"><span class="pre">get_time_of_next_events</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem.get_time_of_next_events" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem.remove">
-<code class="sig-name descname"><span class="pre">remove</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DiscreteEventModel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem.remove" title="Permalink to this definition">¶</a></dt>
-<dd><p>Removes a model of the dynamic system.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>model</strong> (<a class="reference internal" href="src.models.models.html#src.models.models.discrete_event_model.DiscreteEventModel" title="src.models.models.discrete_event_model.DiscreteEventModel"><em>DiscreteEventModel</em></a>) – Model to be removed.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem.schedule">
-<code class="sig-name descname"><span class="pre">schedule</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem.schedule" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem.state_transition">
-<code class="sig-name descname"><span class="pre">state_transition</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem.state_transition" title="Permalink to this definition">¶</a></dt>
-<dd><p>Executes the state transition of the dynamic system.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>*args</strong> – </p></li>
-<li><p><strong>**kwargs</strong> – </p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem.unschedule">
-<code class="sig-name descname"><span class="pre">unschedule</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.dynamic_systems.discrete_event_dynamic_system.DiscreteEventDynamicSystem.unschedule" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-</div>
-<div class="section" id="module-src.dynamic_system.dynamic_systems">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.dynamic_system.dynamic_systems" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

@@ -1,6 +1,11 @@
 src.control package
 ===================
 
+.. automodule:: src.control
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -9,11 +14,3 @@ Subpackages
 
    src.control.controls
    src.control.core
-
-Module contents
----------------
-
-.. automodule:: src.control
-   :members:
-   :undoc-members:
-   :show-inheritance:

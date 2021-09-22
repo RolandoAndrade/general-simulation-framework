@@ -1,6 +1,11 @@
 src.core package
 ================
 
+.. automodule:: src.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
 Subpackages
 -----------
 
@@ -19,18 +24,7 @@ Subpackages
 Submodules
 ----------
 
-src.core.config module
-----------------------
+.. toctree::
+   :maxdepth: 4
 
-.. automodule:: src.core.config
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-Module contents
----------------
-
-.. automodule:: src.core
-   :members:
-   :undoc-members:
-   :show-inheritance:
+   src.core.config
