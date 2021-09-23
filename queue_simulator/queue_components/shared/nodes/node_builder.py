@@ -3,10 +3,10 @@ from queue_simulator.queue_components.entities import NameGenerator, Emitter
 from queue_simulator.queue_components.server import Server
 from queue_simulator.queue_components.shared.nodes.node_types import NodeType
 from queue_simulator.queue_components.sink.sink import Sink
-from queue_simulator.queue_components.source import Source
+from queue_simulator.queue_components.source import Source, GraphicSource
 
 expected_nodes = {
-    NodeType.SOURCE: Source,
+    NodeType.SOURCE: GraphicSource,
     NodeType.SERVER: Server,
     NodeType.SINK: Sink,
     NodeType.ENTITY_EMITTER: Emitter,

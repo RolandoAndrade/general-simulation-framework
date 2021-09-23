@@ -1,19 +1,22 @@
 from abc import ABC, abstractmethod
-from typing import List, Any, Dict
+from typing import List, Any, Dict, TypedDict
 
 from core.entity.core import Entity
 from core.entity.core.property_type import PropertyType
-from core.entity.properties import NumberProperty
-from core.expresions import UserExpression
 from queue_simulator.queue_components.shared.expressions import ExpressionManager
 from queue_simulator.queue_components.shared.models import TimeUnitExpressionProperty
-from queue_simulator.queue_components.shared.models.node_property import NodeProperty
+from queue_simulator.queue_components.shared.models.node_property import NodeProperty, NodePropertyDict
+
+
+class SerializedComponent(TypedDict):
+    type: str
+    properties: List[NodePropertyDict]
 
 
 class SimulatorComponent(ABC, Entity):
-    def serialize(self) -> List[Dict[str, Any]]:
+    def _serialize_properties(self) -> List[NodePropertyDict]:
         properties = self.get_properties()
-        e = [
+        serialized_properties = [
             NodeProperty(
                 "Name", self.get_id(), PropertyType.STRING, "Generic", None
             ).serialize()
@@ -23,7 +26,7 @@ class SimulatorComponent(ABC, Entity):
             p = properties[i]
             if isinstance(p, TimeUnitExpressionProperty):
                 unit = p.get_unit()
-            e.append(
+            serialized_properties.append(
                 NodeProperty(
                     i,
                     str(p.get_value()),
@@ -32,7 +35,13 @@ class SimulatorComponent(ABC, Entity):
                     unit
                 ).serialize()
             )
-        return e
+        return serialized_properties
+
+    def serialize(self) -> SerializedComponent:
+        return {
+            'type': str(type(self)),
+            'properties': self._serialize_properties()
+        }
 
     def _value_string_property(self, value: str, expression_manager: ExpressionManager):
         return value
@@ -56,7 +65,8 @@ class SimulatorComponent(ABC, Entity):
             method = effect[serialized_property.property_type]
             value = serialized_property.property_value
             new_property = method(value, expression_manager)
-            if serialized_property.property_unit is not None and isinstance(edited_property, TimeUnitExpressionProperty):
+            if serialized_property.property_unit is not None and isinstance(edited_property,
+                                                                            TimeUnitExpressionProperty):
                 edited_property.set_unit(serialized_property.property_unit)
             edited_property.set_value(new_property)
 

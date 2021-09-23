@@ -92,6 +92,5 @@ class Prototype10Test(unittest.TestCase):
         self.experiment.simulation_control.wait()
         print([str(source_label_out), str(server_label_in), str(server_label_out), str(sink_label_in)])
 
-
 if __name__ == '__main__':
     unittest.main()

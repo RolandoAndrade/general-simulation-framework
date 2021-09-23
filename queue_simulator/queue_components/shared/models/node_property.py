@@ -1,9 +1,17 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, TypedDict
 
 from core.entity.core.property_type import PropertyType
+
+
+class NodePropertyDict(TypedDict):
+    propertyName: str
+    propertyValue: str
+    propertyType: str
+    propertyCategory: str
+    unit: Optional[str]
 
 
 @dataclass
@@ -14,7 +22,7 @@ class NodeProperty:
     property_category: str
     property_unit: Optional[str] = None
 
-    def serialize(self) -> Dict[str, Any]:
+    def serialize(self) -> NodePropertyDict:
         return {
             "propertyName": self.property_name,
             "propertyValue": self.property_value,

@@ -1,2 +1,3 @@
+from .node_property import NodePropertyDict, NodeProperty
 from .time_unit_expression_property import TimeUnitExpressionProperty
-from .serializable_component import SimulatorComponent
+from .serializable_component import SerializedComponent, SimulatorComponent
