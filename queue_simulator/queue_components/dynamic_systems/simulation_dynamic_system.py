@@ -61,10 +61,10 @@ class SimulationDynamicSystem(DiscreteEventDynamicSystem):
         return set()
 
     def serialize(self):
-        ds = {'models': set(), 'paths': set()}
+        ds = {'models': [], 'paths': []}
         for model in self._models:
-            ds['models'].add(model.serialize())
+            ds['models'].append(model.serialize())
         for path_origin in self._paths:
             for path in self._paths[path_origin]:
-                ds['paths'].add(path.serialize())
+                ds['paths'].append(path.serialize())
         return ds

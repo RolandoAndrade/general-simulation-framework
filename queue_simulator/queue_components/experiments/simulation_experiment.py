@@ -183,5 +183,5 @@ class SimulationExperiment(DiscreteEventExperiment):
 
     def move_node(self, component: str, position: Point2D):
         node = self.dynamic_system.get_model(component)
-        node.set_postition(position)
+        node.set_position(position)
         return node

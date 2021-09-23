@@ -110,7 +110,7 @@ class BuilderController:
         with sio.session(sid) as session:
             recovered = session["experiment"].load(experiment)
             session["experiment"] = recovered
-        return recovered.dynamic_system.serialize()
+        return {'data': recovered.dynamic_system.serialize()}
 
     @staticmethod
     @sio.event
@@ -120,4 +120,4 @@ class BuilderController:
         session: Dict[str, SimulationExperiment]
         with sio.session(sid) as session:
             node = session["experiment"].move_node(component, position)
-        return node.serialize()
+        return {'data': node.serialize()}
