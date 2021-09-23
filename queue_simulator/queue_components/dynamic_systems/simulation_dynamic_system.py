@@ -12,6 +12,7 @@ from queue_simulator.queue_components.sink.sink import Sink
 from queue_simulator.queue_components.source import Source
 import numpy as np
 
+
 class SimulationDynamicSystem(DiscreteEventDynamicSystem):
     _models: Set[Union[Server, Source, Sink]]
     _paths: Dict[DiscreteEventModel, Set[Route]]
@@ -58,3 +59,12 @@ class SimulationDynamicSystem(DiscreteEventDynamicSystem):
                 choice = np.random.choice(len(weights), p=weights)
                 return {effective_path[choice]}
         return set()
+
+    def serialize(self):
+        ds = {'models': set(), 'paths': set()}
+        for model in self._models:
+            ds['models'].add(model.serialize())
+        for path_origin in self._paths:
+            for path in self._paths[path_origin]:
+                ds['paths'].add(path.serialize())
+        return ds

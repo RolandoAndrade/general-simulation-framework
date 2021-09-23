@@ -13,6 +13,7 @@ from queue_simulator.queue_components.label.graph_label import GraphLabel
 from queue_simulator.queue_components.route.route import Route
 from queue_simulator.queue_components.dynamic_systems import SimulationDynamicSystem
 from queue_simulator.queue_components.shared.expressions import ExpressionManager
+from queue_simulator.queue_components.shared.graphic import Point2D
 from queue_simulator.queue_components.shared.models.node_property import NodeProperty
 from queue_simulator.queue_components.shared.nodes import NodeBuilder, NodeType
 from queue_simulator.queue_components.shared.stats import ComponentStats
@@ -179,3 +180,8 @@ class SimulationExperiment(DiscreteEventExperiment):
 
     def get_stats(self) -> List[ComponentStats]:
         return self.dynamic_system.get_stats()
+
+    def move_node(self, component: str, position: Point2D):
+        node = self.dynamic_system.get_model(component)
+        node.set_postition(position)
+        return node
