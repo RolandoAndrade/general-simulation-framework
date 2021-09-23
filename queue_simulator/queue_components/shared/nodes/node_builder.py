@@ -1,3 +1,4 @@
+from core.events import EventBus
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from queue_simulator.queue_components.entities import NameGenerator, GraphicEmitter
 from queue_simulator.queue_components.server import GraphicServer
@@ -19,6 +20,7 @@ class NodeBuilder:
         node_type: NodeType,
         dynamic_system: DiscreteEventDynamicSystem,
         entity_manager: NameGenerator,
+        event_bus: EventBus
     ):
         if node_type == NodeType.ENTITY_EMITTER:
             return expected_nodes[node_type](
@@ -28,4 +30,5 @@ class NodeBuilder:
             dynamic_system,
             entity_manager.get_name(node_type),
             entity_manager=entity_manager,
+            event_bus=event_bus
         )

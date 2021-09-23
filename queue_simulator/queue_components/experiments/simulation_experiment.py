@@ -52,7 +52,7 @@ class SimulationExperiment(DiscreteEventExperiment):
 
     def add_node(self, node_type: NodeType):
         node = NodeBuilder.create_node(
-            node_type, self.dynamic_system, self._name_generator
+            node_type, self.dynamic_system, self._name_generator, self.event_bus
         )
         if node_type == NodeType.ENTITY_EMITTER:
             self._emitters.add(node)
