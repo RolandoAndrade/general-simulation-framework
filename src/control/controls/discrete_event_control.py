@@ -25,7 +25,8 @@ class DiscreteEventControl(BaseControl):
     """Current time of the simulation"""
 
     def __init__(
-        self, simulator: DiscreteEventSimulationEngine, simulation_strategy: SimulationStrategy, event_bus: EventBus = None
+            self, simulator: DiscreteEventSimulationEngine, simulation_strategy: SimulationStrategy,
+            event_bus: EventBus = None
     ):
         """
         Args:
@@ -36,6 +37,11 @@ class DiscreteEventControl(BaseControl):
         self._time = Time(0)
         self._is_paused = False
 
+    def _finish_simulation(self):
+        self._is_paused = True
+        self._event_bus.emit(DomainEvents.SIMULATION_FINISHED)
+        self.init()
+
     def _execute(self, frequency: Time, wait_time: Time, stop_time: Time):
         """Executes the simulation loop number of seconds.
 
@@ -45,13 +51,14 @@ class DiscreteEventControl(BaseControl):
             stop_time (Time): Duration of the simulation.
         """
         while not self._is_paused:
-            next_time = min(self._time + min(self._simulator.get_time_of_next_event(), frequency), stop_time)
+            next_event_time = self._simulator.get_time_of_next_event()
+            if next_event_time < 0:
+                self._finish_simulation()
+            next_time = min(self._time + min(next_event_time, frequency), stop_time)
             self.next_step(next_time)
             sleep(wait_time)
             if 0 <= stop_time <= self._time:
-                self._is_paused = True
-                self._event_bus.emit(DomainEvents.SIMULATION_FINISHED)
-                self.init()
+                self._finish_simulation()
             else:
                 self._event_bus.emit(
                     DomainEvents.SIMULATION_STATUS,
@@ -68,11 +75,11 @@ class DiscreteEventControl(BaseControl):
 
     @debug("Simulation starts")
     def start(
-        self,
-        start_input: Dict[str, ModelInput] = None,
-        frequency: Time = Time(1000),
-        stop_time: Time = 0,
-        wait_time: Time = 0,
+            self,
+            start_input: Dict[str, ModelInput] = None,
+            frequency: Time = Time(1000),
+            stop_time: Time = 0,
+            wait_time: Time = 0,
     ):
         """Starts the simulation
 
