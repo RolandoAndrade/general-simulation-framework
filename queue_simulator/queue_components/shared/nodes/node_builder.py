@@ -1,15 +1,15 @@
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from queue_simulator.queue_components.entities import NameGenerator, Emitter
-from queue_simulator.queue_components.server import Server
+from queue_simulator.queue_components.entities import NameGenerator, GraphicEmitter
+from queue_simulator.queue_components.server import GraphicServer
 from queue_simulator.queue_components.shared.nodes.node_types import NodeType
-from queue_simulator.queue_components.sink.sink import Sink
-from queue_simulator.queue_components.source import Source, GraphicSource
+from queue_simulator.queue_components.sink import GraphicSink
+from queue_simulator.queue_components.source import GraphicSource
 
 expected_nodes = {
     NodeType.SOURCE: GraphicSource,
-    NodeType.SERVER: Server,
-    NodeType.SINK: Sink,
-    NodeType.ENTITY_EMITTER: Emitter,
+    NodeType.SERVER: GraphicServer,
+    NodeType.SINK: GraphicSink,
+    NodeType.ENTITY_EMITTER: GraphicEmitter,
 }
 
 
