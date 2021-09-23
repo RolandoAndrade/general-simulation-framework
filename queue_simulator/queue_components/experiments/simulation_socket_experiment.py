@@ -22,6 +22,7 @@ class SimulationSocketExperiment(SimulationExperiment):
         self._sid = sid
         self.event_bus.on(DomainEvents.SIMULATION_STATUS)(self.on_simulation_status)
         self.event_bus.on(DomainEvents.SIMULATION_FINISHED)(self.on_simulation_finished)
+        self.event_bus.on("state_changed")(self.on_state_changed)
         self._last_labels_values = {}
 
     def on_simulation_status(self, data: SimulationStats):
@@ -51,6 +52,15 @@ class SimulationSocketExperiment(SimulationExperiment):
         logger.info("Simulation stopped, {sid}", sid=self._sid)
         self._sio.emit(DomainEvents.SIMULATION_STOPPED, to=self._sid)
 
+    def on_state_changed(self, data):
+        self._sio.emit("STATE_CHANGED", {
+            'name': data['name'],
+            'state': {
+                'inputBuffer': data['state'].get('input_buffer', None),
+                'outputBuffer': data['state'].get('output_buffer', None),
+                'processBuffer': data['state'].get('process_buffer', None)
+            }
+        }, self._sid)
 
     def __emit_labels(self):
         new_labels = self.get_labels_values()

@@ -31,6 +31,6 @@ class GraphicServer(Server, GraphicComponent):
             'state': {
                 'input_buffer': str(self.get_state().input_buffer.current_number_of_entities),
                 'output_buffer': str(self.get_state().output_buffer.current_number_of_entities),
-                'process_buffer': str(self.get_state().output_buffer.current_number_of_entities)
+                'process_buffer': str(self.get_state().process_buffer.current_number_of_entities)
             }
         })
