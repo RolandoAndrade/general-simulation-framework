@@ -1,4 +1,4 @@
-from typing import Any, TypedDict, Dict
+from typing import TypedDict, Dict
 
 from core.expresions import Expression
 from core.types import Time
