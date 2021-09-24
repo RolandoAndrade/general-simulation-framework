@@ -3,32 +3,24 @@ from typing import Any, Dict
 from core.entity.core import EntityProperties
 from core.entity.properties import StringProperty
 from core.types import Time
+from core.types.model_input import ModelInput
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from models.models import DiscreteEventModel
+from models.core.base_model import ModelState
+from models.models import DiscreteEventModel, DiscreteTimeModel
 
 
-class Cell(DiscreteEventModel):
-    ALIVE = True
-    DEAD = False
-
+class Cell(DiscreteTimeModel):
     _symbol: StringProperty
 
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem, state: bool, symbol: str = None):
         super().__init__(dynamic_system, state=state)
         self._symbol = StringProperty(symbol or "\u2665")
-        self.schedule(self.get_time())
 
-    def _internal_state_transition_function(self, state: bool) -> bool:
-        return state
-
-    def _external_state_transition_function(
+    def _state_transition(
             self, state: bool, inputs: Dict[str, bool], event_time: Time
     ) -> bool:
         next_state: bool = list(inputs.values())[0]
         return next_state
-
-    def _time_advance_function(self, state: bool) -> Time:
-        return Time(1)
 
     def _output_function(self, state: bool) -> bool:
         return state
