@@ -1,6 +1,6 @@
 import unittest
 
-from examples.linear_automata import LinearAutomata
+from examples.example_1.linear_automata import LinearAutomata
 from experiments.experiment_builders import DiscreteEventExperiment
 
 

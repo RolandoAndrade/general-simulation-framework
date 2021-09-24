@@ -2,7 +2,7 @@ from random import random, seed
 from typing import List
 
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from examples.cell import Cell
+from examples.example_1.cell import Cell
 
 
 class LinearAutomata(DiscreteEventDynamicSystem):
