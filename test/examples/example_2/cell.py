@@ -4,9 +4,9 @@ from models.models import DiscreteTimeModel
 
 
 class Cell(DiscreteTimeModel):
-    """Cell of the linear cellular automata
+    """Cell of the Conway's Game of life
 
-    It has an state alive or dead. When receives an input, changes its state to that input.
+    It has an state alive or dead. When receives an input, changes its by the defined rules.
     Its output is the state.
 
     Attributes:
@@ -34,8 +34,12 @@ class Cell(DiscreteTimeModel):
         Returns:
             The new state of the cell.
         """
-        next_state: bool = list(inputs.values())[0]
-        return next_state
+        values = inputs.values()
+        count_alive = 0
+        for is_alive in values:
+            if is_alive:
+                count_alive = count_alive + 1
+        return (not state and count_alive == 3) or (state and 2 <= count_alive <= 3)
 
     def _output_function(self, state: bool) -> bool:
         """

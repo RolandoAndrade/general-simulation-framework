@@ -8,7 +8,7 @@ from examples.example_1.cell import Cell
 class LinearAutomata(DiscreteEventDynamicSystem):
     """Linear Automata implementation
 
-    It has a group of cells, connected between them. The output of each cell is its right neighbor.
+    It has a group of cells, connected between them. The output cells of each cell are all its neighbors.
     Attributes:
         _cells (List[Cell]): Group of cells of the linear automata.
     """
