@@ -71,3 +71,6 @@ class Station(DiscreteEventModel):
         if state["parts"] > 0:
             return 1
         return 0
+
+    def __str__(self):
+        return self.get_id()

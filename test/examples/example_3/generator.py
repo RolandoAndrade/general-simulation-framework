@@ -5,11 +5,12 @@ from core.types import Time
 from core.types.model_input import ModelInput
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from models.core.base_model import ModelState
-from models.models import DiscreteTimeModel
+from models.models import DiscreteEventModel
 
 GeneratorState = Union[Expression, List[int]]
 
-class Generator(DiscreteTimeModel):
+
+class Generator(DiscreteEventModel):
     """Generator of parts
 
     Creates parts given an interarrival time, and the number of pieces to create at that arrival
@@ -29,12 +30,12 @@ class Generator(DiscreteTimeModel):
         self.schedule(Time(0))
         self._interarrival_time = interarrival_time
 
-    def _state_transition(
-        self, state: GeneratorState, inputs: ModelInput
-    ) -> ModelState:
+    def _internal_state_transition_function(
+            self, state: GeneratorState) -> ModelState:
         """Generates a part"""
         if isinstance(state, list):
-            return state.pop(0)
+            state.pop(0)
+        self.schedule(self.get_time())
         return state
 
     def _time_advance_function(self, state: GeneratorState) -> Time:
@@ -50,3 +51,6 @@ class Generator(DiscreteTimeModel):
             return state[0]
         else:
             return state.evaluate()
+
+    def __str__(self):
+        return "Generator"
