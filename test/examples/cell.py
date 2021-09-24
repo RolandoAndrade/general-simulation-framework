@@ -25,7 +25,6 @@ class Cell(DiscreteEventModel):
             self, state: bool, inputs: Dict[str, bool], event_time: Time
     ) -> bool:
         next_state: bool = list(inputs.values())[0]
-        self.schedule(self.get_time())
         return next_state
 
     def _time_advance_function(self, state: bool) -> Time:
