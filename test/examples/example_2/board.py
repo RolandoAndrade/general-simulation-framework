@@ -1,9 +1,13 @@
 from __future__ import annotations
 from random import random, seed
-from typing import List
+from typing import List, TYPE_CHECKING
 
 from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from examples.example_2.cell import Cell
+
+if TYPE_CHECKING:
+    from dynamic_system.core.base_dynamic_sytem import DynamicSystemOutput
+
 
 class Board(DiscreteEventDynamicSystem):
     """Game of life
@@ -56,5 +60,6 @@ class Board(DiscreteEventDynamicSystem):
         return s
 
     def get_output(self) -> DynamicSystemOutput:
+        """Prints the model every generation"""
         print(self)
         return super().get_output()
