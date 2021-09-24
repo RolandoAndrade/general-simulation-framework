@@ -33,12 +33,11 @@ class DiscreteTimeModel(DiscreteEventModel):
 
     def _external_state_transition_function(self, state: ModelState, inputs: ModelInput,
                                             event_time: Time) -> ModelState:
-        return self._state_transition(state, inputs, event_time)
+        return self._state_transition(state, inputs)
 
     def _time_advance_function(self, state: ModelState) -> Time:
         return Time(1)
 
     @abstractmethod
-    def _state_transition(self, state: ModelState, inputs: ModelInput,
-                          event_time: Time) -> ModelState:
+    def _state_transition(self, state: ModelState, inputs: ModelInput) -> ModelState:
         raise NotImplementedError

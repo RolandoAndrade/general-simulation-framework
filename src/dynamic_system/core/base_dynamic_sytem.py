@@ -120,4 +120,5 @@ class BaseDynamicSystem:
             for p in self._paths[path]:
                 dg.edge(path.get_id(), p.get_destination_model().get_id(), label=p.get_id() + "(" + str(p.get_weight()) + ")")
 
-        dg.render(file_name, view=True)
+        dg.render(file_name, view=True, format="png")
+        return dg
