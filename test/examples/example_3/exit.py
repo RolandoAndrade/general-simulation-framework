@@ -2,8 +2,7 @@ from typing import Dict
 
 from gsf.core.types import Time
 from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from gsf.models import ModelState
-from gsf.models.models import DiscreteEventModel
+from gsf.models import ModelState, DiscreteEventModel
 
 
 class Exit(DiscreteEventModel):
