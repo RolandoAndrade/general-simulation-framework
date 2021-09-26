@@ -33,9 +33,8 @@ class Entity:
         """
         if self._entity_manager.name_already_exists(name):
             raise NameError("Name already taken by another entity")
-        else:
-            self._entity_manager.replace_name(name, self.get_id())
-            self._id = name
+        self._entity_manager.replace_name(name, self.get_id())
+        self._id = name
 
     def get_id(self) -> str:
         """Gets the identifier of the entity."""
