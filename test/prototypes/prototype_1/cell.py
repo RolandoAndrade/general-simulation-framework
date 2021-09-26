@@ -2,8 +2,7 @@ from gsf.core.entity.core import EntityProperties
 from gsf.core.types import Time
 from gsf.core.types.model_input import ModelInput
 from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from gsf.models import ModelState
-from gsf.models.models import DiscreteEventModel
+from gsf.models import ModelState, DiscreteEventModel
 
 
 class Cell(DiscreteEventModel):
