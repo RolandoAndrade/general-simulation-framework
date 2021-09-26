@@ -9,18 +9,18 @@ from gsf.models.models import DiscreteEventModel
 
 class ModelMock(DiscreteEventModel):
     def _internal_state_transition_function(self, state: ModelState) -> ModelState:
-        pass
+        raise NotImplementedError()
 
     def _external_state_transition_function(
         self, state: ModelState, inputs: ModelInput, event_time: Time
     ) -> ModelState:
-        pass
+        raise NotImplementedError()
 
     def _time_advance_function(self, state: ModelState) -> Time:
-        pass
+        raise NotImplementedError()
 
     def _output_function(self, state: ModelState) -> Any:
         return 1
 
     def get_properties(self) -> EntityProperties:
-        pass
+        raise NotImplementedError()
