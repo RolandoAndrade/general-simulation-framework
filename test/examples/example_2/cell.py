@@ -58,5 +58,4 @@ class Cell(DiscreteTimeModel):
         is_alive = self.get_state()
         if is_alive:
             return self._symbol
-        else:
-            return "-"
+        return "-"
