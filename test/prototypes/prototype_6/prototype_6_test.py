@@ -1,9 +1,9 @@
 import unittest
 
-from core.entity.core import static_entity_manager
-from core.mathematics.values.value import Value
-from core.types import Time
-from experiments.experiment_builders import DiscreteEventExperiment
+from gsf.core.entity.core import static_entity_manager
+from gsf.core.mathematics.values import Value
+from gsf.core.types import Time
+from gsf.experiments.experiment_builders import DiscreteEventExperiment
 from queue_simulator.queue_components.entities import NameGenerator
 from queue_simulator.queue_components.source import Source
 from test.prototypes.prototype_6.simulator_dynamic_system import SimulatorDynamicSystem

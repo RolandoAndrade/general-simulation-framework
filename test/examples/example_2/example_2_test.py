@@ -1,7 +1,7 @@
 import unittest
 
 from examples.example_2.board import Board
-from experiments.experiment_builders import DiscreteEventExperiment
+from gsf.experiments.experiment_builders import DiscreteEventExperiment
 
 
 class Example2Test(unittest.TestCase):

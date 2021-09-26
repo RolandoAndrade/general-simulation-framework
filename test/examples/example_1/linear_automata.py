@@ -1,7 +1,7 @@
 from random import random, seed
 from typing import List
 
-from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
+from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from examples.example_1.cell import Cell
 
 

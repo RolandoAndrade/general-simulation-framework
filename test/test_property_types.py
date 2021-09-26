@@ -1,8 +1,8 @@
 import unittest
 
-from core.entity import BooleanProperty
-from core.entity import NumberProperty
-from core.entity.properties.string_property import StringProperty
+from gsf.core import BooleanProperty
+from gsf.core import NumberProperty
+from gsf.core.entity.properties import StringProperty
 
 
 class MyTestCase(unittest.TestCase):

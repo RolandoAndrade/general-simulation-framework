@@ -1,7 +1,7 @@
 import unittest
 
-from core.entity.core import static_entity_manager
-from core.types import Time
+from gsf.core.entity.core import static_entity_manager
+from gsf.core.types import Time
 from queue_simulator.queue_components.experiments import SimulationExperiment
 from queue_simulator.queue_components.server import ServerProperty
 from queue_simulator.queue_components.shared.models.node_property import NodeProperty

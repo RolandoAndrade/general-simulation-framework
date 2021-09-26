@@ -1,10 +1,10 @@
 from typing import Any
 
-from core.entity.core import EntityProperties
-from core.types import Time
-from core.types.model_input import ModelInput
-from models.core.base_model import ModelState
-from models.models import DiscreteEventModel
+from gsf.core.entity.core import EntityProperties
+from gsf.core.types import Time
+from gsf.core.types.model_input import ModelInput
+from gsf.models import ModelState
+from gsf.models.models import DiscreteEventModel
 
 
 class ModelMock(DiscreteEventModel):

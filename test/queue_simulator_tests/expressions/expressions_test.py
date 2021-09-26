@@ -1,6 +1,6 @@
 import unittest
 
-from core.mathematics.distributions import ExponentialDistribution, PoissonDistribution, TriangularDistribution
+from gsf.core.mathematics.distributions import ExponentialDistribution, PoissonDistribution, TriangularDistribution
 from queue_simulator.queue_components.shared.expressions.expression_manager import ExpressionManager
 
 

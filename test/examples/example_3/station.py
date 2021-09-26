@@ -1,9 +1,9 @@
 from typing import TypedDict, Dict
 
-from core.expresions import Expression
-from core.types import Time
-from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from models.models import DiscreteEventModel
+from gsf.core import Expression
+from gsf.core.types import Time
+from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
+from gsf.models.models import DiscreteEventModel
 
 
 class StationState(TypedDict):

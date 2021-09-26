@@ -1,12 +1,12 @@
 import unittest
 
-from core.entity.core import static_entity_manager
-from core.entity.properties.property import Property
-from core.mathematics.values.value import Value
-from dynamic_system.dynamic_systems.discrete_event_dynamic_system import (
+from gsf.core.entity.core import static_entity_manager
+from gsf.core.entity.properties.property import Property
+from gsf.core.mathematics.values import Value
+from gsf.dynamic_system.dynamic_systems import (
     DiscreteEventDynamicSystem,
 )
-from dynamic_system.future_event_list import Scheduler
+from gsf.dynamic_system.future_event_list import Scheduler
 from queue_simulator.queue_components.source import Source
 from test.module_tests.mocks import MockEmitter
 

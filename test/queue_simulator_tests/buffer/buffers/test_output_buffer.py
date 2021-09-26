@@ -1,8 +1,8 @@
 import unittest
 from random import seed
 
-from core.entity.core import static_entity_manager
-from core.entity.properties.number_property import NumberProperty
+from gsf.core.entity.core import static_entity_manager
+from gsf.core.entity.properties.number_property import NumberProperty
 from queue_simulator.queue_components.buffer.buffers import OutputBuffer
 from queue_simulator.queue_components.buffer.core.buffer_policy import BufferPolicy
 from queue_simulator.queue_components.buffer.core.buffer_property import BufferProperty

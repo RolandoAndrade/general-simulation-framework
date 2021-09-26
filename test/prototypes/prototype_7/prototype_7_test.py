@@ -1,11 +1,11 @@
 import unittest
 
-from core.entity.core import static_entity_manager
-from core.entity.properties import NumberProperty
-from core.mathematics.distributions import TriangularDistribution, ExponentialDistribution, PoissonDistribution
-from core.mathematics.values.value import Value
-from core.types import Time
-from experiments.experiment_builders import DiscreteEventExperiment
+from gsf.core.entity.core import static_entity_manager
+from gsf.core.entity.properties import NumberProperty
+from gsf.core.mathematics.distributions import TriangularDistribution, ExponentialDistribution, PoissonDistribution
+from gsf.core.mathematics.values import Value
+from gsf.core.types import Time
+from gsf.experiments.experiment_builders import DiscreteEventExperiment
 from queue_simulator.queue_components.entities import NameGenerator
 from queue_simulator.queue_components.server import Server
 from queue_simulator.queue_components.source import Source

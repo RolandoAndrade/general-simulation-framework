@@ -1,14 +1,13 @@
 import unittest
 from typing import List
 
-from core.entity.properties import Property, NumberProperty
-from core.mathematics.distributions import (
+from gsf.core.entity.properties import Property, NumberProperty
+from gsf.core.mathematics.distributions import (
     ExponentialDistribution,
     TriangularDistribution,
 )
-from core.mathematics.values.value import Value
-from core.types import Time
-from queue_simulator.queue_components.buffer.core import BufferProperty
+from gsf.core.mathematics.values import Value
+from gsf.core.types import Time
 from queue_simulator.queue_components.label.label import Label
 from queue_simulator.queue_components.experiments import (
     SimulationExperiment,

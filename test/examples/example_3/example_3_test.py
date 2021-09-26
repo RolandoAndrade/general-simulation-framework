@@ -1,10 +1,10 @@
 import unittest
 
-from core.mathematics.distributions import PoissonDistribution, ExponentialDistribution, TriangularDistribution
-from core.mathematics.values import Value
+from gsf.core.mathematics.distributions import PoissonDistribution, ExponentialDistribution, TriangularDistribution
+from gsf.core.mathematics.values import Value
 from examples.example_3.factory_system import FactorySystem
 from examples.example_3.station import Station
-from experiments.experiment_builders import DiscreteEventExperiment
+from gsf.experiments.experiment_builders import DiscreteEventExperiment
 
 
 class Example3Test(unittest.TestCase):

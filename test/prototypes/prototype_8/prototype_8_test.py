@@ -1,8 +1,8 @@
 import unittest
 
-from core.entity.core import static_entity_manager
-from core.mathematics.values.value import Value
-from core.types import Time
+from gsf.core.entity.core import static_entity_manager
+from gsf.core.mathematics.values import Value
+from gsf.core.types import Time
 from queue_simulator.queue_components.entities import NameGenerator
 from queue_simulator.queue_components.experiments import SimulationExperiment
 from queue_simulator.queue_components.server import ServerProperty

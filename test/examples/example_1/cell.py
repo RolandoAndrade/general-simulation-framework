@@ -1,6 +1,6 @@
 from typing import Dict
-from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from models.models import DiscreteTimeModel
+from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
+from gsf.models.models import DiscreteTimeModel
 
 
 class Cell(DiscreteTimeModel):

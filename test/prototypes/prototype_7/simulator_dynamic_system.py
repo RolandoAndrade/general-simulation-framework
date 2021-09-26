@@ -1,4 +1,4 @@
-from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
+from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 
 
 class SimulatorDynamicSystem(DiscreteEventDynamicSystem):

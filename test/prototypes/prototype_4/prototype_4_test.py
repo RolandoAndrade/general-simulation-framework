@@ -1,7 +1,7 @@
 import unittest
 
-from core.types import Time
-from experiments.experiment_builders import DiscreteEventExperiment
+from gsf.core.types import Time
+from gsf.experiments.experiment_builders import DiscreteEventExperiment
 from test.prototypes.prototype_4.assembly_line import AssemblyLine
 
 

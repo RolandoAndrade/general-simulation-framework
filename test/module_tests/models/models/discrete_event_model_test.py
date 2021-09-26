@@ -1,10 +1,10 @@
 import unittest
 from decimal import Decimal
 
-from core.entity.core import static_entity_manager
-from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from dynamic_system.future_event_list import Scheduler
-from models.models import DiscreteEventModel
+from gsf.core.entity.core import static_entity_manager
+from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
+from gsf.dynamic_system.future_event_list import Scheduler
+from gsf.models.models import DiscreteEventModel
 from test.module_tests.mocks.dynamic_system_mock import DynamicSystemMock
 from test.module_tests.mocks.model_mock import ModelMock
 

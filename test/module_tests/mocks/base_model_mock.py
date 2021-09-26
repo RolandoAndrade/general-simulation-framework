@@ -1,7 +1,7 @@
 from typing import Any
 
-from core.entity.core import EntityProperties
-from models.core.base_model import BaseModel
+from gsf.core.entity.core import EntityProperties
+from gsf.models import BaseModel
 
 
 class BaseModelMock(BaseModel):

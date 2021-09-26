@@ -1,7 +1,7 @@
 import unittest
 
 from examples.example_1.linear_automata import LinearAutomata
-from experiments.experiment_builders import DiscreteEventExperiment
+from gsf.experiments.experiment_builders import DiscreteEventExperiment
 
 
 class Example1(unittest.TestCase):

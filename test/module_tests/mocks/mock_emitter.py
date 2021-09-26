@@ -1,7 +1,7 @@
-from core.entity.core.entity import Entity
-from core.entity.core.entity_emitter import EntityEmitter
-from core.entity.core.entity_property import EntityProperties
-from core.entity.properties.string_property import StringProperty
+from gsf.core.entity.core.entity import Entity
+from gsf.core.entity.core.entity_emitter import EntityEmitter
+from gsf.core.entity.core.entity_property import EntityProperties
+from gsf.core.entity.properties import StringProperty
 
 
 class MockEntity(Entity):

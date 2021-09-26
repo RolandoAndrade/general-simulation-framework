@@ -1,9 +1,9 @@
 import unittest
 
-from core.entity.properties import Property, ExpressionProperty, NumberProperty
-from core.mathematics.values.value import Value
-from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from experiments.experiment_builders.discrete_event_experiment import (
+from gsf.core.entity.properties import Property, ExpressionProperty, NumberProperty
+from gsf.core.mathematics.values import Value
+from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
+from gsf.experiments.experiment_builders.discrete_event_experiment import (
     DiscreteEventExperiment,
 )
 from queue_simulator.queue_components.server import Server

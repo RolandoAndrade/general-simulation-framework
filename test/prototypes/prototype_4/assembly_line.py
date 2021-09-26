@@ -1,7 +1,6 @@
 from typing import List
 
-from core.types import Time
-from dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
+from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from test.prototypes.prototype_4.drill import Drill
 from test.prototypes.prototype_4.generator import Generator
 from test.prototypes.prototype_4.press import Press
