@@ -1,7 +1,6 @@
 import unittest
 from random import seed
 
-from test.prototypes.prototype_1.cell import Cell
 from test.prototypes.prototype_2.board import Board
 
 

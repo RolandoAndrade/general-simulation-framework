@@ -3,8 +3,8 @@ import unittest
 from gsf.core.entity.core import static_entity_manager
 from gsf.core.entity.properties import ExpressionProperty
 from gsf.core.mathematics.values import Value
-from gsf.dynamic_system import BaseDynamicSystem
-from gsf.models import Path, BaseModel
+from gsf.dynamic_system.core import BaseDynamicSystem
+from gsf.models.core import Path, BaseModel
 from test.module_tests.mocks.base_model_mock import BaseModelMock
 from test.module_tests.mocks.dynamic_system_mock import DynamicSystemMock
 

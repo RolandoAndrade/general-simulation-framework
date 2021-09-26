@@ -3,7 +3,6 @@ from typing import Dict
 from gsf.core.entity.core import EntityProperties
 from gsf.core.types import Time
 from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from gsf.models import ModelState
 from gsf.models.models import DiscreteEventModel
 
 
@@ -32,7 +31,7 @@ class Cell(DiscreteEventModel):
             return True
         return False
 
-    def _time_advance_function(self, state: ModelState) -> Time:
+    def _time_advance_function(self, state: Dict[str, bool]) -> Time:
         return Time(1)
 
     def _output_function(self, state: bool) -> bool:

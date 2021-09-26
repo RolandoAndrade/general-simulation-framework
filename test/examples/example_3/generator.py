@@ -3,7 +3,7 @@ from typing import List, Union
 from gsf.core.expresions import Expression
 from gsf.core.types import Time
 from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from gsf.models import ModelState
+from gsf.models.core import ModelState
 from gsf.models.models import DiscreteEventModel
 
 GeneratorState = Union[Expression, List[int]]

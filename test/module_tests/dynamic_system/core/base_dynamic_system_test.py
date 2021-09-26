@@ -3,9 +3,9 @@ import unittest
 from gsf.core.entity.core import Entity
 from gsf.core.entity.properties import ExpressionProperty
 from gsf.core.mathematics.values import Value
-from gsf.dynamic_system import BaseDynamicSystem
+from gsf.dynamic_system.core import BaseDynamicSystem
 from gsf.dynamic_system.future_event_list import Scheduler
-from gsf.models import Path
+from gsf.models.core import Path
 from test.module_tests.mocks.base_model_mock import BaseModelMock
 from test.module_tests.mocks.dynamic_system_mock import DynamicSystemMock
 

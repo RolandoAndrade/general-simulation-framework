@@ -2,7 +2,7 @@ from typing import Dict
 
 from gsf.core.types import Time
 from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
-from gsf.models import ModelState, DiscreteEventModel
+from gsf.models.models import DiscreteEventModel
 
 
 class Exit(DiscreteEventModel):
@@ -23,11 +23,11 @@ class Exit(DiscreteEventModel):
         """Receives the parts"""
         return state + sum(inputs.values())
 
-    def _time_advance_function(self, state: ModelState) -> Time:
+    def _time_advance_function(self, state: int) -> Time:
         """Prevents to execute an autonomous event"""
         return Time(-1)
 
-    def _output_function(self, state: ModelState) -> int:
+    def _output_function(self, state: int) -> int:
         """Returns the number of parts processed."""
         return state
 

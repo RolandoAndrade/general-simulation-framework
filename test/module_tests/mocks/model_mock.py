@@ -3,7 +3,7 @@ from typing import Any
 from gsf.core.entity.core import EntityProperties
 from gsf.core.types import Time
 from gsf.core.types.model_input import ModelInput
-from gsf.models import ModelState
+from gsf.models.core import ModelState
 from gsf.models.models import DiscreteEventModel
 
 
