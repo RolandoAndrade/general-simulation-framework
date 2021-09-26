@@ -10,11 +10,11 @@ from gsf.models.models import DiscreteEventModel
 
 class DiscreteTimeModel(DiscreteEventModel):
     def __init__(
-            self,
-            dynamic_system: DiscreteEventDynamicSystem,
-            name: str = None,
-            state: ModelState = None,
-            entity_manager: EntityManager = None,
+        self,
+        dynamic_system: DiscreteEventDynamicSystem,
+        name: str = None,
+        state: ModelState = None,
+        entity_manager: EntityManager = None,
     ):
         """
         Args:
@@ -31,8 +31,9 @@ class DiscreteTimeModel(DiscreteEventModel):
         self.schedule(self.get_time())
         return state
 
-    def _external_state_transition_function(self, state: ModelState, inputs: ModelInput,
-                                            event_time: Time) -> ModelState:
+    def _external_state_transition_function(
+        self, state: ModelState, inputs: ModelInput, event_time: Time
+    ) -> ModelState:
         return self._state_transition(state, inputs)
 
     def _time_advance_function(self, state: ModelState) -> Time:

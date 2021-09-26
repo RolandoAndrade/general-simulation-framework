@@ -81,8 +81,8 @@ class BaseModel(Entity):
     def set_up_state(self, state: ModelState):
         """Sets up the state of the model.
 
-            Args:
-                state (ModelState): New state of the model.
+        Args:
+            state (ModelState): New state of the model.
         """
         self.__current_state = state
 

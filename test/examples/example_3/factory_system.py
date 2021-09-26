@@ -13,13 +13,14 @@ class FactorySystem(DiscreteEventDynamicSystem):
         generator (Generator): Generator of entities of the factory.
         exit (Exit): Sink of the factory,
     """
+
     generator: Generator
     exit: Exit
 
     def __init__(self, pieces: GeneratorState, interarrival_time: Expression):
         """Args:
-            pieces(GeneratorState): number of pieces to create when there is an arrival.
-            interarrival_time(Expression): interarrival time of pieces.
+        pieces(GeneratorState): number of pieces to create when there is an arrival.
+        interarrival_time(Expression): interarrival time of pieces.
         """
         super().__init__()
         self.generator = Generator(self, pieces, interarrival_time)

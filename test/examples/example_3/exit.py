@@ -13,12 +13,13 @@ class Exit(DiscreteEventModel):
 
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem):
         """Args:
-            dynamic_system(DiscreteEventDynamicSystem): factory where stations belongs.
+        dynamic_system(DiscreteEventDynamicSystem): factory where stations belongs.
         """
         super().__init__(dynamic_system, state=0)
 
-    def _external_state_transition_function(self, state: int, inputs: Dict[str, int],
-                                            event_time: Time) -> int:
+    def _external_state_transition_function(
+        self, state: int, inputs: Dict[str, int], event_time: Time
+    ) -> int:
         """Receives the parts"""
         return state + sum(inputs.values())
 

@@ -1,6 +1,10 @@
 import unittest
 
-from gsf.core.mathematics.distributions import PoissonDistribution, ExponentialDistribution, TriangularDistribution
+from gsf.core.mathematics.distributions import (
+    PoissonDistribution,
+    ExponentialDistribution,
+    TriangularDistribution,
+)
 from gsf.core.mathematics.values import Value
 from examples.example_3.factory_system import FactorySystem
 from examples.example_3.station import Station
@@ -39,5 +43,5 @@ class Example3Test(unittest.TestCase):
         print(experiment.simulation_report.generate_report())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

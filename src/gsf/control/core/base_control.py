@@ -30,7 +30,12 @@ class BaseControl:
     """Event bus of the module."""
 
     @debug("Control initialized", True)
-    def __init__(self, simulator: BaseSimulator, simulation_strategy: SimulationStrategy, event_bus: EventBus = None):
+    def __init__(
+        self,
+        simulator: BaseSimulator,
+        simulation_strategy: SimulationStrategy,
+        event_bus: EventBus = None,
+    ):
         """
         Args:
             simulator (BaseSimulator): Simulation engine to be executed.

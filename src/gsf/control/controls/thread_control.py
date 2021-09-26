@@ -18,7 +18,13 @@ class ThreadControlStrategy(SimulationStrategy):
     def stop_simulation(self):
         self._thread = None
 
-    def start_simulation(self, target: Callable, frequency: Time = 0, wait_time: Time = 0, stop_time: Time = 0):
+    def start_simulation(
+        self,
+        target: Callable,
+        frequency: Time = 0,
+        wait_time: Time = 0,
+        stop_time: Time = 0,
+    ):
         self._thread = Thread(
             target=target,
             args=(

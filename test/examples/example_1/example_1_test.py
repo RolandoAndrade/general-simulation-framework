@@ -15,6 +15,5 @@ class Example1(unittest.TestCase):
         self.assertEqual("--♥♥♥-♥♥♥-", str(linear_automata))
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

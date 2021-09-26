@@ -39,6 +39,7 @@ class Path(Entity):
         _to (BaseModel): Destination model of the path.
         _weight (ExpressionProperty): Weight of the connection.
     """
+
     _serial_id = 0
 
     _from: BaseModel
@@ -48,12 +49,12 @@ class Path(Entity):
     _weight: ExpressionProperty
 
     def __init__(
-            self,
-            from_model: BaseModel,
-            to_model: BaseModel,
-            weight: ExpressionProperty,
-            name: str = None,
-            entity_manager: EntityManager = None,
+        self,
+        from_model: BaseModel,
+        to_model: BaseModel,
+        weight: ExpressionProperty,
+        name: str = None,
+        entity_manager: EntityManager = None,
     ):
         if name is None:
             super().__init__("path" + str(Path._serial_id), entity_manager)
@@ -73,13 +74,11 @@ class Path(Entity):
         return self._from
 
     def get_destination_model(self) -> BaseModel:
-        """Returns the destination model
-        """
+        """Returns the destination model"""
         return self._to
 
     def get_weight(self) -> float:
-        """Return the evaluation of the weight.
-        """
+        """Return the evaluation of the weight."""
         return self._weight.get_value().evaluate()
 
     def get_properties(self) -> EntityProperties:

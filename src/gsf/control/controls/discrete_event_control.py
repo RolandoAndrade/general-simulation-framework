@@ -25,8 +25,10 @@ class DiscreteEventControl(BaseControl):
     """Current time of the simulation"""
 
     def __init__(
-            self, simulator: DiscreteEventSimulationEngine, simulation_strategy: SimulationStrategy,
-            event_bus: EventBus = None
+        self,
+        simulator: DiscreteEventSimulationEngine,
+        simulation_strategy: SimulationStrategy,
+        event_bus: EventBus = None,
     ):
         """
         Args:
@@ -66,8 +68,7 @@ class DiscreteEventControl(BaseControl):
                 )
 
     def next_step(self, time: Time = None):
-        """Executes the next step
-        """
+        """Executes the next step"""
         time = time or (self._time + self._simulator.get_time_of_next_event())
         self._time = time
         self._simulator.compute_next_state(time=self._time)
@@ -75,11 +76,11 @@ class DiscreteEventControl(BaseControl):
 
     @debug("Simulation starts")
     def start(
-            self,
-            start_input: Dict[str, ModelInput] = None,
-            frequency: Time = Time(1000),
-            stop_time: Time = 0,
-            wait_time: Time = 0,
+        self,
+        start_input: Dict[str, ModelInput] = None,
+        frequency: Time = Time(1000),
+        stop_time: Time = 0,
+        wait_time: Time = 0,
     ):
         """Starts the simulation
 
@@ -92,7 +93,9 @@ class DiscreteEventControl(BaseControl):
         self._is_paused = False
         if self._time == 0:
             self._simulator.compute_next_state(start_input)
-        self._simulation_strategy.start_simulation(self._execute, frequency, wait_time, stop_time)
+        self._simulation_strategy.start_simulation(
+            self._execute, frequency, wait_time, stop_time
+        )
 
     @debug("Simulation paused")
     def pause(self):

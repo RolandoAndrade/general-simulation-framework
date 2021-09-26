@@ -1,7 +1,12 @@
 from typing import Set, Dict
 
 from gsf.core.debug.infrastructure.providers import TableProvider
-from gsf.reports.core.base_report import BaseReport, Time, DynamicSystemOutput, ReportResult
+from gsf.reports.core.base_report import (
+    BaseReport,
+    Time,
+    DynamicSystemOutput,
+    ReportResult,
+)
 
 
 class DefaultReport(BaseReport):

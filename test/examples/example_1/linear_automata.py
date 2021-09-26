@@ -12,6 +12,7 @@ class LinearAutomata(DiscreteEventDynamicSystem):
     Attributes:
         _cells (List[Cell]): Group of cells of the linear automata.
     """
+
     _cells: List[Cell]
 
     def __init__(self, cells: int = 5, random_seed: int = 42):
@@ -41,7 +42,7 @@ class LinearAutomata(DiscreteEventDynamicSystem):
             cells (int): Number of cells of the automata.
         """
         for i in range(cells):
-            self._cells[i-1].add(self._cells[i])
+            self._cells[i - 1].add(self._cells[i])
 
     def __str__(self):
         """Changes the format to show the linear automata when is printed"""

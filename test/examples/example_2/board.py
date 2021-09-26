@@ -16,6 +16,7 @@ class Board(DiscreteEventDynamicSystem):
     Attributes:
         _cells (List[List[Cell]]): Group of cells of the board automata.
     """
+
     _cells: List[List[Cell]]
 
     def __init__(self, width: int, height: int, random_seed: int = 42):

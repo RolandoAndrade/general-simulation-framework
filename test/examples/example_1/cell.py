@@ -12,9 +12,15 @@ class Cell(DiscreteTimeModel):
     Attributes:
       _symbol (str): Symbol that represents the cell when it is printed in console.
     """
+
     _symbol: str
 
-    def __init__(self, dynamic_system: DiscreteEventDynamicSystem, state: bool, symbol: str = None):
+    def __init__(
+        self,
+        dynamic_system: DiscreteEventDynamicSystem,
+        state: bool,
+        symbol: str = None,
+    ):
         """
         Args:
             dynamic_system (DiscreteEventDynamicSystem): Automata Grid where the cell belongs.

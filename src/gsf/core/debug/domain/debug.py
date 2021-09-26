@@ -42,6 +42,8 @@ def debug(message: str = "", after: bool = False):
                 + message
             )
             return function(*args, **kwargs)
+
         wrapper.__doc__ = function.__doc__
         return wrapper
+
     return real_decorator

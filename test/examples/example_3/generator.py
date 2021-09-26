@@ -17,21 +17,25 @@ class Generator(DiscreteEventModel):
     Attributes:
         _interarrival_time (Expression): interarrival time of pieces.
     """
+
     _interarrival_time: Expression
 
-    def __init__(self, dynamic_system: DiscreteEventDynamicSystem, pieces: GeneratorState,
-                 interarrival_time: Expression):
+    def __init__(
+        self,
+        dynamic_system: DiscreteEventDynamicSystem,
+        pieces: GeneratorState,
+        interarrival_time: Expression,
+    ):
         """Args:
-            dynamic_system(DiscreteEventDynamicSystem): factory where stations belongs.
-            pieces(GeneratorState): number of pieces to create when there is an arrival.
-            interarrival_time(Expression): interarrival time of pieces.
+        dynamic_system(DiscreteEventDynamicSystem): factory where stations belongs.
+        pieces(GeneratorState): number of pieces to create when there is an arrival.
+        interarrival_time(Expression): interarrival time of pieces.
         """
         super().__init__(dynamic_system, state=pieces)
         self.schedule(Time(0))
         self._interarrival_time = interarrival_time
 
-    def _internal_state_transition_function(
-            self, state: GeneratorState) -> ModelState:
+    def _internal_state_transition_function(self, state: GeneratorState) -> ModelState:
         """Generates a part"""
         if isinstance(state, list):
             state.pop(0)

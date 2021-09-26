@@ -8,6 +8,7 @@ from gsf.models.models import DiscreteEventModel
 
 class StationState(TypedDict):
     """State definition of the station"""
+
     parts: int
     remaining_time: Time
 
@@ -21,31 +22,30 @@ class Station(DiscreteEventModel):
     Attributes:
         _processing_time(Expression): time to process one part.
     """
+
     _processing_time: Expression
 
-    def __init__(self, dynamic_system: DiscreteEventDynamicSystem, processing_time: Expression):
+    def __init__(
+        self, dynamic_system: DiscreteEventDynamicSystem, processing_time: Expression
+    ):
         """
         Args:
             dynamic_system (DiscreteEventDynamicSystem): factory where stations belongs.
             processing_time (Expression): time to process one part.
         """
-        super().__init__(dynamic_system, state={
-            'parts': 0,
-            'remaining_time': -1
-        })
+        super().__init__(dynamic_system, state={"parts": 0, "remaining_time": -1})
         self._processing_time = processing_time
 
     def _internal_state_transition_function(self, state: StationState) -> StationState:
-        """Removes one part from processing, and schedules and event to process a new one.
-        """
+        """Removes one part from processing, and schedules and event to process a new one."""
         state["parts"] = max(state["parts"] - 1, 0)
         self.schedule(self.get_time())
         return state
 
-    def _external_state_transition_function(self, state: StationState, inputs: Dict[str, int],
-                                            event_time: Time) -> StationState:
-        """Removes one part from processing, and schedules and event to process a new one.
-        """
+    def _external_state_transition_function(
+        self, state: StationState, inputs: Dict[str, int], event_time: Time
+    ) -> StationState:
+        """Removes one part from processing, and schedules and event to process a new one."""
         values = inputs.values()
         state["remaining_time"] = state["remaining_time"] - event_time
         for number_of_parts in values:
@@ -57,8 +57,7 @@ class Station(DiscreteEventModel):
         return state
 
     def _time_advance_function(self, state: StationState) -> Time:
-        """Obtains the time of the next processed entity.
-        """
+        """Obtains the time of the next processed entity."""
         if state["parts"] < 1:
             state["remaining_time"] = Time(-1)
         else:
@@ -66,8 +65,7 @@ class Station(DiscreteEventModel):
         return state["remaining_time"]
 
     def _output_function(self, state: StationState) -> int:
-        """Returns a part.
-        """
+        """Returns a part."""
         if state["parts"] > 0:
             return 1
         return 0
