@@ -137,12 +137,12 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.simulation.simulation_engines.discrete_event_simulation_engine">
+  <a class="reference internal nav-link" href="#src-simulation-simulation-engines-discrete-event-simulation-engine-module">
    src.simulation.simulation_engines.discrete_event_simulation_engine module
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.simulation.simulation_engines">
+  <a class="reference internal nav-link" href="#module-contents">
    Module contents
   </a>
  </li>
@@ -162,50 +162,11 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-src.simulation.simulation_engines.discrete_event_simulation_engine">
-<span id="src-simulation-simulation-engines-discrete-event-simulation-engine-module"></span><h2>src.simulation.simulation_engines.discrete_event_simulation_engine module<a class="headerlink" href="#module-src.simulation.simulation_engines.discrete_event_simulation_engine" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="src.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.simulation.simulation_engines.discrete_event_simulation_engine.</span></code><code class="sig-name descname"><span class="pre">DiscreteEventSimulationEngine</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dynamic_system</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DiscreteEventDynamicSystem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_generator</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseReport</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_bus</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">EventBus</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">simulation.core.base_simulator.BaseSimulator</span></code></p>
-<p>Simulation engine for discrete-event simulation</p>
-<dl class="py method">
-<dt id="src.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine.compute_next_state">
-<code class="sig-name descname"><span class="pre">compute_next_state</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DynamicSystemInput</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Time</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">Decimal('0')</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine.compute_next_state" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the next state of the dynamic system</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>inputs</strong> (<em>DynamicSystemInput</em>) – Input for the dynamic system.</p></li>
-<li><p><strong>time</strong> (<em>Time</em>) – Time of the event.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine.compute_output">
-<code class="sig-name descname"><span class="pre">compute_output</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine.compute_output" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the output of the dynamic system if it has not computed
-yet</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine.get_time_of_next_event">
-<code class="sig-name descname"><span class="pre">get_time_of_next_event</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">decimal.Decimal</span><a class="headerlink" href="#src.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine.get_time_of_next_event" title="Permalink to this definition">¶</a></dt>
-<dd><p>Get time of the next event</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine.init">
-<code class="sig-name descname"><span class="pre">init</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine.init" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
+<div class="section" id="src-simulation-simulation-engines-discrete-event-simulation-engine-module">
+<h2>src.simulation.simulation_engines.discrete_event_simulation_engine module<a class="headerlink" href="#src-simulation-simulation-engines-discrete-event-simulation-engine-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-src.simulation.simulation_engines">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.simulation.simulation_engines" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

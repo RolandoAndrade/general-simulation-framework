@@ -137,17 +137,17 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.dynamic_system.future_event_list.scheduled_model">
+  <a class="reference internal nav-link" href="#src-dynamic-system-future-event-list-scheduled-model-module">
    src.dynamic_system.future_event_list.scheduled_model module
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.dynamic_system.future_event_list.scheduler">
+  <a class="reference internal nav-link" href="#src-dynamic-system-future-event-list-scheduler-module">
    src.dynamic_system.future_event_list.scheduler module
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.dynamic_system.future_event_list">
+  <a class="reference internal nav-link" href="#module-contents">
    Module contents
   </a>
  </li>
@@ -167,113 +167,14 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-src.dynamic_system.future_event_list.scheduled_model">
-<span id="src-dynamic-system-future-event-list-scheduled-model-module"></span><h2>src.dynamic_system.future_event_list.scheduled_model module<a class="headerlink" href="#module-src.dynamic_system.future_event_list.scheduled_model" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="src.dynamic_system.future_event_list.scheduled_model.ScheduledModel">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.dynamic_system.future_event_list.scheduled_model.</span></code><code class="sig-name descname"><span class="pre">ScheduledModel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.future_event_list.scheduled_model.ScheduledModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Event scheduled</p>
-<dl class="py method">
-<dt id="src.dynamic_system.future_event_list.scheduled_model.ScheduledModel.decrease_time">
-<code class="sig-name descname"><span class="pre">decrease_time</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.future_event_list.scheduled_model.ScheduledModel.decrease_time" title="Permalink to this definition">¶</a></dt>
-<dd><p>Decreases the time for the scheduled model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>time</strong> (<em>int</em>) – Time variation.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.dynamic_system.future_event_list.scheduled_model.ScheduledModel.get_model">
-<code class="sig-name descname"><span class="pre">get_model</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.future_event_list.scheduled_model.ScheduledModel.get_model" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the scheduled model.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.dynamic_system.future_event_list.scheduled_model.ScheduledModel.get_time">
-<code class="sig-name descname"><span class="pre">get_time</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.future_event_list.scheduled_model.ScheduledModel.get_time" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the time of the scheduled model.</p>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="src-dynamic-system-future-event-list-scheduled-model-module">
+<h2>src.dynamic_system.future_event_list.scheduled_model module<a class="headerlink" href="#src-dynamic-system-future-event-list-scheduled-model-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-src.dynamic_system.future_event_list.scheduler">
-<span id="src-dynamic-system-future-event-list-scheduler-module"></span><h2>src.dynamic_system.future_event_list.scheduler module<a class="headerlink" href="#module-src.dynamic_system.future_event_list.scheduler" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="src.dynamic_system.future_event_list.scheduler.Scheduler">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.dynamic_system.future_event_list.scheduler.</span></code><code class="sig-name descname"><span class="pre">Scheduler</span></code><a class="headerlink" href="#src.dynamic_system.future_event_list.scheduler.Scheduler" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Scheduler for execution of the autonomous events of discrete-event
-models</p>
-<dl class="py method">
-<dt id="src.dynamic_system.future_event_list.scheduler.Scheduler.get_future_event_list">
-<code class="sig-name descname"><span class="pre">get_future_event_list</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.future_event_list.scheduler.Scheduler.get_future_event_list" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the future event list</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.dynamic_system.future_event_list.scheduler.Scheduler.get_next_models">
-<code class="sig-name descname"><span class="pre">get_next_models</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.future_event_list.scheduler.Scheduler.get_next_models" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the next models that will execute an autonomous event</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.dynamic_system.future_event_list.scheduler.Scheduler.get_time_of_next_event">
-<code class="sig-name descname"><span class="pre">get_time_of_next_event</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.future_event_list.scheduler.Scheduler.get_time_of_next_event" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the time of the next event</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.dynamic_system.future_event_list.scheduler.Scheduler.pop_next_models">
-<code class="sig-name descname"><span class="pre">pop_next_models</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.future_event_list.scheduler.Scheduler.pop_next_models" title="Permalink to this definition">¶</a></dt>
-<dd><p>Gets the next models that will execute an autonomous event and
-removes it from the heap</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.dynamic_system.future_event_list.scheduler.Scheduler.schedule">
-<code class="sig-name descname"><span class="pre">schedule</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.future_event_list.scheduler.Scheduler.schedule" title="Permalink to this definition">¶</a></dt>
-<dd><p>Schedule an event at the specified time.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>model</strong> (<a class="reference internal" href="src.models.models.discrete_event_model.html#src.models.models.discrete_event_model.DiscreteEventModel" title="src.models.models.discrete_event_model.DiscreteEventModel"><em>DiscreteEventModel</em></a>) – DiscreteEventModel with an autonomous event scheduled</p></li>
-<li><p><strong>time</strong> (<em>Time</em>) – Time to execute an autonomous event</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.dynamic_system.future_event_list.scheduler.Scheduler.unschedule">
-<code class="sig-name descname"><span class="pre">unschedule</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.future_event_list.scheduler.Scheduler.unschedule" title="Permalink to this definition">¶</a></dt>
-<dd><p>Drop a model from schedule.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>model</strong> (<a class="reference internal" href="src.models.models.discrete_event_model.html#src.models.models.discrete_event_model.DiscreteEventModel" title="src.models.models.discrete_event_model.DiscreteEventModel"><em>DiscreteEventModel</em></a>) – DiscreteEventModel with an autonomous event scheduled.</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.dynamic_system.future_event_list.scheduler.Scheduler.update_time">
-<code class="sig-name descname"><span class="pre">update_time</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.dynamic_system.future_event_list.scheduler.Scheduler.update_time" title="Permalink to this definition">¶</a></dt>
-<dd><p>Updates the time of the events</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>delta_time</strong> (<em>Time</em>) – Time that has passed since the last update</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="src-dynamic-system-future-event-list-scheduler-module">
+<h2>src.dynamic_system.future_event_list.scheduler module<a class="headerlink" href="#src-dynamic-system-future-event-list-scheduler-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-src.dynamic_system.future_event_list">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.dynamic_system.future_event_list" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

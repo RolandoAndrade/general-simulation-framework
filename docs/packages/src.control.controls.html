@@ -137,17 +137,17 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.control.controls.discrete_event_control">
+  <a class="reference internal nav-link" href="#src-control-controls-discrete-event-control-module">
    src.control.controls.discrete_event_control module
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.control.controls.thread_control">
+  <a class="reference internal nav-link" href="#src-control-controls-thread-control-module">
    src.control.controls.thread_control module
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#module-src.control.controls">
+  <a class="reference internal nav-link" href="#module-contents">
    Module contents
   </a>
  </li>
@@ -167,116 +167,14 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-src.control.controls.discrete_event_control">
-<span id="src-control-controls-discrete-event-control-module"></span><h2>src.control.controls.discrete_event_control module<a class="headerlink" href="#module-src.control.controls.discrete_event_control" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="src.control.controls.discrete_event_control.DiscreteEventControl">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.control.controls.discrete_event_control.</span></code><code class="sig-name descname"><span class="pre">DiscreteEventControl</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simulator</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DiscreteEventSimulationEngine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulation_strategy</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">SimulationStrategy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_bus</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">EventBus</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.control.controls.discrete_event_control.DiscreteEventControl" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">control.core.base_control.BaseControl</span></code></p>
-<p>Control that executes the discrete-event simulation</p>
-<dl class="py method">
-<dt id="src.control.controls.discrete_event_control.DiscreteEventControl._execute">
-<code class="sig-name descname"><span class="pre">_execute</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.control.controls.discrete_event_control.DiscreteEventControl._execute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Executes the simulation loop number of seconds.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>frequency</strong> (<em>Time</em>) – Frequency of the simulation computation.</p></li>
-<li><p><strong>wait_time</strong> (<em>Time</em>) – Delay execution for a given.</p></li>
-<li><p><strong>stop_time</strong> (<em>Time</em>) – Duration of the simulation.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.control.controls.discrete_event_control.DiscreteEventControl.init">
-<code class="sig-name descname"><span class="pre">init</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.control.controls.discrete_event_control.DiscreteEventControl.init" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="src.control.controls.discrete_event_control.DiscreteEventControl.next_step">
-<code class="sig-name descname"><span class="pre">next_step</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">decimal.Decimal</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.control.controls.discrete_event_control.DiscreteEventControl.next_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Executes the next step</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.control.controls.discrete_event_control.DiscreteEventControl.pause">
-<code class="sig-name descname"><span class="pre">pause</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.control.controls.discrete_event_control.DiscreteEventControl.pause" title="Permalink to this definition">¶</a></dt>
-<dd><p>Pauses the simulation</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.control.controls.discrete_event_control.DiscreteEventControl.start">
-<code class="sig-name descname"><span class="pre">start</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.control.controls.discrete_event_control.DiscreteEventControl.start" title="Permalink to this definition">¶</a></dt>
-<dd><p>Starts the simulation</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>start_input</strong> – Input of the dynamic system.</p></li>
-<li><p><strong>frequency</strong> (<em>Time</em>) – Frequency of the simulation computation.</p></li>
-<li><p><strong>stop_time</strong> (<em>Time</em>) – Time of the simulation</p></li>
-<li><p><strong>wait_time</strong> (<em>Time</em>) – Delay execution for a given number of seconds.</p></li>
-</ul>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.control.controls.discrete_event_control.DiscreteEventControl.stop">
-<code class="sig-name descname"><span class="pre">stop</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.control.controls.discrete_event_control.DiscreteEventControl.stop" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stops the simulation</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.control.controls.discrete_event_control.DiscreteEventControl.time">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">time</span></code><a class="headerlink" href="#src.control.controls.discrete_event_control.DiscreteEventControl.time" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="src.control.controls.discrete_event_control.DiscreteEventControl.wait">
-<code class="sig-name descname"><span class="pre">wait</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">decimal.Decimal</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.control.controls.discrete_event_control.DiscreteEventControl.wait" title="Permalink to this definition">¶</a></dt>
-<dd><p>Waits the simulation end</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>timeout</strong> (<em>Time</em>) – Time to wait.</p>
-</dd>
-</dl>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="src-control-controls-discrete-event-control-module">
+<h2>src.control.controls.discrete_event_control module<a class="headerlink" href="#src-control-controls-discrete-event-control-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-src.control.controls.thread_control">
-<span id="src-control-controls-thread-control-module"></span><h2>src.control.controls.thread_control module<a class="headerlink" href="#module-src.control.controls.thread_control" title="Permalink to this headline">¶</a></h2>
-<dl class="py class">
-<dt id="src.control.controls.thread_control.ThreadControlStrategy">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">src.control.controls.thread_control.</span></code><code class="sig-name descname"><span class="pre">ThreadControlStrategy</span></code><a class="headerlink" href="#src.control.controls.thread_control.ThreadControlStrategy" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">control.core.simulation_strategy.SimulationStrategy</span></code></p>
-<p>Control that executes the simulation in a new thread</p>
-<dl class="py method">
-<dt id="src.control.controls.thread_control.ThreadControlStrategy.start_simulation">
-<code class="sig-name descname"><span class="pre">start_simulation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.control.controls.thread_control.ThreadControlStrategy.start_simulation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Start the simulation.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.control.controls.thread_control.ThreadControlStrategy.stop_simulation">
-<code class="sig-name descname"><span class="pre">stop_simulation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.control.controls.thread_control.ThreadControlStrategy.stop_simulation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Stops the simulation.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="src.control.controls.thread_control.ThreadControlStrategy.wait_simulation">
-<code class="sig-name descname"><span class="pre">wait_simulation</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">decimal.Decimal</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.control.controls.thread_control.ThreadControlStrategy.wait_simulation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Waits the simulation.</p>
-</dd></dl>
-
-</dd></dl>
-
+<div class="section" id="src-control-controls-thread-control-module">
+<h2>src.control.controls.thread_control module<a class="headerlink" href="#src-control-controls-thread-control-module" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="module-src.control.controls">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-src.control.controls" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

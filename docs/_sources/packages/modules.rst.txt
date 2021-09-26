@@ -1,7 +1,7 @@
-src
+gsf
 ===
 
 .. toctree::
    :maxdepth: 4
 
-   src
+   gsf
