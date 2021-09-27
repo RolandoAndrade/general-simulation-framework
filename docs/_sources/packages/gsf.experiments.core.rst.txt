@@ -1,0 +1,16 @@
+gsf.experiments.core package
+============================
+
+.. automodule:: gsf.experiments.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.experiments.core.base_experiment
+   gsf.experiments.core.recovery_strategy

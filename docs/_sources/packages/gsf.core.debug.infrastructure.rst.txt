@@ -1,0 +1,16 @@
+gsf.core.debug.infrastructure package
+=====================================
+
+.. automodule:: gsf.core.debug.infrastructure
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.core.debug.infrastructure.providers
+   gsf.core.debug.infrastructure.table

@@ -1,0 +1,4 @@
+.. automodule:: gsf.control.controls.discrete_event_control
+   :members:
+   :undoc-members:
+   :show-inheritance:

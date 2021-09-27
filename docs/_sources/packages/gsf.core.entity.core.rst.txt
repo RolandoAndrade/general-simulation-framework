@@ -1,0 +1,19 @@
+gsf.core.entity.core package
+============================
+
+.. automodule:: gsf.core.entity.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.core.entity.core.entity
+   gsf.core.entity.core.entity_emitter
+   gsf.core.entity.core.entity_manager
+   gsf.core.entity.core.entity_property
+   gsf.core.entity.core.property_type

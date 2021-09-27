@@ -1,0 +1,15 @@
+gsf.core.builder package
+========================
+
+.. automodule:: gsf.core.builder
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.core.builder.core

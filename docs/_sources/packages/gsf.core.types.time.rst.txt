@@ -1,0 +1,4 @@
+.. automodule:: gsf.core.types.time
+   :members:
+   :undoc-members:
+   :show-inheritance:

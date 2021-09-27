@@ -1,0 +1,4 @@
+.. automodule:: gsf.core.events.domain_events
+   :members:
+   :undoc-members:
+   :show-inheritance:

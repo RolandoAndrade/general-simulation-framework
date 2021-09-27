@@ -1,0 +1,4 @@
+.. automodule:: gsf.dynamic_system.core.base_dynamic_sytem
+   :members:
+   :undoc-members:
+   :show-inheritance:

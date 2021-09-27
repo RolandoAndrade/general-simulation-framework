@@ -1,0 +1,4 @@
+.. automodule:: gsf.core.mathematics.values.value
+   :members:
+   :undoc-members:
+   :show-inheritance:

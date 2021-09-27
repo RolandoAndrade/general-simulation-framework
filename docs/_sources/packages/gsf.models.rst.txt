@@ -1,0 +1,16 @@
+gsf.models package
+==================
+
+.. automodule:: gsf.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.models.core
+   gsf.models.models

@@ -1,0 +1,4 @@
+.. automodule:: gsf.core.entity.properties.number_property
+   :members:
+   :undoc-members:
+   :show-inheritance:

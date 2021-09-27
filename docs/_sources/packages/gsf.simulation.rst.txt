@@ -1,0 +1,16 @@
+gsf.simulation package
+======================
+
+.. automodule:: gsf.simulation
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.simulation.core
+   gsf.simulation.simulation_engines

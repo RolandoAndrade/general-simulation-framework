@@ -1,0 +1,16 @@
+gsf.core.mathematics package
+============================
+
+.. automodule:: gsf.core.mathematics
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.core.mathematics.distributions
+   gsf.core.mathematics.values

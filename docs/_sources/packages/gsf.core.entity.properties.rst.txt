@@ -1,0 +1,19 @@
+gsf.core.entity.properties package
+==================================
+
+.. automodule:: gsf.core.entity.properties
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.core.entity.properties.boolean_property
+   gsf.core.entity.properties.expression_property
+   gsf.core.entity.properties.number_property
+   gsf.core.entity.properties.property
+   gsf.core.entity.properties.string_property

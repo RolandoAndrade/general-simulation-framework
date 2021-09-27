@@ -1,0 +1,4 @@
+.. automodule:: gsf.core.debug.infrastructure.providers
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,4 @@
+.. automodule:: gsf.core.entity.properties.boolean_property
+   :members:
+   :undoc-members:
+   :show-inheritance:

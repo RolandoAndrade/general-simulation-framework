@@ -1,0 +1,16 @@
+gsf.core.debug package
+======================
+
+.. automodule:: gsf.core.debug
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.core.debug.domain
+   gsf.core.debug.infrastructure

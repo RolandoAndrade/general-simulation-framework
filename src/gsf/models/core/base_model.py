@@ -7,8 +7,6 @@ implementing its abstract methods.
 Example:
     Creating a model::
 
-        from models.core import BaseModel
-
         class Model(BaseModel):
             def get_output(self) -> int:
                 return self.get_state()

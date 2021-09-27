@@ -1,0 +1,21 @@
+gsf package
+===========
+
+.. automodule:: gsf
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.control
+   gsf.core
+   gsf.dynamic_system
+   gsf.experiments
+   gsf.models
+   gsf.reports
+   gsf.simulation

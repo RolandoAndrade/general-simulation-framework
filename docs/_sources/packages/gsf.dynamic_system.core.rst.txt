@@ -1,0 +1,15 @@
+gsf.dynamic\_system.core package
+================================
+
+.. automodule:: gsf.dynamic_system.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.dynamic_system.core.base_dynamic_sytem

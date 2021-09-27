@@ -1,0 +1,4 @@
+.. automodule:: gsf.models.core.base_model
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,17 @@
+gsf.control.core package
+========================
+
+.. automodule:: gsf.control.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.control.core.base_control
+   gsf.control.core.simulation_stats
+   gsf.control.core.simulation_strategy

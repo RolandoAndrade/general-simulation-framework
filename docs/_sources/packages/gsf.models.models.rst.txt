@@ -1,0 +1,16 @@
+gsf.models.models package
+=========================
+
+.. automodule:: gsf.models.models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.models.models.discrete_event_model
+   gsf.models.models.discrete_time_model

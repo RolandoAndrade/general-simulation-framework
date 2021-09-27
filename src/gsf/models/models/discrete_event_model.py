@@ -1,3 +1,56 @@
+"""Discrete Event Model
+==============
+This module contains the definition of a discrete event simulation Model.
+It has an abstract definition DiscreteEventModel, that should be extended,
+implementing its abstract methods.
+
+Example:
+    Creating a model::
+
+        class Station(DiscreteEventModel):
+            _processing_time: Expression
+
+            def __init__(
+                self, dynamic_system: DiscreteEventDynamicSystem, processing_time: Expression
+            ):
+                super().__init__(dynamic_system, state={"parts": 0, "remaining_time": -1})
+                self._processing_time = processing_time
+
+            def _internal_state_transition_function(self, state: StationState) -> StationState:
+                state["parts"] = max(state["parts"] - 1, 0)
+                self.schedule(self.get_time())
+                return state
+
+            def _external_state_transition_function(
+                self, state: StationState, inputs: Dict[str, int], event_time: Time
+            ) -> StationState:
+                values = inputs.values()
+                state["remaining_time"] = state["remaining_time"] - event_time
+                for number_of_parts in values:
+                    if state["parts"] > 0:
+                        state["parts"] = state["parts"] + number_of_parts
+                    elif state["parts"] == 0:
+                        state["parts"] = number_of_parts
+                        self.schedule(self.get_time())
+                return state
+
+            def _time_advance_function(self, state: StationState) -> Time:
+                if state["parts"] < 1:
+                    state["remaining_time"] = Time(-1)
+                else:
+                    state["remaining_time"] = Time(self._processing_time.evaluate())
+                return state["remaining_time"]
+
+            def _output_function(self, state: StationState) -> int:
+                if state["parts"] > 0:
+                    return 1
+                return 0
+
+            def __str__(self):
+                return self.get_id()
+"""
+
+
 from __future__ import annotations
 
 from abc import abstractmethod
@@ -18,7 +71,11 @@ if TYPE_CHECKING:
 
 
 class DiscreteEventModel(BaseModel):
-    """DiscreteEventModel with an state"""
+    """DiscreteEventModel
+
+    A discrete-event model executes can receive inputs at any time. Each event occurs at
+    a particular instant in time and marks a change of state in the system.
+    """
 
     def __init__(
         self,
@@ -82,7 +139,7 @@ class DiscreteEventModel(BaseModel):
     @debug("Executing state transition")
     def state_transition(self, inputs: ModelInput = None, event_time: Time = 0):
         """Executes the state transition using the state given by the state
-        transition function. If there are not inputs is an internal transition,
+        transition function. If there are no inputs is an internal transition,
         otherwise it is an external transition.
 
         Args:

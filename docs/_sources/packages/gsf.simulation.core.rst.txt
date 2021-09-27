@@ -1,0 +1,15 @@
+gsf.simulation.core package
+===========================
+
+.. automodule:: gsf.simulation.core
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.simulation.core.base_simulator

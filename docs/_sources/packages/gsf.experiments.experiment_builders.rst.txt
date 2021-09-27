@@ -1,0 +1,15 @@
+gsf.experiments.experiment\_builders package
+============================================
+
+.. automodule:: gsf.experiments.experiment_builders
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.experiments.experiment_builders.discrete_event_experiment

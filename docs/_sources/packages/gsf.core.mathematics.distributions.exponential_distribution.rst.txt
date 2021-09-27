@@ -1,0 +1,4 @@
+.. automodule:: gsf.core.mathematics.distributions.exponential_distribution
+   :members:
+   :undoc-members:
+   :show-inheritance:

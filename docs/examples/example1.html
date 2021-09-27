@@ -1,0 +1,1114 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Creating a Linear Cellular Automata &#8212; General Simulation Framework</title>
+    
+  <link href="../_static/css/theme.css" rel="stylesheet" />
+  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.acff12b8f9c144ce68a297486a2fa670.css" type="text/css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Creating a Conway’s Game of Life" href="example2.html" />
+    <link rel="prev" title="General Simulation Framework" href="../README.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">General Simulation Framework</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <div class="bd-toc-item active">
+        <p class="caption">
+ <span class="caption-text">
+  About the framework
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../README.html">
+   General Simulation Framework
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Examples
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Creating a Linear Cellular Automata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="example2.html">
+   Creating a Conway’s Game of Life
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="example3.html">
+   Creating a discrete-event simulator
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../packages/gsf.control.html">
+   Control
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.control.controls.html">
+     gsf.control.controls package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <label for="toctree-checkbox-2">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.control.core.html">
+     gsf.control.core package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../packages/gsf.core.html">
+   Core
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.core.builder.html">
+     gsf.core.builder package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../packages/gsf.core.builder.core.html">
+       gsf.core.builder.core package
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+      <label for="toctree-checkbox-6">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul class="simple">
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.core.debug.html">
+     gsf.core.debug package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+    <label for="toctree-checkbox-7">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../packages/gsf.core.debug.domain.html">
+       gsf.core.debug.domain package
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+      <label for="toctree-checkbox-8">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul class="simple">
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../packages/gsf.core.debug.infrastructure.html">
+       gsf.core.debug.infrastructure package
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+      <label for="toctree-checkbox-9">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul class="simple">
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.core.entity.html">
+     gsf.core.entity package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+    <label for="toctree-checkbox-10">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../packages/gsf.core.entity.core.html">
+       gsf.core.entity.core package
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+      <label for="toctree-checkbox-11">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul class="simple">
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../packages/gsf.core.entity.properties.html">
+       gsf.core.entity.properties package
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+      <label for="toctree-checkbox-12">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul class="simple">
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.core.events.html">
+     gsf.core.events package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+    <label for="toctree-checkbox-13">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.core.expresions.html">
+     gsf.core.expresions package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+    <label for="toctree-checkbox-14">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.core.mathematics.html">
+     gsf.core.mathematics package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+    <label for="toctree-checkbox-15">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../packages/gsf.core.mathematics.distributions.html">
+       gsf.core.mathematics.distributions package
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+      <label for="toctree-checkbox-16">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul class="simple">
+      </ul>
+     </li>
+     <li class="toctree-l3 has-children">
+      <a class="reference internal" href="../packages/gsf.core.mathematics.values.html">
+       gsf.core.mathematics.values package
+      </a>
+      <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+      <label for="toctree-checkbox-17">
+       <i class="fas fa-chevron-down">
+       </i>
+      </label>
+      <ul class="simple">
+      </ul>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.core.time.html">
+     gsf.core.time package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+    <label for="toctree-checkbox-18">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.core.types.html">
+     gsf.core.types package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+    <label for="toctree-checkbox-19">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../packages/gsf.dynamic_system.html">
+   Dynamic System
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+  <label for="toctree-checkbox-20">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.dynamic_system.core.html">
+     gsf.dynamic_system.core package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+    <label for="toctree-checkbox-21">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.dynamic_system.dynamic_systems.html">
+     gsf.dynamic_system.dynamic_systems package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+    <label for="toctree-checkbox-22">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.dynamic_system.future_event_list.html">
+     gsf.dynamic_system.future_event_list package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
+    <label for="toctree-checkbox-23">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../packages/gsf.experiments.html">
+   Experiments
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
+  <label for="toctree-checkbox-24">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.experiments.core.html">
+     gsf.experiments.core package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
+    <label for="toctree-checkbox-25">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.experiments.experiment_builders.html">
+     gsf.experiments.experiment_builders package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-26" name="toctree-checkbox-26" type="checkbox"/>
+    <label for="toctree-checkbox-26">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.experiments.strategies.html">
+     gsf.experiments.strategies package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-27" name="toctree-checkbox-27" type="checkbox"/>
+    <label for="toctree-checkbox-27">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../packages/gsf.models.html">
+   Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-28" name="toctree-checkbox-28" type="checkbox"/>
+  <label for="toctree-checkbox-28">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.models.core.html">
+     gsf.models.core package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-29" name="toctree-checkbox-29" type="checkbox"/>
+    <label for="toctree-checkbox-29">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../packages/gsf.models.core.base_model.html">
+       Base Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../packages/gsf.models.core.path.html">
+       Path
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.models.models.html">
+     gsf.models.models package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-30" name="toctree-checkbox-30" type="checkbox"/>
+    <label for="toctree-checkbox-30">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../packages/gsf.reports.html">
+   Reports
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" type="checkbox"/>
+  <label for="toctree-checkbox-31">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.reports.core.html">
+     gsf.reports.core package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" type="checkbox"/>
+    <label for="toctree-checkbox-32">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.reports.report_generators.html">
+     gsf.reports.report_generators package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-33" name="toctree-checkbox-33" type="checkbox"/>
+    <label for="toctree-checkbox-33">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../packages/gsf.simulation.html">
+   Simulation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-34" name="toctree-checkbox-34" type="checkbox"/>
+  <label for="toctree-checkbox-34">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.simulation.core.html">
+     gsf.simulation.core package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-35" name="toctree-checkbox-35" type="checkbox"/>
+    <label for="toctree-checkbox-35">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="../packages/gsf.simulation.simulation_engines.html">
+     gsf.simulation.simulation_engines package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-36" name="toctree-checkbox-36" type="checkbox"/>
+    <label for="toctree-checkbox-36">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul class="simple">
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Theme by the <a href="https://ebp.jupyterbook.org">Executable Book Project</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="topbar container-xl fixed-top">
+    <div class="topbar-contents row">
+        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
+        <div class="col pl-md-4 topbar-main">
+            
+            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+                aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+                title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+                <i class="fas fa-bars"></i>
+                <i class="fas fa-arrow-left"></i>
+                <i class="fas fa-arrow-up"></i>
+            </button>
+            
+            
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/examples/example1.ipynb.txt"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+            <!-- Source interaction buttons -->
+
+            <!-- Full screen (wrap in <a> to have style consistency -->
+
+<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+        data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+        title="Fullscreen mode"><i
+            class="fas fa-expand"></i></button></a>
+
+            <!-- Launch buttons -->
+
+        </div>
+
+        <!-- Table of contents -->
+        <div class="d-none d-md-block col-md-2 bd-toc show">
+            
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> Contents
+            </div>
+            <nav id="bd-toc-nav">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Rules">
+   Rules
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Implementing-cells">
+   Implementing cells
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Implementing-the-automata">
+   Implementing the automata
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#Running-the-simulation">
+   Running the simulation
+  </a>
+ </li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt *,
+div.nbinput.container div.input_area pre,
+div.nboutput.container div.output_area pre,
+div.nbinput.container div.input_area .highlight,
+div.nboutput.container div.output_area .highlight {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+div.nbinput.container > div[class*=highlight],
+div.nboutput.container > div[class*=highlight] {
+    margin: 0;
+}
+
+div.nbinput.container div.prompt *,
+div.nboutput.container div.prompt * {
+    background: none;
+}
+
+div.nboutput.container div.output_area .highlight,
+div.nboutput.container div.output_area pre {
+    background: unset;
+}
+
+div.nboutput.container div.output_area div.highlight {
+    color: unset;  /* override Pygments text color */
+}
+
+/* avoid gaps between output lines */
+div.nboutput.container div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput.container,
+div.nboutput.container {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput.container,
+    div.nboutput.container {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput.container {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast.container {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput.container div.prompt pre {
+    color: #307FC1;
+}
+
+/* output prompt */
+div.nboutput.container div.prompt pre {
+    color: #BF5B3D;
+}
+
+/* all prompts */
+div.nbinput.container div.prompt,
+div.nboutput.container div.prompt {
+    width: 4.5ex;
+    padding-top: 5px;
+    position: relative;
+    user-select: none;
+}
+
+div.nbinput.container div.prompt > div,
+div.nboutput.container div.prompt > div {
+    position: absolute;
+    right: 0;
+    margin-right: 0.3ex;
+}
+
+@media (max-width: 540px) {
+    div.nbinput.container div.prompt,
+    div.nboutput.container div.prompt {
+        width: unset;
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput.container div.prompt.empty {
+        padding: 0;
+    }
+
+    div.nbinput.container div.prompt > div,
+    div.nboutput.container div.prompt > div {
+        position: unset;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput.container div.prompt pre,
+div.nboutput.container div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput.container div.input_area,
+div.nboutput.container div.output_area {
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput.container div.input_area,
+    div.nboutput.container div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput.container div.input_area {
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    /*background: #f5f5f5;*/
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput.container div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.imgmath center alignment in output cells */
+div.nboutput.container div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput.container div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-default-inverse-fg { color: #FFFFFF; }
+.ansi-default-inverse-bg { background-color: #000000; }
+
+.ansi-bold { font-weight: bold; }
+.ansi-underline { text-decoration: underline; }
+
+
+div.nbinput.container div.input_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight] > pre,
+div.nboutput.container div.output_area div[class*=highlight].math,
+div.nboutput.container div.output_area.rendered_html,
+div.nboutput.container div.output_area > div.output_javascript,
+div.nboutput.container div.output_area:not(.rendered_html) > img{
+    padding: 5px;
+    margin: 0;
+}
+
+/* fix copybtn overflow problem in chromium (needed for 'sphinx_copybutton') */
+div.nbinput.container div.input_area > div[class^='highlight'],
+div.nboutput.container div.output_area > div[class^='highlight']{
+    overflow-y: hidden;
+}
+
+/* hide copybtn icon on prompts (needed for 'sphinx_copybutton') */
+.prompt a.copybtn {
+    display: none;
+}
+
+/* Some additional styling taken form the Jupyter notebook CSS */
+div.rendered_html table {
+  border: none;
+  border-collapse: collapse;
+  border-spacing: 0;
+  color: black;
+  font-size: 12px;
+  table-layout: fixed;
+}
+div.rendered_html thead {
+  border-bottom: 1px solid black;
+  vertical-align: bottom;
+}
+div.rendered_html tr,
+div.rendered_html th,
+div.rendered_html td {
+  text-align: right;
+  vertical-align: middle;
+  padding: 0.5em 0.5em;
+  line-height: normal;
+  white-space: normal;
+  max-width: none;
+  border: none;
+}
+div.rendered_html th {
+  font-weight: bold;
+}
+div.rendered_html tbody tr:nth-child(odd) {
+  background: #f5f5f5;
+}
+div.rendered_html tbody tr:hover {
+  background: rgba(66, 165, 245, 0.2);
+}
+</style>
+<div class="section" id="Creating-a-Linear-Cellular-Automata">
+<h1>Creating a Linear Cellular Automata<a class="headerlink" href="#Creating-a-Linear-Cellular-Automata" title="Permalink to this headline">¶</a></h1>
+<p>Let’s start creating a linear cellular automata</p>
+<p><img alt="linear-aca2.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAn0AAABFCAYAAAA/xVAkAAAAAXNSR0IArs4c6QAABTd0RVh0bXhmaWxlACUzQ214ZmlsZSUyMGhvc3QlM0QlMjJhcHAuZGlhZ3JhbXMubmV0JTIyJTIwbW9kaWZpZWQlM0QlMjIyMDIxLTA5LTI0VDEyJTNBNDQlM0E0OS40ODVaJTIyJTIwYWdlbnQlM0QlMjI1LjAlMjAoWDExJTNCJTIwTGludXglMjB4ODZfNjQpJTIwQXBwbGVXZWJLaXQlMkY1MzcuMzYlMjAoS0hUTUwlMkMlMjBsaWtlJTIwR2Vja28pJTIwQ2hyb21lJTJGOTQuMC40NjA2LjU0JTIwU2FmYXJpJTJGNTM3LjM2JTIyJTIwZXRhZyUzRCUyMkZtMFBjRVhiUWpqelY2aWlLc056JTIyJTIwdmVyc2lvbiUzRCUyMjE1LjMuMCUyMiUyMHR5cGUlM0QlMjJnb29nbGUlMjIlM0UlM0NkaWFncmFtJTIwaWQlM0QlMjJCNkxtc2x2Nl8xaEl4NzFja2tYTSUyMiUyMG5hbWUlM0QlMjJQYWdlLTElMjIlM0U1Wm5ianBzd0VJYWZKcGV0QUhPOGJIUFlWZFZLbFZLcDdhVVZISERsWUdwTUF2djBOYkVOSWRuTnNsb2FpTWhGeFB3ZXczam1zMlhERE14M3hRT0RhZnlOaG9qTUxDTXNabUF4czZ6QXNjViUyRkpaUlNjQTFEQ2hIRG9aVE1SbGpqSjZSRTdaYmpFR1V0UjA0cDRUaHRpeHVhSkdqRFd4cGtqQjdhYmx0SzJrOU5ZWVF1aFBVR2trdjFKdzU1TEZYZjhocjlFZUVvMWs4MjNVQzI3S0IyVmlQSlloalN3NGtFbGpNd1o1UnllYlVyNW9oVXVkTjVrZjFXTDdUV2dUR1U4QzRkak1YZkh6YkIyWmM4WEZsZUNwOU1ZSDh3SFJVY0wlMkZXSVVTZ1NvRXpLZUV3am1rQ3liTlRQak9aSmlLcmJHc0pxZkw1U21nclJGT0lmeEhtcHFnbHpUb1VVOHgxUnJTSmlWdjVTJTJGWSUyRkc3OHI0NkdoelVadzJMa3BseVZpckFGJTJGTWdaSXltck1OdWpad3hSSmtFZUpYJTJGS3k2VW9Kd1JIZEl4Q1A2TVVRZ3glMkZ0MkhGQ3hGdFYlMkJUVG5FaGFySVc2b2o3N3VISkZkUHVxaldJY1ljclZONEhPeEJUTUYycG1HV3lsbXh4VVZWTVpYQ1BXSWNGZGVUZURsbzFjRldRS3NaYldyQUQ4MzgwQzd4eWRUUVd2OVpjaWZLc05XUllXZElocTMlMkJHZDVpUXVhVVVIYnNEb3glMkJzRGFOc1hIdFRaUnJweVBYN3BCY08zZkR0VHMycnYySmN1MTI1Tm9ia212M1hyaXVOOWFqNFRxWUtOZGVSNjc5SWJuMiUyQnVlNkQ0ajlrVUZjbjFadkNuR1BNUG9kWVF5R2hORWZKWXhnYkNlN3V1aFRXMUdEamhDYnh2TUZ2UTNGd1glMkZmS3F5T3Y3NWVXNHlON3N0MDNkZFNxOSUyRlJ2bzRwR0JKVEhlYjR0N1QyMkk1cUZwam9BbXlDcm1qYmc2SU43Z1Z0WjJ5bk5jdWVLdHAyVjdUZlNmYXg2eWZHWUhuaWtGS2M4T3prenQ4cm9lSEVQZCUyQkQybWRmdFY3ek42NzduMlA0UnZkMk5PSkNqcSUyRkJzRTdVT3lhMWZUZVQlMkJuYW5WMkUybjBwbHBwdnZ6V0Q1RHclM0QlM0QlM0MlMkZkaWFncmFtJTNFJTNDJTJGbXhmaWxlJTNFjBtuUwAACkpJREFUeF7tnEFyXEUMhmW4AVwoOQMHYcEdgA3FnmNwgeRAsAkLqmBhypRTHk88lrr7l1776csyo25J36/u93s84zvjHwQgAAEIQAACEIDA6Qncnb5DGoQABCAAAQhAAAIQMEwfQwABCEAAAhCAAAQaEMD0NRCZFiEAAQhAAAIQgACmjxmAAAQgAAEIQAACDQhg+hqITIsQgAAEIAABCEAA08cMQAACEIAABCAAgQYEPNP3wczeNeBAixCAAAQgAAEIQOCtEvhoZu+94j3Td2/GN3w9iLwOAQhAAAIQgAAEDiQQ8muYvgMVIjUEIAABCEAAAhAQEMD0CSCyBQQgAAEIQAACENidAKZvd4WoDwIQgAAEIAABCAgIYPoEENkCAhCAAAQgAAEI7E4A07e7QtQHAQhAAAIQgAAEBAQwfQKIbAEBCEAAAhCAAAR2J4Dp210h6oMABCAAAQhAAAICApg+AUS2gAAEIAABCEAAArsTwPTtrhD1QQACEIAABCAAAQEBTJ8AIltAAAIQgAAEIACB3Qlg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" /></p>
+<p>A cellular automaton is a discrete model of computation studied in automata theory.</p>
+<p>It consists of a regular grid of cells, each in one of a finite number of states, such as on and off (in contrast to a coupled map lattice). The grid can be in any finite number of dimensions. For each cell, a set of cells called its neighborhood is defined relative to the specified cell.An initial state (time t = 0) is selected by assigning a state for each cell. A new generation is created (advancing t by 1), according to some fixed rule (generally, a mathematical function) that determines the
+new state of each cell in terms of the current state of the cell and the states of the cells in its neighborhood. Typically, the rule for updating the state of cells is the same for each cell and does not change over time.</p>
+<div class="section" id="Rules">
+<h2>Rules<a class="headerlink" href="#Rules" title="Permalink to this headline">¶</a></h2>
+<p>For this example, the rule for updating the state of the cells is:</p>
+<blockquote>
+<div><p>For each cell of the automata, it will take the state of its left neighboring cell.</p>
+</div></blockquote>
+<p>With this rule, the cells will move one step to the right side every generation.</p>
+</div>
+<div class="section" id="Implementing-cells">
+<h2>Implementing cells<a class="headerlink" href="#Implementing-cells" title="Permalink to this headline">¶</a></h2>
+<p>To implement cells, you can extend the class <code class="docutils literal notranslate"><span class="pre">models.models.DiscreteTimeModel</span></code>, and define the abstract protected methods.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Dict</span>
+<span class="kn">from</span> <span class="nn">gsf.dynamic_system.dynamic_systems</span> <span class="kn">import</span> <span class="n">DiscreteEventDynamicSystem</span>
+<span class="kn">from</span> <span class="nn">gsf.models.models</span> <span class="kn">import</span> <span class="n">DiscreteTimeModel</span>
+
+
+<span class="k">class</span> <span class="nc">Cell</span><span class="p">(</span><span class="n">DiscreteTimeModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cell of the linear cellular automata</span>
+
+<span class="sd">    It has an state alive or dead. When receives an input, changes its state to that input.</span>
+<span class="sd">    Its output is the state.</span>
+
+<span class="sd">    Attributes:</span>
+<span class="sd">      _symbol (str): Symbol that represents the cell when it is printed in console.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_symbol</span><span class="p">:</span> <span class="nb">str</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dynamic_system</span><span class="p">:</span> <span class="n">DiscreteEventDynamicSystem</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            dynamic_system (DiscreteEventDynamicSystem): Automata Grid where the cell belongs.</span>
+<span class="sd">            state (bool); State that indicates whether the cell is alive (True) or dead (False).</span>
+<span class="sd">            symbol (str): Symbol that represents the cell when it is printed in console.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">dynamic_system</span><span class="p">,</span> <span class="n">state</span><span class="o">=</span><span class="n">state</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_symbol</span> <span class="o">=</span> <span class="n">symbol</span> <span class="ow">or</span> <span class="s2">&quot;</span><span class="se">\u2665</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_state_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">inputs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Receives an input and changes the state of the cell.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            state (bool); Current state of the cell.</span>
+<span class="sd">            inputs: A dictionary where the key is the input source cell and the value the output of that cell.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The new state of the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">next_state</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">values</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">next_state</span>
+
+    <span class="k">def</span> <span class="nf">_output_function</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the state of the cell.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">state</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Prints the cell with the defined symbol&quot;&quot;&quot;</span>
+        <span class="n">is_alive</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_state</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">is_alive</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_symbol</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;-&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Cell</span></code> class, must receive the <code class="docutils literal notranslate"><span class="pre">DiscreteEventDynamicSystem</span></code> where the model belongs. We also include the state of the cell as a bool and a symbol that represents the cells when they will be printed.</p>
+<p>When a generation is running, the framework will obtain the outputs of every cell defined by <code class="docutils literal notranslate"><span class="pre">_output_function</span></code>, and will inject them on the next model by <code class="docutils literal notranslate"><span class="pre">_state_transition</span></code>. The state transition member, receives a dict with the source input model and its state, and returns the new state that will take the cell.</p>
+</div>
+<div class="section" id="Implementing-the-automata">
+<h2>Implementing the automata<a class="headerlink" href="#Implementing-the-automata" title="Permalink to this headline">¶</a></h2>
+<p>The automata is a dynamic system, a discrete event dynamic system, so it extends <code class="docutils literal notranslate"><span class="pre">dynamic_system.dynamic_systems.DiscreteEventDynamicSystem</span></code></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">random</span><span class="p">,</span> <span class="n">seed</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">from</span> <span class="nn">gsf.dynamic_system.dynamic_systems</span> <span class="kn">import</span> <span class="n">DiscreteEventDynamicSystem</span>
+
+
+<span class="k">class</span> <span class="nc">LinearAutomata</span><span class="p">(</span><span class="n">DiscreteEventDynamicSystem</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Linear Automata implementation</span>
+
+<span class="sd">    It has a group of cells, connected between them. The output cell of each cell is its right neighbor.</span>
+<span class="sd">    Attributes:</span>
+<span class="sd">        _cells (List[Cell]): Group of cells of the linear automata.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">_cells</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Cell</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cells</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Args:</span>
+<span class="sd">            cells (int): Number of cells of the automata.</span>
+<span class="sd">            random_seed (int): Random seed for determinate the state of the seeds.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="n">seed</span><span class="p">(</span><span class="n">random_seed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_create_cells</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_create_relations</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_create_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cells</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Appends the cells to the automata.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            cells (int): Number of cells of the automata.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cells</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cells</span><span class="p">):</span>
+            <span class="n">is_alive</span> <span class="o">=</span> <span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mf">0.5</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cells</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Cell</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">is_alive</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">_create_relations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cells</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Creates the connections between the left cell and the right cell.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            cells (int): Number of cells of the automata.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cells</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cells</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cells</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Changes the format to show the linear automata when is printed&quot;&quot;&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cells</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">LinearAutomata</span></code> receives the number of cells that it will have and a random seed to determine the initial random state of the cells.</p>
+<p>First creates the cells, setting the state as alive or deade with a probability of 0.5, and giving as ´DynamicSystem´ the current linear automata.</p>
+<p>Then, it connects the models, setting as the output of the <code class="docutils literal notranslate"><span class="pre">cell[i-1]</span></code>, the <code class="docutils literal notranslate"><span class="pre">cell[i]</span></code>.</p>
+</div>
+<div class="section" id="Running-the-simulation">
+<h2>Running the simulation<a class="headerlink" href="#Running-the-simulation" title="Permalink to this headline">¶</a></h2>
+<p>We defined a dynamic system, so we can simulate it. Use the class <code class="docutils literal notranslate"><span class="pre">DiscreteEventExperiment</span></code> to run 5 geneations!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">gsf.experiments.experiment_builders</span> <span class="kn">import</span> <span class="n">DiscreteEventExperiment</span>
+
+<span class="n">linear_automata</span> <span class="o">=</span> <span class="n">LinearAutomata</span><span class="p">(</span><span class="n">cells</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">experiment</span> <span class="o">=</span> <span class="n">DiscreteEventExperiment</span><span class="p">(</span><span class="n">linear_automata</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">linear_automata</span><span class="p">)</span>
+<span class="n">experiment</span><span class="o">.</span><span class="n">simulation_control</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">stop_time</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">experiment</span><span class="o">.</span><span class="n">simulation_control</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">linear_automata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+-♥♥♥---♥♥♥
+--♥♥♥-♥♥♥-
+</pre></div></div>
+</div>
+<p>Create the experiment with the linear automata as dynamic system. Then, run it during 5 generations.</p>
+<p>As the simulation runs in a different thread, we wait for it to finish with <code class="docutils literal notranslate"><span class="pre">experiment.simulation_control.wait()</span></code>.</p>
+<p>Try the example by your custom params and have fun.</p>
+</div>
+</div>
+
+
+              </div>
+              
+        
+        <div class='prev-next-bottom'>
+            
+    <a class='left-prev' id="prev-link" href="../README.html" title="previous page">General Simulation Framework</a>
+    <a class='right-next' id="next-link" href="example2.html" title="next page">Creating a Conway’s Game of Life</a>
+
+        </div>
+        
+        </div>
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Rolando Andrade<br/>
+        
+            &copy; Copyright 2021, Rolando Andrade.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+  
+  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+
+  
+  </body>
+</html>

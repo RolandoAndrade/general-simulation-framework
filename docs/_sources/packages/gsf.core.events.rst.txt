@@ -1,0 +1,16 @@
+gsf.core.events package
+=======================
+
+.. automodule:: gsf.core.events
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.core.events.domain_events
+   gsf.core.events.event_bus

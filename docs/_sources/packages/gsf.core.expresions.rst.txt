@@ -1,0 +1,16 @@
+gsf.core.expresions package
+===========================
+
+.. automodule:: gsf.core.expresions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.core.expresions.expression
+   gsf.core.expresions.user_expression

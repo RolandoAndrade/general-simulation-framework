@@ -1,0 +1,17 @@
+gsf.experiments package
+=======================
+
+.. automodule:: gsf.experiments
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.experiments.core
+   gsf.experiments.experiment_builders
+   gsf.experiments.strategies

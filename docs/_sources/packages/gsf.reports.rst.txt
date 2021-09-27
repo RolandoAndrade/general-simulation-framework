@@ -1,0 +1,16 @@
+gsf.reports package
+===================
+
+.. automodule:: gsf.reports
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.reports.core
+   gsf.reports.report_generators

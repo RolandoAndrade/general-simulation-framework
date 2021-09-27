@@ -1,0 +1,4 @@
+.. automodule:: gsf.core.expresions.user_expression
+   :members:
+   :undoc-members:
+   :show-inheritance:

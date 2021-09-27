@@ -1,0 +1,4 @@
+.. automodule:: gsf.core.config
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,16 @@
+gsf.control.controls package
+============================
+
+.. automodule:: gsf.control.controls
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.control.controls.discrete_event_control
+   gsf.control.controls.thread_control

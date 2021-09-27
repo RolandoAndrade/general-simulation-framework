@@ -1,0 +1,4 @@
+.. automodule:: gsf.models.models.discrete_time_model
+   :members:
+   :undoc-members:
+   :show-inheritance:

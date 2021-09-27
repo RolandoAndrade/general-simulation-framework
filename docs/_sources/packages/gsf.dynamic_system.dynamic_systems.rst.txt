@@ -1,0 +1,15 @@
+gsf.dynamic\_system.dynamic\_systems package
+============================================
+
+.. automodule:: gsf.dynamic_system.dynamic_systems
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.dynamic_system.dynamic_systems.discrete_event_dynamic_system

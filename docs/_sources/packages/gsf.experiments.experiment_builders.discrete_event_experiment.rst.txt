@@ -1,0 +1,4 @@
+.. automodule:: gsf.experiments.experiment_builders.discrete_event_experiment
+   :members:
+   :undoc-members:
+   :show-inheritance:

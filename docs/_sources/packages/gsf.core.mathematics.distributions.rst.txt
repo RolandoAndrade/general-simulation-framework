@@ -1,0 +1,18 @@
+gsf.core.mathematics.distributions package
+==========================================
+
+.. automodule:: gsf.core.mathematics.distributions
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   gsf.core.mathematics.distributions.exponential_distribution
+   gsf.core.mathematics.distributions.poisson_distribution
+   gsf.core.mathematics.distributions.random_distribution
+   gsf.core.mathematics.distributions.triangular_distribution

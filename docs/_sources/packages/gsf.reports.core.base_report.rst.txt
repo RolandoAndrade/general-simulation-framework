@@ -1,0 +1,4 @@
+.. automodule:: gsf.reports.core.base_report
+   :members:
+   :undoc-members:
+   :show-inheritance:

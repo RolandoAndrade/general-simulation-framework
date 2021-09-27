@@ -1,0 +1,4 @@
+.. automodule:: gsf.control.core.base_control
+   :members:
+   :undoc-members:
+   :show-inheritance:

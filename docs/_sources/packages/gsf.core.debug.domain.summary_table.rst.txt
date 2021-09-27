@@ -1,0 +1,4 @@
+.. automodule:: gsf.core.debug.domain.summary_table
+   :members:
+   :undoc-members:
+   :show-inheritance:
