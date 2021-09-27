@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Creating a Linear Cellular Automata &#8212; General Simulation Framework</title>
+    <title>Creating a Linear Cellular Automaton &#8212; General Simulation Framework</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -86,7 +86,7 @@
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Creating a Linear Cellular Automata
+   Creating a Linear Cellular Automaton
   </a>
  </li>
  <li class="toctree-l1">
@@ -471,7 +471,17 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../packages/gsf.models.models.discrete_event_model.html">
+       Discrete Event Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="../packages/gsf.models.models.discrete_time_model.html">
+       Discrete Time Model
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -630,8 +640,8 @@
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#Implementing-the-automata">
-   Implementing the automata
+  <a class="reference internal nav-link" href="#Implementing-the-automaton">
+   Implementing the automaton
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -898,9 +908,9 @@ div.rendered_html tbody tr:hover {
   background: rgba(66, 165, 245, 0.2);
 }
 </style>
-<div class="section" id="Creating-a-Linear-Cellular-Automata">
-<h1>Creating a Linear Cellular Automata<a class="headerlink" href="#Creating-a-Linear-Cellular-Automata" title="Permalink to this headline">¶</a></h1>
-<p>Let’s start creating a linear cellular automata</p>
+<div class="section" id="Creating-a-Linear-Cellular-Automaton">
+<h1>Creating a Linear Cellular Automaton<a class="headerlink" href="#Creating-a-Linear-Cellular-Automaton" title="Permalink to this headline">¶</a></h1>
+<p>Let’s start creating a linear cellular automaton</p>
 <p><img alt="linear-aca2.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAn0AAABFCAYAAAA/xVAkAAAAAXNSR0IArs4c6QAABTd0RVh0bXhmaWxlACUzQ214ZmlsZSUyMGhvc3QlM0QlMjJhcHAuZGlhZ3JhbXMubmV0JTIyJTIwbW9kaWZpZWQlM0QlMjIyMDIxLTA5LTI0VDEyJTNBNDQlM0E0OS40ODVaJTIyJTIwYWdlbnQlM0QlMjI1LjAlMjAoWDExJTNCJTIwTGludXglMjB4ODZfNjQpJTIwQXBwbGVXZWJLaXQlMkY1MzcuMzYlMjAoS0hUTUwlMkMlMjBsaWtlJTIwR2Vja28pJTIwQ2hyb21lJTJGOTQuMC40NjA2LjU0JTIwU2FmYXJpJTJGNTM3LjM2JTIyJTIwZXRhZyUzRCUyMkZtMFBjRVhiUWpqelY2aWlLc056JTIyJTIwdmVyc2lvbiUzRCUyMjE1LjMuMCUyMiUyMHR5cGUlM0QlMjJnb29nbGUlMjIlM0UlM0NkaWFncmFtJTIwaWQlM0QlMjJCNkxtc2x2Nl8xaEl4NzFja2tYTSUyMiUyMG5hbWUlM0QlMjJQYWdlLTElMjIlM0U1Wm5ianBzd0VJYWZKcGV0QUhPOGJIUFlWZFZLbFZLcDdhVVZISERsWUdwTUF2djBOYkVOSWRuTnNsb2FpTWhGeFB3ZXczam1zMlhERE14M3hRT0RhZnlOaG9qTUxDTXNabUF4czZ6QXNjViUyRkpaUlNjQTFEQ2hIRG9aVE1SbGpqSjZSRTdaYmpFR1V0UjA0cDRUaHRpeHVhSkdqRFd4cGtqQjdhYmx0SzJrOU5ZWVF1aFBVR2trdjFKdzU1TEZYZjhocjlFZUVvMWs4MjNVQzI3S0IyVmlQSlloalN3NGtFbGpNd1o1UnllYlVyNW9oVXVkTjVrZjFXTDdUV2dUR1U4QzRkak1YZkh6YkIyWmM4WEZsZUNwOU1ZSDh3SFJVY0wlMkZXSVVTZ1NvRXpLZUV3am1rQ3liTlRQak9aSmlLcmJHc0pxZkw1U21nclJGT0lmeEhtcHFnbHpUb1VVOHgxUnJTSmlWdjVTJTJGWSUyRkc3OHI0NkdoelVadzJMa3BseVZpckFGJTJGTWdaSXltck1OdWpad3hSSmtFZUpYJTJGS3k2VW9Kd1JIZEl4Q1A2TVVRZ3glMkZ0MkhGQ3hGdFYlMkJUVG5FaGFySVc2b2o3N3VISkZkUHVxaldJY1ljclZONEhPeEJUTUYycG1HV3lsbXh4VVZWTVpYQ1BXSWNGZGVUZURsbzFjRldRS3NaYldyQUQ4MzgwQzd4eWRUUVd2OVpjaWZLc05XUllXZElocTMlMkJHZDVpUXVhVVVIYnNEb3glMkJzRGFOc1hIdFRaUnJweVBYN3BCY08zZkR0VHMycnYySmN1MTI1Tm9ia212M1hyaXVOOWFqNFRxWUtOZGVSNjc5SWJuMiUyQnVlNkQ0ajlrVUZjbjFadkNuR1BNUG9kWVF5R2hORWZKWXhnYkNlN3V1aFRXMUdEamhDYnh2TUZ2UTNGd1glMkZmS3F5T3Y3NWVXNHlON3N0MDNkZFNxOSUyRlJ2bzRwR0JKVEhlYjR0N1QyMkk1cUZwam9BbXlDcm1qYmc2SU43Z1Z0WjJ5bk5jdWVLdHAyVjdUZlNmYXg2eWZHWUhuaWtGS2M4T3prenQ4cm9lSEVQZCUyQkQybWRmdFY3ek42NzduMlA0UnZkMk5PSkNqcSUyRkJzRTdVT3lhMWZUZVQlMkJuYW5WMkUybjBwbHBwdnZ6V0Q1RHclM0QlM0QlM0MlMkZkaWFncmFtJTNFJTNDJTJGbXhmaWxlJTNFjBtuUwAACkpJREFUeF7tnEFyXEUMhmW4AVwoOQMHYcEdgA3FnmNwgeRAsAkLqmBhypRTHk88lrr7l1776csyo25J36/u93s84zvjHwQgAAEIQAACEIDA6Qncnb5DGoQABCAAAQhAAAIQMEwfQwABCEAAAhCAAAQaEMD0NRCZFiEAAQhAAAIQgACmjxmAAAQgAAEIQAACDQhg+hqITIsQgAAEIAABCEAA08cMQAACEIAABCAAgQYEPNP3wczeNeBAixCAAAQgAAEIQOCtEvhoZu+94j3Td2/GN3w9iLwOAQhAAAIQgAAEDiQQ8muYvgMVIjUEIAABCEAAAhAQEMD0CSCyBQQgAAEIQAACENidAKZvd4WoDwIQgAAEIAABCAgIYPoEENkCAhCAAAQgAAEI7E4A07e7QtQHAQhAAAIQgAAEBAQwfQKIbAEBCEAAAhCAAAR2J4Dp210h6oMABCAAAQhAAAICApg+AUS2gAAEIAABCEAAArsTwPTtrhD1QQACEIAABCAAAQEBTJ8AIltAAAIQgAAEIACB3Qlg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" /></p>
 <p>A cellular automaton is a discrete model of computation studied in automata theory.</p>
 <p>It consists of a regular grid of cells, each in one of a finite number of states, such as on and off (in contrast to a coupled map lattice). The grid can be in any finite number of dimensions. For each cell, a set of cells called its neighborhood is defined relative to the specified cell.An initial state (time t = 0) is selected by assigning a state for each cell. A new generation is created (advancing t by 1), according to some fixed rule (generally, a mathematical function) that determines the
@@ -909,7 +919,7 @@ new state of each cell in terms of the current state of the cell and the states 
 <h2>Rules<a class="headerlink" href="#Rules" title="Permalink to this headline">¶</a></h2>
 <p>For this example, the rule for updating the state of the cells is:</p>
 <blockquote>
-<div><p>For each cell of the automata, it will take the state of its left neighboring cell.</p>
+<div><p>For each cell of the automaton, it will take the state of its left neighboring cell.</p>
 </div></blockquote>
 <p>With this rule, the cells will move one step to the right side every generation.</p>
 </div>
@@ -927,7 +937,7 @@ new state of each cell in terms of the current state of the cell and the states 
 
 
 <span class="k">class</span> <span class="nc">Cell</span><span class="p">(</span><span class="n">DiscreteTimeModel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Cell of the linear cellular automata</span>
+    <span class="sd">&quot;&quot;&quot;Cell of the linear cellular automaton</span>
 
 <span class="sd">    It has an state alive or dead. When receives an input, changes its state to that input.</span>
 <span class="sd">    Its output is the state.</span>
@@ -940,7 +950,7 @@ new state of each cell in terms of the current state of the cell and the states 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dynamic_system</span><span class="p">:</span> <span class="n">DiscreteEventDynamicSystem</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
-<span class="sd">            dynamic_system (DiscreteEventDynamicSystem): Automata Grid where the cell belongs.</span>
+<span class="sd">            dynamic_system (DiscreteEventDynamicSystem): Automaton Grid where the cell belongs.</span>
 <span class="sd">            state (bool); State that indicates whether the cell is alive (True) or dead (False).</span>
 <span class="sd">            symbol (str): Symbol that represents the cell when it is printed in console.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -979,9 +989,9 @@ new state of each cell in terms of the current state of the cell and the states 
 <p>The <code class="docutils literal notranslate"><span class="pre">Cell</span></code> class, must receive the <code class="docutils literal notranslate"><span class="pre">DiscreteEventDynamicSystem</span></code> where the model belongs. We also include the state of the cell as a bool and a symbol that represents the cells when they will be printed.</p>
 <p>When a generation is running, the framework will obtain the outputs of every cell defined by <code class="docutils literal notranslate"><span class="pre">_output_function</span></code>, and will inject them on the next model by <code class="docutils literal notranslate"><span class="pre">_state_transition</span></code>. The state transition member, receives a dict with the source input model and its state, and returns the new state that will take the cell.</p>
 </div>
-<div class="section" id="Implementing-the-automata">
-<h2>Implementing the automata<a class="headerlink" href="#Implementing-the-automata" title="Permalink to this headline">¶</a></h2>
-<p>The automata is a dynamic system, a discrete event dynamic system, so it extends <code class="docutils literal notranslate"><span class="pre">dynamic_system.dynamic_systems.DiscreteEventDynamicSystem</span></code></p>
+<div class="section" id="Implementing-the-automaton">
+<h2>Implementing the automaton<a class="headerlink" href="#Implementing-the-automaton" title="Permalink to this headline">¶</a></h2>
+<p>The automaton is a dynamic system, a discrete event dynamic system, so it extends <code class="docutils literal notranslate"><span class="pre">dynamic_system.dynamic_systems.DiscreteEventDynamicSystem</span></code></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
@@ -994,18 +1004,18 @@ new state of each cell in terms of the current state of the cell and the states 
 
 
 <span class="k">class</span> <span class="nc">LinearAutomata</span><span class="p">(</span><span class="n">DiscreteEventDynamicSystem</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Linear Automata implementation</span>
+    <span class="sd">&quot;&quot;&quot;Linear Automaton implementation</span>
 
 <span class="sd">    It has a group of cells, connected between them. The output cell of each cell is its right neighbor.</span>
 <span class="sd">    Attributes:</span>
-<span class="sd">        _cells (List[Cell]): Group of cells of the linear automata.</span>
+<span class="sd">        _cells (List[Cell]): Group of cells of the linear automaton.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">_cells</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Cell</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cells</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Args:</span>
-<span class="sd">            cells (int): Number of cells of the automata.</span>
+<span class="sd">            cells (int): Number of cells of the automaton.</span>
 <span class="sd">            random_seed (int): Random seed for determinate the state of the seeds.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
@@ -1014,9 +1024,9 @@ new state of each cell in terms of the current state of the cell and the states 
         <span class="bp">self</span><span class="o">.</span><span class="n">_create_relations</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_create_cells</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cells</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Appends the cells to the automata.</span>
+        <span class="sd">&quot;&quot;&quot;Appends the cells to the automaton.</span>
 <span class="sd">        Args:</span>
-<span class="sd">            cells (int): Number of cells of the automata.</span>
+<span class="sd">            cells (int): Number of cells of the automaton.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_cells</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cells</span><span class="p">):</span>
@@ -1026,13 +1036,13 @@ new state of each cell in terms of the current state of the cell and the states 
     <span class="k">def</span> <span class="nf">_create_relations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cells</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Creates the connections between the left cell and the right cell.</span>
 <span class="sd">        Args:</span>
-<span class="sd">            cells (int): Number of cells of the automata.</span>
+<span class="sd">            cells (int): Number of cells of the automaton.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">cells</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_cells</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_cells</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Changes the format to show the linear automata when is printed&quot;&quot;&quot;</span>
+        <span class="sd">&quot;&quot;&quot;Changes the format to show the linear automaton when is printed&quot;&quot;&quot;</span>
         <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">for</span> <span class="n">cell</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cells</span><span class="p">:</span>
             <span class="n">s</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
@@ -1041,7 +1051,7 @@ new state of each cell in terms of the current state of the cell and the states 
 </div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">LinearAutomata</span></code> receives the number of cells that it will have and a random seed to determine the initial random state of the cells.</p>
-<p>First creates the cells, setting the state as alive or deade with a probability of 0.5, and giving as ´DynamicSystem´ the current linear automata.</p>
+<p>First creates the cells, setting the state as alive or deade with a probability of 0.5, and giving as ´DynamicSystem´ the current linear automaton.</p>
 <p>Then, it connects the models, setting as the output of the <code class="docutils literal notranslate"><span class="pre">cell[i-1]</span></code>, the <code class="docutils literal notranslate"><span class="pre">cell[i]</span></code>.</p>
 </div>
 <div class="section" id="Running-the-simulation">
@@ -1054,12 +1064,12 @@ new state of each cell in terms of the current state of the cell and the states 
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">gsf.experiments.experiment_builders</span> <span class="kn">import</span> <span class="n">DiscreteEventExperiment</span>
 
-<span class="n">linear_automata</span> <span class="o">=</span> <span class="n">LinearAutomata</span><span class="p">(</span><span class="n">cells</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">experiment</span> <span class="o">=</span> <span class="n">DiscreteEventExperiment</span><span class="p">(</span><span class="n">linear_automata</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">linear_automata</span><span class="p">)</span>
+<span class="n">linear_automaton</span> <span class="o">=</span> <span class="n">LinearAutomata</span><span class="p">(</span><span class="n">cells</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">experiment</span> <span class="o">=</span> <span class="n">DiscreteEventExperiment</span><span class="p">(</span><span class="n">linear_automaton</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">linear_automaton</span><span class="p">)</span>
 <span class="n">experiment</span><span class="o">.</span><span class="n">simulation_control</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">stop_time</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="n">experiment</span><span class="o">.</span><span class="n">simulation_control</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">linear_automata</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">linear_automaton</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1072,7 +1082,7 @@ new state of each cell in terms of the current state of the cell and the states 
 --♥♥♥-♥♥♥-
 </pre></div></div>
 </div>
-<p>Create the experiment with the linear automata as dynamic system. Then, run it during 5 generations.</p>
+<p>Create the experiment with the linear automaton as dynamic system. Then, run it during 5 generations.</p>
 <p>As the simulation runs in a different thread, we wait for it to finish with <code class="docutils literal notranslate"><span class="pre">experiment.simulation_control.wait()</span></code>.</p>
 <p>Try the example by your custom params and have fun.</p>
 </div>
