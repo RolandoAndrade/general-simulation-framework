@@ -32,10 +32,10 @@
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script src="_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <script src="_static/searchtools.js"></script>
     <script src="_static/language_data.js"></script>
-    <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="#" />
   <script src="searchindex.js" defer></script>
@@ -76,17 +76,10 @@
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="about.html">
-   About the framework
+ <li class="toctree-l1">
+  <a class="reference internal" href="README.html">
+   General Simulation Framework
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="simple">
-  </ul>
  </li>
 </ul>
 <p class="caption">
@@ -96,9 +89,283 @@
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="README.html">
-   Examples
+  <a class="reference internal" href="examples/example1.html">
+   Creating a Linear Cellular Automata
   </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="examples/example2.html">
+   Creating a Conway’s Game of Life
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="examples/example3.html">
+   Creating a discrete-event simulator
+  </a>
+ </li>
+</ul>
+<p class="caption">
+ <span class="caption-text">
+  Reference
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="packages/gsf.control.html">
+   Control
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.control.controls.html">
+     gsf.control.controls package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.control.core.html">
+     gsf.control.core package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="packages/gsf.core.html">
+   Core
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="packages/gsf.core.builder.html">
+     gsf.core.builder package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <label for="toctree-checkbox-3">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="packages/gsf.core.builder.core.html">
+       gsf.core.builder.core package
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="packages/gsf.core.debug.html">
+     gsf.core.debug package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+    <label for="toctree-checkbox-4">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="packages/gsf.core.debug.domain.html">
+       gsf.core.debug.domain package
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="packages/gsf.core.debug.infrastructure.html">
+       gsf.core.debug.infrastructure package
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="packages/gsf.core.entity.html">
+     gsf.core.entity package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+    <label for="toctree-checkbox-5">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="packages/gsf.core.entity.core.html">
+       gsf.core.entity.core package
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="packages/gsf.core.entity.properties.html">
+       gsf.core.entity.properties package
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.core.events.html">
+     gsf.core.events package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.core.expresions.html">
+     gsf.core.expresions package
+    </a>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="packages/gsf.core.mathematics.html">
+     gsf.core.mathematics package
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+    <label for="toctree-checkbox-6">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="packages/gsf.core.mathematics.distributions.html">
+       gsf.core.mathematics.distributions package
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="packages/gsf.core.mathematics.values.html">
+       gsf.core.mathematics.values package
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.core.time.html">
+     gsf.core.time package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.core.types.html">
+     gsf.core.types package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="packages/gsf.dynamic_system.html">
+   Dynamic System
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+  <label for="toctree-checkbox-7">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.dynamic_system.core.html">
+     gsf.dynamic_system.core package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.dynamic_system.dynamic_systems.html">
+     gsf.dynamic_system.dynamic_systems package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.dynamic_system.future_event_list.html">
+     gsf.dynamic_system.future_event_list package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="packages/gsf.experiments.html">
+   Experiments
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.experiments.core.html">
+     gsf.experiments.core package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.experiments.experiment_builders.html">
+     gsf.experiments.experiment_builders package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.experiments.strategies.html">
+     gsf.experiments.strategies package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="packages/gsf.models.html">
+   Models
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+  <label for="toctree-checkbox-9">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.models.core.html">
+     gsf.models.core package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.models.models.html">
+     gsf.models.models package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="packages/gsf.reports.html">
+   Reports
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+  <label for="toctree-checkbox-10">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.reports.core.html">
+     gsf.reports.core package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.reports.report_generators.html">
+     gsf.reports.report_generators package
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="packages/gsf.simulation.html">
+   Simulation
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+  <label for="toctree-checkbox-11">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.simulation.core.html">
+     gsf.simulation.core package
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="packages/gsf.simulation.simulation_engines.html">
+     gsf.simulation.simulation_engines package
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 

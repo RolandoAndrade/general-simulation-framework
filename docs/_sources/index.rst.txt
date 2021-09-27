@@ -7,14 +7,27 @@ General Simulation Framework
 ========================================================
 
 .. toctree::
-   About the framework <about.rst>
+   README.md
    :maxdepth: 4
    :caption: About the framework
 
 .. toctree::
-   Examples <README.md>
+   examples/example1.ipynb
+   examples/example2.ipynb
+   examples/example3.ipynb
    :maxdepth: 4
    :caption: Examples
+
+.. toctree::
+   Control <packages/gsf.control.rst>
+   Core <packages/gsf.core.rst>
+   Dynamic System <packages/gsf.dynamic_system.rst>
+   Experiments <packages/gsf.experiments.rst>
+   Models <packages/gsf.models.rst>
+   Reports <packages/gsf.reports.rst>
+   Simulation <packages/gsf.simulation.rst>
+   :maxdepth: 4
+   :caption: Reference
 
 Indices and tables
 ==================
