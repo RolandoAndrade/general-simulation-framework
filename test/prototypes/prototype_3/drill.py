@@ -41,7 +41,7 @@ class Drill(DiscreteEventModel):
         return 0
 
     def get_properties(self) -> EntityProperties:
-        pass
+        raise NotImplementedError()
 
     def __init__(self, dynamic_system: DiscreteEventDynamicSystem, name: str):
         super().__init__(dynamic_system, state={"p": 0, "s": 0}, name=name)

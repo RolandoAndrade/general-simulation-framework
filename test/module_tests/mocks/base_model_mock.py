@@ -6,10 +6,10 @@ from gsf.models.core import BaseModel
 
 class BaseModelMock(BaseModel):
     def get_output(self) -> Any:
-        pass
+        raise NotImplementedError()
 
     def state_transition(self, *args, **kwargs):
-        pass
+        raise NotImplementedError()
 
     def get_properties(self) -> EntityProperties:
-        pass
+        raise NotImplementedError()
