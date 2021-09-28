@@ -669,31 +669,68 @@
 <dt id="gsf.control.core.simulation_stats.SimulationStats">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gsf.control.core.simulation_stats.</span></code><code class="sig-name descname"><span class="pre">SimulationStats</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_paused</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.control.core.simulation_stats.SimulationStats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="simple">
-<dt>Params:</dt><dd><p>time (Time): current time of the simulation.
-stop_time (Time): time when the simulation will stop.
-frequency (Time): frequency of the simulation step.
-is_paused (bool): bool that indicates if the simulation is running.</p>
+<dl class="py attribute">
+<dt id="gsf.control.core.simulation_stats.SimulationStats.time">
+<code class="sig-name descname"><span class="pre">time</span></code><a class="headerlink" href="#gsf.control.core.simulation_stats.SimulationStats.time" title="Permalink to this definition">¶</a></dt>
+<dd><p>current time of the simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Time</p>
 </dd>
 </dl>
-<dl class="py attribute">
-<dt id="gsf.control.core.simulation_stats.SimulationStats.frequency">
-<code class="sig-name descname"><span class="pre">frequency</span></code><em class="property"><span class="pre">:</span> <span class="pre">decimal.Decimal</span></em><a class="headerlink" href="#gsf.control.core.simulation_stats.SimulationStats.frequency" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt id="gsf.control.core.simulation_stats.SimulationStats.is_paused">
-<code class="sig-name descname"><span class="pre">is_paused</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#gsf.control.core.simulation_stats.SimulationStats.is_paused" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="gsf.control.core.simulation_stats.SimulationStats.stop_time">
-<code class="sig-name descname"><span class="pre">stop_time</span></code><em class="property"><span class="pre">:</span> <span class="pre">decimal.Decimal</span></em><a class="headerlink" href="#gsf.control.core.simulation_stats.SimulationStats.stop_time" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname"><span class="pre">stop_time</span></code><a class="headerlink" href="#gsf.control.core.simulation_stats.SimulationStats.stop_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>time when the simulation will stop.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.control.core.simulation_stats.SimulationStats.frequency">
+<code class="sig-name descname"><span class="pre">frequency</span></code><a class="headerlink" href="#gsf.control.core.simulation_stats.SimulationStats.frequency" title="Permalink to this definition">¶</a></dt>
+<dd><p>frequency of the simulation step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.control.core.simulation_stats.SimulationStats.is_paused">
+<code class="sig-name descname"><span class="pre">is_paused</span></code><a class="headerlink" href="#gsf.control.core.simulation_stats.SimulationStats.is_paused" title="Permalink to this definition">¶</a></dt>
+<dd><p>bool that indicates if the simulation is running.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="id0">
+<code class="sig-name descname"><span class="pre">frequency</span></code><em class="property"><span class="pre">:</span> <span class="pre">decimal.Decimal</span></em><a class="headerlink" href="#id0" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
-<dt id="gsf.control.core.simulation_stats.SimulationStats.time">
-<code class="sig-name descname"><span class="pre">time</span></code><em class="property"><span class="pre">:</span> <span class="pre">decimal.Decimal</span></em><a class="headerlink" href="#gsf.control.core.simulation_stats.SimulationStats.time" title="Permalink to this definition">¶</a></dt>
+<dt id="id1">
+<code class="sig-name descname"><span class="pre">is_paused</span></code><em class="property"><span class="pre">:</span> <span class="pre">bool</span></em><a class="headerlink" href="#id1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id2">
+<code class="sig-name descname"><span class="pre">stop_time</span></code><em class="property"><span class="pre">:</span> <span class="pre">decimal.Decimal</span></em><a class="headerlink" href="#id2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="id3">
+<code class="sig-name descname"><span class="pre">time</span></code><em class="property"><span class="pre">:</span> <span class="pre">decimal.Decimal</span></em><a class="headerlink" href="#id3" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
