@@ -1,3 +1,23 @@
+"""Simulation Control Strategy
+==============
+This module contains the abstract definition of a simulation control strategy.
+It has the definition of the SimulationStrategy, that should be extended,
+implementing its abstract methods.
+
+Example:
+    Creating an strategy::
+
+        class NewStrategy(SimulationStrategy):
+                def start_simulation(self, callable: Callable):
+                    callable()
+
+                def wait_simulation(self):
+                    sleep(1)
+
+                def stop_simulation(self):
+                    return True
+"""
+
 from abc import ABC
 
 

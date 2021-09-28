@@ -1,3 +1,23 @@
+"""Discrete Event Control
+==============
+This module contains the definition of a discrete event simulation control.
+It has the definition of the DiscreteEventControl, that allows control simulations.
+
+Example:
+    Creating a discrete-event control::
+
+        ...
+        dynamic_system = some_discrete_event_dynamic_system
+        simulator = DiscreteEventSimulationEngine(dynamic_system, DefaultReport())
+        simulation_strategy = ThreadControl()
+        event_control = DiscreteEventControl(simulator, simulation_strategy)
+
+    Simulating a discrete-event simulation::
+
+        event_control.start(stop_time=10)
+"""
+
+
 from __future__ import annotations
 
 from time import sleep
@@ -16,7 +36,13 @@ if TYPE_CHECKING:
 
 
 class DiscreteEventControl(BaseControl):
-    """Control that executes the discrete-event simulation"""
+    """Control that executes the discrete-event simulation
+
+    Allows the control of discrete-event simulations,
+
+    Attributes:
+        _time (Time): current clock time of the simulation.
+    """
 
     _simulator: DiscreteEventSimulationEngine
     """Overrides simulator type"""
@@ -34,12 +60,15 @@ class DiscreteEventControl(BaseControl):
         Args:
             simulator (DiscreteEventSimulationEngine): Simulation engine to be
                 executed.
+            simulation_strategy (SimulationStrategy): Strategy to execute the simulation.
+            event_bus (EventBus): EvenBus of the module.
         """
         BaseControl.__init__(self, simulator, simulation_strategy, event_bus)
         self._time = Time(0)
         self._is_paused = False
 
     def _finish_simulation(self):
+        """Finishes the simulation."""
         self._is_paused = True
         self._event_bus.emit(DomainEvents.SIMULATION_FINISHED)
         self.init()
@@ -68,7 +97,11 @@ class DiscreteEventControl(BaseControl):
                 )
 
     def next_step(self, time: Time = None):
-        """Executes the next step"""
+        """Executes the next step of the simulation
+
+        Args:
+            time (Time): time of the next step. If it is None, takes the time of the next event.
+        """
         time = time or (self._time + self._simulator.get_time_of_next_event())
         self._time = time
         self._simulator.compute_next_state(time=self._time)
@@ -112,12 +145,18 @@ class DiscreteEventControl(BaseControl):
         self.init()
 
     def init(self):
+        """Initializes the clock and the simulator."""
         self._time = Time(0)
         self._simulator.init()
 
     def wait(self, timeout: Time = None):
+        """Waits for the simulation process.
+        Args:
+            timeout (Time): time to wait.
+        """
         self._simulation_strategy.wait_simulation(timeout)
 
     @property
     def time(self):
+        """Current clock time of the simulation"""
         return self._time

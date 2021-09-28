@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; General Simulation Framework</title>
+    <title>Base Control &#8212; General Simulation Framework</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="gsf.control.core.simulation_stats.html" />
+    <link rel="next" title="Simulation Stats" href="gsf.control.core.simulation_stats.html" />
     <link rel="prev" title="gsf.control.core package" href="gsf.control.core.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -105,17 +105,17 @@
   Reference
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="gsf.control.html">
    Control
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2 has-children">
     <a class="reference internal" href="gsf.control.controls.html">
      gsf.control.controls package
@@ -125,19 +125,44 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.discrete_event_control.html">
+       Discrete Event Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.thread_control.html">
+       Thread Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
-   <li class="toctree-l2 has-children">
+   <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="gsf.control.core.html">
      gsf.control.core package
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
     <label for="toctree-checkbox-3">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul class="current">
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Base Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_stats.html">
+       Simulation Stats
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_strategy.html">
+       Simulation Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -624,14 +649,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -640,11 +657,102 @@
         
               <div>
                 
-  <span class="target" id="module-gsf.control.core.base_control"></span><dl class="py class">
+  <span class="target" id="module-gsf.control.core.base_control"></span><div class="section" id="base-control">
+<h1>Base Control<a class="headerlink" href="#base-control" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the abstract definition of a simulation control.
+It has the definition of BaseControl, that should be extended,
+implementing its abstract methods.</p>
+<p class="rubric">Example</p>
+<p>Creating a discrete-event control:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NewControl</span><span class="p">(</span><span class="n">BaseControl</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">simulator</span><span class="p">:</span> <span class="n">BaseSimulator</span><span class="p">,</span>
+        <span class="n">simulation_strategy</span><span class="p">:</span> <span class="n">SimulationStrategy</span><span class="p">,</span>
+        <span class="n">event_bus</span><span class="p">:</span> <span class="n">EventBus</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">BaseControl</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">simulation_strategy</span><span class="p">,</span> <span class="n">event_bus</span><span class="p">)</span>
+
+
+    <span class="k">def</span> <span class="nf">_execute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frequency</span><span class="p">:</span> <span class="n">Time</span><span class="p">,</span> <span class="n">wait_time</span><span class="p">:</span> <span class="n">Time</span><span class="p">,</span> <span class="n">stop_time</span><span class="p">:</span> <span class="n">Time</span><span class="p">):</span>
+        <span class="k">while</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_paused</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_simulator</span><span class="o">.</span><span class="n">compute_next_state</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">start</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">start_input</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ModelInput</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">frequency</span><span class="p">:</span> <span class="n">Time</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="mi">1000</span><span class="p">),</span>
+        <span class="n">stop_time</span><span class="p">:</span> <span class="n">Time</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">wait_time</span><span class="p">:</span> <span class="n">Time</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_paused</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_strategy</span><span class="o">.</span><span class="n">start_simulation</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_execute</span><span class="p">,</span> <span class="n">frequency</span><span class="p">,</span> <span class="n">wait_time</span><span class="p">,</span> <span class="n">stop_time</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">pause</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_paused</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">stop</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_is_paused</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_strategy</span><span class="o">.</span><span class="n">stop_simulation</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+
+
+    <span class="k">def</span> <span class="nf">wait</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="p">:</span> <span class="n">Time</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_simulation_strategy</span><span class="o">.</span><span class="n">wait_simulation</span><span class="p">(</span><span class="n">timeout</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
 <dt id="gsf.control.core.base_control.BaseControl">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gsf.control.core.base_control.</span></code><code class="sig-name descname"><span class="pre">BaseControl</span></code><a class="headerlink" href="#gsf.control.core.base_control.BaseControl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Simulation control</p>
+<dl class="py attribute">
+<dt id="gsf.control.core.base_control.BaseControl._simulator">
+<code class="sig-name descname"><span class="pre">_simulator</span></code><a class="headerlink" href="#gsf.control.core.base_control.BaseControl._simulator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulator to be executed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gsf.simulation.core.base_simulator.html#gsf.simulation.core.base_simulator.BaseSimulator" title="gsf.simulation.core.base_simulator.BaseSimulator">BaseSimulator</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.control.core.base_control.BaseControl._is_paused">
+<code class="sig-name descname"><span class="pre">_is_paused</span></code><a class="headerlink" href="#gsf.control.core.base_control.BaseControl._is_paused" title="Permalink to this definition">¶</a></dt>
+<dd><p>Boolean that indicates if the simulation is paused.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.control.core.base_control.BaseControl._simulation_strategy">
+<code class="sig-name descname"><span class="pre">_simulation_strategy</span></code><a class="headerlink" href="#gsf.control.core.base_control.BaseControl._simulation_strategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strategy for infrastructure simulation details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gsf.control.core.simulation_strategy.html#gsf.control.core.simulation_strategy.SimulationStrategy" title="gsf.control.core.simulation_strategy.SimulationStrategy">SimulationStrategy</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.control.core.base_control.BaseControl._event_bus">
+<code class="sig-name descname"><span class="pre">_event_bus</span></code><a class="headerlink" href="#gsf.control.core.base_control.BaseControl._event_bus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event bus of the module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>EventBus</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="gsf.control.core.base_control.BaseControl._execute">
 <em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">_execute</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.control.core.base_control.BaseControl._execute" title="Permalink to this definition">¶</a></dt>
@@ -706,6 +814,7 @@
 
 </dd></dl>
 
+</div>
 
 
               </div>
@@ -714,7 +823,7 @@
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="gsf.control.core.html" title="previous page">gsf.control.core package</a>
-    <a class='right-next' id="next-link" href="gsf.control.core.simulation_stats.html" title="next page">&lt;no title&gt;</a>
+    <a class='right-next' id="next-link" href="gsf.control.core.simulation_stats.html" title="next page">Simulation Stats</a>
 
         </div>
         

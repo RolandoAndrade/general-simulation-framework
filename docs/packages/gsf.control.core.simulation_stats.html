@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; General Simulation Framework</title>
+    <title>Simulation Stats &#8212; General Simulation Framework</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -35,8 +35,8 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="gsf.control.core.simulation_strategy.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="gsf.control.core.base_control.html" />
+    <link rel="next" title="Simulation Control Strategy" href="gsf.control.core.simulation_strategy.html" />
+    <link rel="prev" title="Base Control" href="gsf.control.core.base_control.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -105,17 +105,17 @@
   Reference
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="gsf.control.html">
    Control
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2 has-children">
     <a class="reference internal" href="gsf.control.controls.html">
      gsf.control.controls package
@@ -125,19 +125,44 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.discrete_event_control.html">
+       Discrete Event Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.thread_control.html">
+       Thread Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
-   <li class="toctree-l2 has-children">
+   <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="gsf.control.core.html">
      gsf.control.core package
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
     <label for="toctree-checkbox-3">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.base_control.html">
+       Base Control
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Simulation Stats
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_strategy.html">
+       Simulation Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -624,14 +649,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -640,10 +657,25 @@
         
               <div>
                 
-  <span class="target" id="module-gsf.control.core.simulation_stats"></span><dl class="py class">
+  <span class="target" id="module-gsf.control.core.simulation_stats"></span><div class="section" id="simulation-stats">
+<h1>Simulation Stats<a class="headerlink" href="#simulation-stats" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the definition of the SimulationStats dataclass.</p>
+<p class="rubric">Example</p>
+<p>Creating a simulation stat:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">stat</span> <span class="o">=</span> <span class="n">SimulationStats</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">stop_time</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">frequency</span><span class="o">=</span><span class="n">Time</span><span class="p">(</span><span class="mf">0.5</span><span class="p">),</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
 <dt id="gsf.control.core.simulation_stats.SimulationStats">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gsf.control.core.simulation_stats.</span></code><code class="sig-name descname"><span class="pre">SimulationStats</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_paused</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">bool</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.control.core.simulation_stats.SimulationStats" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="simple">
+<dt>Params:</dt><dd><p>time (Time): current time of the simulation.
+stop_time (Time): time when the simulation will stop.
+frequency (Time): frequency of the simulation step.
+is_paused (bool): bool that indicates if the simulation is running.</p>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt id="gsf.control.core.simulation_stats.SimulationStats.frequency">
 <code class="sig-name descname"><span class="pre">frequency</span></code><em class="property"><span class="pre">:</span> <span class="pre">decimal.Decimal</span></em><a class="headerlink" href="#gsf.control.core.simulation_stats.SimulationStats.frequency" title="Permalink to this definition">¶</a></dt>
@@ -666,6 +698,7 @@
 
 </dd></dl>
 
+</div>
 
 
               </div>
@@ -673,8 +706,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="gsf.control.core.base_control.html" title="previous page">&lt;no title&gt;</a>
-    <a class='right-next' id="next-link" href="gsf.control.core.simulation_strategy.html" title="next page">&lt;no title&gt;</a>
+    <a class='left-prev' id="prev-link" href="gsf.control.core.base_control.html" title="previous page">Base Control</a>
+    <a class='right-next' id="next-link" href="gsf.control.core.simulation_strategy.html" title="next page">Simulation Control Strategy</a>
 
         </div>
         

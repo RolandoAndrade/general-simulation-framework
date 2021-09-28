@@ -6,7 +6,7 @@
 [![made-with-sphinx-doc](https://img.shields.io/badge/Made%20with-Sphinx-1f425f.svg)](https://www.sphinx-doc.org/)
 [![Open In Collab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1tJOnpvKK9jZRpqFwAezlwRv1eRthU0tP?usp=sharing)
 [![PyPi version](https://badgen.net/pypi/v/general-simulation-framework/)](https://pypi.org/project/general-simulation-framework/)
-[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/Naereen/StrapDown.js/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/Naereen/StrapDown.js.svg)](https://github.com/RolandoAndrade/general-simulation-framework/blob/master/LICENSE)
 
 
 
@@ -62,15 +62,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-GSF is a framework for the implementation of simulation tools.
-The development environment is built following an object-oriented paradigm using Python 3 as programming language. 
-The inversion of control of the framework is partial, as it
-is desired that the user can choose when to call the utilities 
-provided by the framework, taking control during the simulation,
-where the different processes belonging to the framework 
-make the calls to the user's implementation of the abstract 
-methods defined in the framework.
-
+GSF is a framework for the implementation of simulation tools, which offers the possibility 
+of using and extending the same components to generate a wide variety of simulation projects. 
+Its use makes it possible to dispense with the knowledge of several simulation processes, 
+save programming time and maintain a standard structure in the developed solutions.
 
 <!-- GETTING STARTED -->
 ## Getting Started
@@ -93,7 +88,7 @@ Download and install by pip:
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-You can run the examples in [GoogleColab](https://colab.research.google.com/drive/1tJOnpvKK9jZRpqFwAezlwRv1eRthU0tP?usp=sharing).
+You can run the examples in [Colaboratory](https://colab.research.google.com/drive/1tJOnpvKK9jZRpqFwAezlwRv1eRthU0tP?usp=sharing).
 
 For more information, please refer to the [Documentation](https://example.com)
 

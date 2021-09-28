@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; General Simulation Framework</title>
+    <title>Discrete Event Control &#8212; General Simulation Framework</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="gsf.control.controls.thread_control.html" />
+    <link rel="next" title="Thread Control Strategy" href="gsf.control.controls.thread_control.html" />
     <link rel="prev" title="gsf.control.controls package" href="gsf.control.controls.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -105,27 +105,37 @@
   Reference
  </span>
 </p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="gsf.control.html">
    Control
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
-   <li class="toctree-l2 has-children">
+  <ul class="current">
+   <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="gsf.control.controls.html">
      gsf.control.controls package
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
     <label for="toctree-checkbox-2">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul class="current">
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Discrete Event Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.thread_control.html">
+       Thread Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -137,7 +147,22 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.base_control.html">
+       Base Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_stats.html">
+       Simulation Stats
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_strategy.html">
+       Simulation Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -624,14 +649,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -640,11 +657,40 @@
         
               <div>
                 
-  <span class="target" id="module-gsf.control.controls.discrete_event_control"></span><dl class="py class">
+  <span class="target" id="module-gsf.control.controls.discrete_event_control"></span><div class="section" id="discrete-event-control">
+<h1>Discrete Event Control<a class="headerlink" href="#discrete-event-control" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the definition of a discrete event simulation control.
+It has the definition of the DiscreteEventControl, that allows control simulations.</p>
+<p class="rubric">Example</p>
+<p>Creating a discrete-event control:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">...</span>
+<span class="n">dynamic_system</span> <span class="o">=</span> <span class="n">some_discrete_event_dynamic_system</span>
+<span class="n">simulator</span> <span class="o">=</span> <span class="n">DiscreteEventSimulationEngine</span><span class="p">(</span><span class="n">dynamic_system</span><span class="p">,</span> <span class="n">DefaultReport</span><span class="p">())</span>
+<span class="n">simulation_strategy</span> <span class="o">=</span> <span class="n">ThreadControl</span><span class="p">()</span>
+<span class="n">event_control</span> <span class="o">=</span> <span class="n">DiscreteEventControl</span><span class="p">(</span><span class="n">simulator</span><span class="p">,</span> <span class="n">simulation_strategy</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Simulating a discrete-event simulation:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">event_control</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">stop_time</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
 <dt id="gsf.control.controls.discrete_event_control.DiscreteEventControl">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gsf.control.controls.discrete_event_control.</span></code><code class="sig-name descname"><span class="pre">DiscreteEventControl</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">simulator</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DiscreteEventSimulationEngine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulation_strategy</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">SimulationStrategy</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_bus</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">EventBus</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.control.controls.discrete_event_control.DiscreteEventControl" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="gsf.control.core.base_control.html#gsf.control.core.base_control.BaseControl" title="gsf.control.core.base_control.BaseControl"><code class="xref py py-class docutils literal notranslate"><span class="pre">gsf.control.core.base_control.BaseControl</span></code></a></p>
 <p>Control that executes the discrete-event simulation</p>
+<p>Allows the control of discrete-event simulations,</p>
+<dl class="py attribute">
+<dt id="gsf.control.controls.discrete_event_control.DiscreteEventControl._time">
+<code class="sig-name descname"><span class="pre">_time</span></code><a class="headerlink" href="#gsf.control.controls.discrete_event_control.DiscreteEventControl._time" title="Permalink to this definition">¶</a></dt>
+<dd><p>current clock time of the simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="gsf.control.controls.discrete_event_control.DiscreteEventControl._execute">
 <code class="sig-name descname"><span class="pre">_execute</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">frequency</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wait_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">stop_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">decimal.Decimal</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.control.controls.discrete_event_control.DiscreteEventControl._execute" title="Permalink to this definition">¶</a></dt>
@@ -661,14 +707,26 @@
 </dd></dl>
 
 <dl class="py method">
+<dt id="gsf.control.controls.discrete_event_control.DiscreteEventControl._finish_simulation">
+<code class="sig-name descname"><span class="pre">_finish_simulation</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gsf.control.controls.discrete_event_control.DiscreteEventControl._finish_simulation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finishes the simulation.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt id="gsf.control.controls.discrete_event_control.DiscreteEventControl.init">
 <code class="sig-name descname"><span class="pre">init</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gsf.control.controls.discrete_event_control.DiscreteEventControl.init" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Initializes the clock and the simulator.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="gsf.control.controls.discrete_event_control.DiscreteEventControl.next_step">
 <code class="sig-name descname"><span class="pre">next_step</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">decimal.Decimal</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.control.controls.discrete_event_control.DiscreteEventControl.next_step" title="Permalink to this definition">¶</a></dt>
-<dd><p>Executes the next step</p>
+<dd><p>Executes the next step of the simulation</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>time</strong> (<em>Time</em>) – time of the next step. If it is None, takes the time of the next event.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -702,21 +760,20 @@
 <dl class="py method">
 <dt id="gsf.control.controls.discrete_event_control.DiscreteEventControl.time">
 <em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">time</span></code><a class="headerlink" href="#gsf.control.controls.discrete_event_control.DiscreteEventControl.time" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Current clock time of the simulation</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="gsf.control.controls.discrete_event_control.DiscreteEventControl.wait">
 <code class="sig-name descname"><span class="pre">wait</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">decimal.Decimal</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.control.controls.discrete_event_control.DiscreteEventControl.wait" title="Permalink to this definition">¶</a></dt>
-<dd><p>Waits the simulation end</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>timeout</strong> (<em>Time</em>) – Time to wait.</p>
-</dd>
-</dl>
+<dd><p>Waits for the simulation process.
+:param timeout: time to wait.
+:type timeout: Time</p>
 </dd></dl>
 
 </dd></dl>
 
+</div>
 
 
               </div>
@@ -725,7 +782,7 @@
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="gsf.control.controls.html" title="previous page">gsf.control.controls package</a>
-    <a class='right-next' id="next-link" href="gsf.control.controls.thread_control.html" title="next page">&lt;no title&gt;</a>
+    <a class='right-next' id="next-link" href="gsf.control.controls.thread_control.html" title="next page">Thread Control Strategy</a>
 
         </div>
         

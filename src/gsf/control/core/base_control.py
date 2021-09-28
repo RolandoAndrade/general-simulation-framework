@@ -1,3 +1,52 @@
+"""Base Control
+==============
+This module contains the abstract definition of a simulation control.
+It has the definition of BaseControl, that should be extended,
+implementing its abstract methods.
+
+Example:
+    Creating a discrete-event control::
+
+        class NewControl(BaseControl):
+        
+            def __init__(
+                self,
+                simulator: BaseSimulator,
+                simulation_strategy: SimulationStrategy,
+                event_bus: EventBus = None,
+            ):
+                BaseControl.__init__(self, simulator, simulation_strategy, event_bus)
+        
+
+            def _execute(self, frequency: Time, wait_time: Time, stop_time: Time):
+                while not self._is_paused:
+                    self._simulator.compute_next_state()
+
+            def start(
+                self,
+                start_input: Dict[str, ModelInput] = None,
+                frequency: Time = Time(1000),
+                stop_time: Time = 0,
+                wait_time: Time = 0,
+            ):
+                self._is_paused = False
+                self._simulation_strategy.start_simulation(
+                    self._execute, frequency, wait_time, stop_time
+                )
+
+            def pause(self):
+                self._is_paused = True
+
+            def stop(self):
+                self._is_paused = True
+                self._simulation_strategy.stop_simulation()
+                self.init()
+
+        
+            def wait(self, timeout: Time = None):
+                self._simulation_strategy.wait_simulation(timeout)
+"""
+
 from __future__ import annotations
 
 from abc import abstractmethod
@@ -15,7 +64,14 @@ if TYPE_CHECKING:
 
 
 class BaseControl:
-    """Simulation control"""
+    """Simulation control
+
+    Attributes:
+        _simulator (BaseSimulator): Simulator to be executed.
+        _is_paused (bool): Boolean that indicates if the simulation is paused.
+        _simulation_strategy (SimulationStrategy): Strategy for infrastructure simulation details.
+        _event_bus (EventBus): Event bus of the module.
+    """
 
     _simulator: BaseSimulator
     """Simulator to be executed"""
@@ -39,6 +95,8 @@ class BaseControl:
         """
         Args:
             simulator (BaseSimulator): Simulation engine to be executed.
+            simulation_strategy (SimulationStrategy): Strategy to execute the simulation.
+            event_bus (EventBus): EvenBus of the module.
         """
         self._simulator = simulator
         self._is_paused = True
