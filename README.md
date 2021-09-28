@@ -62,7 +62,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-GSF is a framework for the implementation of simulation tools, which offers the possibility 
+GSF is a framework for the implementation of simulation tools which offers the possibility 
 of using and extending the same components to generate a wide variety of simulation projects. 
 Its use makes it possible to dispense with the knowledge of several simulation processes, 
 save programming time and maintain a standard structure in the developed solutions.
