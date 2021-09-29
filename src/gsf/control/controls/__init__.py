@@ -1,5 +1,5 @@
 """Controls Module
-==============
+=====================
 This module includes the concrete discrete-event simulation control and concrete simulation strategies.
 """
 

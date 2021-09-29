@@ -1,3 +1,22 @@
+"""Base Simulator
+====================
+This module contains the abstract definition of a simulator.
+It has the definition of BaseSimulator, that should be extended,
+implementing its abstract methods.
+
+Example:
+    Creating a simulator::
+
+        class NewSimulator(BaseSimulator):
+
+            def compute_next_state(self, input):
+                self._dynamic_system.state_transition(input)
+
+            def compute_output(self):
+                return self._dynamic_system.get_output()
+"""
+
+
 from __future__ import annotations
 
 from abc import abstractmethod
@@ -61,4 +80,5 @@ class BaseSimulator:
         raise NotImplementedError
 
     def init(self):
+        """Initializes the simulator properties"""
         self._is_output_up_to_update = False

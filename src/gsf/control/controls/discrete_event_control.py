@@ -1,5 +1,5 @@
 """Discrete Event Control
-==============
+===========================
 This module contains the definition of a discrete event simulation control.
 It has the definition of the DiscreteEventControl, that allows control simulations.
 

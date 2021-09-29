@@ -1,3 +1,21 @@
+"""Discrete Event Simulator
+=============================
+This module contains the definition of a discrete event simulator.
+It has the definition of the DiscreteEventSimulationEngine, that allows simulations width inputs and time
+over a discrete-event dynamic system.
+
+Example:
+    Creating a discrete-event simulator::
+
+        ...
+        dynamic_system = some_discrete_event_dynamic_system
+        simulator = DiscreteEventSimulationEngine(dynamic_system, DefaultReport())
+
+    Running a discrete-event simulation::
+
+        simulator.compute_next_state(time=simulator.get_time_of_next_event())
+"""
+
 from __future__ import annotations
 
 from typing import TYPE_CHECKING
@@ -74,5 +92,6 @@ class DiscreteEventSimulationEngine(BaseSimulator):
         return None
 
     def init(self):
+        """Initializes the simulator properties"""
         super(DiscreteEventSimulationEngine, self).init()
         self._last_event_time = Time(0)
