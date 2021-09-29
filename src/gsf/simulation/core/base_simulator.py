@@ -31,6 +31,12 @@ class BaseSimulator:
 
     An simulator engine executes the state transition function of the dynamic
     system, computes the output and reports it.
+
+    Attributes:
+        _dynamic_system (BaseDynamicSystem): Dynamic system to be simulated.
+        _is_output_up_to_update (bool): Indicates if the output was computed for that iteration.
+        _report_generator (BaseReport): Current report generator where engine saves the outputs.
+        _event_bus (EventBus): Event bus of the module.
     """
 
     _dynamic_system: BaseDynamicSystem

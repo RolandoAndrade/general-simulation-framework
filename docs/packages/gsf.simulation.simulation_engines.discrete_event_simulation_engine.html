@@ -529,7 +529,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.reports.core.base_report.html">
+       Base Report
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -541,7 +546,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.reports.report_generators.default_report.html">
+       Default Report
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -687,6 +697,39 @@ over a discrete-event dynamic system.</p>
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gsf.simulation.simulation_engines.discrete_event_simulation_engine.</span></code><code class="sig-name descname"><span class="pre">DiscreteEventSimulationEngine</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dynamic_system</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DiscreteEventDynamicSystem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">base_generator</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseReport</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">event_bus</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">EventBus</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="gsf.simulation.core.base_simulator.html#gsf.simulation.core.base_simulator.BaseSimulator" title="gsf.simulation.core.base_simulator.BaseSimulator"><code class="xref py py-class docutils literal notranslate"><span class="pre">gsf.simulation.core.base_simulator.BaseSimulator</span></code></a></p>
 <p>Simulation engine for discrete-event simulation</p>
+<dl class="py attribute">
+<dt id="gsf.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine._dynamic_system">
+<code class="sig-name descname"><span class="pre">_dynamic_system</span></code><a class="headerlink" href="#gsf.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine._dynamic_system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic system to be simulated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gsf.dynamic_system.core.base_dynamic_sytem.html#gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem" title="gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem">BaseDynamicSystem</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine._is_output_up_to_update">
+<code class="sig-name descname"><span class="pre">_is_output_up_to_update</span></code><a class="headerlink" href="#gsf.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine._is_output_up_to_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates if the output was computed for that iteration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine._last_event_time">
+<code class="sig-name descname"><span class="pre">_last_event_time</span></code><a class="headerlink" href="#gsf.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine._last_event_time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time of the last event recorded.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="gsf.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine.compute_next_state">
 <code class="sig-name descname"><span class="pre">compute_next_state</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">DynamicSystemInput</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Time</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">Decimal('0')</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine.compute_next_state" title="Permalink to this definition">¶</a></dt>
@@ -717,7 +760,8 @@ yet</p>
 <dl class="py method">
 <dt id="gsf.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine.init">
 <code class="sig-name descname"><span class="pre">init</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gsf.simulation.simulation_engines.discrete_event_simulation_engine.DiscreteEventSimulationEngine.init" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Initializes the simulator properties</p>
+</dd></dl>
 
 </dd></dl>
 

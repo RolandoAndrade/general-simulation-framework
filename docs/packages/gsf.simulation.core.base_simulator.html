@@ -530,7 +530,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.reports.core.base_report.html">
+       Base Report
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -542,7 +547,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.reports.report_generators.default_report.html">
+       Default Report
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -690,6 +700,50 @@ implementing its abstract methods.</p>
 <p>Abstract simulator engine.</p>
 <p>An simulator engine executes the state transition function of the dynamic
 system, computes the output and reports it.</p>
+<dl class="py attribute">
+<dt id="gsf.simulation.core.base_simulator.BaseSimulator._dynamic_system">
+<code class="sig-name descname"><span class="pre">_dynamic_system</span></code><a class="headerlink" href="#gsf.simulation.core.base_simulator.BaseSimulator._dynamic_system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic system to be simulated.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gsf.dynamic_system.core.base_dynamic_sytem.html#gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem" title="gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem">BaseDynamicSystem</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.simulation.core.base_simulator.BaseSimulator._is_output_up_to_update">
+<code class="sig-name descname"><span class="pre">_is_output_up_to_update</span></code><a class="headerlink" href="#gsf.simulation.core.base_simulator.BaseSimulator._is_output_up_to_update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates if the output was computed for that iteration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.simulation.core.base_simulator.BaseSimulator._report_generator">
+<code class="sig-name descname"><span class="pre">_report_generator</span></code><a class="headerlink" href="#gsf.simulation.core.base_simulator.BaseSimulator._report_generator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current report generator where engine saves the outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gsf.reports.core.base_report.html#gsf.reports.core.base_report.BaseReport" title="gsf.reports.core.base_report.BaseReport">BaseReport</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.simulation.core.base_simulator.BaseSimulator._event_bus">
+<code class="sig-name descname"><span class="pre">_event_bus</span></code><a class="headerlink" href="#gsf.simulation.core.base_simulator.BaseSimulator._event_bus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event bus of the module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>EventBus</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="gsf.simulation.core.base_simulator.BaseSimulator.compute_next_state">
 <em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">compute_next_state</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.simulation.core.base_simulator.BaseSimulator.compute_next_state" title="Permalink to this definition">¶</a></dt>
@@ -714,7 +768,8 @@ yet</p>
 <dl class="py method">
 <dt id="gsf.simulation.core.base_simulator.BaseSimulator.init">
 <code class="sig-name descname"><span class="pre">init</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gsf.simulation.core.base_simulator.BaseSimulator.init" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Initializes the simulator properties</p>
+</dd></dl>
 
 </dd></dl>
 

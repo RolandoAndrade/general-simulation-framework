@@ -33,7 +33,13 @@ if TYPE_CHECKING:
 
 
 class DiscreteEventSimulationEngine(BaseSimulator):
-    """Simulation engine for discrete-event simulation"""
+    """Simulation engine for discrete-event simulation
+
+    Attributes:
+        _dynamic_system (BaseDynamicSystem): Dynamic system to be simulated.
+        _is_output_up_to_update (bool): Indicates if the output was computed for that iteration.
+        _last_event_time (Time): Time of the last event recorded.
+    """
 
     _dynamic_system: DiscreteEventDynamicSystem
     """Dynamic system to be simulated."""

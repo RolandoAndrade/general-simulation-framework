@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; General Simulation Framework</title>
+    <title>Base Report &#8212; General Simulation Framework</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -105,7 +105,7 @@
   Reference
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="gsf.control.html">
    Control
@@ -125,7 +125,17 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.discrete_event_control.html">
+       Discrete Event Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.thread_control.html">
+       Thread Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -137,7 +147,22 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.base_control.html">
+       Base Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_stats.html">
+       Simulation Stats
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_strategy.html">
+       Simulation Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -486,26 +511,31 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="gsf.reports.html">
    Reports
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-31" name="toctree-checkbox-31" type="checkbox"/>
   <label for="toctree-checkbox-31">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
-   <li class="toctree-l2 has-children">
+  <ul class="current">
+   <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="gsf.reports.core.html">
      gsf.reports.core package
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" type="checkbox"/>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-32" name="toctree-checkbox-32" type="checkbox"/>
     <label for="toctree-checkbox-32">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul class="current">
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Base Report
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -517,7 +547,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.reports.report_generators.default_report.html">
+       Default Report
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -541,7 +576,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.simulation.core.base_simulator.html">
+       Base Simulator
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -553,7 +593,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.simulation.simulation_engines.discrete_event_simulation_engine.html">
+       Discrete Event Simulator
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -624,14 +669,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -640,23 +677,96 @@
         
               <div>
                 
-  <span class="target" id="module-gsf.reports.core.base_report"></span><dl class="py class">
+  <span class="target" id="module-gsf.reports.core.base_report"></span><div class="section" id="base-report">
+<h1>Base Report<a class="headerlink" href="#base-report" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the abstract definition of a simulation report.
+It has the definition of BaseReport, that should be extended,
+implementing its abstract methods.</p>
+<p class="rubric">Example</p>
+<p>Creating a concrete report:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NewReport</span><span class="p">(</span><span class="n">BaseReport</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">_get_results</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Set</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">outputs</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Time</span><span class="p">,</span> <span class="n">DynamicSystemOutput</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ReportResult</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Saving an output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">report</span><span class="o">.</span><span class="n">add_output</span><span class="p">({</span><span class="n">model</span><span class="p">:</span> <span class="n">model_output</span><span class="p">},</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Generating report:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">report</span><span class="o">.</span><span class="n">generate_report</span><span class="p">()</span>
+</pre></div>
+</div>
+<dl class="py class">
 <dt id="gsf.reports.core.base_report.BaseReport">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gsf.reports.core.base_report.</span></code><code class="sig-name descname"><span class="pre">BaseReport</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">event_bus</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">event_bus.bus.EventBus</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.reports.core.base_report.BaseReport" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Base report generator</p>
+<dl class="py attribute">
+<dt id="gsf.reports.core.base_report.BaseReport._outputs">
+<code class="sig-name descname"><span class="pre">_outputs</span></code><a class="headerlink" href="#gsf.reports.core.base_report.BaseReport._outputs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Saved outputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Dict[Time, DynamicSystemOutput]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.reports.core.base_report.BaseReport._headers">
+<code class="sig-name descname"><span class="pre">_headers</span></code><a class="headerlink" href="#gsf.reports.core.base_report.BaseReport._headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Headers for the report table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Set[str]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.reports.core.base_report.BaseReport._event_bus">
+<code class="sig-name descname"><span class="pre">_event_bus</span></code><a class="headerlink" href="#gsf.reports.core.base_report.BaseReport._event_bus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event bus of the module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>EventBus</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="gsf.reports.core.base_report.BaseReport._get_results">
+<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">_get_results</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">headers</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Set</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span> </span><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#gsf.reports.core.base_report.BaseReport._get_results" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generates the report.</p>
+</dd></dl>
+
 <dl class="py method">
 <dt id="gsf.reports.core.base_report.BaseReport.add_output">
 <code class="sig-name descname"><span class="pre">add_output</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">float</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.reports.core.base_report.BaseReport.add_output" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Saves an output into the report registry.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>output</strong> (<em>DynamicSystemOutput</em>) – Report to save.</p></li>
+<li><p><strong>time</strong> (<em>Time</em>) – Time of the given output.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 <dl class="py method">
 <dt id="gsf.reports.core.base_report.BaseReport.generate_report">
 <code class="sig-name descname"><span class="pre">generate_report</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">Any</span><a class="headerlink" href="#gsf.reports.core.base_report.BaseReport.generate_report" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Returns the generated report from the saved outputs.</p>
+</dd></dl>
 
 </dd></dl>
 
+</div>
 
 
               </div>
