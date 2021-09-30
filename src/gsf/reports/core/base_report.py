@@ -31,7 +31,11 @@ from typing import Dict, Any, Set
 from gsf.core.events import EventBus, DomainEvents, static_event_bus
 
 DynamicSystemOutput = Dict[str, Any]
+"""Output of the dynamic system type."""
+
 ReportResult = Any
+"""Report result type"""
+
 Time = float
 
 

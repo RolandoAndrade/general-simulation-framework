@@ -1,3 +1,35 @@
+"""Scheduler
+=================================
+This module contains the definition of a scheduler.
+It has the definition of the Scheduler that allows schedule events and execute them using the FEL paradigm·
+
+Example:
+    Creating an scheduler::
+
+        scheduler = Scheduler()
+
+    Scheduling an event::
+
+        scheduler.schedule(model, Time(2))
+        # or
+        model.schedule(Time(2))
+
+
+    Deleting an scheduled event::
+
+        scheduler.unschedule(model)
+        # or
+        model.unschedule()
+
+    Get a set of imminent events::
+
+        next = scheduler.get_next_models()
+
+    Get a set of imminent events and removes them from the FEL::
+
+        next = scheduler.pop_next_models()
+"""
+
 from __future__ import annotations
 
 import heapq
@@ -15,8 +47,13 @@ if TYPE_CHECKING:
 
 
 class Scheduler:
-    """Scheduler for execution of the autonomous events of discrete-event
-    models
+    """Scheduler
+
+    It executes the autonomous events of discrete-event
+    models.
+
+    Attributes:
+        _future_event_list (List[ScheduledModel]): Collection of scheduled models. It is used as a min-heap.
     """
 
     _future_event_list: List[ScheduledModel]

@@ -125,7 +125,17 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.discrete_event_control.html">
+       Discrete Event Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.thread_control.html">
+       Thread Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -137,7 +147,22 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.base_control.html">
+       Base Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_stats.html">
+       Simulation Stats
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_strategy.html">
+       Simulation Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -353,7 +378,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.dynamic_system.core.base_dynamic_sytem.html">
+       Base Dynamic System
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -365,7 +395,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.dynamic_system.dynamic_systems.discrete_event_dynamic_system.html">
+       Discrete Event Dynamic System
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -377,7 +412,17 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.dynamic_system.future_event_list.scheduled_model.html">
+       Scheduled Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.dynamic_system.future_event_list.scheduler.html">
+       Scheduler
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -505,7 +550,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.reports.core.base_report.html">
+       Base Report
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -517,7 +567,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.reports.report_generators.default_report.html">
+       Default Report
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -541,7 +596,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.simulation.core.base_simulator.html">
+       Base Simulator
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -553,7 +613,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.simulation.simulation_engines.discrete_event_simulation_engine.html">
+       Discrete Event Simulator
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -630,6 +695,11 @@
             <nav id="bd-toc-nav">
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dynamic-system-module">
+   Dynamic System Module
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#subpackages">
    Subpackages
   </a>
@@ -647,24 +717,40 @@
                 
   <div class="section" id="module-gsf.dynamic_system">
 <span id="gsf-dynamic-system-package"></span><h1>gsf.dynamic_system package<a class="headerlink" href="#module-gsf.dynamic_system" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="dynamic-system-module">
+<h2>Dynamic System Module<a class="headerlink" href="#dynamic-system-module" title="Permalink to this headline">¶</a></h2>
+<p>The dynamic system module allows the user to define and group the entities,
+establish the input and output connections between them and contains the functions for
+scheduling and querying events.</p>
+<p>It will be used by the
+simulation module to carry out the state transitions and obtain the system outputs.
+outputs of the system.</p>
+</div>
 <div class="section" id="subpackages">
 <h2>Subpackages<a class="headerlink" href="#subpackages" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="gsf.dynamic_system.core.html">gsf.dynamic_system.core package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="gsf.dynamic_system.core.html#submodules">Submodules</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="gsf.dynamic_system.core.html#core-module">Core Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gsf.dynamic_system.core.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gsf.dynamic_system.core.base_dynamic_sytem.html">Base Dynamic System</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="gsf.dynamic_system.dynamic_systems.html">gsf.dynamic_system.dynamic_systems package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="gsf.dynamic_system.dynamic_systems.html#submodules">Submodules</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="gsf.dynamic_system.dynamic_systems.html#dynamic-systems-module">Dynamic Systems Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gsf.dynamic_system.dynamic_systems.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gsf.dynamic_system.dynamic_systems.discrete_event_dynamic_system.html">Discrete Event Dynamic System</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="gsf.dynamic_system.future_event_list.html">gsf.dynamic_system.future_event_list package</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="gsf.dynamic_system.future_event_list.html#submodules">Submodules</a><ul class="simple">
+<li class="toctree-l2"><a class="reference internal" href="gsf.dynamic_system.future_event_list.html#future-event-list-module">Future Event List Module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="gsf.dynamic_system.future_event_list.html#submodules">Submodules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gsf.dynamic_system.future_event_list.scheduled_model.html">Scheduled Model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gsf.dynamic_system.future_event_list.scheduler.html">Scheduler</a></li>
 </ul>
 </li>
 </ul>

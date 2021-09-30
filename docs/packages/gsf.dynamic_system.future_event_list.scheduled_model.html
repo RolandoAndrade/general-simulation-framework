@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; General Simulation Framework</title>
+    <title>Scheduled Model &#8212; General Simulation Framework</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="gsf.dynamic_system.future_event_list.scheduler.html" />
+    <link rel="next" title="Scheduler" href="gsf.dynamic_system.future_event_list.scheduler.html" />
     <link rel="prev" title="gsf.dynamic_system.future_event_list package" href="gsf.dynamic_system.future_event_list.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -105,7 +105,7 @@
   Reference
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="gsf.control.html">
    Control
@@ -125,7 +125,17 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.discrete_event_control.html">
+       Discrete Event Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.thread_control.html">
+       Thread Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -137,7 +147,22 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.base_control.html">
+       Base Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_stats.html">
+       Simulation Stats
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_strategy.html">
+       Simulation Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -334,16 +359,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="gsf.dynamic_system.html">
    Dynamic System
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
   <label for="toctree-checkbox-20">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2 has-children">
     <a class="reference internal" href="gsf.dynamic_system.core.html">
      gsf.dynamic_system.core package
@@ -353,7 +378,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.dynamic_system.core.base_dynamic_sytem.html">
+       Base Dynamic System
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -365,19 +395,34 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.dynamic_system.dynamic_systems.discrete_event_dynamic_system.html">
+       Discrete Event Dynamic System
+      </a>
+     </li>
     </ul>
    </li>
-   <li class="toctree-l2 has-children">
+   <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="gsf.dynamic_system.future_event_list.html">
      gsf.dynamic_system.future_event_list package
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-23" name="toctree-checkbox-23" type="checkbox"/>
     <label for="toctree-checkbox-23">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul class="current">
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Scheduled Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.dynamic_system.future_event_list.scheduler.html">
+       Scheduler
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -505,7 +550,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.reports.core.base_report.html">
+       Base Report
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -517,7 +567,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.reports.report_generators.default_report.html">
+       Default Report
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -541,7 +596,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.simulation.core.base_simulator.html">
+       Base Simulator
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -553,7 +613,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.simulation.simulation_engines.discrete_event_simulation_engine.html">
+       Discrete Event Simulator
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -624,14 +689,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -640,15 +697,47 @@
         
               <div>
                 
-  <span class="target" id="module-gsf.dynamic_system.future_event_list.scheduled_model"></span><dl class="py class">
+  <span class="target" id="module-gsf.dynamic_system.future_event_list.scheduled_model"></span><div class="section" id="scheduled-model">
+<h1>Scheduled Model<a class="headerlink" href="#scheduled-model" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the definition of a scheduled model.
+It has the definition of the ScheduledModel that allows is used by the scheduler to sort events by time.</p>
+<p class="rubric">Example</p>
+<p>Creating a scheduled model:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span>  <span class="o">=</span> <span class="n">ScheduledModel</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">Time</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="py class">
 <dt id="gsf.dynamic_system.future_event_list.scheduled_model.ScheduledModel">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gsf.dynamic_system.future_event_list.scheduled_model.</span></code><code class="sig-name descname"><span class="pre">ScheduledModel</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_model</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseModel</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_time</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Time</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.dynamic_system.future_event_list.scheduled_model.ScheduledModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Event scheduled</p>
+<p>It contains a model and the time where an autonomous event will be executed.</p>
+<dl class="py attribute">
+<dt id="gsf.dynamic_system.future_event_list.scheduled_model.ScheduledModel._model">
+<code class="sig-name descname"><span class="pre">_model</span></code><a class="headerlink" href="#gsf.dynamic_system.future_event_list.scheduled_model.ScheduledModel._model" title="Permalink to this definition">¶</a></dt>
+<dd><p>Model to be scheduled.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gsf.models.core.base_model.html#gsf.models.core.base_model.BaseModel" title="gsf.models.core.base_model.BaseModel">BaseModel</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.dynamic_system.future_event_list.scheduled_model.ScheduledModel._time">
+<code class="sig-name descname"><span class="pre">_time</span></code><a class="headerlink" href="#gsf.dynamic_system.future_event_list.scheduled_model.ScheduledModel._time" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time to be executed the event.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Time</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="gsf.dynamic_system.future_event_list.scheduled_model.ScheduledModel.decrease_time">
 <code class="sig-name descname"><span class="pre">decrease_time</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gsf.dynamic_system.future_event_list.scheduled_model.ScheduledModel.decrease_time" title="Permalink to this definition">¶</a></dt>
-<dd><p>Decreases the time for the scheduled model.</p>
+<dd><p>Decreases the time of the scheduled model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>time</strong> (<em>int</em>) – Time variation.</p>
@@ -670,6 +759,7 @@
 
 </dd></dl>
 
+</div>
 
 
               </div>
@@ -678,7 +768,7 @@
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="gsf.dynamic_system.future_event_list.html" title="previous page">gsf.dynamic_system.future_event_list package</a>
-    <a class='right-next' id="next-link" href="gsf.dynamic_system.future_event_list.scheduler.html" title="next page">&lt;no title&gt;</a>
+    <a class='right-next' id="next-link" href="gsf.dynamic_system.future_event_list.scheduler.html" title="next page">Scheduler</a>
 
         </div>
         

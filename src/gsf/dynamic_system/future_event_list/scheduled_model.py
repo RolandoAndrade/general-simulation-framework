@@ -1,3 +1,14 @@
+"""Scheduled Model
+=================================
+This module contains the definition of a scheduled model.
+It has the definition of the ScheduledModel that allows is used by the scheduler to sort events by time.
+
+Example:
+    Creating a scheduled model::
+
+        model  = ScheduledModel(model, Time(2))
+"""
+
 from __future__ import annotations
 
 from dataclasses import dataclass
@@ -14,7 +25,14 @@ if TYPE_CHECKING:
 
 @dataclass
 class ScheduledModel:
-    """Event scheduled"""
+    """Event scheduled
+
+    It contains a model and the time where an autonomous event will be executed.
+
+    Attributes:
+        _model (BaseModel): Model to be scheduled.
+        _time (Time): Time to be executed the event.
+    """
 
     _model: BaseModel
     _time: Time
@@ -31,7 +49,7 @@ class ScheduledModel:
 
     @debug("Decreasing time")
     def decrease_time(self, time: Time) -> Time:
-        """Decreases the time for the scheduled model.
+        """Decreases the time of the scheduled model.
 
         Args:
             time (int): Time variation.

@@ -1,3 +1,36 @@
+"""Base Dynamic System
+=======================
+This module contains the abstract definition of a dynamic system.
+It has the definition of BaseDynamicSystem, that should be extended,
+implementing its abstract methods.
+
+Example:
+    Creating a simulator::
+
+        class DynamicSystem(BaseDynamicSystem):
+
+            def get_output(self, input):
+                outs = {}
+                for model in self._models:
+                    outs[model] = model.get_output()
+
+            def state_transition(self):
+                for model in self._models:
+                    model.state_transition()
+
+    Add a model to the dynamic system::
+
+        Model(dynamic_system)
+
+    Add a link between models::
+
+        path = Path(from_model, to_model, Value(1), 'path name')
+        dynamic_system.add(path)
+        # or
+        from_model.add(to_model, Value(1), 'path name')
+
+"""
+
 from __future__ import annotations
 
 from abc import abstractmethod
@@ -14,12 +47,26 @@ if TYPE_CHECKING:
     from gsf.models.core import Path, BaseModel
 
     DynamicSystemOutput = Dict[BaseModel, Any]
+    """Dynamic System Output type"""
+
     DynamicSystemModels = Set[BaseModel]
+    """Collection of models type"""
+
     DynamicSystemPaths = Dict[BaseModel, Set[Path]]
+    """Collection of paths type"""
 
 
 class BaseDynamicSystem:
-    """Abstract dynamic system"""
+    """Abstract dynamic system
+
+    It contains a collection of models and paths. Dynamic systems execute the state transition and compute
+    the output of the models.
+
+    Attributes:
+        _models (DynamicSystemModels): Models of the dynamic system
+        _paths (DynamicSystemPaths): Paths of the dynamic system.
+        _event_bus (EventBus): Event bus of the module.
+    """
 
     _models: DynamicSystemModels
     """Models of the dynamic system"""
@@ -32,8 +79,11 @@ class BaseDynamicSystem:
 
     @debug("Started the dynamic system", after=True)
     def __init__(self, event_bus: EventBus = None):
-        """Creates a dynamic system"""
+        """Creates a dynamic system
 
+        Args:
+            event_bus (EventBus): Event bus of the module.
+        """
         self._models = set()
         self._paths = {}
         self._event_bus = event_bus or static_event_bus
@@ -112,7 +162,11 @@ class BaseDynamicSystem:
         raise NotImplementedError
 
     def show(self, file_name: str = "dynamic_system"):
-        """Shows a graph of the dynamic system"""
+        """Shows a graph of the dynamic system
+
+        Args:
+            file_name (str): Name of the file to be generated.
+        """
         dg = Digraph()
         for model in self._models:
             dg.node(model.get_id(), model.get_id())

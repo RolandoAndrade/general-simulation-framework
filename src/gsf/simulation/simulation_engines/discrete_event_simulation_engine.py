@@ -1,7 +1,7 @@
 """Discrete Event Simulator
 =============================
-This module contains the definition of a discrete event simulator.
-It has the definition of the DiscreteEventSimulationEngine, that allows simulations width inputs and time
+This module contains the definition of a discrete-event simulator.
+It has the definition of the DiscreteEventSimulationEngine, that allows simulations with inputs and time
 over a discrete-event dynamic system.
 
 Example:

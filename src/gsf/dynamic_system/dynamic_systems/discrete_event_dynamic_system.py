@@ -1,3 +1,51 @@
+"""Discrete Event Dynamic System
+=================================
+This module contains the definition of a discrete-event dynamic system.
+It has the definition of the DiscreteEventDynamicSystem that allows simulations over networks of models.
+
+Example:
+    Creating a discrete-event dynamic system::
+
+        class LinearAutomaton(DiscreteEventDynamicSystem):
+            _cells: List[Cell]
+
+            def __init__(self, cells: int = 5, random_seed: int = 42):
+                super().__init__()
+                seed(random_seed)
+                self._create_cells(cells)
+                self._create_relations(cells)
+
+            def _create_cells(self, cells: int):
+                self._cells = []
+                for i in range(cells):
+                    is_alive = random() < 0.5
+                    # When a model is created, is added to the _models' collection od the dynamic system.
+                    self._cells.append(Cell(self, is_alive))
+
+            def _create_relations(self, cells: int):
+                for i in range(cells):
+                    self._cells[i - 1].add(self._cells[i])
+
+            def __str__(self):
+                s = ""
+                for cell in self._cells:
+                    s += str(cell)
+                return s
+
+
+    Add a model to the dynamic system::
+
+        Model(dynamic_system)
+
+    Add a link between models::
+
+        path = Path(from_model, to_model, Value(1), 'path name')
+        dynamic_system.add(path)
+        # or
+        from_model.add(to_model, Value(1), 'path name')
+"""
+
+
 from __future__ import annotations
 from abc import ABC
 from typing import TYPE_CHECKING, Dict, Set, cast, Any
@@ -17,13 +65,27 @@ if TYPE_CHECKING:
     )
 
     DynamicSystemModels = Set[DiscreteEventModel]
+    """Collection of discrete-event models."""
+
     DynamicSystemPaths = Dict[DiscreteEventModel, Set[Path]]
+    """Collection of paths between models."""
+
     DynamicSystemOutput = Dict[DiscreteEventModel, Any]
+    """Output of the dynamic system."""
+
     from gsf.core.types import DynamicSystemInput, Time
 
 
 class DiscreteEventDynamicSystem(ABC, BaseDynamicSystem):
-    """Dynamic system for discrete-event models"""
+    """Dynamic system for discrete-event models.
+
+    Its state transitions receives an specific time taken from the scheduler, using the event-scheduling
+    time-advance algorithm.
+
+    Attributes:
+        _outputs (DynamicSystemOutput): Output of the models.
+        _scheduler (Scheduler): Scheduler of events.
+    """
 
     _models: DynamicSystemModels
     """Models of the dynamic system."""

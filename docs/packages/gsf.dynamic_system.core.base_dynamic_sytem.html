@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; General Simulation Framework</title>
+    <title>Base Dynamic System &#8212; General Simulation Framework</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -105,7 +105,7 @@
   Reference
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="gsf.control.html">
    Control
@@ -125,7 +125,17 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.discrete_event_control.html">
+       Discrete Event Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.thread_control.html">
+       Thread Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -137,7 +147,22 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.base_control.html">
+       Base Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_stats.html">
+       Simulation Stats
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_strategy.html">
+       Simulation Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -334,26 +359,31 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="gsf.dynamic_system.html">
    Dynamic System
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
   <label for="toctree-checkbox-20">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
-   <li class="toctree-l2 has-children">
+  <ul class="current">
+   <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="gsf.dynamic_system.core.html">
      gsf.dynamic_system.core package
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
     <label for="toctree-checkbox-21">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul class="current">
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Base Dynamic System
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -365,7 +395,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.dynamic_system.dynamic_systems.discrete_event_dynamic_system.html">
+       Discrete Event Dynamic System
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -377,7 +412,17 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.dynamic_system.future_event_list.scheduled_model.html">
+       Scheduled Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.dynamic_system.future_event_list.scheduler.html">
+       Scheduler
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -505,7 +550,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.reports.core.base_report.html">
+       Base Report
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -517,7 +567,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.reports.report_generators.default_report.html">
+       Default Report
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -541,7 +596,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.simulation.core.base_simulator.html">
+       Base Simulator
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -553,7 +613,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.simulation.simulation_engines.discrete_event_simulation_engine.html">
+       Discrete Event Simulator
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -624,14 +689,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -640,11 +697,76 @@
         
               <div>
                 
-  <span class="target" id="module-gsf.dynamic_system.core.base_dynamic_sytem"></span><dl class="py class">
+  <span class="target" id="module-gsf.dynamic_system.core.base_dynamic_sytem"></span><div class="section" id="base-dynamic-system">
+<h1>Base Dynamic System<a class="headerlink" href="#base-dynamic-system" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the abstract definition of a dynamic system.
+It has the definition of BaseDynamicSystem, that should be extended,
+implementing its abstract methods.</p>
+<p class="rubric">Example</p>
+<p>Creating a simulator:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DynamicSystem</span><span class="p">(</span><span class="n">BaseDynamicSystem</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">get_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">input</span><span class="p">):</span>
+        <span class="n">outs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="p">:</span>
+            <span class="n">outs</span><span class="p">[</span><span class="n">model</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">get_output</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">state_transition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_models</span><span class="p">:</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">state_transition</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Add a model to the dynamic system:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span><span class="p">(</span><span class="n">dynamic_system</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Add a link between models:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">from_model</span><span class="p">,</span> <span class="n">to_model</span><span class="p">,</span> <span class="n">Value</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;path name&#39;</span><span class="p">)</span>
+<span class="n">dynamic_system</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+<span class="c1"># or</span>
+<span class="n">from_model</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">to_model</span><span class="p">,</span> <span class="n">Value</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;path name&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
 <dt id="gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gsf.dynamic_system.core.base_dynamic_sytem.</span></code><code class="sig-name descname"><span class="pre">BaseDynamicSystem</span></code><a class="headerlink" href="#gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Abstract dynamic system</p>
+<p>It contains a collection of models and paths. Dynamic systems execute the state transition and compute
+the output of the models.</p>
+<dl class="py attribute">
+<dt id="gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem._models">
+<code class="sig-name descname"><span class="pre">_models</span></code><a class="headerlink" href="#gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem._models" title="Permalink to this definition">¶</a></dt>
+<dd><p>Models of the dynamic system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DynamicSystemModels</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem._paths">
+<code class="sig-name descname"><span class="pre">_paths</span></code><a class="headerlink" href="#gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem._paths" title="Permalink to this definition">¶</a></dt>
+<dd><p>Paths of the dynamic system.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>DynamicSystemPaths</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem._event_bus">
+<code class="sig-name descname"><span class="pre">_event_bus</span></code><a class="headerlink" href="#gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem._event_bus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Event bus of the module.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>EventBus</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.add">
 <code class="sig-name descname"><span class="pre">add</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.add" title="Permalink to this definition">¶</a></dt>
@@ -688,6 +810,11 @@
 <dt id="gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.show">
 <code class="sig-name descname"><span class="pre">show</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'dynamic_system'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem.show" title="Permalink to this definition">¶</a></dt>
 <dd><p>Shows a graph of the dynamic system</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<em>str</em>) – Name of the file to be generated.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
@@ -717,6 +844,7 @@
 
 </dd></dl>
 
+</div>
 
 
               </div>
