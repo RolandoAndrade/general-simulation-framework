@@ -59,11 +59,11 @@ class BaseModel(Entity):
 
     @debug("Initialized Model", True)
     def __init__(
-            self,
-            dynamic_system: BaseDynamicSystem,
-            name: str = None,
-            state: ModelState = None,
-            entity_manager: EntityManager = None,
+        self,
+        dynamic_system: BaseDynamicSystem,
+        name: str = None,
+        state: ModelState = None,
+        entity_manager: EntityManager = None,
     ):
         # Init the model
         if name is None:
@@ -92,10 +92,10 @@ class BaseModel(Entity):
 
     @debug("Adding output")
     def add(
-            self,
-            model: BaseModel,
-            weight: ExpressionProperty = ExpressionProperty(Value(1)),
-            name: str = None,
+        self,
+        model: BaseModel,
+        weight: ExpressionProperty = ExpressionProperty(Value(1)),
+        name: str = None,
     ):
         """Current model will be the input for the given model.
 

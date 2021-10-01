@@ -22,7 +22,7 @@ config = {
             "sink": sys.stderr,
             "level": "INFO",
             "format": "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <level>{"
-                      "message}</level>",
+            "message}</level>",
         }
     ]
 }
@@ -74,7 +74,7 @@ def enable_debug():
                 "sink": sys.stderr,
                 "level": "DEBUG",
                 "format": "<green>{time:YYYY-MM-DD HH:mm:ss.SSS}</green> | <level>{level: <8}</level> | <level>{"
-                          "message}</level>",
+                "message}</level>",
             }
         ]
     }

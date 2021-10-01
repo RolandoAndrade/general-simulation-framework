@@ -29,6 +29,7 @@ class RecoveryStrategy:
 
     Determines how an experiment is saved and loaded.
     """
+
     @abstractmethod
     def save(self, experiment: BaseExperiment, *args, **kwargs):
         """Saves the experiment"""

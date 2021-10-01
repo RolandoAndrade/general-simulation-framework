@@ -27,6 +27,7 @@ class PickleRecovery(RecoveryStrategy):
 
     It saves the experiments using the pickle serialization library.
     """
+
     def save(self, experiment: BaseExperiment, *args, **kwargs) -> bytes:
         """Saves the experiment"""
         return pickle.dumps(experiment)
