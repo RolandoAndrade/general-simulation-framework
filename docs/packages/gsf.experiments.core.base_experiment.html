@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; General Simulation Framework</title>
+    <title>Base Experiment &#8212; General Simulation Framework</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="gsf.experiments.core.recovery_strategy.html" />
+    <link rel="next" title="Recovery Strategy" href="gsf.experiments.core.recovery_strategy.html" />
     <link rel="prev" title="gsf.experiments.core package" href="gsf.experiments.core.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -105,7 +105,7 @@
   Reference
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="gsf.control.html">
    Control
@@ -125,7 +125,17 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.discrete_event_control.html">
+       Discrete Event Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.controls.thread_control.html">
+       Thread Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -137,7 +147,22 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.base_control.html">
+       Base Control
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_stats.html">
+       Simulation Stats
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.control.core.simulation_strategy.html">
+       Simulation Control Strategy
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -353,7 +378,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.dynamic_system.core.base_dynamic_sytem.html">
+       Base Dynamic System
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -365,7 +395,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.dynamic_system.dynamic_systems.discrete_event_dynamic_system.html">
+       Discrete Event Dynamic System
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -377,31 +412,51 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.dynamic_system.future_event_list.scheduled_model.html">
+       Scheduled Model
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.dynamic_system.future_event_list.scheduler.html">
+       Scheduler
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="gsf.experiments.html">
    Experiments
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-24" name="toctree-checkbox-24" type="checkbox"/>
   <label for="toctree-checkbox-24">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
-   <li class="toctree-l2 has-children">
+  <ul class="current">
+   <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="gsf.experiments.core.html">
      gsf.experiments.core package
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-25" name="toctree-checkbox-25" type="checkbox"/>
     <label for="toctree-checkbox-25">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul class="current">
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Base Experiment
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.experiments.core.recovery_strategy.html">
+       Recovery Strategy
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -413,7 +468,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.experiments.experiment_builders.discrete_event_experiment.html">
+       Discrete Event Experiment
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -425,7 +485,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.experiments.strategies.pickle_recovery.html">
+       Recovery Strategy
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -505,7 +570,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.reports.core.base_report.html">
+       Base Report
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -517,7 +587,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.reports.report_generators.default_report.html">
+       Default Report
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -541,7 +616,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.simulation.core.base_simulator.html">
+       Base Simulator
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -553,7 +633,12 @@
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.simulation.simulation_engines.discrete_event_simulation_engine.html">
+       Discrete Event Simulator
+      </a>
+     </li>
     </ul>
    </li>
   </ul>
@@ -624,14 +709,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -640,11 +717,85 @@
         
               <div>
                 
-  <span class="target" id="module-gsf.experiments.core.base_experiment"></span><dl class="py class">
+  <span class="target" id="module-gsf.experiments.core.base_experiment"></span><div class="section" id="base-experiment">
+<h1>Base Experiment<a class="headerlink" href="#base-experiment" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the abstract definition of an experiment.
+It has an abstract definition BaseExperiment that should be extended
+using the concrete classes of the simulation paradigm to be used.</p>
+<p class="rubric">Example</p>
+<p>Creating an experiment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DiscreteEventExperiment</span><span class="p">(</span><span class="n">BaseExperiment</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dynamic_system</span><span class="p">:</span> <span class="n">DiscreteEventDynamicSystem</span><span class="p">):</span>
+        <span class="n">report</span> <span class="o">=</span> <span class="n">DefaultReport</span><span class="p">()</span>
+        <span class="n">simulator</span> <span class="o">=</span> <span class="n">DiscreteEventSimulationEngine</span><span class="p">(</span><span class="n">dynamic_system</span><span class="p">,</span> <span class="n">report</span><span class="p">)</span>
+        <span class="n">control</span> <span class="o">=</span> <span class="n">DiscreteEventControl</span><span class="p">(</span><span class="n">simulator</span><span class="p">,</span> <span class="n">ThreadControlStrategy</span><span class="p">())</span>
+        <span class="n">recovery_strategy</span> <span class="o">=</span> <span class="n">PickleRecovery</span><span class="p">()</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">DiscreteEventExperiment</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
+            <span class="n">dynamic_system</span><span class="p">,</span> <span class="n">simulator</span><span class="p">,</span> <span class="n">control</span><span class="p">,</span> <span class="n">report</span><span class="p">,</span> <span class="n">recovery_strategy</span>
+        <span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py class">
 <dt id="gsf.experiments.core.base_experiment.BaseExperiment">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gsf.experiments.core.base_experiment.</span></code><code class="sig-name descname"><span class="pre">BaseExperiment</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dynamic_system</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseDynamicSystem</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">simulator</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseSimulator</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">control</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseControl</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">report</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">BaseReport</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">recovery_strategy</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">RecoveryStrategy</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.experiments.core.base_experiment.BaseExperiment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Simulation experiment</p>
+<p>Organizes the simulation modules.</p>
+<dl class="py attribute">
+<dt id="gsf.experiments.core.base_experiment.BaseExperiment.__dynamic_system">
+<code class="sig-name descname"><span class="pre">__dynamic_system</span></code><a class="headerlink" href="#gsf.experiments.core.base_experiment.BaseExperiment.__dynamic_system" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dynamic system where things will be built.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gsf.dynamic_system.core.base_dynamic_sytem.html#gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem" title="gsf.dynamic_system.core.base_dynamic_sytem.BaseDynamicSystem">BaseDynamicSystem</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.experiments.core.base_experiment.BaseExperiment.__simulator">
+<code class="sig-name descname"><span class="pre">__simulator</span></code><a class="headerlink" href="#gsf.experiments.core.base_experiment.BaseExperiment.__simulator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Simulator that will run the simulations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gsf.simulation.core.base_simulator.html#gsf.simulation.core.base_simulator.BaseSimulator" title="gsf.simulation.core.base_simulator.BaseSimulator">BaseSimulator</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.experiments.core.base_experiment.BaseExperiment.__control">
+<code class="sig-name descname"><span class="pre">__control</span></code><a class="headerlink" href="#gsf.experiments.core.base_experiment.BaseExperiment.__control" title="Permalink to this definition">¶</a></dt>
+<dd><p>Control for the simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gsf.control.core.base_control.html#gsf.control.core.base_control.BaseControl" title="gsf.control.core.base_control.BaseControl">BaseControl</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.experiments.core.base_experiment.BaseExperiment.__report">
+<code class="sig-name descname"><span class="pre">__report</span></code><a class="headerlink" href="#gsf.experiments.core.base_experiment.BaseExperiment.__report" title="Permalink to this definition">¶</a></dt>
+<dd><p>Report module for the simulation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gsf.reports.core.base_report.html#gsf.reports.core.base_report.BaseReport" title="gsf.reports.core.base_report.BaseReport">BaseReport</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.experiments.core.base_experiment.BaseExperiment.__recovery_strategy">
+<code class="sig-name descname"><span class="pre">__recovery_strategy</span></code><a class="headerlink" href="#gsf.experiments.core.base_experiment.BaseExperiment.__recovery_strategy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Strategy for persistence of the experiment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="gsf.experiments.core.recovery_strategy.html#gsf.experiments.core.recovery_strategy.RecoveryStrategy" title="gsf.experiments.core.recovery_strategy.RecoveryStrategy">RecoveryStrategy</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="gsf.experiments.core.base_experiment.BaseExperiment.dynamic_system">
 <em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">dynamic_system</span></code><a class="headerlink" href="#gsf.experiments.core.base_experiment.BaseExperiment.dynamic_system" title="Permalink to this definition">¶</a></dt>
@@ -654,12 +805,14 @@
 <dl class="py method">
 <dt id="gsf.experiments.core.base_experiment.BaseExperiment.load">
 <code class="sig-name descname"><span class="pre">load</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Any</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.experiments.core.base_experiment.BaseExperiment.load" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Imports an already existing experiment.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="gsf.experiments.core.base_experiment.BaseExperiment.save">
 <code class="sig-name descname"><span class="pre">save</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gsf.experiments.core.base_experiment.BaseExperiment.save" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Saves the experiment.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="gsf.experiments.core.base_experiment.BaseExperiment.simulation_control">
@@ -681,6 +834,7 @@
 
 </dd></dl>
 
+</div>
 
 
               </div>
@@ -689,7 +843,7 @@
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="gsf.experiments.core.html" title="previous page">gsf.experiments.core package</a>
-    <a class='right-next' id="next-link" href="gsf.experiments.core.recovery_strategy.html" title="next page">&lt;no title&gt;</a>
+    <a class='right-next' id="next-link" href="gsf.experiments.core.recovery_strategy.html" title="next page">Recovery Strategy</a>
 
         </div>
         

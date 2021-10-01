@@ -1,3 +1,16 @@
+"""Discrete Event Experiment
+=============================
+This module contains the definition of a discrete-event experiment.
+It has the definition of the DiscreteEventExperiment that allows to create discrete-event
+experiments and simulate them.
+
+Example:
+    Creating a discrete-event experiment::
+
+        dynamic_system = some_discrete_event_dynamic_system
+        simulator = DiscreteEventExperiment(dynamic_system)
+"""
+
 from __future__ import annotations
 
 from gsf.control.controls import ThreadControlStrategy
@@ -17,7 +30,10 @@ from gsf.simulation.simulation_engines.discrete_event_simulation_engine import (
 
 
 class DiscreteEventExperiment(BaseExperiment):
-    """Discrete-event simulation experiment"""
+    """Discrete-event simulation experiment
+
+    If the module's instances are not given, it creates a discrete-event compatible module.
+    """
 
     def __init__(
         self,
@@ -27,6 +43,14 @@ class DiscreteEventExperiment(BaseExperiment):
         report: BaseReport = None,
         recovery_strategy: RecoveryStrategy = None,
     ):
+        """
+        Args:
+            dynamic_system (BaseDynamicSystem): Dynamic system where things will be built.
+            simulator (BaseSimulator): Simulator that will run the simulations.
+            control (BaseControl): Control for the simulation.
+            report (BaseReport): Report module for the simulation.
+            recovery_strategy (RecoveryStrategy): Strategy for persistence of the experiment.
+        """
         report = report or DefaultReport()
         simulator = simulator or DiscreteEventSimulationEngine(dynamic_system, report)
         control = control or DiscreteEventControl(simulator, ThreadControlStrategy())
