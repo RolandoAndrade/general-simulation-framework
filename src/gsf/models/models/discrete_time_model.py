@@ -1,5 +1,5 @@
 """Discrete Time Model
-==============
+=========================
 This module contains the definition of a discrete time simulation Model.
 It has an abstract definition DiscreteTimeModel, that should be extended,
 implementing its abstract methods.

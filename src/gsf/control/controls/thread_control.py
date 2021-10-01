@@ -1,5 +1,5 @@
 """Thread Control Strategy
-==============
+===========================
 This module contains the definition of a simulation control strategy.
 It has the definition of the ThreadControlStrategy, that allows control simulations using the library
 threading.

@@ -1,5 +1,5 @@
 """Simulation Control Strategy
-==============
+==================================
 This module contains the abstract definition of a simulation control strategy.
 It has the definition of the SimulationStrategy, that should be extended,
 implementing its abstract methods.

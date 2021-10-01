@@ -1,7 +1,7 @@
 """Discrete Event Model
-==============
-This module contains the definition of a discrete event simulation Model.
-It has an abstract definition DiscreteEventModel, that should be extended,
+==========================
+This module contains the definition of a discrete-event simulation Model.
+It has an abstract definition DiscreteEventModel that should be extended,
 implementing its abstract methods.
 
 Example:

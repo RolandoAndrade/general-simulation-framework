@@ -1,5 +1,5 @@
 """Base Control
-==============
+================
 This module contains the abstract definition of a simulation control.
 It has the definition of BaseControl, that should be extended,
 implementing its abstract methods.

@@ -1,5 +1,5 @@
 """Simulation Stats
-==============
+====================
 This module contains the definition of the SimulationStats dataclass.
 
 Example:

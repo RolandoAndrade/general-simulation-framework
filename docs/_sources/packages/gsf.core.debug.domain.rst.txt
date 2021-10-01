@@ -13,5 +13,4 @@ Submodules
    :maxdepth: 4
 
    gsf.core.debug.domain.debug
-   gsf.core.debug.domain.logger
    gsf.core.debug.domain.summary_table

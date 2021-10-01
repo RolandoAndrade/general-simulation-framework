@@ -12,7 +12,6 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   gsf.core.builder
    gsf.core.debug
    gsf.core.entity
    gsf.core.events
