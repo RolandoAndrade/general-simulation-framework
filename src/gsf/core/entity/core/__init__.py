@@ -1,3 +1,9 @@
+"""Core Module
+=====================
+It contains entities, entity emitters, properties, etc.
+"""
+
+
 from .entity_manager import EntityManager, static_entity_manager
 from .entity import Entity
 from .entity_property import EntityProperties

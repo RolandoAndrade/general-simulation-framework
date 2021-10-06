@@ -1,3 +1,17 @@
+"""Entity Property
+=============================
+This module contains the definition of the generic property.
+It has the definition of the EntityProperty that allows to define the properties of an entity with
+a value, type and category.
+
+Example:
+    Creating properties::
+
+        number_property = EntityProperty(0, PropertyType.NUMBER, "Category 1")
+        string_property = EntityProperty("0", PropertyType.STRING, "Category 1")
+        boolean_property = EntityProperty(True, PropertyType.BOOLEAN, "Category 2")
+"""
+
 from __future__ import annotations
 
 from typing import Dict, TypeVar, Generic
@@ -8,7 +22,15 @@ T = TypeVar("T")
 
 
 class EntityProperty(Generic[T]):
-    """Property of an entity"""
+    """Property of an entity
+
+    Contains a value, type and category to describe an entity,
+
+    Attributes:
+        __value (T): Property value
+        __type (str): Property type
+        __category (str): Property category
+    """
 
     __value: T
     """Property value"""

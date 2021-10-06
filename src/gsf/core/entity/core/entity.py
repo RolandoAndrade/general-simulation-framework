@@ -1,3 +1,25 @@
+"""Entity
+=============================
+This module contains the definition of entities.
+It has the abstract definition of Entity. Entities are elements with identity and properties.
+
+Example:
+    Creating an entity::
+
+        class Model(Entity):
+            _count: NumberProperty
+
+            def __init__(self, name: str):
+                super().__init__(name)
+                self._count = NumberProperty(0)
+
+            def get_properties(self) -> EntityProperties:
+                return {
+                    'count': self._count
+                }
+"""
+
+
 from __future__ import annotations
 
 from abc import abstractmethod
@@ -7,7 +29,14 @@ from gsf.core.entity.core.entity_property import EntityProperties
 
 
 class Entity:
-    """Unique component with an identification."""
+    """Entity
+
+    Unique component with an identification.
+
+    Attributes:
+        _id (str): Identifier of the entity.
+        _entity_manager (EntityManager): Delegated entity manager.
+    """
 
     _id: str
     """Identification of the entity."""

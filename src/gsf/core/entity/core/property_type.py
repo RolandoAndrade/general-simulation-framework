@@ -1,3 +1,11 @@
+"""Property Type
+=============================
+This module contains the definition of the available types of properties.
+It has the definition of PropertyType that contains the static constants of the available types. It also
+contains a method to verify the type of the property.
+"""
+
+
 from __future__ import annotations
 
 from typing import Any
@@ -12,10 +20,14 @@ expected_types = {
     "ANY": Any,
     "EVENT": Any,
 }
+"""Dict with names of the types and their corresponding type"""
 
 
 class PropertyType:
-    """Type of a property"""
+    """Type of a property
+
+    It contains the constants of the available types.
+    """
 
     STRING = "STRING"
     BOOLEAN = "BOOLEAN"

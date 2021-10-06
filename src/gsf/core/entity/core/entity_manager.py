@@ -1,8 +1,25 @@
+"""Entity Manager
+=============================
+This module contains the definition of entity managers.
+It has the definition of the EntityManager and a static instance of the class.
+
+Example:
+    Creating an entity manager::
+
+        manager = EntityManager()
+"""
+
 from typing import Set
 
 
 class EntityManager:
-    """Manager of entities."""
+    """Manager of entities.
+
+    It controls the names used by entities.
+
+    Attributes:
+        _saved_names (Set[str]): List of entities saved.
+    """
 
     _saved_names: Set[str]
     """List of entities saved."""
