@@ -1,4 +1,4 @@
-gsf.reports package
+Reports package
 ===================
 
 .. automodule:: gsf.reports

@@ -1,4 +1,4 @@
-gsf.core.mathematics.distributions package
+Distributions package
 ==========================================
 
 .. automodule:: gsf.core.mathematics.distributions

@@ -1,4 +1,4 @@
-gsf.dynamic\_system.future\_event\_list package
+Future\_event\_list package
 ===============================================
 
 .. automodule:: gsf.dynamic_system.future_event_list

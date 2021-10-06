@@ -1,4 +1,4 @@
-gsf.simulation.core package
+Core package
 ===========================
 
 .. automodule:: gsf.simulation.core

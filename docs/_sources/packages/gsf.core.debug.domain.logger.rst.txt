@@ -1,4 +1,0 @@
-.. automodule:: gsf.core.debug.domain.logger
-   :members:
-   :undoc-members:
-   :show-inheritance:

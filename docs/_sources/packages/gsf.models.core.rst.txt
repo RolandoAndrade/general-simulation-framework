@@ -1,4 +1,4 @@
-gsf.models.core package
+Core package
 =======================
 
 .. automodule:: gsf.models.core

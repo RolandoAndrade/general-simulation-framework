@@ -1,4 +1,4 @@
-gsf.core.mathematics.values package
+Values package
 ===================================
 
 .. automodule:: gsf.core.mathematics.values

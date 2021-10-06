@@ -1,4 +1,4 @@
-gsf.experiments package
+Experiments package
 =======================
 
 .. automodule:: gsf.experiments

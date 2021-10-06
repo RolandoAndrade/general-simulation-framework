@@ -1,4 +1,4 @@
-gsf.experiments.experiment\_builders package
+Experiment\_builders package
 ============================================
 
 .. automodule:: gsf.experiments.experiment_builders

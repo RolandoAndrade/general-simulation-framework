@@ -1,4 +1,4 @@
-gsf.models.models package
+Models package
 =========================
 
 .. automodule:: gsf.models.models

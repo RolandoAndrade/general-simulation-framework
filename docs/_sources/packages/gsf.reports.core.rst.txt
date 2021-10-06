@@ -1,4 +1,4 @@
-gsf.reports.core package
+Core package
 ========================
 
 .. automodule:: gsf.reports.core

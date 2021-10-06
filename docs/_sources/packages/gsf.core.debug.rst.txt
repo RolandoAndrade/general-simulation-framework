@@ -1,4 +1,4 @@
-gsf.core.debug package
+Debug package
 ======================
 
 .. automodule:: gsf.core.debug

@@ -1,4 +1,4 @@
-gsf.core.events package
+Events package
 =======================
 
 .. automodule:: gsf.core.events

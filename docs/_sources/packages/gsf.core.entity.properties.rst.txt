@@ -1,4 +1,4 @@
-gsf.core.entity.properties package
+Properties package
 ==================================
 
 .. automodule:: gsf.core.entity.properties

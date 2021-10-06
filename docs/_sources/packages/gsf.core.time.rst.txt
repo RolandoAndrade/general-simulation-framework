@@ -1,4 +1,4 @@
-gsf.core.time package
+Time package
 =====================
 
 .. automodule:: gsf.core.time

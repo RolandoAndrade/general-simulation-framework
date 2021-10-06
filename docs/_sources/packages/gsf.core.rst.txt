@@ -1,4 +1,4 @@
-gsf.core package
+Core package
 ================
 
 .. automodule:: gsf.core

@@ -1,4 +1,4 @@
-gsf.core.types package
+Types package
 ======================
 
 .. automodule:: gsf.core.types

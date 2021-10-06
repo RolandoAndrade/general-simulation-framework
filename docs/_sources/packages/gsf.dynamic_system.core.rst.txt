@@ -1,4 +1,4 @@
-gsf.dynamic\_system.core package
+Dynamic\_system.core package
 ================================
 
 .. automodule:: gsf.dynamic_system.core

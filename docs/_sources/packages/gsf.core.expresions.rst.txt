@@ -1,4 +1,4 @@
-gsf.core.expresions package
+Expressions package
 ===========================
 
 .. automodule:: gsf.core.expresions

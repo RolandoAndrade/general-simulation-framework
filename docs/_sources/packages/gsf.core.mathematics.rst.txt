@@ -1,4 +1,4 @@
-gsf.core.mathematics package
+Mathematics package
 ============================
 
 .. automodule:: gsf.core.mathematics

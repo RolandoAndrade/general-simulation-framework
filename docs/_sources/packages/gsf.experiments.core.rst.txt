@@ -1,4 +1,4 @@
-gsf.experiments.core package
+Core package
 ============================
 
 .. automodule:: gsf.experiments.core

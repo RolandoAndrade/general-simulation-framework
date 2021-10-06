@@ -1,4 +1,4 @@
-gsf.core.entity package
+Entity package
 =======================
 
 .. automodule:: gsf.core.entity

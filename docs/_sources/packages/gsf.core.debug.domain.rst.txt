@@ -1,4 +1,4 @@
-gsf.core.debug.domain package
+Domain package
 =============================
 
 .. automodule:: gsf.core.debug.domain

@@ -1,4 +1,4 @@
-gsf.core.debug.infrastructure package
+Infrastructure package
 =====================================
 
 .. automodule:: gsf.core.debug.infrastructure

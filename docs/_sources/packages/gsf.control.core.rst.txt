@@ -1,4 +1,4 @@
-gsf.control.core package
+Core package
 ========================
 
 .. automodule:: gsf.control.core

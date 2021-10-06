@@ -1,4 +1,4 @@
-gsf.control package
+Control package
 ===================
 
 .. automodule:: gsf.control

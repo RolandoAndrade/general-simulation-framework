@@ -1,4 +1,4 @@
-gsf.simulation.simulation\_engines package
+Simulation\_engines package
 ==========================================
 
 .. automodule:: gsf.simulation.simulation_engines

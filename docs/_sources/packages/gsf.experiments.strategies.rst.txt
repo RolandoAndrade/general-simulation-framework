@@ -1,4 +1,4 @@
-gsf.experiments.strategies package
+Strategies package
 ==================================
 
 .. automodule:: gsf.experiments.strategies

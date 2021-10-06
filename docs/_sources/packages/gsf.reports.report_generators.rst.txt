@@ -1,4 +1,4 @@
-gsf.reports.report\_generators package
+Report\_generators package
 ======================================
 
 .. automodule:: gsf.reports.report_generators
