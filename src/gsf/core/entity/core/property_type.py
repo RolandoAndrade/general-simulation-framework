@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from gsf.core.expresions.expression import Expression
+from gsf.core.expressions.expression import Expression
 
 expected_types = {
     "STRING": str,

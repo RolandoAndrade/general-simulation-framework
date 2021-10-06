@@ -8,7 +8,7 @@ Example:
         property = ExpressionProperty(Value(1))
 """
 
-from gsf.core.expresions.expression import Expression
+from gsf.core.expressions.expression import Expression
 from gsf.core.entity.core.entity_property import EntityProperty
 from gsf.core.entity.core.property_type import PropertyType
 

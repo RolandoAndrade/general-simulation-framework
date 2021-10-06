@@ -1,6 +1,6 @@
 from typing import List, Union
 
-from gsf.core.expresions import Expression
+from gsf.core.expressions import Expression
 from gsf.core.types import Time
 from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from gsf.models.core import ModelState

@@ -26,7 +26,7 @@ from __future__ import annotations
 from abc import abstractmethod
 from typing import Union, List
 
-from gsf.core.expresions.expression import Expression
+from gsf.core.expressions.expression import Expression
 
 
 class RandomDistribution(Expression):

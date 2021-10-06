@@ -18,7 +18,7 @@ from __future__ import annotations
 
 from typing import Generic, TypeVar
 
-from gsf.core.expresions.expression import Expression
+from gsf.core.expressions.expression import Expression
 
 T = TypeVar("T")
 

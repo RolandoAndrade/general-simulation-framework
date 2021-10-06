@@ -1,4 +1,4 @@
-from gsf.core.expresions import Expression
+from gsf.core.expressions import Expression
 from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
 from examples.example_3.exit import Exit
 from examples.example_3.generator import Generator, GeneratorState

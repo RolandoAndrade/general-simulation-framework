@@ -19,7 +19,7 @@ Example:
 
 from typing import Any
 
-from gsf.core.expresions import Expression
+from gsf.core.expressions import Expression
 
 
 class UserExpression(Expression):
