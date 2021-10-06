@@ -1,3 +1,11 @@
+"""Simulation Time module
+=============================
+This module contains the definition of the time units and its conversions.
+
+.. warning::
+    This module is deprecated and will not be included into the next versions.
+"""
+
 from __future__ import annotations
 
 import enum
