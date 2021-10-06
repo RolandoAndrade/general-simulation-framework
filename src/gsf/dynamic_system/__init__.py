@@ -1,5 +1,5 @@
 """Dynamic System Module
-==============
+===========================
 The dynamic system module allows the user to define and group the entities,
 establish the input and output connections between them and contains the functions for
 scheduling and querying events.

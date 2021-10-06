@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; General Simulation Framework</title>
+    <title>Entity Property &#8212; General Simulation Framework</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -35,8 +35,8 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="gsf.core.entity.core.property_type.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="gsf.core.entity.core.entity_manager.html" />
+    <link rel="next" title="Property Type" href="gsf.core.entity.core.property_type.html" />
+    <link rel="prev" title="Entity Manager" href="gsf.core.entity.core.entity_manager.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -105,7 +105,7 @@
   Reference
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="gsf.control.html">
    Control
@@ -167,16 +167,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="gsf.core.html">
    Core
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2 has-children">
     <a class="reference internal" href="gsf.core.debug.html">
      gsf.core.debug package
@@ -233,26 +233,51 @@
      </li>
     </ul>
    </li>
-   <li class="toctree-l2 has-children">
+   <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="gsf.core.entity.html">
      gsf.core.entity package
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
     <label for="toctree-checkbox-8">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul>
-     <li class="toctree-l3 has-children">
+    <ul class="current">
+     <li class="toctree-l3 current active has-children">
       <a class="reference internal" href="gsf.core.entity.core.html">
        gsf.core.entity.core package
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+      <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
       <label for="toctree-checkbox-9">
        <i class="fas fa-chevron-down">
        </i>
       </label>
-      <ul class="simple">
+      <ul class="current">
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity.html">
+         Entity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity_emitter.html">
+         Entity Emitter
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity_manager.html">
+         Entity Manager
+        </a>
+       </li>
+       <li class="toctree-l4 current active">
+        <a class="current reference internal" href="#">
+         Entity Property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.property_type.html">
+         Property Type
+        </a>
+       </li>
       </ul>
      </li>
      <li class="toctree-l3 has-children">
@@ -705,14 +730,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -721,7 +738,19 @@
         
               <div>
                 
-  <span class="target" id="module-gsf.core.entity.core.entity_property"></span><dl class="py data">
+  <span class="target" id="module-gsf.core.entity.core.entity_property"></span><div class="section" id="entity-property">
+<h1>Entity Property<a class="headerlink" href="#entity-property" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the definition of the generic property.
+It has the definition of the EntityProperty that allows to define the properties of an entity with
+a value, type and category.</p>
+<p class="rubric">Example</p>
+<p>Creating properties:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">number_property</span> <span class="o">=</span> <span class="n">EntityProperty</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">PropertyType</span><span class="o">.</span><span class="n">NUMBER</span><span class="p">,</span> <span class="s2">&quot;Category 1&quot;</span><span class="p">)</span>
+<span class="n">string_property</span> <span class="o">=</span> <span class="n">EntityProperty</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">,</span> <span class="n">PropertyType</span><span class="o">.</span><span class="n">STRING</span><span class="p">,</span> <span class="s2">&quot;Category 1&quot;</span><span class="p">)</span>
+<span class="n">boolean_property</span> <span class="o">=</span> <span class="n">EntityProperty</span><span class="p">(</span><span class="kc">True</span><span class="p">,</span> <span class="n">PropertyType</span><span class="o">.</span><span class="n">BOOLEAN</span><span class="p">,</span> <span class="s2">&quot;Category 2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py data">
 <dt id="gsf.core.entity.core.entity_property.EntityProperties">
 <code class="sig-prename descclassname"><span class="pre">gsf.core.entity.core.entity_property.</span></code><code class="sig-name descname"><span class="pre">EntityProperties</span></code><a class="headerlink" href="#gsf.core.entity.core.entity_property.EntityProperties" title="Permalink to this definition">¶</a></dt>
 <dd><p>Group of properties of an entity</p>
@@ -733,6 +762,40 @@
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gsf.core.entity.core.entity_property.</span></code><code class="sig-name descname"><span class="pre">EntityProperty</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">Optional</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">property_type</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'STRING'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">str</span></span> <span class="o"><span class="pre">=</span></span> <span class="default_value"><span class="pre">'Generic'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.core.entity.core.entity_property.EntityProperty" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">gsf.core.entity.core.entity_property.T</span></code>]</p>
 <p>Property of an entity</p>
+<p>Contains a value, type and category to describe an entity,</p>
+<dl class="py attribute">
+<dt id="gsf.core.entity.core.entity_property.EntityProperty.__value">
+<code class="sig-name descname"><span class="pre">__value</span></code><a class="headerlink" href="#gsf.core.entity.core.entity_property.EntityProperty.__value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property value</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>T</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.core.entity.core.entity_property.EntityProperty.__type">
+<code class="sig-name descname"><span class="pre">__type</span></code><a class="headerlink" href="#gsf.core.entity.core.entity_property.EntityProperty.__type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property type</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="gsf.core.entity.core.entity_property.EntityProperty.__category">
+<code class="sig-name descname"><span class="pre">__category</span></code><a class="headerlink" href="#gsf.core.entity.core.entity_property.EntityProperty.__category" title="Permalink to this definition">¶</a></dt>
+<dd><p>Property category</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
 <dl class="py method">
 <dt id="gsf.core.entity.core.entity_property.EntityProperty.get_category">
 <code class="sig-name descname"><span class="pre">get_category</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">str</span><a class="headerlink" href="#gsf.core.entity.core.entity_property.EntityProperty.get_category" title="Permalink to this definition">¶</a></dt>
@@ -759,6 +822,7 @@
 
 </dd></dl>
 
+</div>
 
 
               </div>
@@ -766,8 +830,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="gsf.core.entity.core.entity_manager.html" title="previous page">&lt;no title&gt;</a>
-    <a class='right-next' id="next-link" href="gsf.core.entity.core.property_type.html" title="next page">&lt;no title&gt;</a>
+    <a class='left-prev' id="prev-link" href="gsf.core.entity.core.entity_manager.html" title="previous page">Entity Manager</a>
+    <a class='right-next' id="next-link" href="gsf.core.entity.core.property_type.html" title="next page">Property Type</a>
 
         </div>
         

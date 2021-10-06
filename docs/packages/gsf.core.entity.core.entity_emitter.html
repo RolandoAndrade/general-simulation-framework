@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; General Simulation Framework</title>
+    <title>Entity Emitter &#8212; General Simulation Framework</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -35,8 +35,8 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="gsf.core.entity.core.entity_manager.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="gsf.core.entity.core.entity.html" />
+    <link rel="next" title="Entity Manager" href="gsf.core.entity.core.entity_manager.html" />
+    <link rel="prev" title="Entity" href="gsf.core.entity.core.entity.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -105,7 +105,7 @@
   Reference
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="gsf.control.html">
    Control
@@ -167,16 +167,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="gsf.core.html">
    Core
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2 has-children">
     <a class="reference internal" href="gsf.core.debug.html">
      gsf.core.debug package
@@ -233,26 +233,51 @@
      </li>
     </ul>
    </li>
-   <li class="toctree-l2 has-children">
+   <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="gsf.core.entity.html">
      gsf.core.entity package
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
     <label for="toctree-checkbox-8">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul>
-     <li class="toctree-l3 has-children">
+    <ul class="current">
+     <li class="toctree-l3 current active has-children">
       <a class="reference internal" href="gsf.core.entity.core.html">
        gsf.core.entity.core package
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+      <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
       <label for="toctree-checkbox-9">
        <i class="fas fa-chevron-down">
        </i>
       </label>
-      <ul class="simple">
+      <ul class="current">
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity.html">
+         Entity
+        </a>
+       </li>
+       <li class="toctree-l4 current active">
+        <a class="current reference internal" href="#">
+         Entity Emitter
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity_manager.html">
+         Entity Manager
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity_property.html">
+         Entity Property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.property_type.html">
+         Property Type
+        </a>
+       </li>
       </ul>
      </li>
      <li class="toctree-l3 has-children">
@@ -705,14 +730,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -721,7 +738,22 @@
         
               <div>
                 
-  <span class="target" id="module-gsf.core.entity.core.entity_emitter"></span><dl class="py class">
+  <span class="target" id="module-gsf.core.entity.core.entity_emitter"></span><div class="section" id="entity-emitter">
+<h1>Entity Emitter<a class="headerlink" href="#entity-emitter" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the definition of entity emitters.
+It has the abstract definition of EntityEmitter that defines an abstract method to generate entities.</p>
+<p class="rubric">Example</p>
+<p>Creating an entity emitter:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">NewEntityEmitter</span><span class="p">(</span><span class="n">EntityEmitter</span><span class="p">):</span>
+
+    <span class="n">_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">generate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Entity</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">Model</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="py class">
 <dt id="gsf.core.entity.core.entity_emitter.EntityEmitter">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gsf.core.entity.core.entity_emitter.</span></code><code class="sig-name descname"><span class="pre">EntityEmitter</span></code><a class="headerlink" href="#gsf.core.entity.core.entity_emitter.EntityEmitter" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
@@ -734,6 +766,7 @@
 
 </dd></dl>
 
+</div>
 
 
               </div>
@@ -741,8 +774,8 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="gsf.core.entity.core.entity.html" title="previous page">&lt;no title&gt;</a>
-    <a class='right-next' id="next-link" href="gsf.core.entity.core.entity_manager.html" title="next page">&lt;no title&gt;</a>
+    <a class='left-prev' id="prev-link" href="gsf.core.entity.core.entity.html" title="previous page">Entity</a>
+    <a class='right-next' id="next-link" href="gsf.core.entity.core.entity_manager.html" title="next page">Entity Manager</a>
 
         </div>
         

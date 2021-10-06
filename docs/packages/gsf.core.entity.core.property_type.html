@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; General Simulation Framework</title>
+    <title>Property Type &#8212; General Simulation Framework</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="gsf.core.entity.properties package" href="gsf.core.entity.properties.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="gsf.core.entity.core.entity_property.html" />
+    <link rel="prev" title="Entity Property" href="gsf.core.entity.core.entity_property.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -105,7 +105,7 @@
   Reference
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="gsf.control.html">
    Control
@@ -167,16 +167,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="gsf.core.html">
    Core
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2 has-children">
     <a class="reference internal" href="gsf.core.debug.html">
      gsf.core.debug package
@@ -233,26 +233,51 @@
      </li>
     </ul>
    </li>
-   <li class="toctree-l2 has-children">
+   <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="gsf.core.entity.html">
      gsf.core.entity package
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
     <label for="toctree-checkbox-8">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul>
-     <li class="toctree-l3 has-children">
+    <ul class="current">
+     <li class="toctree-l3 current active has-children">
       <a class="reference internal" href="gsf.core.entity.core.html">
        gsf.core.entity.core package
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+      <input checked="" class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
       <label for="toctree-checkbox-9">
        <i class="fas fa-chevron-down">
        </i>
       </label>
-      <ul class="simple">
+      <ul class="current">
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity.html">
+         Entity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity_emitter.html">
+         Entity Emitter
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity_manager.html">
+         Entity Manager
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity_property.html">
+         Entity Property
+        </a>
+       </li>
+       <li class="toctree-l4 current active">
+        <a class="current reference internal" href="#">
+         Property Type
+        </a>
+       </li>
       </ul>
      </li>
      <li class="toctree-l3 has-children">
@@ -705,14 +730,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -721,11 +738,17 @@
         
               <div>
                 
-  <span class="target" id="module-gsf.core.entity.core.property_type"></span><dl class="py class">
+  <span class="target" id="module-gsf.core.entity.core.property_type"></span><div class="section" id="property-type">
+<h1>Property Type<a class="headerlink" href="#property-type" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the definition of the available types of properties.
+It has the definition of PropertyType that contains the static constants of the available types. It also
+contains a method to verify the type of the property.</p>
+<dl class="py class">
 <dt id="gsf.core.entity.core.property_type.PropertyType">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gsf.core.entity.core.property_type.</span></code><code class="sig-name descname"><span class="pre">PropertyType</span></code><a class="headerlink" href="#gsf.core.entity.core.property_type.PropertyType" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
 <p>Type of a property</p>
+<p>It contains the constants of the available types.</p>
 <dl class="py attribute">
 <dt id="gsf.core.entity.core.property_type.PropertyType.ANY">
 <code class="sig-name descname"><span class="pre">ANY</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'ANY'</span></em><a class="headerlink" href="#gsf.core.entity.core.property_type.PropertyType.ANY" title="Permalink to this definition">¶</a></dt>
@@ -764,6 +787,13 @@
 
 </dd></dl>
 
+<dl class="py data">
+<dt id="gsf.core.entity.core.property_type.expected_types">
+<code class="sig-prename descclassname"><span class="pre">gsf.core.entity.core.property_type.</span></code><code class="sig-name descname"><span class="pre">expected_types</span></code><em class="property"> <span class="pre">=</span> <span class="pre">{'ANY':</span> <span class="pre">typing.Any,</span> <span class="pre">'BOOLEAN':</span> <span class="pre">&lt;class</span> <span class="pre">'bool'&gt;,</span> <span class="pre">'EVENT':</span> <span class="pre">typing.Any,</span> <span class="pre">'EXPRESSION':</span> <span class="pre">&lt;class</span> <span class="pre">'gsf.core.expresions.expression.Expression'&gt;,</span> <span class="pre">'NUMBER':</span> <span class="pre">&lt;class</span> <span class="pre">'float'&gt;,</span> <span class="pre">'STRING':</span> <span class="pre">&lt;class</span> <span class="pre">'str'&gt;}</span></em><a class="headerlink" href="#gsf.core.entity.core.property_type.expected_types" title="Permalink to this definition">¶</a></dt>
+<dd><p>Dict with names of the types and their corresponding type</p>
+</dd></dl>
+
+</div>
 
 
               </div>
@@ -771,7 +801,7 @@
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="gsf.core.entity.core.entity_property.html" title="previous page">&lt;no title&gt;</a>
+    <a class='left-prev' id="prev-link" href="gsf.core.entity.core.entity_property.html" title="previous page">Entity Property</a>
     <a class='right-next' id="next-link" href="gsf.core.entity.properties.html" title="next page">gsf.core.entity.properties package</a>
 
         </div>
