@@ -1,3 +1,13 @@
+"""Property
+=============================
+Concrete property with Any type.
+
+Example:
+    Creating the property::
+
+        property: Property[int] = Property(1)
+"""
+
 from __future__ import annotations
 
 from typing import Any, Generic, TypeVar
@@ -9,5 +19,10 @@ T = TypeVar("T")
 
 
 class Property(EntityProperty, Generic[T]):
+    """Any Property
+
+    Defines a property with type Any
+    """
+    
     def __init__(self, value: Any):
         super().__init__(value, PropertyType.ANY)

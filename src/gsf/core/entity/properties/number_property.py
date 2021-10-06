@@ -1,3 +1,13 @@
+"""Number Property
+=============================
+Concrete property with number type.
+
+Example:
+    Creating the property::
+
+        property = NumberProperty(1)
+"""
+
 from decimal import Decimal
 from typing import Union
 
@@ -6,6 +16,11 @@ from gsf.core.entity.core.property_type import PropertyType
 
 
 class NumberProperty(EntityProperty):
+    """Number property
+
+    Defines a property with an integer or decimal type.
+    """
+
     def __init__(self, value: Union[Decimal, int]):
         super().__init__(value, PropertyType.NUMBER)
 
