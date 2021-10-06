@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; General Simulation Framework</title>
+    <title>Domain Events &#8212; General Simulation Framework</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -35,7 +35,7 @@
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="&lt;no title&gt;" href="gsf.core.events.event_bus.html" />
+    <link rel="next" title="Event Bus" href="gsf.core.events.event_bus.html" />
     <link rel="prev" title="gsf.core.events package" href="gsf.core.events.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -105,7 +105,7 @@
   Reference
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="gsf.control.html">
    Control
@@ -167,16 +167,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="gsf.core.html">
    Core
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2 has-children">
     <a class="reference internal" href="gsf.core.debug.html">
      gsf.core.debug package
@@ -252,7 +252,32 @@
        <i class="fas fa-chevron-down">
        </i>
       </label>
-      <ul class="simple">
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity.html">
+         Entity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity_emitter.html">
+         Entity Emitter
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity_manager.html">
+         Entity Manager
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity_property.html">
+         Entity Property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.property_type.html">
+         Property Type
+        </a>
+       </li>
       </ul>
      </li>
      <li class="toctree-l3 has-children">
@@ -264,21 +289,56 @@
        <i class="fas fa-chevron-down">
        </i>
       </label>
-      <ul class="simple">
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.properties.boolean_property.html">
+         Boolean Property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.properties.expression_property.html">
+         Expression Property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.properties.number_property.html">
+         Number Property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.properties.property.html">
+         Property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.properties.string_property.html">
+         String Property
+        </a>
+       </li>
       </ul>
      </li>
     </ul>
    </li>
-   <li class="toctree-l2 has-children">
+   <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="gsf.core.events.html">
      gsf.core.events package
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
     <label for="toctree-checkbox-11">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul class="current">
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Domain Events
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.core.events.event_bus.html">
+       Event Bus
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -705,14 +765,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -721,35 +773,44 @@
         
               <div>
                 
-  <span class="target" id="module-gsf.core.events.domain_events"></span><dl class="py class">
+  <span class="target" id="module-gsf.core.events.domain_events"></span><div class="section" id="domain-events">
+<h1>Domain Events<a class="headerlink" href="#domain-events" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the definition of the available domain events that are emitted by the simulation
+framework.</p>
+<dl class="py class">
 <dt id="gsf.core.events.domain_events.DomainEvents">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gsf.core.events.domain_events.</span></code><code class="sig-name descname"><span class="pre">DomainEvents</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.core.events.domain_events.DomainEvents" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code>, <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
-<p>An enumeration.</p>
+<p>Contains the constants of the emitted events.</p>
 <dl class="py attribute">
 <dt id="gsf.core.events.domain_events.DomainEvents.OUTPUT_SAVED">
 <code class="sig-name descname"><span class="pre">OUTPUT_SAVED</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'OUTPUT_SAVED'</span></em><a class="headerlink" href="#gsf.core.events.domain_events.DomainEvents.OUTPUT_SAVED" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Emitted when an output is saved in the reports module.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="gsf.core.events.domain_events.DomainEvents.SIMULATION_FINISHED">
 <code class="sig-name descname"><span class="pre">SIMULATION_FINISHED</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'SIMULATION_FINISHED'</span></em><a class="headerlink" href="#gsf.core.events.domain_events.DomainEvents.SIMULATION_FINISHED" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Emitted when simulation is finished.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="gsf.core.events.domain_events.DomainEvents.SIMULATION_PAUSED">
 <code class="sig-name descname"><span class="pre">SIMULATION_PAUSED</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'SIMULATION_PAUSED'</span></em><a class="headerlink" href="#gsf.core.events.domain_events.DomainEvents.SIMULATION_PAUSED" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Emitted when simulation was paused.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="gsf.core.events.domain_events.DomainEvents.SIMULATION_STATUS">
 <code class="sig-name descname"><span class="pre">SIMULATION_STATUS</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'SIMULATION_STATUS'</span></em><a class="headerlink" href="#gsf.core.events.domain_events.DomainEvents.SIMULATION_STATUS" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Emitted when the status of the simulation change after every iteration.</p>
+</dd></dl>
 
 <dl class="py attribute">
 <dt id="gsf.core.events.domain_events.DomainEvents.SIMULATION_STOPPED">
 <code class="sig-name descname"><span class="pre">SIMULATION_STOPPED</span></code><em class="property"> <span class="pre">=</span> <span class="pre">'SIMULATION_STOPPED'</span></em><a class="headerlink" href="#gsf.core.events.domain_events.DomainEvents.SIMULATION_STOPPED" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Emitted when simulation was stopped.</p>
+</dd></dl>
 
 <dl class="py method">
 <dt id="gsf.core.events.domain_events.DomainEvents._generate_next_value_">
@@ -763,6 +824,7 @@ last_value: the last value assigned or None</p>
 
 </dd></dl>
 
+</div>
 
 
               </div>
@@ -771,7 +833,7 @@ last_value: the last value assigned or None</p>
         <div class='prev-next-bottom'>
             
     <a class='left-prev' id="prev-link" href="gsf.core.events.html" title="previous page">gsf.core.events package</a>
-    <a class='right-next' id="next-link" href="gsf.core.events.event_bus.html" title="next page">&lt;no title&gt;</a>
+    <a class='right-next' id="next-link" href="gsf.core.events.event_bus.html" title="next page">Event Bus</a>
 
         </div>
         

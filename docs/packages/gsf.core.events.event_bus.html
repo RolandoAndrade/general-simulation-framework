@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; General Simulation Framework</title>
+    <title>Event Bus &#8212; General Simulation Framework</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="gsf.core.expresions package" href="gsf.core.expresions.html" />
-    <link rel="prev" title="&lt;no title&gt;" href="gsf.core.events.domain_events.html" />
+    <link rel="prev" title="Domain Events" href="gsf.core.events.domain_events.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -105,7 +105,7 @@
   Reference
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="gsf.control.html">
    Control
@@ -167,16 +167,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="gsf.core.html">
    Core
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2 has-children">
     <a class="reference internal" href="gsf.core.debug.html">
      gsf.core.debug package
@@ -252,7 +252,32 @@
        <i class="fas fa-chevron-down">
        </i>
       </label>
-      <ul class="simple">
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity.html">
+         Entity
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity_emitter.html">
+         Entity Emitter
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity_manager.html">
+         Entity Manager
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.entity_property.html">
+         Entity Property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.core.property_type.html">
+         Property Type
+        </a>
+       </li>
       </ul>
      </li>
      <li class="toctree-l3 has-children">
@@ -264,21 +289,56 @@
        <i class="fas fa-chevron-down">
        </i>
       </label>
-      <ul class="simple">
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.properties.boolean_property.html">
+         Boolean Property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.properties.expression_property.html">
+         Expression Property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.properties.number_property.html">
+         Number Property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.properties.property.html">
+         Property
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.entity.properties.string_property.html">
+         String Property
+        </a>
+       </li>
       </ul>
      </li>
     </ul>
    </li>
-   <li class="toctree-l2 has-children">
+   <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="gsf.core.events.html">
      gsf.core.events package
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
     <label for="toctree-checkbox-11">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul class="simple">
+    <ul class="current">
+     <li class="toctree-l3">
+      <a class="reference internal" href="gsf.core.events.domain_events.html">
+       Domain Events
+      </a>
+     </li>
+     <li class="toctree-l3 current active">
+      <a class="current reference internal" href="#">
+       Event Bus
+      </a>
+     </li>
     </ul>
    </li>
    <li class="toctree-l2 has-children">
@@ -705,14 +765,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -721,14 +773,51 @@
         
               <div>
                 
-  <span class="target" id="module-gsf.core.events.event_bus"></span>
+  <span class="target" id="module-gsf.core.events.event_bus"></span><div class="section" id="event-bus">
+<h1>Event Bus<a class="headerlink" href="#event-bus" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the definition of the event bus and creates an static instance for event bus.</p>
+<p class="rubric">Example</p>
+<p>Creating an event bus:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">event_bus</span> <span class="o">=</span> <span class="n">EventBus</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Listening an event with decorator:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">event_bus</span> <span class="o">=</span> <span class="n">EventBus</span><span class="p">()</span>
+
+<span class="nd">@event_bus</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">subscribed_event</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;World&quot;</span><span class="p">)</span>
+
+<span class="n">event_bus</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Listening an event:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">event_bus</span> <span class="o">=</span> <span class="n">EventBus</span><span class="p">()</span>
+
+<span class="k">def</span> <span class="nf">subscribed_event</span><span class="p">(</span><span class="n">number</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;World&#39;</span><span class="p">)</span>
+
+<span class="n">event_bus</span><span class="o">.</span><span class="n">on</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="n">subscribed_event</span><span class="p">)</span>
+
+<span class="n">event_bus</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="py data">
+<dt id="gsf.core.events.event_bus.static_event_bus">
+<code class="sig-prename descclassname"><span class="pre">gsf.core.events.event_bus.</span></code><code class="sig-name descname"><span class="pre">static_event_bus</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;EventBus:</span> <span class="pre">0</span> <span class="pre">subscribed</span> <span class="pre">events&gt;</span></em><a class="headerlink" href="#gsf.core.events.event_bus.static_event_bus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Static instance of event bus.</p>
+</dd></dl>
+
+</div>
+
 
               </div>
               
         
         <div class='prev-next-bottom'>
             
-    <a class='left-prev' id="prev-link" href="gsf.core.events.domain_events.html" title="previous page">&lt;no title&gt;</a>
+    <a class='left-prev' id="prev-link" href="gsf.core.events.domain_events.html" title="previous page">Domain Events</a>
     <a class='right-next' id="next-link" href="gsf.core.expresions.html" title="next page">gsf.core.expresions package</a>
 
         </div>
