@@ -19,7 +19,6 @@ class BooleanProperty(EntityProperty):
     Defines a property with the boolean type.
     """
 
-
     def __init__(self, value: bool):
         super().__init__(value, PropertyType.BOOLEAN)
 

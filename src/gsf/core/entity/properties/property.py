@@ -23,6 +23,6 @@ class Property(EntityProperty, Generic[T]):
 
     Defines a property with type Any
     """
-    
+
     def __init__(self, value: Any):
         super().__init__(value, PropertyType.ANY)
