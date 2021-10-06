@@ -15,7 +15,7 @@ Subpackages
    gsf.core.debug
    gsf.core.entity
    gsf.core.events
-   gsf.core.expresions
+   gsf.core.expressions
    gsf.core.mathematics
    gsf.core.time
    gsf.core.types

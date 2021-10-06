@@ -74,7 +74,7 @@
     "\n",
     "from typing import Dict\n",
     "\n",
-    "from gsf.core.expresions import Expression\n",
+    "from gsf.core.expressions import Expression\n",
     "from gsf.core.types import Time\n",
     "from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem\n",
     "from gsf.models.models import DiscreteEventModel\n",
@@ -188,7 +188,7 @@
    "source": [
     "from typing import List, Union\n",
     "\n",
-    "from gsf.core.expresions import Expression\n",
+    "from gsf.core.expressions import Expression\n",
     "from gsf.core.types import Time\n",
     "from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem\n",
     "from gsf.models.core.base_model import ModelState\n",
@@ -337,7 +337,7 @@
    "execution_count": null,
    "outputs": [],
    "source": [
-    "from gsf.core.expresions import Expression\n",
+    "from gsf.core.expressions import Expression\n",
     "from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem\n",
     "\n",
     "\n",
