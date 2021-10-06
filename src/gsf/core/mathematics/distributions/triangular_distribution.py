@@ -1,3 +1,15 @@
+"""Triangular Distribution
+=============================
+Contains the concrete definition of TriangularDistribution.
+
+
+Example:
+    Creating the distribution::
+
+        dist = TriangularDistribution(1, 5, 10)
+
+"""
+
 from __future__ import annotations
 
 from decimal import Decimal
@@ -8,7 +20,9 @@ import numpy as np
 
 
 class TriangularDistribution(RandomDistribution):
-    """Draw samples from a Triangular distribution."""
+    """Triangular Distribution
+
+    Draw samples from a Triangular distribution."""
 
     __minimum: float
     """Mean of the distribution."""

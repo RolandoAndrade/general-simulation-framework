@@ -1,3 +1,15 @@
+"""Poisson Distribution
+=============================
+Contains the concrete definition of PoissonDistribution.
+
+
+Example:
+    Creating the distribution::
+
+        dist = PoissonDistribution(5)
+
+"""
+
 from __future__ import annotations
 
 from gsf.core.mathematics.distributions.random_distribution import RandomDistribution
@@ -5,7 +17,9 @@ import numpy as np
 
 
 class PoissonDistribution(RandomDistribution):
-    """Draw samples from a Poisson distribution."""
+    """Poisson Distribution
+
+    Draw samples from a Poisson distribution."""
 
     __mean: float
     """Mean of the distribution."""

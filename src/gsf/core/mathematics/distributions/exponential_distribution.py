@@ -1,3 +1,15 @@
+"""Exponential Distribution
+=============================
+Contains the concrete definition of ExponentialDistribution.
+
+
+Example:
+    Creating the distribution::
+
+        dist = ExponentialDistribution(4.2)
+
+"""
+
 from __future__ import annotations
 
 from decimal import Decimal
@@ -8,7 +20,9 @@ import numpy as np
 
 
 class ExponentialDistribution(RandomDistribution):
-    """Draw samples from a Exponential distribution."""
+    """Exponential Distribution
+
+    Draw samples from a Exponential distribution."""
 
     __mean: float
     """Mean of the distribution."""

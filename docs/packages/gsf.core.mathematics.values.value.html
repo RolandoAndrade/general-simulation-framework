@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>&lt;no title&gt; &#8212; General Simulation Framework</title>
+    <title>Value &#8212; General Simulation Framework</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -105,7 +105,7 @@
   Reference
  </span>
 </p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="gsf.control.html">
    Control
@@ -167,16 +167,16 @@
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="gsf.core.html">
    Core
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
   <label for="toctree-checkbox-4">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2 has-children">
     <a class="reference internal" href="gsf.core.debug.html">
      gsf.core.debug package
@@ -358,21 +358,21 @@
      </li>
      <li class="toctree-l3">
       <a class="reference internal" href="gsf.core.expresions.user_expression.html">
-       Expressions module
+       User Expression module
       </a>
      </li>
     </ul>
    </li>
-   <li class="toctree-l2 has-children">
+   <li class="toctree-l2 current active has-children">
     <a class="reference internal" href="gsf.core.mathematics.html">
      gsf.core.mathematics package
     </a>
-    <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+    <input checked="" class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
     <label for="toctree-checkbox-13">
      <i class="fas fa-chevron-down">
      </i>
     </label>
-    <ul>
+    <ul class="current">
      <li class="toctree-l3 has-children">
       <a class="reference internal" href="gsf.core.mathematics.distributions.html">
        gsf.core.mathematics.distributions package
@@ -382,19 +382,44 @@
        <i class="fas fa-chevron-down">
        </i>
       </label>
-      <ul class="simple">
+      <ul>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.mathematics.distributions.exponential_distribution.html">
+         Exponential Distribution
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.mathematics.distributions.poisson_distribution.html">
+         Poisson Distribution
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.mathematics.distributions.random_distribution.html">
+         Random Distribution
+        </a>
+       </li>
+       <li class="toctree-l4">
+        <a class="reference internal" href="gsf.core.mathematics.distributions.triangular_distribution.html">
+         Triangular Distribution
+        </a>
+       </li>
       </ul>
      </li>
-     <li class="toctree-l3 has-children">
+     <li class="toctree-l3 current active has-children">
       <a class="reference internal" href="gsf.core.mathematics.values.html">
        gsf.core.mathematics.values package
       </a>
-      <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+      <input checked="" class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
       <label for="toctree-checkbox-15">
        <i class="fas fa-chevron-down">
        </i>
       </label>
-      <ul class="simple">
+      <ul class="current">
+       <li class="toctree-l4 current active">
+        <a class="current reference internal" href="#">
+         Value
+        </a>
+       </li>
       </ul>
      </li>
     </ul>
@@ -775,14 +800,6 @@
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> Contents
-            </div>
-            <nav id="bd-toc-nav">
-                <ul class="simple visible nav section-nav flex-column">
-</ul>
-
-            </nav>
         </div>
     </div>
 </div>
@@ -791,18 +808,32 @@
         
               <div>
                 
-  <span class="target" id="module-gsf.core.mathematics.values.value"></span><dl class="py class">
+  <span class="target" id="module-gsf.core.mathematics.values.value"></span><div class="section" id="value">
+<h1>Value<a class="headerlink" href="#value" title="Permalink to this headline">¶</a></h1>
+<p>Is an generic expression that can be evaluated.</p>
+<p class="rubric">Example</p>
+<p>Creating a value:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">my_numeric_value</span><span class="p">:</span> <span class="n">Value</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Value</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Evaluating:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">two</span> <span class="o">=</span> <span class="n">my_numeric_value</span><span class="o">.</span><span class="n">evaluate</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<dl class="py class">
 <dt id="gsf.core.mathematics.values.value.Value">
 <em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">gsf.core.mathematics.values.value.</span></code><code class="sig-name descname"><span class="pre">Value</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span> <span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#gsf.core.mathematics.values.value.Value" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="gsf.core.expresions.expression.html#gsf.core.expresions.expression.Expression" title="gsf.core.expresions.expression.Expression"><code class="xref py py-class docutils literal notranslate"><span class="pre">gsf.core.expresions.expression.Expression</span></code></a>, <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">gsf.core.mathematics.values.value.T</span></code>]</p>
+<p>Contains a generic constant value.</p>
 <dl class="py method">
 <dt id="gsf.core.mathematics.values.value.Value.evaluate">
 <code class="sig-name descname"><span class="pre">evaluate</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; <span class="pre">T</span><a class="headerlink" href="#gsf.core.mathematics.values.value.Value.evaluate" title="Permalink to this definition">¶</a></dt>
-<dd><p>Evaluates the expression</p>
+<dd><p>Returns the value</p>
 </dd></dl>
 
 </dd></dl>
 
+</div>
 
 
               </div>
