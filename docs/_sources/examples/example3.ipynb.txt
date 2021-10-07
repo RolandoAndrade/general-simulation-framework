@@ -22,7 +22,7 @@
    "source": [
     "# Creating a discrete-event simulator\n",
     "\n",
-    "Let's imagine a factory to which a certain resource arrives, a certain server processes it and sends it to another station and leaves the factory.\n",
+    "Let's imagine a factory where a certain resource arrives, a certain server processes it and sends it to another station and leaves the factory.\n",
     "\n",
     "![discrete-event-model.png](data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAboAAAAqCAYAAADF5p5yAAAAAXNSR0IArs4c6QAABEF0RVh0bXhmaWxlACUzQ214ZmlsZSUyMGhvc3QlM0QlMjJhcHAuZGlhZ3JhbXMubmV0JTIyJTIwbW9kaWZpZWQlM0QlMjIyMDIxLTA5LTI0VDE0JTNBNTElM0EzOC40MzVaJTIyJTIwYWdlbnQlM0QlMjI1LjAlMjAoWDExJTNCJTIwTGludXglMjB4ODZfNjQpJTIwQXBwbGVXZWJLaXQlMkY1MzcuMzYlMjAoS0hUTUwlMkMlMjBsaWtlJTIwR2Vja28pJTIwQ2hyb21lJTJGOTQuMC40NjA2LjU0JTIwU2FmYXJpJTJGNTM3LjM2JTIyJTIwdmVyc2lvbiUzRCUyMjE1LjMuMCUyMiUyMGV0YWclM0QlMjJmN2pkSlA1S2M4WUo0Yk1aekNyRCUyMiUyMHR5cGUlM0QlMjJnb29nbGUlMjIlM0UlM0NkaWFncmFtJTIwaWQlM0QlMjJxdGRSTnJEbnl1TVBJNGh1eU1nVSUyMiUzRTFWYkxqcHRBRVB3YVh5T2VhJTJCZVllTDNKSWNraGpwVE5jV1I2WWFLQlJ1UEdRTDQlMkJqV2tNYU5iUktpJTJGYkZ6UlYwejJQNm1wZ0VhN3o1cDFWWmZZUkV6Q0x3RXVhUlhpJTJGQ0lJNGZzM1BqbWg3SXZTRG5raXRUbnJLSDRtdCUyRmdGQ2VzSldPb0g5TEpBUURlbHlUdTZ3S0dCSE0wNVppJTJGVTg3QW5OZk5kU3BlQVEyNTB5THZ0Vko1VDE3Q3BZanZ4NzBHazI3T3pmeVlWek5RVExUZmFaU3JDZVVPRm1FYTR0SXZXanZGbUQ2YlFiZE9uekhzN01uZzVtb2FDWEpJanVlMnFIdTBIQ1Z4V0lsakpNc1ZCbU03SnZMVlpGQXQwQ0hxTXg1Z05peWFUUDVIY2dhcVZ1cWlKa0txUGN5Q3cwbWg0bjQyJTJGZFVxOWlRZmVOckh3RTdRQUtzdTNqRkV5eU9qaW1IZEdROTRRRlBhaGNtNDc0b25PMlRlQjlncHFmbnpGWGhZVElXZjJJY1M5SnA4Tk0xRDFXZGlkVUtLWlROZ1hST1hhbDkwOEY1VVlBeklFUHhpRVdqQ0o5bUslMkJ1eEpMcEtXNnNHZyUy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)\n",
     "\n"
@@ -41,7 +41,7 @@
     "- Stations process the components, one at time.\n",
     "\n",
     "  - When an input enters to the station, updates the processing time, and adds the element to process.\n",
-    "  \n",
+    "\n",
     "  - When processing time is completed, extracts the part from the elements to process and start to process another if it is possible.\n",
     "\n",
     "- Exit counts the procesed entities."
@@ -159,9 +159,9 @@
   {
    "cell_type": "markdown",
    "source": [
-    "Stations process the parts for a `_processing_time`. \n",
+    "Stations process the parts for a `_processing_time`.\n",
     "\n",
-    "When time ends, an autonomous event is emitted, so the framework runs the `_internal_state_transition_function`, where the station removes one part from processing, and schedules and event to process a new one. When a part comes from another station, the framework runs the `_external_state_transition_function` where the station adds new parts to process.\n",
+    "When time ends, an autonomous event is emitted, so the framework runs the `_internal_state_transition_function`, where the station removes one part from processing, and schedules an event to process a new one. When a part comes from another station, the framework runs the `_external_state_transition_function` where the station adds new parts to process.\n",
     "\n",
     "The time is `Time(-1)` if there is no parts to process, and evaluates an expression if there are parts. An expression is a datatype of the framework that allows include almost any value.\n",
     "\n"
@@ -404,14 +404,15 @@
     "from gsf.experiments.experiment_builders import DiscreteEventExperiment\n",
     "from gsf.core.mathematics.values import Value\n",
     "\n",
+    "\n",
     "factory = FactorySystem([1, 2], Value(1)) # 1 and 2 parts every second\n",
     "station_1 = Station(factory, Value(1)) # 1 second processing time\n",
     "station_2 = Station(factory, Value(2)) # 2 seconds processing time\n",
     "\n",
     "# build the network\n",
-    "factory.generator.add(station_1)\n",
-    "station_1.add(station_2)\n",
-    "station_2.add(factory.exit)\n",
+    "factory.generator.add(station_1) # from generator to station_1\n",
+    "station_1.add(station_2) # from station_1 to station_2\n",
+    "station_2.add(factory.exit) # from station_2 to exit\n",
     "\n",
     "experiment = DiscreteEventExperiment(factory)\n",
     "experiment.simulation_control.start(stop_time=10)\n",
@@ -430,9 +431,32 @@
   {
    "cell_type": "markdown",
    "source": [
+    "You can see the network usign `factory.show()`"
+   ],
+   "metadata": {
+    "collapsed": false
+   }
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "outputs": [],
+   "source": [
+    "factory.show()"
+   ],
+   "metadata": {
+    "collapsed": false,
+    "pycharm": {
+     "name": "#%%\n"
+    }
+   }
+  },
+  {
+   "cell_type": "markdown",
+   "source": [
     "### Add expressions\n",
     "\n",
-    "You can use framework's predefined expressions "
+    "You can use framework's predefined expressions"
    ],
    "metadata": {
     "collapsed": false
@@ -444,6 +468,7 @@
    "outputs": [],
    "source": [
     "from gsf.core.mathematics.distributions import PoissonDistribution, ExponentialDistribution, TriangularDistribution\n",
+    "from gsf.experiments.experiment_builders import DiscreteEventExperiment\n",
     "\n",
     "factory = FactorySystem(PoissonDistribution(5), ExponentialDistribution(0.5))\n",
     "station_1 = Station(factory, TriangularDistribution(1, 2, 5))\n",

@@ -1106,7 +1106,7 @@ div.rendered_html tbody tr:hover {
 </style>
 <div class="section" id="Creating-a-discrete-event-simulator">
 <h1>Creating a discrete-event simulator<a class="headerlink" href="#Creating-a-discrete-event-simulator" title="Permalink to this headline">¶</a></h1>
-<p>Let’s imagine a factory to which a certain resource arrives, a certain server processes it and sends it to another station and leaves the factory.</p>
+<p>Let’s imagine a factory where a certain resource arrives, a certain server processes it and sends it to another station and leaves the factory.</p>
 <p><img alt="discrete-event-model.png" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAboAAAAqCAYAAADF5p5yAAAAAXNSR0IArs4c6QAABEF0RVh0bXhmaWxlACUzQ214ZmlsZSUyMGhvc3QlM0QlMjJhcHAuZGlhZ3JhbXMubmV0JTIyJTIwbW9kaWZpZWQlM0QlMjIyMDIxLTA5LTI0VDE0JTNBNTElM0EzOC40MzVaJTIyJTIwYWdlbnQlM0QlMjI1LjAlMjAoWDExJTNCJTIwTGludXglMjB4ODZfNjQpJTIwQXBwbGVXZWJLaXQlMkY1MzcuMzYlMjAoS0hUTUwlMkMlMjBsaWtlJTIwR2Vja28pJTIwQ2hyb21lJTJGOTQuMC40NjA2LjU0JTIwU2FmYXJpJTJGNTM3LjM2JTIyJTIwdmVyc2lvbiUzRCUyMjE1LjMuMCUyMiUyMGV0YWclM0QlMjJmN2pkSlA1S2M4WUo0Yk1aekNyRCUyMiUyMHR5cGUlM0QlMjJnb29nbGUlMjIlM0UlM0NkaWFncmFtJTIwaWQlM0QlMjJxdGRSTnJEbnl1TVBJNGh1eU1nVSUyMiUzRTFWYkxqcHRBRVB3YVh5T2VhJTJCZVllTDNKSWNraGpwVE5jV1I2WWFLQlJ1UEdRTDQlMkJqV2tNYU5iUktpJTJGYkZ6UlYwejJQNm1wZ0VhN3o1cDFWWmZZUkV6Q0x3RXVhUlhpJTJGQ0lJNGZzM1BqbWg3SXZTRG5raXRUbnJLSDRtdCUyRmdGQ2VzSldPb0g5TEpBUURlbHlUdTZ3S0dCSE0wNVppJTJGVTg3QW5OZk5kU3BlQVEyNTB5THZ0Vko1VDE3Q3BZanZ4NzBHazI3T3pmeVlWek5RVExUZmFaU3JDZVVPRm1FYTR0SXZXanZGbUQ2YlFiZE9uekhzN01uZzVtb2FDWEpJanVlMnFIdTBIQ1Z4V0lsakpNc1ZCbU03SnZMVlpGQXQwQ0hxTXg1Z05peWFUUDVIY2dhcVZ1cWlKa0txUGN5Q3cwbWg0bjQyJTJGZFVxOWlRZmVOckh3RTdRQUtzdTNqRkV5eU9qaW1IZEdROTRRRlBhaGNtNDc0b25PMlRlQjlncHFmbnpGWGhZVElXZjJJY1M5SnA4Tk0xRDFXZGlkVUtLWlROZ1hST1hhbDkwOEY1VVlBeklFUHhpRVdqQ0o5bUslMkJ1eEpMcEtXNnNHZyUy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" /></p>
 <div class="section" id="Rules">
 <h2>Rules<a class="headerlink" href="#Rules" title="Permalink to this headline">¶</a></h2>
@@ -1215,7 +1215,7 @@ div.rendered_html tbody tr:hover {
 </div>
 </div>
 <p>Stations process the parts for a <code class="docutils literal notranslate"><span class="pre">_processing_time</span></code>.</p>
-<p>When time ends, an autonomous event is emitted, so the framework runs the <code class="docutils literal notranslate"><span class="pre">_internal_state_transition_function</span></code>, where the station removes one part from processing, and schedules and event to process a new one. When a part comes from another station, the framework runs the <code class="docutils literal notranslate"><span class="pre">_external_state_transition_function</span></code> where the station adds new parts to process.</p>
+<p>When time ends, an autonomous event is emitted, so the framework runs the <code class="docutils literal notranslate"><span class="pre">_internal_state_transition_function</span></code>, where the station removes one part from processing, and schedules an event to process a new one. When a part comes from another station, the framework runs the <code class="docutils literal notranslate"><span class="pre">_external_state_transition_function</span></code> where the station adds new parts to process.</p>
 <p>The time is <code class="docutils literal notranslate"><span class="pre">Time(-1)</span></code> if there is no parts to process, and evaluates an expression if there are parts. An expression is a datatype of the framework that allows include almost any value.</p>
 </div>
 <div class="section" id="Creating-the-generator">
@@ -1384,14 +1384,15 @@ div.rendered_html tbody tr:hover {
 <span></span><span class="kn">from</span> <span class="nn">gsf.experiments.experiment_builders</span> <span class="kn">import</span> <span class="n">DiscreteEventExperiment</span>
 <span class="kn">from</span> <span class="nn">gsf.core.mathematics.values</span> <span class="kn">import</span> <span class="n">Value</span>
 
+
 <span class="n">factory</span> <span class="o">=</span> <span class="n">FactorySystem</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">Value</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># 1 and 2 parts every second</span>
 <span class="n">station_1</span> <span class="o">=</span> <span class="n">Station</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="n">Value</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span> <span class="c1"># 1 second processing time</span>
 <span class="n">station_2</span> <span class="o">=</span> <span class="n">Station</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="n">Value</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># 2 seconds processing time</span>
 
 <span class="c1"># build the network</span>
-<span class="n">factory</span><span class="o">.</span><span class="n">generator</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">station_1</span><span class="p">)</span>
-<span class="n">station_1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">station_2</span><span class="p">)</span>
-<span class="n">station_2</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">factory</span><span class="o">.</span><span class="n">exit</span><span class="p">)</span>
+<span class="n">factory</span><span class="o">.</span><span class="n">generator</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">station_1</span><span class="p">)</span> <span class="c1"># from generator to station_1</span>
+<span class="n">station_1</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">station_2</span><span class="p">)</span> <span class="c1"># from station_1 to station_2</span>
+<span class="n">station_2</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">factory</span><span class="o">.</span><span class="n">exit</span><span class="p">)</span> <span class="c1"># from station_2 to exit</span>
 
 <span class="n">experiment</span> <span class="o">=</span> <span class="n">DiscreteEventExperiment</span><span class="p">(</span><span class="n">factory</span><span class="p">)</span>
 <span class="n">experiment</span><span class="o">.</span><span class="n">simulation_control</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">stop_time</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
@@ -1422,15 +1423,33 @@ div.rendered_html tbody tr:hover {
 +------+--------+-----------+--------+
 </pre></div></div>
 </div>
-<div class="section" id="Add-expressions">
-<h3>Add expressions<a class="headerlink" href="#Add-expressions" title="Permalink to this headline">¶</a></h3>
-<p>You can use framework’s predefined expressions</p>
+<p>You can see the network usign <code class="docutils literal notranslate"><span class="pre">factory.show()</span></code></p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
+<span></span><span class="n">factory</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/examples_example3_17_0.svg" src="../_images/examples_example3_17_0.svg" /></div>
+</div>
+<div class="section" id="Add-expressions">
+<h3>Add expressions<a class="headerlink" href="#Add-expressions" title="Permalink to this headline">¶</a></h3>
+<p>You can use framework’s predefined expressions</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">gsf.core.mathematics.distributions</span> <span class="kn">import</span> <span class="n">PoissonDistribution</span><span class="p">,</span> <span class="n">ExponentialDistribution</span><span class="p">,</span> <span class="n">TriangularDistribution</span>
+<span class="kn">from</span> <span class="nn">gsf.experiments.experiment_builders</span> <span class="kn">import</span> <span class="n">DiscreteEventExperiment</span>
 
 <span class="n">factory</span> <span class="o">=</span> <span class="n">FactorySystem</span><span class="p">(</span><span class="n">PoissonDistribution</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">ExponentialDistribution</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
 <span class="n">station_1</span> <span class="o">=</span> <span class="n">Station</span><span class="p">(</span><span class="n">factory</span><span class="p">,</span> <span class="n">TriangularDistribution</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
@@ -1448,52 +1467,69 @@ div.rendered_html tbody tr:hover {
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
+<div class="nboutput docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-4
+3
 +-------------------------------------------+
 |             Simulation report             |
-+-------------+--------+-----------+--------+
-|     time    | model6 | Generator | model7 |
-+-------------+--------+-----------+--------+
-|      0      |   -    |     2     |   -    |
-|  0.70650766 |   -    |     3     |   -    |
-|  1.94849291 |   1    |     -     |   -    |
-|  2.31811112 |   -    |     3     |   -    |
-|  2.86414656 |   -    |     4     |   -    |
-|  3.41491569 |   -    |     3     |   -    |
-|  3.47479968 |   -    |     5     |   -    |
-|  3.77715602 |   -    |     3     |   -    |
-|  3.81117346 |   -    |     -     |   1    |
-|  3.99111494 |   1    |     -     |   -    |
-|  4.52721768 |   -    |     10    |   -    |
-|  4.81710258 |   -    |     3     |   -    |
-|  4.83112143 |   -    |     4     |   -    |
-|  5.26941134 |   -    |     4     |   -    |
-|  5.72869518 |   -    |     7     |   -    |
-|  5.95854536 |   -    |     2     |   -    |
-|  6.60581077 |   -    |     -     |   1    |
-|  7.73043955 |   -    |     3     |   -    |
-|  8.03307911 |   1    |     -     |   -    |
-|  8.12411587 |   -    |     7     |   -    |
-|  8.47681037 |   -    |     9     |   -    |
-|  8.48890702 |   -    |     1     |   -    |
-|  9.89991074 |   -    |     -     |   1    |
-| 10.18430299 |   1    |     -     |   -    |
-| 10.21484419 |   -    |     4     |   -    |
-| 10.60897562 |   -    |     7     |   -    |
-| 12.25787304 |   1    |     -     |   -    |
-| 12.50391059 |   -    |     4     |   -    |
-| 13.41451059 |   -    |     11    |   -    |
-| 14.04327619 |   -    |     -     |   1    |
-| 14.15039843 |   1    |     -     |   -    |
-| 14.18862035 |   -    |     3     |   -    |
-| 14.20170755 |   -    |     4     |   -    |
-| 14.28052463 |   -    |     7     |   -    |
-+-------------+--------+-----------+--------+
++-------------+-----------+--------+--------+
+|     time    | Generator | model6 | model7 |
++-------------+-----------+--------+--------+
+|      0      |     6     |   -    |   -    |
+|  0.96332559 |     4     |   -    |   -    |
+|  2.09312678 |     10    |   -    |   -    |
+|  2.35056324 |     3     |   -    |   -    |
+|  2.39291718 |     4     |   -    |   -    |
+|  3.16931019 |     9     |   -    |   -    |
+|  3.47817454 |     7     |   -    |   -    |
+|  3.74797734 |     6     |   -    |   -    |
+|  4.01101600 |     -     |   1    |   -    |
+|  4.13636268 |     7     |   -    |   -    |
+|  4.28584944 |     4     |   -    |   -    |
+|  4.66146672 |     6     |   -    |   -    |
+|  4.97266491 |     5     |   -    |   -    |
+|  5.35416232 |     5     |   -    |   -    |
+|  6.74599293 |     -     |   -    |   1    |
+|  7.02375607 |     5     |   -    |   -    |
+|  7.25656051 |     -     |   1    |   -    |
+|  7.27027466 |     7     |   -    |   -    |
+|  7.27831129 |     6     |   -    |   -    |
+|  7.41882874 |     6     |   -    |   -    |
+|  7.97573887 |     3     |   -    |   -    |
+|  8.07425179 |     7     |   -    |   -    |
+|  8.34431883 |     7     |   -    |   -    |
+|  8.41782964 |     4     |   -    |   -    |
+|  8.99115356 |     2     |   -    |   -    |
+|  9.15874705 |     -     |   -    |   1    |
+|  9.46516163 |     5     |   -    |   -    |
+| 10.14813636 |     -     |   1    |   -    |
+| 10.50405463 |     6     |   -    |   -    |
+| 11.21912148 |     5     |   -    |   -    |
+| 11.47218174 |     2     |   -    |   -    |
+| 11.65776092 |     5     |   -    |   -    |
+| 11.91477662 |     3     |   -    |   -    |
+| 12.18615471 |     7     |   -    |   -    |
+| 12.66111431 |     7     |   -    |   -    |
+| 13.04349449 |     5     |   -    |   -    |
+| 13.07539413 |     2     |   -    |   -    |
+| 13.19808818 |     3     |   -    |   -    |
+| 13.71377193 |     -     |   -    |   1    |
+| 13.96347672 |     -     |   1    |   -    |
+| 14.04346664 |     4     |   -    |   -    |
+| 14.53036266 |     10    |   -    |   -    |
+| 14.63644353 |     9     |   -    |   -    |
++-------------+-----------+--------+--------+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+Icon theme &#34;Numix-Circle-Light&#34; not found.
 </pre></div></div>
 </div>
 </div>
