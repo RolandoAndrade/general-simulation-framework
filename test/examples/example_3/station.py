@@ -31,7 +31,7 @@ class Station(DiscreteEventModel):
     ):
         """
         Args:
-            dynamic_system (DiscreteEventDynamicSystem): factory where stations belongs.
+            dynamic_system (DiscreteEventDynamicSystem): factory where stations belong.
             processing_time (Expression): time to process one part.
         """
         super().__init__(dynamic_system, state={"parts": 0, "remaining_time": -1})
