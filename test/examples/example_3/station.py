@@ -1,5 +1,6 @@
 from typing import TypedDict, Dict
 
+from gsf.core.entity.core import EntityProperties
 from gsf.core.expressions import Expression
 from gsf.core.types import Time
 from gsf.dynamic_system.dynamic_systems import DiscreteEventDynamicSystem
@@ -16,7 +17,7 @@ class StationState(TypedDict):
 class Station(DiscreteEventModel):
     """Station of the simulator
 
-    It process the inputs that receives. Its state has the number of parts that currently are inside the
+    It processes the inputs that receives. Its state has the number of parts that currently are inside the
     station and the remaining time to finish to process one of that parts.
 
     Attributes:
@@ -72,3 +73,6 @@ class Station(DiscreteEventModel):
 
     def __str__(self):
         return self.get_id()
+
+    def get_properties(self) -> EntityProperties:
+        pass
