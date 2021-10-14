@@ -17,8 +17,8 @@ class StationState(TypedDict):
 class Station(DiscreteEventModel):
     """Station of the simulator
 
-    It processes the inputs that receives. Its state has the number of parts that currently are inside the
-    station and the remaining time to finish to process one of that parts.
+    It processes the entries it receives. Its status has the number of parts currently inside the station and the time
+    remaining to finish processing one of those parts.
 
     Attributes:
         _processing_time(Expression): time to process one part.
