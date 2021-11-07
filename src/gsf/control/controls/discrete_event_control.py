@@ -50,6 +50,9 @@ class DiscreteEventControl(BaseControl):
     _time: Time
     """Current time of the simulation"""
 
+    _start_frequency: Time
+    """Frequency of the simulation"""
+
     def __init__(
         self,
         simulator: DiscreteEventSimulationEngine,
@@ -81,13 +84,19 @@ class DiscreteEventControl(BaseControl):
             wait_time (Time): Delay execution for a given.
             stop_time (Time): Duration of the simulation.
         """
+        self._start_frequency = frequency
         while not self._is_paused:
             next_event_time = self._simulator.get_time_of_next_event()
             if next_event_time < 0:
                 self._finish_simulation()
-            next_time = min(self._time + min(next_event_time, frequency), stop_time)
+            if frequency <= next_event_time:
+                next_time = min(self._time + frequency, stop_time)
+                frequency = self._start_frequency
+            else:
+                next_time = min(self._time + next_event_time, stop_time)
+                frequency = max(next_time - frequency, 0)
             self.next_step(next_time)
-            sleep(wait_time)
+            sleep(float(wait_time))
             if 0 <= stop_time <= self._time:
                 self._finish_simulation()
             else:
