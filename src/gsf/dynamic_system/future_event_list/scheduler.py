@@ -69,7 +69,7 @@ class Scheduler:
             model (DiscreteEventModel): DiscreteEventModel with an autonomous event scheduled
             time (Time): Time to execute an autonomous event
         """
-        if time >= 0:
+        if time >= 0 and time != Time('inf'):
             sm = ScheduledModel(model, time)
             heapq.heappush(self._future_event_list, sm)
 
