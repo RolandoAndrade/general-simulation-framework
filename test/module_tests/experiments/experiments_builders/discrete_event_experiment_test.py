@@ -45,12 +45,10 @@ class DiscreteEventExperimentTest(unittest.TestCase):
         models_expected = set(
             [m.get_id() for m in self.experiment.dynamic_system._models]
         )
-        models_actual = set(
-            m.get_id() for m in loaded_experiment.dynamic_system._models
-        )
+        models_actual = {m.get_id() for m in loaded_experiment.dynamic_system._models}
 
-        paths_expected = set(m.get_id() for m in self.experiment.dynamic_system._paths)
-        paths_actual = set(m.get_id() for m in loaded_experiment.dynamic_system._paths)
+        paths_expected = {m.get_id() for m in self.experiment.dynamic_system._paths}
+        paths_actual = {m.get_id() for m in loaded_experiment.dynamic_system._paths}
 
         self.assertEqual(models_expected, models_actual)
         self.assertEqual(paths_expected, paths_actual)
